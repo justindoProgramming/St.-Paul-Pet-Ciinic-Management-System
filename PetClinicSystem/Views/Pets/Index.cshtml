@@ -1,0 +1,156 @@
+﻿@model List<PetClinicSystem.Models.Pet>
+@{
+    Layout = "~/Views/Shared/_Layout_Admin.cshtml";
+    ViewBag.ActiveMenu = "Patients";   // highlight sidebar
+}
+
+<div class="container-fluid py-4">
+
+    <!-- HEADER -->
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <h3 class="fw-bold">Patient Records</h3>
+
+        <div class="d-flex gap-2">
+            <input id="searchBox" class="form-control" placeholder="Search by name, breed, or owner…" style="max-width: 260px;" />
+
+            <button class="btn btn-success" onclick="loadCreate()">
+                <i class="fa-solid fa-plus"></i> Add Patient
+            </button>
+        </div>
+    </div>
+
+    <!-- PATIENT CARDS -->
+    <div class="row g-4">
+        @foreach (var pet in Model)
+        {
+            <div class="col-md-6">
+                <div class="card shadow-sm border-0 rounded-4 p-3">
+
+                    <div class="row g-0">
+
+                        <!-- ICON -->
+                        <div class="col-md-3 d-flex align-items-center justify-content-center">
+                            <div class="bg-light rounded-circle d-flex align-items-center justify-content-center"
+                                 style="height:80px; width:80px;">
+                                <i class="fa-solid fa-paw fs-2 text-success"></i>
+                            </div>
+                        </div>
+
+                        <!-- INFO -->
+                        <div class="col-md-9 ps-3">
+
+                            <h5 class="fw-bold">@pet.Name</h5>
+                            <small class="text-secondary">@pet.Species • @pet.Breed</small>
+
+                            <div class="mt-2">
+                                <strong>Owner:</strong> @pet.Owner.FullName <br />
+                                <span class="text-secondary">@pet.Owner.PhoneNumber</span>
+                            </div>
+
+                            <div class="mt-3 d-flex gap-2">
+
+                                <button class="btn btn-outline-primary btn-sm"
+                                        onclick="loadView(@pet.PetId)">
+                                    View
+                                </button>
+
+                                <button class="btn btn-outline-success btn-sm"
+                                        onclick="loadEdit(@pet.PetId)">
+                                    Edit
+                                </button>
+
+                                <button class="btn btn-outline-danger btn-sm"
+                                        onclick="loadDelete(@pet.PetId)">
+                                    Delete
+                                </button>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                </div>
+            </div>
+        }
+    </div>
+</div>
+
+<!-- ==================== MODALS (AJAX LOADED) ==================== -->
+<!-- CREATE -->
+<div class="modal fade" id="createModal" tabindex="-1">
+    <div class="modal-dialog modal-dialog-centered modal-lg">
+        <div class="modal-content" id="createModalContent"></div>
+    </div>
+</div>
+
+<!-- EDIT -->
+<div class="modal fade" id="editModal" tabindex="-1">
+    <div class="modal-dialog modal-dialog-centered modal-lg">
+        <div class="modal-content" id="editModalContent"></div>
+    </div>
+</div>
+
+<!-- VIEW -->
+<div class="modal fade" id="viewModal" tabindex="-1">
+    <div class="modal-dialog modal-dialog-centered modal-lg">
+        <div class="modal-content" id="viewModalContent"></div>
+    </div>
+</div>
+
+<!-- DELETE -->
+<div class="modal fade" id="deleteModal" tabindex="-1">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content" id="deleteModalContent"></div>
+    </div>
+</div>
+
+@section Scripts {
+    <script>
+
+        /* --------------------------
+           CREATE
+           -------------------------- */
+        function loadCreate() {
+            $("#createModalContent").load("/Pets/Create", function () {
+                new bootstrap.Modal(document.getElementById("createModal")).show();
+            });
+        }
+
+        /* --------------------------
+           EDIT
+           -------------------------- */
+        function loadEdit(id) {
+            $("#editModalContent").load("/Pets/Edit/" + id, function () {
+                new bootstrap.Modal(document.getElementById("editModal")).show();
+            });
+        }
+
+        /* --------------------------
+           VIEW
+           -------------------------- */
+        function loadView(id) {
+            $("#viewModalContent").load("/Pets/Details/" + id, function () {
+                new bootstrap.Modal(document.getElementById("viewModal")).show();
+            });
+        }
+
+        /* --------------------------
+           DELETE
+           -------------------------- */
+        function loadDelete(id) {
+            $("#deleteModalContent").load("/Pets/Delete/" + id, function () {
+                new bootstrap.Modal(document.getElementById("deleteModal")).show();
+            });
+        }
+
+        /* --------------------------
+           TOAST ON SAVE
+           -------------------------- */
+        $(document).ready(function () {
+            var msg = '@TempData["Success"]';
+            if (msg) showSuccessToast();
+        });
+
+    </script>
+}

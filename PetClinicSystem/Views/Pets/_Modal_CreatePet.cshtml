@@ -1,0 +1,77 @@
+﻿@model PetClinicSystem.Models.Pet
+@{
+    var owners = ViewBag.Owners as List<PetClinicSystem.Models.Owner>;
+}
+
+<div class="modal-dialog modal-lg modal-dialog-centered">
+    <div class="modal-content p-4 rounded-4 shadow">
+
+        <h4 class="fw-bold mb-3">Add New Patient</h4>
+
+        <form method="post" action="/Pets/Create">
+            <div class="row g-3">
+
+                <div class="col-md-6">
+                    <label class="fw-semibold">Name</label>
+                    <input name="Name" class="form-control" required />
+                </div>
+
+                <div class="col-md-6">
+                    <label class="fw-semibold">Owner</label>
+                    <select name="OwnerId" class="form-select" required>
+                        <option disabled selected>Select Owner</option>
+                        @foreach (var o in owners)
+                        {
+                            <option value="@o.OwnerId">@o.FullName</option>
+                        }
+                    </select>
+                </div>
+
+                <div class="col-md-6">
+                    <label>Species</label>
+                    <input name="Species" class="form-control" required />
+                </div>
+
+                <div class="col-md-6">
+                    <label>Breed</label>
+                    <input name="Breed" class="form-control" />
+                </div>
+
+                <div class="col-md-4">
+                    <label>Gender</label>
+                    <select name="Gender" class="form-select">
+                        <option>Male</option>
+                        <option>Female</option>
+                    </select>
+                </div>
+
+                <div class="col-md-4">
+                    <label>Birthdate</label>
+                    <input type="date" name="BirthDate" class="form-control" />
+                </div>
+
+                <div class="col-md-4">
+                    <label>Weight (kg)</label>
+                    <input type="number" step="0.1" name="Weight" class="form-control" />
+                </div>
+
+                <div class="col-md-12">
+                    <label>Color Markings</label>
+                    <input name="ColorMarkings" class="form-control" />
+                </div>
+
+                <div class="col-md-12">
+                    <label>Medical History</label>
+                    <textarea name="MedicalHistory" class="form-control"></textarea>
+                </div>
+
+            </div>
+
+            <div class="text-end mt-4">
+                <button type="button" data-bs-dismiss="modal" class="btn btn-outline-secondary">Cancel</button>
+                <button class="btn btn-success">Add Patient</button>
+            </div>
+        </form>
+
+    </div>
+</div>

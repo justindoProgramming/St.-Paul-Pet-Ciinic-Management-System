@@ -1,0 +1,109 @@
+﻿@model PetClinicSystem.Models.Pet
+@{
+    var owners = ViewBag.Owners as List<PetClinicSystem.Models.Owner>;
+}
+
+<div class="modal-dialog modal-lg modal-dialog-centered">
+<div class="modal-content p-4 shadow rounded-4">
+
+    <h4 class="fw-bold mb-3">Edit Patient</h4>
+
+    <form method="post" action="/Pets/Edit">
+        <input type="hidden" name="PetId" value="@Model.PetId" />
+
+        <div class="row g-3">
+
+            <!-- NAME -->
+            <div class="col-md-6">
+                <label class="fw-semibold">Name</label>
+                <input name="Name" class="form-control rounded-3" value="@Model.Name" required />
+            </div>
+
+            <!-- OWNER -->
+            <div class="col-md-6">
+                <label class="fw-semibold">Owner</label>
+                <select name="OwnerId" class="form-select rounded-3" required>
+                    @foreach (var o in owners)
+                    {
+                        if (o.OwnerId == Model.OwnerId)
+                        {
+                            <option value="@o.OwnerId" selected>@o.FullName</option>
+                        }
+                        else
+                        {
+                            <option value="@o.OwnerId">@o.FullName</option>
+                        }
+                    }
+                </select>
+            </div>
+
+            <!-- SPECIES -->
+            <div class="col-md-6">
+                <label class="fw-semibold">Species</label>
+                <input name="Species" class="form-control rounded-3" value="@Model.Species" required />
+            </div>
+
+            <!-- BREED -->
+            <div class="col-md-6">
+                <label class="fw-semibold">Breed</label>
+                <input name="Breed" class="form-control rounded-3" value="@Model.Breed" />
+            </div>
+
+            <!-- GENDER -->
+            <div class="col-md-4">
+                <label class="fw-semibold">Gender</label>
+                <select name="Gender" class="form-select rounded-3" required>
+                    @if (Model.Gender == "Male")
+                    {
+                        <option value="Male" selected>Male</option>
+                        <option value="Female">Female</option>
+                    }
+                    else if (Model.Gender == "Female")
+                    {
+                        <option value="Male">Male</option>
+                        <option value="Female" selected>Female</option>
+                    }
+                    else
+                    {
+                        <option value="Male">Male</option>
+                        <option value="Female">Female</option>
+                    }
+                </select>
+            </div>
+
+            <!-- BIRTHDATE -->
+            <div class="col-md-4">
+                <label class="fw-semibold">Birthdate</label>
+                <input type="date" name="BirthDate" class="form-control rounded-3"
+                       value="@Model.BirthDate.ToString("yyyy-MM-dd")" />
+            </div>
+
+            <!-- WEIGHT -->
+            <div class="col-md-4">
+                <label class="fw-semibold">Weight (kg)</label>
+                <input type="number" step="0.1" name="Weight" class="form-control rounded-3" value="@Model.Weight" />
+            </div>
+
+            <!-- COLOR MARKINGS -->
+            <div class="col-md-12">
+                <label class="fw-semibold">Color Markings</label>
+                <input name="ColorMarkings" class="form-control rounded-3" value="@Model.ColorMarkings" />
+            </div>
+
+            <!-- MEDICAL HISTORY -->
+            <div class="col-md-12">
+                <label class="fw-semibold">Medical History</label>
+                <textarea name="MedicalHistory" class="form-control rounded-3">@Model.MedicalHistory</textarea>
+            </div>
+
+        </div>
+
+        <div class="text-end mt-4 d-flex justify-content-end gap-2">
+            <button class="btn btn-outline-secondary rounded-3" data-bs-dismiss="modal" type="button">Cancel</button>
+            <button class="btn btn-primary rounded-3" type="submit">Save Changes</button>
+        </div>
+
+    </form>
+
+</div>
+</div>

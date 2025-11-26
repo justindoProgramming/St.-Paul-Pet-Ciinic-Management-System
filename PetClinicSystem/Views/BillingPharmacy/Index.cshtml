@@ -1,0 +1,291 @@
+﻿@using PetClinicSystem.Models
+@{
+    Layout = "~/Views/Shared/_Layout_Admin.cshtml";
+    ViewBag.ActiveMenu = "Billing";
+}
+
+<div class="container-fluid py-4">
+
+    <h3 class="fw-bold">Billing & Pharmacy</h3>
+    <p class="text-secondary">Manage point of sale, prescriptions, drugs, and vaccinations</p>
+
+    <!-- TABS -->
+    <div class="d-flex justify-content-center my-4 gap-2">
+        <button class="btn tab-btn active" onclick="showTab('pos', this)">Point of Sale</button>
+        <button class="btn tab-btn" onclick="showTab('prescriptions', this)">Prescriptions</button>
+        <button class="btn tab-btn" onclick="showTab('inventory', this)">Drugs Inventory</button>
+        <button class="btn tab-btn" onclick="showTab('vaccines', this)">Vaccinations</button>
+    </div>
+
+    <!-- POS TAB -->
+    <div id="tab-pos" class="tab-section">
+        <div class="row">
+            <div class="col-md-8">
+                <h5 class="fw-bold mb-3">Services</h5>
+
+                <input type="text" class="form-control mb-3"
+                       placeholder="Search services..."
+                       oninput="filterServices(this.value)" />
+
+                <div class="row g-3" id="servicesContainer">
+                    <!-- filled by _POS_Scripts -->
+                </div>
+            </div>
+
+            <div class="col-md-4">
+                <div class="card shadow p-3 rounded-4">
+                    <h5 class="fw-bold">Current Sale</h5>
+
+                    <label class="mt-2 fw-semibold">Select Patient</label>
+                    <select id="petSelect" class="form-select">
+                        <option disabled selected>Choose patient...</option>
+                        @foreach (var p in (List<Pet>)ViewBag.Pets)
+                        {
+                            <option value="@p.PetId">
+                                @p.Name (@p.Owner.FullName)
+                            </option>
+                        }
+                    </select>
+
+                    <hr />
+                    <div id="cartItems"></div>
+                    <hr />
+
+                    <div class="d-flex justify-content-between">
+                        <span class="fw-semibold">Subtotal:</span>
+                        <span id="subtotal">$0.00</span>
+                    </div>
+
+                    <button class="btn btn-success mt-3 w-100"
+                            onclick="checkout()">
+                        <i class="fa-solid fa-cash-register me-2"></i> Process Payment
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- PRESCRIPTIONS TAB -->
+    <div id="tab-prescriptions" class="tab-section d-none">
+        <div class="d-flex justify-content-between align-items-center mb-3">
+            <h5 class="fw-bold mb-0">Prescriptions</h5>
+            <button class="btn btn-success" onclick="loadPrescriptionCreate()">
+                + New Prescription
+            </button>
+        </div>
+
+        <div class="mb-3">
+            <input type="text" class="form-control" placeholder="Search by patient, medication, or doctor..." />
+        </div>
+
+        <div id="prescriptionsList">
+            @await Html.PartialAsync("_Prescriptions",
+            (List<Prescription>)ViewBag.Prescriptions)
+        </div>
+    </div>
+
+    <!-- DRUGS INVENTORY TAB -->
+    <div id="tab-inventory" class="tab-section d-none">
+        <div id="inventoryContainer">
+            @await Html.PartialAsync("_Drugs",
+                        (List<Drug>)ViewBag.Drugs)
+        </div>
+    </div>
+
+    <!-- VACCINATIONS TAB -->
+    <div id="tab-vaccines" class="tab-section d-none">
+        <div id="vaccinationsContainer">
+            @await Html.PartialAsync("_Vaccinations",
+                        (List<Vaccination>)ViewBag.Vaccinations)
+        </div>
+    </div>
+
+</div>
+
+<!-- PRESCRIPTION MODAL SHELLS -->
+<div class="modal fade" id="prescCreateModal" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-lg modal-dialog-centered">
+        <div class="modal-content" id="prescCreateContent"></div>
+    </div>
+</div>
+
+<div class="modal fade" id="prescViewModal" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-lg modal-dialog-centered">
+        <div class="modal-content" id="prescViewContent"></div>
+    </div>
+</div>
+
+<div class="modal fade" id="prescEditModal" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-lg modal-dialog-centered">
+        <div class="modal-content" id="prescEditContent"></div>
+    </div>
+</div>
+
+<div class="modal fade" id="prescDeleteModal" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content" id="prescDeleteContent"></div>
+    </div>
+</div>
+
+<!-- DRUG MODAL SHELLS -->
+<div class="modal fade" id="drugCreateModal" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-lg modal-dialog-centered">
+        <div class="modal-content" id="drugCreateContent"></div>
+    </div>
+</div>
+
+<div class="modal fade" id="drugEditModal" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-lg modal-dialog-centered">
+        <div class="modal-content" id="drugEditContent"></div>
+    </div>
+</div>
+
+<div class="modal fade" id="drugDeleteModal" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content" id="drugDeleteContent"></div>
+    </div>
+</div>
+
+<!-- VACCINATION MODAL SHELLS -->
+<div class="modal fade" id="vaccCreateModal" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-lg modal-dialog-centered">
+        <div class="modal-content" id="vaccCreateContent"></div>
+    </div>
+</div>
+
+<div class="modal fade" id="vaccViewModal" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-lg modal-dialog-centered">
+        <div class="modal-content" id="vaccViewContent"></div>
+    </div>
+</div>
+
+<div class="modal fade" id="vaccEditModal" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-lg modal-dialog-centered">
+        <div class="modal-content" id="vaccEditContent"></div>
+    </div>
+</div>
+
+<div class="modal fade" id="vaccDeleteModal" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content" id="vaccDeleteContent"></div>
+    </div>
+</div>
+
+<!-- Toast notification for Billing & Pharmacy -->
+<div id="bp-toast" class="bp-toast d-none">
+    <span id="bp-toast-text"></span>
+</div>
+
+<script>
+    function showTab(tab, btn) {
+        document.querySelectorAll('.tab-section')
+            .forEach(s => s.classList.add("d-none"));
+
+        document.querySelectorAll('.tab-btn')
+            .forEach(b => b.classList.remove("active"));
+
+        document.getElementById("tab-" + tab).classList.remove("d-none");
+        if (btn) {
+            btn.classList.add("active");
+        }
+
+        if (tab === 'inventory') {
+            loadDrugs();
+        } else if (tab === 'prescriptions') {
+            loadPrescriptions();
+        } else if (tab === 'vaccines') {
+            loadVaccinations();
+        }
+    }
+
+    // Toast helper for Billing & Pharmacy
+    function showBpToast(message, type) {
+        const toast = document.getElementById("bp-toast");
+        const textEl = document.getElementById("bp-toast-text");
+        if (!toast || !textEl) return;
+
+        textEl.textContent = message || "";
+
+        // reset classes
+        toast.classList.remove("d-none", "bp-toast-success", "bp-toast-error", "bp-toast-show", "bp-toast-hide");
+
+        // choose color
+        if (type === "error") {
+            toast.classList.add("bp-toast-error");
+        } else {
+            toast.classList.add("bp-toast-success");
+        }
+
+        // show
+        toast.classList.add("bp-toast-show");
+
+        // auto hide after 3 seconds
+        setTimeout(function () {
+            toast.classList.add("bp-toast-hide");
+            setTimeout(function () {
+                toast.classList.add("d-none");
+                toast.classList.remove("bp-toast-show", "bp-toast-hide");
+            }, 300); // match transition
+        }, 3000);
+    }
+</script>
+
+<style>
+    .tab-btn {
+        background: #f2f2f2;
+        border-radius: 25px;
+        padding: 8px 20px;
+        font-weight: 600;
+    }
+
+        .tab-btn.active {
+            background: #198754;
+            color: white;
+        }
+
+    /* Toast styles */
+    .bp-toast {
+        position: fixed;
+        top: 18px;
+        right: 24px;
+        z-index: 2000;
+        min-width: 260px;
+        max-width: 400px;
+        padding: 12px 20px;
+        border-radius: 8px;
+        color: #ffffff;
+        font-weight: 600;
+        box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        opacity: 0;
+        transform: translateY(-10px);
+        transition: opacity 0.25s ease, transform 0.25s ease;
+    }
+
+    .bp-toast-show {
+        opacity: 1;
+        transform: translateY(0);
+    }
+
+    .bp-toast-hide {
+        opacity: 0;
+        transform: translateY(-10px);
+    }
+
+    .bp-toast-success {
+        background-color: #15803d; /* green */
+    }
+
+    .bp-toast-error {
+        background-color: #b91c1c; /* red */
+    }
+</style>
+
+@section Scripts {
+    <script src="~/js/drugs.js"></script>
+    <script src="~/js/prescriptions.js"></script>
+    <script src="~/js/vaccinations.js"></script>
+    @await Html.PartialAsync("_POS_Scripts")
+}

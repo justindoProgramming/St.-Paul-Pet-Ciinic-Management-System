@@ -1,0 +1,195 @@
+﻿@model List<PetClinicSystem.Models.Schedule>
+
+@{
+    ViewData["Title"] = "Appointments";
+
+    int role = Context.Session.GetInt32("UserRole") ?? -1;
+
+    if (role == 1)
+        Layout = "~/Views/Shared/_Layout_Admin.cshtml";
+    else if (role == 2)
+        Layout = "~/Views/Shared/_Layout_Staff.cshtml";
+    else if (role == 0)
+        Layout = "~/Views/Shared/_Layout_Client.cshtml";
+    else
+        Layout = "~/Views/Shared/_Layout_Public.cshtml";
+}
+
+<div class="container py-4">
+
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <h3 class="fw-bold">Upcoming Appointments</h3>
+
+        @if (TempData["Success"] != null)
+        {
+            <script>
+                window.onload = function () {
+                    showSuccessToast();
+                }
+            </script>
+        }
+
+        <div class="d-flex gap-2">
+            <input id="searchBox" type="text" class="form-control"
+                   placeholder="Search appointments..." style="max-width: 250px;" />
+
+            <button class="btn btn-outline-secondary">
+                <i class="fa-solid fa-filter"></i> Filter
+            </button>
+
+            <button class="btn btn-success"
+                    data-bs-toggle="modal"
+                    data-bs-target="#createModal"
+                    onclick="loadCreate()">
+                <i class="fa-solid fa-plus"></i> New Appointment
+            </button>
+        </div>
+    </div>
+
+    <!-- APPOINTMENT CARDS -->
+    <div class="row g-3">
+
+        @foreach (var appt in Model)
+        {
+            <div class="col-12">
+                <div class="card shadow-sm border-0 rounded-4 p-3 appointment-card">
+                    <div class="row g-0">
+
+                        <!-- TIME -->
+                        <div class="col-md-2 d-flex flex-column align-items-center justify-content-center border-end">
+                            <h4 class="fw-bold text-success mb-0">
+                                @appt.ScheduleTime?.ToString(@"hh\:mm")
+                            </h4>
+                            <small class="text-secondary">
+                                @appt.ScheduleDateOld?.ToString("MMM dd, yyyy")
+                            </small>
+                        </div>
+
+                        <!-- MAIN INFO -->
+                        <div class="col-md-7 px-4">
+                            <h5 class="fw-bold mb-1">@appt.Pet?.Name</h5>
+                            <span class="text-secondary small">@appt.Pet?.Species - @appt.Pet?.Breed</span>
+
+                            <div class="mt-3">
+                                <h6 class="fw-semibold mb-0">Owner</h6>
+                                <span class="text-secondary">@appt.Pet?.Owner?.FullName • @appt.Pet?.Owner?.PhoneNumber</span>
+                            </div>
+
+                            <div class="mt-3">
+                                <h6 class="fw-semibold mb-0">Reason</h6>
+                                <span class="text-secondary">@appt.Service</span>
+                            </div>
+
+                            <div class="mt-3">
+                                <h6 class="fw-semibold mb-0">Doctor</h6>
+                                <span class="text-secondary">@appt.Staff?.FullName</span>
+                            </div>
+                        </div>
+
+                        <!-- STATUS + VIEW BUTTON -->
+                        <div class="col-md-3 d-flex flex-column align-items-end justify-content-between">
+
+                            <div>
+                                @switch (appt.Status?.ToLower())
+                                {
+                                    case "confirmed":
+                                        <span class="badge bg-primary rounded-pill px-3 py-2">Confirmed</span>
+                                        break;
+                                    case "pending":
+                                        <span class="badge bg-secondary rounded-pill px-3 py-2">Pending</span>
+                                        break;
+                                    case "urgent":
+                                        <span class="badge bg-danger rounded-pill px-3 py-2">Urgent</span>
+                                        break;
+                                    case "completed":
+                                        <span class="badge bg-success rounded-pill px-3 py-2">Completed</span>
+                                        break;
+                                    default:
+                                        <span class="badge bg-dark rounded-pill px-3 py-2">@appt.Status</span>
+                                        break;
+                                }
+                            </div>
+
+                            <div class="d-flex gap-2 mt-3">
+                                <button class="btn btn-outline-success"
+                                        data-bs-toggle="modal"
+                                        data-bs-target="#viewModal"
+                                        onclick="loadView(@appt.ScheduleId)">
+                                    View
+                                </button>
+
+                                <button class="btn btn-outline-primary"
+                                        data-bs-toggle="modal"
+                                        data-bs-target="#editModal"
+                                        onclick="loadEdit(@appt.ScheduleId)">
+                                    Edit
+                                </button>
+                            </div>
+
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        }
+
+    </div>
+</div>
+
+<!-- FIXED MODAL STRUCTURES -->
+<!-- VIEW MODAL -->
+<div class="modal fade" id="viewModal" tabindex="-1">
+    <div class="modal-dialog modal-lg modal-dialog-centered">
+        <div class="modal-content" id="viewModalContent"></div>
+    </div>
+</div>
+
+<!-- CREATE MODAL -->
+<div class="modal fade" id="createModal" tabindex="-1">
+    <div class="modal-dialog modal-lg modal-dialog-centered">
+        <div class="modal-content" id="createModalContent"></div>
+    </div>
+</div>
+
+<!-- EDIT MODAL -->
+<div class="modal fade" id="editModal" tabindex="-1">
+    <div class="modal-dialog modal-lg modal-dialog-centered">
+        <div class="modal-content" id="editModalContent"></div>
+    </div>
+</div>
+
+@section Scripts {
+    <script>
+        // LOAD VIEW
+        function loadView(id) {
+            $("#viewModalContent").html("Loading...");
+            $("#viewModalContent").load('/Appointments/Details/' + id, function () {
+                new bootstrap.Modal(document.getElementById("viewModal")).show();
+            });
+        }
+
+        // LOAD CREATE
+        function loadCreate() {
+            $("#createModalContent").html("Loading...");
+            $("#createModalContent").load('/Appointments/Create', function () {
+                new bootstrap.Modal(document.getElementById("createModal")).show();
+            });
+        }
+
+        // LOAD EDIT
+        function loadEdit(id) {
+            $("#editModalContent").html("Loading...");
+            $("#editModalContent").load('/Appointments/Edit/' + id, function () {
+                new bootstrap.Modal(document.getElementById("editModal")).show();
+            });
+        }
+
+        // SUCCESS TOAST
+        $(document).ready(function () {
+            var msg = '@TempData["Success"]';
+            if (msg) {
+                showSuccessToast();
+            }
+        });
+    </script>
+}

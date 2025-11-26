@@ -1,0 +1,19 @@
+﻿@model PetClinicSystem.Models.Pet
+
+<div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content p-4 rounded-4 shadow">
+
+        <h4 class="fw-bold">Delete Patient</h4>
+        <p class="text-secondary">Are you sure you want to delete <strong>@Model.Name</strong>?</p>
+
+        <form method="post" action="/Pets/DeleteConfirmed">
+            <input type="hidden" name="petId" value="@Model.PetId" />
+
+            <div class="text-end mt-3">
+                <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">Cancel</button>
+                <button class="btn btn-danger">Delete</button>
+            </div>
+        </form>
+
+    </div>
+</div>

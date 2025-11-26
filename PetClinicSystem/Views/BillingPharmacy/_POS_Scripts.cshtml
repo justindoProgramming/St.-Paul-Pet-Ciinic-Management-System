@@ -1,0 +1,239 @@
+﻿<script>
+
+    // ============================
+    // 1. HARDCODED SERVICES
+    // ============================
+        const services = [
+        { name: "General Consultation", price: 50 },
+        { name: "Vaccination", price: 35 },
+        { name: "Dental Cleaning", price: 120 },
+        { name: "Surgery Consultation", price: 80 },
+        { name: "X-Ray", price: 150 },
+        { name: "Blood Test", price: 75 },
+        { name: "Ultrasound", price: 200 },
+        { name: "Deworming Tablet", price: 30 },
+        { name: "Parvo Test", price: 45 },
+        { name: "Heartworm Test", price: 60 },
+        { name: "Grooming (Basic)", price: 40 },
+        { name: "Grooming (Full)", price: 80 },
+        { name: "Nail Trimming", price: 15 },
+        { name: "Ear Cleaning", price: 20 },
+        { name: "Spay Surgery", price: 250 },
+        { name: "Neuter Surgery", price: 220 },
+        { name: "Microchipping", price: 50 },
+        { name: "Fecal Test", price: 35 },
+        { name: "Allergy Test", price: 90 },
+        { name: "Fluid Therapy", price: 100 },
+        { name: "Wound Treatment", price: 60 },
+        { name: "Hospitalization (per day)", price: 180 },
+        { name: "Rabies Vaccination", price: 25 },
+        { name: "Tick & Flea Treatment", price: 40 },
+        { name: "Kennel Cough Vaccination", price: 45 },
+        { name: "Skin Scraping Test", price: 50 }
+    ];
+
+
+
+    // ============================
+    // 2. LOAD SERVICE CARDS
+    // ============================
+    function loadServices(filter = "") {
+        let html = "";
+        let lower = filter.toLowerCase();
+
+        services
+            .filter(s => s.name.toLowerCase().includes(lower))
+            .forEach((s, i) => {
+                html += `
+                    <div class="col-md-6">
+                        <div class="card p-3 shadow-sm rounded-4">
+                            <h6 class="fw-bold">${s.name}</h6>
+                            <p class="text-secondary">$${s.price.toFixed(2)}</p>
+                            <button class="btn btn-success btn-sm" onclick="addToCart(${i})">
+                                <i class="fa-solid fa-plus"></i> Add
+                            </button>
+                        </div>
+                    </div>`;
+            });
+
+        document.getElementById("servicesContainer").innerHTML = html;
+    }
+
+    loadServices();
+
+    function filterServices(text) {
+        loadServices(text);
+    }
+
+
+    // ============================
+    // 3. CART SYSTEM
+    // ============================
+    let cart = [];
+
+    function addToCart(i) {
+        let item = services[i];
+        let existing = cart.find(c => c.name === item.name);
+
+        if (existing) {
+            existing.qty++;
+        } else {
+            cart.push({
+                name: item.name,
+                price: item.price,
+                qty: 1
+            });
+        }
+
+        renderCart();
+    }
+
+    function removeItem(name) {
+        cart = cart.filter(c => c.name !== name);
+        renderCart();
+    }
+
+    function renderCart() {
+        let html = "";
+        let subtotal = 0;
+
+        cart.forEach(c => {
+            subtotal += c.price * c.qty;
+
+            html += `
+                <div class="d-flex justify-content-between align-items-center mb-2">
+                    <div>
+                        <strong>${c.name}</strong> <br/>
+                        <small>$${c.price.toFixed(2)}</small>
+                    </div>
+
+                    <div class="d-flex align-items-center gap-2">
+                        <span class="badge bg-secondary">${c.qty}</span>
+                        <button class="btn btn-sm btn-outline-danger" onclick="removeItem('${c.name}')">
+                            <i class="fa-solid fa-trash"></i>
+                        </button>
+                    </div>
+                </div>
+            `;
+        });
+
+        document.getElementById("cartItems").innerHTML = html;
+        document.getElementById("subtotal").innerText = "$" + subtotal.toFixed(2);
+    }
+
+
+    // ============================
+    // 4. CHECKOUT – SAVE TO DATABASE
+    // ============================
+    function checkout() {
+        let petId = document.getElementById("petSelect").value;
+        if (!petId) return showToast("Please select a patient.", "warning");
+
+        if (cart.length === 0) return showToast("Cart is empty!", "warning");
+
+        let staffId = 1; // PLACEHOLDER — replace with logged-in user
+
+        let items = cart.map(c => ({
+            petId: parseInt(petId),
+            staffId: staffId,
+            serviceName: c.name,
+            servicePrice: c.price,
+            quantity: c.qty,
+            total: c.price * c.qty
+        }));
+
+        fetch("/BillingPharmacy/SaveTransaction", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify(items)
+        })
+        .then(r => r.json())
+        .then(res => {
+            showToast(res.message, "success");
+            cart = [];
+            renderCart();
+        })
+        .catch(() => showToast("Fill out all inputs before proceeding.", "danger"));
+    }
+
+
+    // ============================
+    // 5. TAB SYSTEM
+    // ============================
+    function showTab(tab) {
+        document.querySelectorAll(".tab-section").forEach(s => s.classList.add("d-none"));
+        document.querySelectorAll(".tab-btn").forEach(b => b.classList.remove("active"));
+
+        if (tab === "pos") {
+            document.getElementById("tab-pos").classList.remove("d-none");
+            document.getElementById("tabPosBtn").classList.add("active");
+
+        } else if (tab === "prescriptions") {
+            document.getElementById("tab-prescriptions").classList.remove("d-none");
+            event.target.classList.add("active");
+
+        } else if (tab === "inventory") {
+            document.getElementById("tab-inventory").classList.remove("d-none");
+            event.target.classList.add("active");
+
+        } else if (tab === "vaccines") {
+            document.getElementById("tab-vaccines").classList.remove("d-none");
+            event.target.classList.add("active");
+        }
+    }
+
+
+
+    // ============================
+    // 6. TOAST NOTIFICATION
+    // ============================
+    function showToast(msg, type = "success") {
+        let toast = document.createElement("div");
+        toast.className = `toast align-items-center text-white bg-${type} border-0 show`;
+        toast.role = "alert";
+        toast.innerHTML = `
+            <div class="d-flex">
+                <div class="toast-body">${msg}</div>
+                <button class="btn-close btn-close-white me-2 m-auto"
+                        onclick="this.parentElement.parentElement.remove()"></button>
+            </div>
+        `;
+
+        Object.assign(toast.style, {
+            position: "fixed",
+            top: "20px",
+            right: "20px",
+            zIndex: "9999"
+        });
+
+        document.body.appendChild(toast);
+
+        setTimeout(() => toast.remove(), 3000);
+    }
+
+        function loadPrescriptionCreate() {
+        $("#mainModal .modal-content").load("/Prescriptions/Create", function () {
+            new bootstrap.Modal(document.getElementById("mainModal")).show();
+        });
+    }
+
+    function loadPrescriptionView(id) {
+        $("#mainModal .modal-content").load("/Prescriptions/ViewPrescription/" + id, function () {
+            new bootstrap.Modal(document.getElementById("mainModal")).show();
+        });
+    }
+
+    function loadPrescriptionEdit(id) {
+        $("#mainModal .modal-content").load("/Prescriptions/Edit/" + id, function () {
+            new bootstrap.Modal(document.getElementById("mainModal")).show();
+        });
+    }
+
+    function loadPrescriptionDelete(id) {
+        $("#mainModal .modal-content").load("/Prescriptions/Delete/" + id, function () {
+            new bootstrap.Modal(document.getElementById("mainModal")).show();
+        });
+    }
+
+
+</script>

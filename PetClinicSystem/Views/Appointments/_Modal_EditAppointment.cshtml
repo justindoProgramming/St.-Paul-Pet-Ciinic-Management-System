@@ -1,0 +1,91 @@
+﻿<div class="modal-dialog modal-dialog-centered modal-lg">
+    <div class="modal-content p-4 rounded-4 border-0 shadow">
+
+        @model PetClinicSystem.Models.Schedule
+        @{
+            var pets = ViewBag.Pets as List<PetClinicSystem.Models.Pet>;
+            var staff = ViewBag.Staff as List<PetClinicSystem.Models.Account>;
+        }
+
+        <form method="post" action="/Appointments/Edit">
+
+            <input type="hidden" name="ScheduleId" value="@Model.ScheduleId" />
+
+            <h4 class="fw-bold mb-3">Edit Appointment</h4>
+
+            <div class="row g-3">
+
+                <div class="col-md-6">
+                    <label class="fw-semibold">Pet</label>
+                    <select name="PetId" class="form-select" required>
+                        @foreach (var p in pets)
+                        {
+                            if (Model.PetId == p.PetId)
+                            {
+                                <option value="@p.PetId" selected>
+                                    @p.Name (@p.Owner.FullName)
+                                </option>
+                            }
+                            else
+                            {
+                                <option value="@p.PetId">
+                                    @p.Name (@p.Owner.FullName)
+                                </option>
+                            }
+                        }
+                    </select>
+                </div>
+
+                <div class="col-md-6">
+                    <label class="fw-semibold">Doctor</label>
+                    <select name="StaffId" class="form-select" required>
+                        @foreach (var s in staff)
+                        {
+                            if (Model.StaffId == s.AccountId)
+                            {
+                                <option value="@s.AccountId" selected>
+                                    @s.FullName
+                                </option>
+                            }
+                            else
+                            {
+                                <option value="@s.AccountId">
+                                    @s.FullName
+                                </option>
+                            }
+                        }
+                    </select>
+                </div>
+
+                <div class="col-md-12">
+                    <label class="fw-semibold">Service</label>
+                    <input name="Service" class="form-control" value="@Model.Service" required />
+                </div>
+
+                <div class="col-md-6">
+                    <label class="fw-semibold">Date</label>
+                    <input type="date"
+                           name="ScheduleDateOld"
+                           class="form-control"
+                           value="@Model.ScheduleDateOld?.ToString("yyyy-MM-dd")" />
+                </div>
+
+                <div class="col-md-6">
+                    <label class="fw-semibold">Time</label>
+                    <input type="time"
+                           name="ScheduleTime"
+                           class="form-control"
+                           value="@Model.ScheduleTime?.ToString(@"hh\:mm")" />
+                </div>
+
+            </div>
+
+            <div class="mt-4 text-end">
+                <button class="btn btn-outline-secondary" data-bs-dismiss="modal" type="button">Cancel</button>
+                <button class="btn btn-success" type="submit">Save Changes</button>
+            </div>
+
+        </form>
+
+    </div>
+</div>

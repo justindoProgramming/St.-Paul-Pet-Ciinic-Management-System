@@ -1,0 +1,63 @@
+﻿@model PetClinicSystem.Models.Schedule
+@{
+    var pets = ViewBag.Pets as List<PetClinicSystem.Models.Pet>;
+    var staff = ViewBag.Staff as List<PetClinicSystem.Models.Account>;
+}
+
+<div class="modal-dialog modal-dialog-centered modal-lg">
+    <div class="modal-content p-4 rounded-4 border-0 shadow">
+
+        <h4 class="fw-bold mb-3">New Appointment</h4>
+
+        <form method="post" action="/Appointments/Create">
+
+            <div class="row g-3">
+
+                <div class="col-md-6">
+                    <label class="fw-semibold">Pet</label>
+                    <select name="PetId" class="form-select" required>
+                        <option disabled selected>Select pet</option>
+                        @foreach (var p in pets)
+                        {
+                            <option value="@p.PetId">@p.Name (@p.Owner.FullName)</option>
+                        }
+                    </select>
+                </div>
+
+                <div class="col-md-6">
+                    <label class="fw-semibold">Doctor</label>
+                    <select name="StaffId" class="form-select" required>
+                        <option disabled selected>Select staff</option>
+                        @foreach (var s in staff)
+                        {
+                            <option value="@s.AccountId">@s.FullName</option>
+                        }
+                    </select>
+                </div>
+
+                <div class="col-md-12">
+                    <label class="fw-semibold">Service</label>
+                    <input name="Service" class="form-control" required />
+                </div>
+
+                <div class="col-md-6">
+                    <label class="fw-semibold">Date</label>
+                    <input type="date" name="ScheduleDateOld" class="form-control" required />
+                </div>
+
+                <div class="col-md-6">
+                    <label class="fw-semibold">Time</label>
+                    <input type="time" name="ScheduleTime" class="form-control" required />
+                </div>
+
+            </div>
+
+            <div class="text-end mt-4">
+                <button class="btn btn-outline-secondary" data-bs-dismiss="modal">Cancel</button>
+                <button class="btn btn-success">Create</button>
+            </div>
+
+        </form>
+
+    </div>
+</div>

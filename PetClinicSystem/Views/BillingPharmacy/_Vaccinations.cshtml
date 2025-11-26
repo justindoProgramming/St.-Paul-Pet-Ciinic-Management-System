@@ -1,0 +1,72 @@
+﻿@model List<PetClinicSystem.Models.Vaccination>
+
+@if (Model == null || !Model.Any())
+{
+    <div class="text-center text-secondary py-5">
+        No vaccination records available.
+    </div>
+}
+else
+{
+    <div class="d-flex justify-content-between align-items-center mb-3">
+        <h5 class="fw-bold mb-0">Vaccinations</h5>
+        <button class="btn btn-success" onclick="loadVaccinationCreate()">
+            + Record Vaccination
+        </button>
+    </div>
+
+    <div class="row mb-3">
+        <div class="col-md-6">
+            <input type="text"
+                   class="form-control"
+                   placeholder="Search by patient or vaccine..."
+                   oninput="filterVaccinations(this.value)" />
+        </div>
+    </div>
+
+    <div class="table-responsive">
+        <table class="table align-middle" id="vaccinationsTable">
+            <thead class="table-light">
+                <tr>
+                    <th>Patient</th>
+                    <th>Vaccine</th>
+                    <th>Date Given</th>
+                    <th>Next Due</th>
+                    <th>Doctor</th>
+                    <th style="width: 150px;">Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var v in Model)
+                {
+                    <tr>
+                        <td>
+                            <strong>@v.Pet?.Name</strong><br />
+                            <small class="text-muted">@v.Pet?.Owner?.FullName</small>
+                        </td>
+                        <td>@v.VaccineName</td>
+                        <td>@(v.DateGiven?.ToString("MMM dd, yyyy") ?? "")</td>
+                        <td>@(v.NextDueDate?.ToString("MMM dd, yyyy") ?? "")</td>
+                        <td>@v.Staff?.FullName</td>
+                        <td>
+                            <div class="btn-group btn-group-sm" role="group">
+                                <button class="btn btn-outline-primary"
+                                        onclick="loadVaccinationView(@v.VaccinationId)">
+                                    View
+                                </button>
+                                <button class="btn btn-warning text-white"
+                                        onclick="loadVaccinationEdit(@v.VaccinationId)">
+                                    Edit
+                                </button>
+                                <button class="btn btn-danger"
+                                        onclick="loadVaccinationDelete(@v.VaccinationId)">
+                                    Delete
+                                </button>
+                            </div>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+}

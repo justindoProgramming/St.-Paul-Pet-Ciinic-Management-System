@@ -1,0 +1,60 @@
+﻿@model List<PetClinicSystem.Models.Prescription>
+
+@if (Model == null || !Model.Any())
+{
+    <div class="text-center text-secondary py-5">
+        No prescriptions found.
+    </div>
+}
+else
+{
+    <div class="table-responsive">
+        <table class="table align-middle" id="prescriptionsTable">
+            <thead class="table-light">
+                <tr>
+                    <th>Patient</th>
+                    <th>Medication</th>
+                    <th>Dosage</th>
+                    <th>Frequency</th>
+                    <th>Duration</th>
+                    <th>Doctor</th>
+                    <th>Date</th>
+                    <th style="width: 150px;">Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var p in Model)
+                {
+                    <tr>
+                        <td>
+                            <strong>@p.Pet?.Name</strong><br />
+                            <small class="text-muted">@p.Pet?.Owner?.FullName</small>
+                        </td>
+                        <td>@p.Medication</td>
+                        <td>@p.Dosage</td>
+                        <td>@p.Frequency</td>
+                        <td>@p.Duration</td>
+                        <td>@p.Staff?.FullName</td>
+                        <td>@p.Date.ToString("MMM dd, yyyy")</td>
+                        <td>
+                            <div class="btn-group btn-group-sm" role="group">
+                                <button class="btn btn-outline-primary"
+                                        onclick="loadPrescriptionView(@p.PrescriptionId)">
+                                    View
+                                </button>
+                                <button class="btn btn-warning text-white"
+                                        onclick="loadPrescriptionEdit(@p.PrescriptionId)">
+                                    Edit
+                                </button>
+                                <button class="btn btn-danger"
+                                        onclick="loadPrescriptionDelete(@p.PrescriptionId)">
+                                    Delete
+                                </button>
+                            </div>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+}

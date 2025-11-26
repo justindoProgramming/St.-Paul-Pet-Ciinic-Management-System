@@ -1,0 +1,96 @@
+﻿@model PetClinicSystem.Models.Prescription
+
+@{
+    var pets = ViewBag.Pets as List<PetClinicSystem.Models.Pet>;
+    var staff = ViewBag.Staff as List<PetClinicSystem.Models.Account>;
+}
+
+<div class="modal-header border-0">
+    <h5 class="modal-title fw-bold">New Prescription</h5>
+    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+</div>
+
+<form id="createPrescriptionForm"
+      method="post"
+      action="@Url.Action("CreatePrescription", "BillingPharmacy")">
+
+    <div class="modal-body">
+        <div class="row g-3">
+
+            <!-- PATIENT -->
+            <div class="col-md-6">
+                <label class="form-label fw-semibold">Patient</label>
+                <select name="PetId" class="form-select" required>
+                    <option value="" disabled selected>Select patient...</option>
+                    @if (pets != null)
+                    {
+                        foreach (var pet in pets)
+                        {
+                            <option value="@pet.PetId">
+                                @pet.Name (@pet.Owner.FullName)
+                            </option>
+                        }
+                    }
+                </select>
+            </div>
+
+            <!-- DOCTOR -->
+            <div class="col-md-6">
+                <label class="form-label fw-semibold">Doctor</label>
+                <select name="StaffId" class="form-select" required>
+                    <option value="" disabled selected>Select doctor...</option>
+                    @if (staff != null)
+                    {
+                        foreach (var doc in staff)
+                        {
+                            <option value="@doc.AccountId">
+                                @doc.FullName
+                            </option>
+                        }
+                    }
+                </select>
+            </div>
+
+            <!-- MEDICATION / DOSAGE / FREQUENCY / DURATION -->
+            <div class="col-md-6">
+                <label class="form-label fw-semibold">Medication</label>
+                <input name="Medication" class="form-control" required />
+            </div>
+
+            <div class="col-md-6">
+                <label class="form-label fw-semibold">Dosage</label>
+                <input name="Dosage" class="form-control" placeholder="e.g., 250mg" required />
+            </div>
+
+            <div class="col-md-6">
+                <label class="form-label fw-semibold">Frequency</label>
+                <input name="Frequency" class="form-control" placeholder="e.g., Twice daily" required />
+            </div>
+
+            <div class="col-md-6">
+                <label class="form-label fw-semibold">Duration</label>
+                <input name="Duration" class="form-control" placeholder="e.g., 7 days" required />
+            </div>
+
+            <div class="col-12">
+                <label class="form-label fw-semibold">Notes</label>
+                <textarea name="Notes" class="form-control" rows="3"
+                          placeholder="Additional instructions or notes"></textarea>
+            </div>
+
+            <div class="col-md-4">
+                <label class="form-label fw-semibold">Date</label>
+                <input type="date"
+                       name="Date"
+                       class="form-control"
+                       value="@DateTime.Today.ToString("yyyy-MM-dd")" />
+            </div>
+
+        </div>
+    </div>
+
+    <div class="modal-footer border-0">
+        <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">Cancel</button>
+        <button type="submit" class="btn btn-success">Create Prescription</button>
+    </div>
+</form>

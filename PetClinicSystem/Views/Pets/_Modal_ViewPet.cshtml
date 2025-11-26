@@ -1,0 +1,39 @@
+﻿@model PetClinicSystem.Models.Pet
+
+<div class="modal-dialog modal-dialog-centered modal-lg">
+    <div class="modal-content p-4 rounded-4 shadow">
+
+        <div class="d-flex justify-content-between">
+            <h4 class="fw-bold">Patient Details</h4>
+            <button class="btn-close" data-bs-dismiss="modal"></button>
+        </div>
+
+        <hr />
+
+        <h5 class="fw-bold">Basic Info</h5>
+        <div class="text-secondary">
+            <div><strong>Name:</strong> @Model.Name</div>
+            <div><strong>Species:</strong> @Model.Species</div>
+            <div><strong>Breed:</strong> @Model.Breed</div>
+            <div><strong>Gender:</strong> @Model.Gender</div>
+            <div><strong>Birthdate:</strong> @Model.BirthDate.ToString("MMM dd, yyyy")</div>
+            <div><strong>Weight:</strong> @Model.Weight kg</div>
+        </div>
+
+        <hr />
+
+        <h5 class="fw-bold">Owner Information</h5>
+        <div class="text-secondary">
+            <div><strong>Name:</strong> @Model.Owner.FullName</div>
+            <div><strong>Phone:</strong> @Model.Owner.PhoneNumber</div>
+            <div><strong>Email:</strong> @Model.Owner.Email</div>
+            <div><strong>Address:</strong> @Model.Owner.Address</div>
+        </div>
+
+        <hr />
+
+        <h5 class="fw-bold">Medical History</h5>
+        <p class="text-secondary">@Model.MedicalHistory</p>
+
+    </div>
+</div>

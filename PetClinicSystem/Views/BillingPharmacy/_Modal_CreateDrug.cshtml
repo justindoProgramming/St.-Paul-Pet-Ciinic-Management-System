@@ -1,0 +1,47 @@
+﻿@model PetClinicSystem.Models.Drug
+
+<div class="modal-header border-0">
+    <h5 class="modal-title fw-semibold">Add New Drug</h5>
+    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+</div>
+
+<form id="createDrugForm" action="@Url.Action("CreateDrug", "BillingPharmacy")" method="post">
+    <div class="modal-body">
+        <div class="row g-3">
+
+            <div class="col-md-6">
+                <label class="form-label">Drug Name</label>
+                <input type="text" name="DrugName" value="@Model.DrugName" class="form-control" required />
+            </div>
+
+            <div class="col-md-6">
+                <label class="form-label">Dosage Type</label>
+                <input type="text" name="DosageType" value="@Model.DosageType" class="form-control"
+                       placeholder="Tablets, syrup, injection..." />
+            </div>
+
+            <div class="col-md-4">
+                <label class="form-label">Quantity</label>
+                <input type="number" min="0" name="Quantity" value="@Model.Quantity" class="form-control" required />
+            </div>
+
+            <div class="col-md-4">
+                <label class="form-label">Unit Price</label>
+                <input type="number" min="0" step="0.01" name="UnitPrice" value="@Model.UnitPrice" class="form-control" required />
+            </div>
+
+            <div class="col-md-4">
+                <label class="form-label">Expiry Date</label>
+                <input type="date" name="ExpiryDate"
+                       value="@(Model.ExpiryDate == DateTime.MinValue ? "" : Model.ExpiryDate.ToString("yyyy-MM-dd"))"
+                       class="form-control" />
+            </div>
+
+        </div>
+    </div>
+
+    <div class="modal-footer bg-light">
+        <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">Cancel</button>
+        <button type="submit" class="btn btn-success px-4">Save Drug</button>
+    </div>
+</form>

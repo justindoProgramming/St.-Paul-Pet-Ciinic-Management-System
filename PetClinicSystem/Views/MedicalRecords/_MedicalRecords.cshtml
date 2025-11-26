@@ -1,0 +1,51 @@
+﻿@model IEnumerable<PetClinicSystem.Models.MedicalRecord>
+
+<table class="table table-hover align-middle mb-0">
+    <thead class="table-light">
+        <tr>
+            <th style="width: 130px;">Date</th>
+            <th>Patient</th>
+            <th>Owner</th>
+            <th>Doctor / Staff</th>
+            <th>Diagnosis</th>
+            <th>Treatment</th>
+            <th style="width: 150px;"></th>
+        </tr>
+    </thead>
+    <tbody>
+        @if (Model != null && Model.Any())
+        {
+            foreach (var r in Model)
+            {
+                <tr class="medical-record-row">
+                    <td>@(r.Date?.ToString("MMM dd, yyyy") ?? "-")</td>
+                    <td>@r.Pet?.Name</td>
+                    <td>@r.Pet?.Owner?.FullName</td>
+                    <td>@r.Staff?.FullName</td>
+                    <td>@(string.IsNullOrWhiteSpace(r.Diagnosis) ? "-" : r.Diagnosis)</td>
+                    <td>@(string.IsNullOrWhiteSpace(r.Treatment) ? "-" : r.Treatment)</td>
+                    <td class="text-end">
+                        <button class="btn btn-outline-primary btn-sm me-1"
+                                type="button"
+                                onclick="loadRecordEdit(@r.RecordId)">
+                            Edit
+                        </button>
+                        <button class="btn btn-outline-danger btn-sm"
+                                type="button"
+                                onclick="loadRecordDelete(@r.RecordId)">
+                            Delete
+                        </button>
+                    </td>
+                </tr>
+            }
+        }
+        else
+        {
+            <tr>
+                <td colspan="7" class="text-center text-muted py-4">
+                    No medical records found. Click <strong>New Record</strong> to add one.
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
