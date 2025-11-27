@@ -3,12 +3,176 @@
   "WorkspaceRootPath": "C:\\Users\\CJ LUMANGLAS\\Documents\\C#\\PetClinicSystem\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{CF82C2DF-C7B2-17F2-4FF6-054C65CDABBB}|PetClinicSystem\\PetClinicSystem.csproj|c:\\users\\cj lumanglas\\documents\\c#\\petclinicsystem\\petclinicsystem\\controllers\\accountcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{CF82C2DF-C7B2-17F2-4FF6-054C65CDABBB}|PetClinicSystem\\PetClinicSystem.csproj|solutionrelative:petclinicsystem\\controllers\\accountcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{CF82C2DF-C7B2-17F2-4FF6-054C65CDABBB}|PetClinicSystem\\PetClinicSystem.csproj|c:\\users\\cj lumanglas\\documents\\c#\\petclinicsystem\\petclinicsystem\\views\\billingpharmacy\\_pos_scripts.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{CF82C2DF-C7B2-17F2-4FF6-054C65CDABBB}|PetClinicSystem\\PetClinicSystem.csproj|solutionrelative:petclinicsystem\\views\\billingpharmacy\\_pos_scripts.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{CF82C2DF-C7B2-17F2-4FF6-054C65CDABBB}|PetClinicSystem\\PetClinicSystem.csproj|c:\\users\\cj lumanglas\\documents\\c#\\petclinicsystem\\petclinicsystem\\wwwroot\\js\\pos.js||{14D17961-FE51-464D-9111-C4AF11D7D99A}",
+      "RelativeMoniker": "D:0:0:{CF82C2DF-C7B2-17F2-4FF6-054C65CDABBB}|PetClinicSystem\\PetClinicSystem.csproj|solutionrelative:petclinicsystem\\wwwroot\\js\\pos.js||{14D17961-FE51-464D-9111-C4AF11D7D99A}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{CF82C2DF-C7B2-17F2-4FF6-054C65CDABBB}|PetClinicSystem\\PetClinicSystem.csproj|c:\\users\\cj lumanglas\\documents\\c#\\petclinicsystem\\petclinicsystem\\views\\billingpharmacy\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{CF82C2DF-C7B2-17F2-4FF6-054C65CDABBB}|PetClinicSystem\\PetClinicSystem.csproj|solutionrelative:petclinicsystem\\views\\billingpharmacy\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{CF82C2DF-C7B2-17F2-4FF6-054C65CDABBB}|PetClinicSystem\\PetClinicSystem.csproj|c:\\users\\cj lumanglas\\documents\\c#\\petclinicsystem\\petclinicsystem\\views\\billingpharmacy\\_pos.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{CF82C2DF-C7B2-17F2-4FF6-054C65CDABBB}|PetClinicSystem\\PetClinicSystem.csproj|solutionrelative:petclinicsystem\\views\\billingpharmacy\\_pos.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{CF82C2DF-C7B2-17F2-4FF6-054C65CDABBB}|PetClinicSystem\\PetClinicSystem.csproj|c:\\users\\cj lumanglas\\documents\\c#\\petclinicsystem\\petclinicsystem\\controllers\\billingpharmacycontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{CF82C2DF-C7B2-17F2-4FF6-054C65CDABBB}|PetClinicSystem\\PetClinicSystem.csproj|solutionrelative:petclinicsystem\\controllers\\billingpharmacycontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{CF82C2DF-C7B2-17F2-4FF6-054C65CDABBB}|PetClinicSystem\\PetClinicSystem.csproj|c:\\users\\cj lumanglas\\documents\\c#\\petclinicsystem\\petclinicsystem\\views\\billingpharmacy\\_modal_viewvaccination.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{CF82C2DF-C7B2-17F2-4FF6-054C65CDABBB}|PetClinicSystem\\PetClinicSystem.csproj|solutionrelative:petclinicsystem\\views\\billingpharmacy\\_modal_viewvaccination.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{CF82C2DF-C7B2-17F2-4FF6-054C65CDABBB}|PetClinicSystem\\PetClinicSystem.csproj|c:\\users\\cj lumanglas\\documents\\c#\\petclinicsystem\\petclinicsystem\\wwwroot\\js\\prescriptions.js||{14D17961-FE51-464D-9111-C4AF11D7D99A}",
+      "RelativeMoniker": "D:0:0:{CF82C2DF-C7B2-17F2-4FF6-054C65CDABBB}|PetClinicSystem\\PetClinicSystem.csproj|solutionrelative:petclinicsystem\\wwwroot\\js\\prescriptions.js||{14D17961-FE51-464D-9111-C4AF11D7D99A}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{CF82C2DF-C7B2-17F2-4FF6-054C65CDABBB}|PetClinicSystem\\PetClinicSystem.csproj|c:\\users\\cj lumanglas\\documents\\c#\\petclinicsystem\\petclinicsystem\\models\\pet.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{CF82C2DF-C7B2-17F2-4FF6-054C65CDABBB}|PetClinicSystem\\PetClinicSystem.csproj|solutionrelative:petclinicsystem\\models\\pet.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{CF82C2DF-C7B2-17F2-4FF6-054C65CDABBB}|PetClinicSystem\\PetClinicSystem.csproj|c:\\users\\cj lumanglas\\documents\\c#\\petclinicsystem\\petclinicsystem\\controllers\\ownerscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{CF82C2DF-C7B2-17F2-4FF6-054C65CDABBB}|PetClinicSystem\\PetClinicSystem.csproj|solutionrelative:petclinicsystem\\controllers\\ownerscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{CF82C2DF-C7B2-17F2-4FF6-054C65CDABBB}|PetClinicSystem\\PetClinicSystem.csproj|c:\\users\\cj lumanglas\\documents\\c#\\petclinicsystem\\petclinicsystem\\wwwroot\\js\\owners.js||{14D17961-FE51-464D-9111-C4AF11D7D99A}",
+      "RelativeMoniker": "D:0:0:{CF82C2DF-C7B2-17F2-4FF6-054C65CDABBB}|PetClinicSystem\\PetClinicSystem.csproj|solutionrelative:petclinicsystem\\wwwroot\\js\\owners.js||{14D17961-FE51-464D-9111-C4AF11D7D99A}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{CF82C2DF-C7B2-17F2-4FF6-054C65CDABBB}|PetClinicSystem\\PetClinicSystem.csproj|c:\\users\\cj lumanglas\\documents\\c#\\petclinicsystem\\petclinicsystem\\views\\owners\\_modal_deleteowner.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{CF82C2DF-C7B2-17F2-4FF6-054C65CDABBB}|PetClinicSystem\\PetClinicSystem.csproj|solutionrelative:petclinicsystem\\views\\owners\\_modal_deleteowner.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{CF82C2DF-C7B2-17F2-4FF6-054C65CDABBB}|PetClinicSystem\\PetClinicSystem.csproj|c:\\users\\cj lumanglas\\documents\\c#\\petclinicsystem\\petclinicsystem\\views\\owners\\_modal_editowner.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{CF82C2DF-C7B2-17F2-4FF6-054C65CDABBB}|PetClinicSystem\\PetClinicSystem.csproj|solutionrelative:petclinicsystem\\views\\owners\\_modal_editowner.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{CF82C2DF-C7B2-17F2-4FF6-054C65CDABBB}|PetClinicSystem\\PetClinicSystem.csproj|c:\\users\\cj lumanglas\\documents\\c#\\petclinicsystem\\petclinicsystem\\views\\owners\\_modal_viewowner.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{CF82C2DF-C7B2-17F2-4FF6-054C65CDABBB}|PetClinicSystem\\PetClinicSystem.csproj|solutionrelative:petclinicsystem\\views\\owners\\_modal_viewowner.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{CF82C2DF-C7B2-17F2-4FF6-054C65CDABBB}|PetClinicSystem\\PetClinicSystem.csproj|c:\\users\\cj lumanglas\\documents\\c#\\petclinicsystem\\petclinicsystem\\views\\owners\\_modal_createowner.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{CF82C2DF-C7B2-17F2-4FF6-054C65CDABBB}|PetClinicSystem\\PetClinicSystem.csproj|solutionrelative:petclinicsystem\\views\\owners\\_modal_createowner.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{CF82C2DF-C7B2-17F2-4FF6-054C65CDABBB}|PetClinicSystem\\PetClinicSystem.csproj|c:\\users\\cj lumanglas\\documents\\c#\\petclinicsystem\\petclinicsystem\\views\\owners\\_ownercards.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{CF82C2DF-C7B2-17F2-4FF6-054C65CDABBB}|PetClinicSystem\\PetClinicSystem.csproj|solutionrelative:petclinicsystem\\views\\owners\\_ownercards.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{CF82C2DF-C7B2-17F2-4FF6-054C65CDABBB}|PetClinicSystem\\PetClinicSystem.csproj|c:\\users\\cj lumanglas\\documents\\c#\\petclinicsystem\\petclinicsystem\\views\\owners\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{CF82C2DF-C7B2-17F2-4FF6-054C65CDABBB}|PetClinicSystem\\PetClinicSystem.csproj|solutionrelative:petclinicsystem\\views\\owners\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{CF82C2DF-C7B2-17F2-4FF6-054C65CDABBB}|PetClinicSystem\\PetClinicSystem.csproj|c:\\users\\cj lumanglas\\documents\\c#\\petclinicsystem\\petclinicsystem\\views\\shared\\_layout_admin.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{CF82C2DF-C7B2-17F2-4FF6-054C65CDABBB}|PetClinicSystem\\PetClinicSystem.csproj|solutionrelative:petclinicsystem\\views\\shared\\_layout_admin.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{CF82C2DF-C7B2-17F2-4FF6-054C65CDABBB}|PetClinicSystem\\PetClinicSystem.csproj|c:\\users\\cj lumanglas\\documents\\c#\\petclinicsystem\\petclinicsystem\\views\\appointments\\_modal_deleteappointment.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{CF82C2DF-C7B2-17F2-4FF6-054C65CDABBB}|PetClinicSystem\\PetClinicSystem.csproj|solutionrelative:petclinicsystem\\views\\appointments\\_modal_deleteappointment.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{CF82C2DF-C7B2-17F2-4FF6-054C65CDABBB}|PetClinicSystem\\PetClinicSystem.csproj|c:\\users\\cj lumanglas\\documents\\c#\\petclinicsystem\\petclinicsystem\\views\\appointments\\_modal_editappointment.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{CF82C2DF-C7B2-17F2-4FF6-054C65CDABBB}|PetClinicSystem\\PetClinicSystem.csproj|solutionrelative:petclinicsystem\\views\\appointments\\_modal_editappointment.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{CF82C2DF-C7B2-17F2-4FF6-054C65CDABBB}|PetClinicSystem\\PetClinicSystem.csproj|c:\\users\\cj lumanglas\\documents\\c#\\petclinicsystem\\petclinicsystem\\views\\appointments\\_modal_createappointment.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{CF82C2DF-C7B2-17F2-4FF6-054C65CDABBB}|PetClinicSystem\\PetClinicSystem.csproj|solutionrelative:petclinicsystem\\views\\appointments\\_modal_createappointment.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{CF82C2DF-C7B2-17F2-4FF6-054C65CDABBB}|PetClinicSystem\\PetClinicSystem.csproj|c:\\users\\cj lumanglas\\documents\\c#\\petclinicsystem\\petclinicsystem\\views\\appointments\\_modal_viewappointment.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{CF82C2DF-C7B2-17F2-4FF6-054C65CDABBB}|PetClinicSystem\\PetClinicSystem.csproj|solutionrelative:petclinicsystem\\views\\appointments\\_modal_viewappointment.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{CF82C2DF-C7B2-17F2-4FF6-054C65CDABBB}|PetClinicSystem\\PetClinicSystem.csproj|c:\\users\\cj lumanglas\\documents\\c#\\petclinicsystem\\petclinicsystem\\views\\pets\\_modal_editpet.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{CF82C2DF-C7B2-17F2-4FF6-054C65CDABBB}|PetClinicSystem\\PetClinicSystem.csproj|solutionrelative:petclinicsystem\\views\\pets\\_modal_editpet.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{CF82C2DF-C7B2-17F2-4FF6-054C65CDABBB}|PetClinicSystem\\PetClinicSystem.csproj|c:\\users\\cj lumanglas\\documents\\c#\\petclinicsystem\\petclinicsystem\\views\\pets\\_modal_deletepet.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{CF82C2DF-C7B2-17F2-4FF6-054C65CDABBB}|PetClinicSystem\\PetClinicSystem.csproj|solutionrelative:petclinicsystem\\views\\pets\\_modal_deletepet.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{CF82C2DF-C7B2-17F2-4FF6-054C65CDABBB}|PetClinicSystem\\PetClinicSystem.csproj|c:\\users\\cj lumanglas\\documents\\c#\\petclinicsystem\\petclinicsystem\\views\\pets\\_modal_viewpet.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{CF82C2DF-C7B2-17F2-4FF6-054C65CDABBB}|PetClinicSystem\\PetClinicSystem.csproj|solutionrelative:petclinicsystem\\views\\pets\\_modal_viewpet.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{CF82C2DF-C7B2-17F2-4FF6-054C65CDABBB}|PetClinicSystem\\PetClinicSystem.csproj|c:\\users\\cj lumanglas\\documents\\c#\\petclinicsystem\\petclinicsystem\\views\\pets\\_modal_createpet.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{CF82C2DF-C7B2-17F2-4FF6-054C65CDABBB}|PetClinicSystem\\PetClinicSystem.csproj|solutionrelative:petclinicsystem\\views\\pets\\_modal_createpet.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{CF82C2DF-C7B2-17F2-4FF6-054C65CDABBB}|PetClinicSystem\\PetClinicSystem.csproj|c:\\users\\cj lumanglas\\documents\\c#\\petclinicsystem\\petclinicsystem\\models\\prescription.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{CF82C2DF-C7B2-17F2-4FF6-054C65CDABBB}|PetClinicSystem\\PetClinicSystem.csproj|solutionrelative:petclinicsystem\\models\\prescription.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{CF82C2DF-C7B2-17F2-4FF6-054C65CDABBB}|PetClinicSystem\\PetClinicSystem.csproj|c:\\users\\cj lumanglas\\documents\\c#\\petclinicsystem\\petclinicsystem\\views\\billingpharmacy\\_modal_createprescription.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{CF82C2DF-C7B2-17F2-4FF6-054C65CDABBB}|PetClinicSystem\\PetClinicSystem.csproj|solutionrelative:petclinicsystem\\views\\billingpharmacy\\_modal_createprescription.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{CF82C2DF-C7B2-17F2-4FF6-054C65CDABBB}|PetClinicSystem\\PetClinicSystem.csproj|c:\\users\\cj lumanglas\\documents\\c#\\petclinicsystem\\petclinicsystem\\views\\billingpharmacy\\_modal_editprescription.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{CF82C2DF-C7B2-17F2-4FF6-054C65CDABBB}|PetClinicSystem\\PetClinicSystem.csproj|solutionrelative:petclinicsystem\\views\\billingpharmacy\\_modal_editprescription.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{CF82C2DF-C7B2-17F2-4FF6-054C65CDABBB}|PetClinicSystem\\PetClinicSystem.csproj|c:\\users\\cj lumanglas\\documents\\c#\\petclinicsystem\\petclinicsystem\\views\\billingpharmacy\\_modal_deleteprescription.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{CF82C2DF-C7B2-17F2-4FF6-054C65CDABBB}|PetClinicSystem\\PetClinicSystem.csproj|solutionrelative:petclinicsystem\\views\\billingpharmacy\\_modal_deleteprescription.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{CF82C2DF-C7B2-17F2-4FF6-054C65CDABBB}|PetClinicSystem\\PetClinicSystem.csproj|c:\\users\\cj lumanglas\\documents\\c#\\petclinicsystem\\petclinicsystem\\views\\billingpharmacy\\_modal_viewprescription.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{CF82C2DF-C7B2-17F2-4FF6-054C65CDABBB}|PetClinicSystem\\PetClinicSystem.csproj|solutionrelative:petclinicsystem\\views\\billingpharmacy\\_modal_viewprescription.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{CF82C2DF-C7B2-17F2-4FF6-054C65CDABBB}|PetClinicSystem\\PetClinicSystem.csproj|c:\\users\\cj lumanglas\\documents\\c#\\petclinicsystem\\petclinicsystem\\views\\billingpharmacy\\_prescriptions.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{CF82C2DF-C7B2-17F2-4FF6-054C65CDABBB}|PetClinicSystem\\PetClinicSystem.csproj|solutionrelative:petclinicsystem\\views\\billingpharmacy\\_prescriptions.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{CF82C2DF-C7B2-17F2-4FF6-054C65CDABBB}|PetClinicSystem\\PetClinicSystem.csproj|c:\\users\\cj lumanglas\\documents\\c#\\petclinicsystem\\petclinicsystem\\wwwroot\\js\\settings.js||{14D17961-FE51-464D-9111-C4AF11D7D99A}",
       "RelativeMoniker": "D:0:0:{CF82C2DF-C7B2-17F2-4FF6-054C65CDABBB}|PetClinicSystem\\PetClinicSystem.csproj|solutionrelative:petclinicsystem\\wwwroot\\js\\settings.js||{14D17961-FE51-464D-9111-C4AF11D7D99A}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{CF82C2DF-C7B2-17F2-4FF6-054C65CDABBB}|PetClinicSystem\\PetClinicSystem.csproj|c:\\users\\cj lumanglas\\documents\\c#\\petclinicsystem\\petclinicsystem\\controllers\\accountcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{CF82C2DF-C7B2-17F2-4FF6-054C65CDABBB}|PetClinicSystem\\PetClinicSystem.csproj|solutionrelative:petclinicsystem\\controllers\\accountcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{CF82C2DF-C7B2-17F2-4FF6-054C65CDABBB}|PetClinicSystem\\PetClinicSystem.csproj|c:\\users\\cj lumanglas\\documents\\c#\\petclinicsystem\\petclinicsystem\\views\\shared\\_layout_public.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{CF82C2DF-C7B2-17F2-4FF6-054C65CDABBB}|PetClinicSystem\\PetClinicSystem.csproj|solutionrelative:petclinicsystem\\views\\shared\\_layout_public.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{CF82C2DF-C7B2-17F2-4FF6-054C65CDABBB}|PetClinicSystem\\PetClinicSystem.csproj|c:\\users\\cj lumanglas\\documents\\c#\\petclinicsystem\\petclinicsystem\\views\\home\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{CF82C2DF-C7B2-17F2-4FF6-054C65CDABBB}|PetClinicSystem\\PetClinicSystem.csproj|solutionrelative:petclinicsystem\\views\\home\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{CF82C2DF-C7B2-17F2-4FF6-054C65CDABBB}|PetClinicSystem\\PetClinicSystem.csproj|c:\\users\\cj lumanglas\\documents\\c#\\petclinicsystem\\petclinicsystem\\views\\manageaccounts\\_modal_editaccount.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{CF82C2DF-C7B2-17F2-4FF6-054C65CDABBB}|PetClinicSystem\\PetClinicSystem.csproj|solutionrelative:petclinicsystem\\views\\manageaccounts\\_modal_editaccount.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{CF82C2DF-C7B2-17F2-4FF6-054C65CDABBB}|PetClinicSystem\\PetClinicSystem.csproj|c:\\users\\cj lumanglas\\documents\\c#\\petclinicsystem\\petclinicsystem\\views\\shared\\_layout.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{CF82C2DF-C7B2-17F2-4FF6-054C65CDABBB}|PetClinicSystem\\PetClinicSystem.csproj|solutionrelative:petclinicsystem\\views\\shared\\_layout.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{CF82C2DF-C7B2-17F2-4FF6-054C65CDABBB}|PetClinicSystem\\PetClinicSystem.csproj|c:\\users\\cj lumanglas\\documents\\c#\\petclinicsystem\\petclinicsystem\\views\\account\\landing.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{CF82C2DF-C7B2-17F2-4FF6-054C65CDABBB}|PetClinicSystem\\PetClinicSystem.csproj|solutionrelative:petclinicsystem\\views\\account\\landing.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{CF82C2DF-C7B2-17F2-4FF6-054C65CDABBB}|PetClinicSystem\\PetClinicSystem.csproj|c:\\users\\cj lumanglas\\documents\\c#\\petclinicsystem\\petclinicsystem\\views\\shared\\_layout_staff.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{CF82C2DF-C7B2-17F2-4FF6-054C65CDABBB}|PetClinicSystem\\PetClinicSystem.csproj|solutionrelative:petclinicsystem\\views\\shared\\_layout_staff.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{CF82C2DF-C7B2-17F2-4FF6-054C65CDABBB}|PetClinicSystem\\PetClinicSystem.csproj|c:\\users\\cj lumanglas\\documents\\c#\\petclinicsystem\\petclinicsystem\\views\\shared\\_layout_client.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{CF82C2DF-C7B2-17F2-4FF6-054C65CDABBB}|PetClinicSystem\\PetClinicSystem.csproj|solutionrelative:petclinicsystem\\views\\shared\\_layout_client.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{CF82C2DF-C7B2-17F2-4FF6-054C65CDABBB}|PetClinicSystem\\PetClinicSystem.csproj|c:\\users\\cj lumanglas\\documents\\c#\\petclinicsystem\\petclinicsystem\\views\\manageaccounts\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{CF82C2DF-C7B2-17F2-4FF6-054C65CDABBB}|PetClinicSystem\\PetClinicSystem.csproj|solutionrelative:petclinicsystem\\views\\manageaccounts\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{CF82C2DF-C7B2-17F2-4FF6-054C65CDABBB}|PetClinicSystem\\PetClinicSystem.csproj|c:\\users\\cj lumanglas\\documents\\c#\\petclinicsystem\\petclinicsystem\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{CF82C2DF-C7B2-17F2-4FF6-054C65CDABBB}|PetClinicSystem\\PetClinicSystem.csproj|solutionrelative:petclinicsystem\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{CF82C2DF-C7B2-17F2-4FF6-054C65CDABBB}|PetClinicSystem\\PetClinicSystem.csproj|c:\\users\\cj lumanglas\\documents\\c#\\petclinicsystem\\petclinicsystem\\views\\billingpharmacy\\_modal_editdrug.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{CF82C2DF-C7B2-17F2-4FF6-054C65CDABBB}|PetClinicSystem\\PetClinicSystem.csproj|solutionrelative:petclinicsystem\\views\\billingpharmacy\\_modal_editdrug.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{CF82C2DF-C7B2-17F2-4FF6-054C65CDABBB}|PetClinicSystem\\PetClinicSystem.csproj|c:\\users\\cj lumanglas\\documents\\c#\\petclinicsystem\\petclinicsystem\\views\\settings\\_modal_changepassword.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
@@ -23,16 +187,8 @@
       "RelativeMoniker": "D:0:0:{CF82C2DF-C7B2-17F2-4FF6-054C65CDABBB}|PetClinicSystem\\PetClinicSystem.csproj|solutionrelative:petclinicsystem\\views\\settings\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{CF82C2DF-C7B2-17F2-4FF6-054C65CDABBB}|PetClinicSystem\\PetClinicSystem.csproj|c:\\users\\cj lumanglas\\documents\\c#\\petclinicsystem\\petclinicsystem\\views\\shared\\_layout_admin.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
-      "RelativeMoniker": "D:0:0:{CF82C2DF-C7B2-17F2-4FF6-054C65CDABBB}|PetClinicSystem\\PetClinicSystem.csproj|solutionrelative:petclinicsystem\\views\\shared\\_layout_admin.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
-    },
-    {
       "AbsoluteMoniker": "D:0:0:{CF82C2DF-C7B2-17F2-4FF6-054C65CDABBB}|PetClinicSystem\\PetClinicSystem.csproj|c:\\users\\cj lumanglas\\documents\\c#\\petclinicsystem\\petclinicsystem\\controllers\\settingscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{CF82C2DF-C7B2-17F2-4FF6-054C65CDABBB}|PetClinicSystem\\PetClinicSystem.csproj|solutionrelative:petclinicsystem\\controllers\\settingscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{CF82C2DF-C7B2-17F2-4FF6-054C65CDABBB}|PetClinicSystem\\PetClinicSystem.csproj|c:\\users\\cj lumanglas\\documents\\c#\\petclinicsystem\\petclinicsystem\\views\\billingpharmacy\\_modal_editdrug.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
-      "RelativeMoniker": "D:0:0:{CF82C2DF-C7B2-17F2-4FF6-054C65CDABBB}|PetClinicSystem\\PetClinicSystem.csproj|solutionrelative:petclinicsystem\\views\\billingpharmacy\\_modal_editdrug.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{CF82C2DF-C7B2-17F2-4FF6-054C65CDABBB}|PetClinicSystem\\PetClinicSystem.csproj|c:\\users\\cj lumanglas\\documents\\c#\\petclinicsystem\\petclinicsystem\\wwwroot\\js\\accounts.js||{14D17961-FE51-464D-9111-C4AF11D7D99A}",
@@ -49,10 +205,6 @@
     {
       "AbsoluteMoniker": "D:0:0:{CF82C2DF-C7B2-17F2-4FF6-054C65CDABBB}|PetClinicSystem\\PetClinicSystem.csproj|c:\\users\\cj lumanglas\\documents\\c#\\petclinicsystem\\petclinicsystem\\controllers\\medicalrecordscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{CF82C2DF-C7B2-17F2-4FF6-054C65CDABBB}|PetClinicSystem\\PetClinicSystem.csproj|solutionrelative:petclinicsystem\\controllers\\medicalrecordscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{CF82C2DF-C7B2-17F2-4FF6-054C65CDABBB}|PetClinicSystem\\PetClinicSystem.csproj|c:\\users\\cj lumanglas\\documents\\c#\\petclinicsystem\\petclinicsystem\\views\\manageaccounts\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
-      "RelativeMoniker": "D:0:0:{CF82C2DF-C7B2-17F2-4FF6-054C65CDABBB}|PetClinicSystem\\PetClinicSystem.csproj|solutionrelative:petclinicsystem\\views\\manageaccounts\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{CF82C2DF-C7B2-17F2-4FF6-054C65CDABBB}|PetClinicSystem\\PetClinicSystem.csproj|c:\\users\\cj lumanglas\\documents\\c#\\petclinicsystem\\petclinicsystem\\views\\manageaccounts\\_accountcards.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
@@ -87,14 +239,6 @@
       "RelativeMoniker": "D:0:0:{CF82C2DF-C7B2-17F2-4FF6-054C65CDABBB}|PetClinicSystem\\PetClinicSystem.csproj|solutionrelative:petclinicsystem\\views\\manageaccounts\\_modal_createaccount.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{CF82C2DF-C7B2-17F2-4FF6-054C65CDABBB}|PetClinicSystem\\PetClinicSystem.csproj|c:\\users\\cj lumanglas\\documents\\c#\\petclinicsystem\\petclinicsystem\\views\\manageaccounts\\_modal_editaccount.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
-      "RelativeMoniker": "D:0:0:{CF82C2DF-C7B2-17F2-4FF6-054C65CDABBB}|PetClinicSystem\\PetClinicSystem.csproj|solutionrelative:petclinicsystem\\views\\manageaccounts\\_modal_editaccount.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{CF82C2DF-C7B2-17F2-4FF6-054C65CDABBB}|PetClinicSystem\\PetClinicSystem.csproj|c:\\users\\cj lumanglas\\documents\\c#\\petclinicsystem\\petclinicsystem\\controllers\\billingpharmacycontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{CF82C2DF-C7B2-17F2-4FF6-054C65CDABBB}|PetClinicSystem\\PetClinicSystem.csproj|solutionrelative:petclinicsystem\\controllers\\billingpharmacycontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
       "AbsoluteMoniker": "D:0:0:{CF82C2DF-C7B2-17F2-4FF6-054C65CDABBB}|PetClinicSystem\\PetClinicSystem.csproj|c:\\users\\cj lumanglas\\documents\\c#\\petclinicsystem\\petclinicsystem\\controllers\\clientcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{CF82C2DF-C7B2-17F2-4FF6-054C65CDABBB}|PetClinicSystem\\PetClinicSystem.csproj|solutionrelative:petclinicsystem\\controllers\\clientcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
@@ -113,42 +257,6 @@
     {
       "AbsoluteMoniker": "D:0:0:{CF82C2DF-C7B2-17F2-4FF6-054C65CDABBB}|PetClinicSystem\\PetClinicSystem.csproj|c:\\users\\cj lumanglas\\documents\\c#\\petclinicsystem\\petclinicsystem\\controllers\\staffcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{CF82C2DF-C7B2-17F2-4FF6-054C65CDABBB}|PetClinicSystem\\PetClinicSystem.csproj|solutionrelative:petclinicsystem\\controllers\\staffcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{CF82C2DF-C7B2-17F2-4FF6-054C65CDABBB}|PetClinicSystem\\PetClinicSystem.csproj|c:\\users\\cj lumanglas\\documents\\c#\\petclinicsystem\\petclinicsystem\\views\\pets\\_modal_viewpet.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
-      "RelativeMoniker": "D:0:0:{CF82C2DF-C7B2-17F2-4FF6-054C65CDABBB}|PetClinicSystem\\PetClinicSystem.csproj|solutionrelative:petclinicsystem\\views\\pets\\_modal_viewpet.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{CF82C2DF-C7B2-17F2-4FF6-054C65CDABBB}|PetClinicSystem\\PetClinicSystem.csproj|c:\\users\\cj lumanglas\\documents\\c#\\petclinicsystem\\petclinicsystem\\wwwroot\\js\\prescriptions.js||{14D17961-FE51-464D-9111-C4AF11D7D99A}",
-      "RelativeMoniker": "D:0:0:{CF82C2DF-C7B2-17F2-4FF6-054C65CDABBB}|PetClinicSystem\\PetClinicSystem.csproj|solutionrelative:petclinicsystem\\wwwroot\\js\\prescriptions.js||{14D17961-FE51-464D-9111-C4AF11D7D99A}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{CF82C2DF-C7B2-17F2-4FF6-054C65CDABBB}|PetClinicSystem\\PetClinicSystem.csproj|c:\\users\\cj lumanglas\\documents\\c#\\petclinicsystem\\petclinicsystem\\views\\billingpharmacy\\_modal_deleteprescription.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
-      "RelativeMoniker": "D:0:0:{CF82C2DF-C7B2-17F2-4FF6-054C65CDABBB}|PetClinicSystem\\PetClinicSystem.csproj|solutionrelative:petclinicsystem\\views\\billingpharmacy\\_modal_deleteprescription.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{CF82C2DF-C7B2-17F2-4FF6-054C65CDABBB}|PetClinicSystem\\PetClinicSystem.csproj|c:\\users\\cj lumanglas\\documents\\c#\\petclinicsystem\\petclinicsystem\\views\\billingpharmacy\\_modal_viewprescription.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
-      "RelativeMoniker": "D:0:0:{CF82C2DF-C7B2-17F2-4FF6-054C65CDABBB}|PetClinicSystem\\PetClinicSystem.csproj|solutionrelative:petclinicsystem\\views\\billingpharmacy\\_modal_viewprescription.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{CF82C2DF-C7B2-17F2-4FF6-054C65CDABBB}|PetClinicSystem\\PetClinicSystem.csproj|c:\\users\\cj lumanglas\\documents\\c#\\petclinicsystem\\petclinicsystem\\views\\billingpharmacy\\_modal_viewvaccination.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
-      "RelativeMoniker": "D:0:0:{CF82C2DF-C7B2-17F2-4FF6-054C65CDABBB}|PetClinicSystem\\PetClinicSystem.csproj|solutionrelative:petclinicsystem\\views\\billingpharmacy\\_modal_viewvaccination.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{CF82C2DF-C7B2-17F2-4FF6-054C65CDABBB}|PetClinicSystem\\PetClinicSystem.csproj|c:\\users\\cj lumanglas\\documents\\c#\\petclinicsystem\\petclinicsystem\\views\\billingpharmacy\\_modal_editprescription.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
-      "RelativeMoniker": "D:0:0:{CF82C2DF-C7B2-17F2-4FF6-054C65CDABBB}|PetClinicSystem\\PetClinicSystem.csproj|solutionrelative:petclinicsystem\\views\\billingpharmacy\\_modal_editprescription.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{CF82C2DF-C7B2-17F2-4FF6-054C65CDABBB}|PetClinicSystem\\PetClinicSystem.csproj|c:\\users\\cj lumanglas\\documents\\c#\\petclinicsystem\\petclinicsystem\\views\\billingpharmacy\\_modal_createprescription.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
-      "RelativeMoniker": "D:0:0:{CF82C2DF-C7B2-17F2-4FF6-054C65CDABBB}|PetClinicSystem\\PetClinicSystem.csproj|solutionrelative:petclinicsystem\\views\\billingpharmacy\\_modal_createprescription.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{CF82C2DF-C7B2-17F2-4FF6-054C65CDABBB}|PetClinicSystem\\PetClinicSystem.csproj|c:\\users\\cj lumanglas\\documents\\c#\\petclinicsystem\\petclinicsystem\\views\\billingpharmacy\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
-      "RelativeMoniker": "D:0:0:{CF82C2DF-C7B2-17F2-4FF6-054C65CDABBB}|PetClinicSystem\\PetClinicSystem.csproj|solutionrelative:petclinicsystem\\views\\billingpharmacy\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{CF82C2DF-C7B2-17F2-4FF6-054C65CDABBB}|PetClinicSystem\\PetClinicSystem.csproj|c:\\users\\cj lumanglas\\documents\\c#\\petclinicsystem\\petclinicsystem\\views\\billingpharmacy\\_prescriptions.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
-      "RelativeMoniker": "D:0:0:{CF82C2DF-C7B2-17F2-4FF6-054C65CDABBB}|PetClinicSystem\\PetClinicSystem.csproj|solutionrelative:petclinicsystem\\views\\billingpharmacy\\_prescriptions.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{CF82C2DF-C7B2-17F2-4FF6-054C65CDABBB}|PetClinicSystem\\PetClinicSystem.csproj|c:\\users\\cj lumanglas\\documents\\c#\\petclinicsystem\\petclinicsystem\\wwwroot\\js\\vaccinations.js||{14D17961-FE51-464D-9111-C4AF11D7D99A}",
@@ -173,10 +281,6 @@
     {
       "AbsoluteMoniker": "D:0:0:{CF82C2DF-C7B2-17F2-4FF6-054C65CDABBB}|PetClinicSystem\\PetClinicSystem.csproj|c:\\users\\cj lumanglas\\documents\\c#\\petclinicsystem\\petclinicsystem\\models\\vaccination.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{CF82C2DF-C7B2-17F2-4FF6-054C65CDABBB}|PetClinicSystem\\PetClinicSystem.csproj|solutionrelative:petclinicsystem\\models\\vaccination.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{CF82C2DF-C7B2-17F2-4FF6-054C65CDABBB}|PetClinicSystem\\PetClinicSystem.csproj|c:\\users\\cj lumanglas\\documents\\c#\\petclinicsystem\\petclinicsystem\\models\\prescription.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{CF82C2DF-C7B2-17F2-4FF6-054C65CDABBB}|PetClinicSystem\\PetClinicSystem.csproj|solutionrelative:petclinicsystem\\models\\prescription.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{CF82C2DF-C7B2-17F2-4FF6-054C65CDABBB}|PetClinicSystem\\PetClinicSystem.csproj|c:\\users\\cj lumanglas\\documents\\c#\\petclinicsystem\\petclinicsystem\\views\\billingpharmacy\\_drugs.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
@@ -215,44 +319,8 @@
       "RelativeMoniker": "D:0:0:{CF82C2DF-C7B2-17F2-4FF6-054C65CDABBB}|PetClinicSystem\\PetClinicSystem.csproj|solutionrelative:petclinicsystem\\views\\appointments\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{CF82C2DF-C7B2-17F2-4FF6-054C65CDABBB}|PetClinicSystem\\PetClinicSystem.csproj|c:\\users\\cj lumanglas\\documents\\c#\\petclinicsystem\\petclinicsystem\\views\\appointments\\_modal_deleteappointment.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
-      "RelativeMoniker": "D:0:0:{CF82C2DF-C7B2-17F2-4FF6-054C65CDABBB}|PetClinicSystem\\PetClinicSystem.csproj|solutionrelative:petclinicsystem\\views\\appointments\\_modal_deleteappointment.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{CF82C2DF-C7B2-17F2-4FF6-054C65CDABBB}|PetClinicSystem\\PetClinicSystem.csproj|c:\\users\\cj lumanglas\\documents\\c#\\petclinicsystem\\petclinicsystem\\views\\appointments\\_modal_createappointment.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
-      "RelativeMoniker": "D:0:0:{CF82C2DF-C7B2-17F2-4FF6-054C65CDABBB}|PetClinicSystem\\PetClinicSystem.csproj|solutionrelative:petclinicsystem\\views\\appointments\\_modal_createappointment.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{CF82C2DF-C7B2-17F2-4FF6-054C65CDABBB}|PetClinicSystem\\PetClinicSystem.csproj|c:\\users\\cj lumanglas\\documents\\c#\\petclinicsystem\\petclinicsystem\\views\\billingpharmacy\\_pos.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
-      "RelativeMoniker": "D:0:0:{CF82C2DF-C7B2-17F2-4FF6-054C65CDABBB}|PetClinicSystem\\PetClinicSystem.csproj|solutionrelative:petclinicsystem\\views\\billingpharmacy\\_pos.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{CF82C2DF-C7B2-17F2-4FF6-054C65CDABBB}|PetClinicSystem\\PetClinicSystem.csproj|c:\\users\\cj lumanglas\\documents\\c#\\petclinicsystem\\petclinicsystem\\views\\billingpharmacy\\_pos_scripts.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
-      "RelativeMoniker": "D:0:0:{CF82C2DF-C7B2-17F2-4FF6-054C65CDABBB}|PetClinicSystem\\PetClinicSystem.csproj|solutionrelative:petclinicsystem\\views\\billingpharmacy\\_pos_scripts.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
-    },
-    {
       "AbsoluteMoniker": "D:0:0:{CF82C2DF-C7B2-17F2-4FF6-054C65CDABBB}|PetClinicSystem\\PetClinicSystem.csproj|c:\\users\\cj lumanglas\\documents\\c#\\petclinicsystem\\petclinicsystem\\views\\admin\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
       "RelativeMoniker": "D:0:0:{CF82C2DF-C7B2-17F2-4FF6-054C65CDABBB}|PetClinicSystem\\PetClinicSystem.csproj|solutionrelative:petclinicsystem\\views\\admin\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{CF82C2DF-C7B2-17F2-4FF6-054C65CDABBB}|PetClinicSystem\\PetClinicSystem.csproj|c:\\users\\cj lumanglas\\documents\\c#\\petclinicsystem\\petclinicsystem\\views\\home\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
-      "RelativeMoniker": "D:0:0:{CF82C2DF-C7B2-17F2-4FF6-054C65CDABBB}|PetClinicSystem\\PetClinicSystem.csproj|solutionrelative:petclinicsystem\\views\\home\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{CF82C2DF-C7B2-17F2-4FF6-054C65CDABBB}|PetClinicSystem\\PetClinicSystem.csproj|c:\\users\\cj lumanglas\\documents\\c#\\petclinicsystem\\petclinicsystem\\views\\shared\\_layout_public.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
-      "RelativeMoniker": "D:0:0:{CF82C2DF-C7B2-17F2-4FF6-054C65CDABBB}|PetClinicSystem\\PetClinicSystem.csproj|solutionrelative:petclinicsystem\\views\\shared\\_layout_public.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{CF82C2DF-C7B2-17F2-4FF6-054C65CDABBB}|PetClinicSystem\\PetClinicSystem.csproj|c:\\users\\cj lumanglas\\documents\\c#\\petclinicsystem\\petclinicsystem\\views\\appointments\\_modal_viewappointment.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
-      "RelativeMoniker": "D:0:0:{CF82C2DF-C7B2-17F2-4FF6-054C65CDABBB}|PetClinicSystem\\PetClinicSystem.csproj|solutionrelative:petclinicsystem\\views\\appointments\\_modal_viewappointment.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{CF82C2DF-C7B2-17F2-4FF6-054C65CDABBB}|PetClinicSystem\\PetClinicSystem.csproj|c:\\users\\cj lumanglas\\documents\\c#\\petclinicsystem\\petclinicsystem\\views\\appointments\\_modal_editappointment.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
-      "RelativeMoniker": "D:0:0:{CF82C2DF-C7B2-17F2-4FF6-054C65CDABBB}|PetClinicSystem\\PetClinicSystem.csproj|solutionrelative:petclinicsystem\\views\\appointments\\_modal_editappointment.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{CF82C2DF-C7B2-17F2-4FF6-054C65CDABBB}|PetClinicSystem\\PetClinicSystem.csproj|c:\\users\\cj lumanglas\\documents\\c#\\petclinicsystem\\petclinicsystem\\wwwroot\\js\\pos.js||{14D17961-FE51-464D-9111-C4AF11D7D99A}",
-      "RelativeMoniker": "D:0:0:{CF82C2DF-C7B2-17F2-4FF6-054C65CDABBB}|PetClinicSystem\\PetClinicSystem.csproj|solutionrelative:petclinicsystem\\wwwroot\\js\\pos.js||{14D17961-FE51-464D-9111-C4AF11D7D99A}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{CF82C2DF-C7B2-17F2-4FF6-054C65CDABBB}|PetClinicSystem\\PetClinicSystem.csproj|c:\\users\\cj lumanglas\\documents\\c#\\petclinicsystem\\petclinicsystem\\wwwroot\\css\\pos.css||{A5401142-F49D-43DB-90B1-F57BA349E55C}",
@@ -283,10 +351,6 @@
       "RelativeMoniker": "D:0:0:{CF82C2DF-C7B2-17F2-4FF6-054C65CDABBB}|PetClinicSystem\\PetClinicSystem.csproj|solutionrelative:petclinicsystem\\wwwroot\\css\\site.css||{A5401142-F49D-43DB-90B1-F57BA349E55C}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{CF82C2DF-C7B2-17F2-4FF6-054C65CDABBB}|PetClinicSystem\\PetClinicSystem.csproj|c:\\users\\cj lumanglas\\documents\\c#\\petclinicsystem\\petclinicsystem\\views\\shared\\_layout.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
-      "RelativeMoniker": "D:0:0:{CF82C2DF-C7B2-17F2-4FF6-054C65CDABBB}|PetClinicSystem\\PetClinicSystem.csproj|solutionrelative:petclinicsystem\\views\\shared\\_layout.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
-    },
-    {
       "AbsoluteMoniker": "D:0:0:{CF82C2DF-C7B2-17F2-4FF6-054C65CDABBB}|PetClinicSystem\\PetClinicSystem.csproj|c:\\users\\cj lumanglas\\documents\\c#\\petclinicsystem\\petclinicsystem\\views\\staff\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
       "RelativeMoniker": "D:0:0:{CF82C2DF-C7B2-17F2-4FF6-054C65CDABBB}|PetClinicSystem\\PetClinicSystem.csproj|solutionrelative:petclinicsystem\\views\\staff\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
     },
@@ -295,28 +359,8 @@
       "RelativeMoniker": "D:0:0:{CF82C2DF-C7B2-17F2-4FF6-054C65CDABBB}|PetClinicSystem\\PetClinicSystem.csproj|solutionrelative:petclinicsystem\\views\\pets\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{CF82C2DF-C7B2-17F2-4FF6-054C65CDABBB}|PetClinicSystem\\PetClinicSystem.csproj|c:\\users\\cj lumanglas\\documents\\c#\\petclinicsystem\\petclinicsystem\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{CF82C2DF-C7B2-17F2-4FF6-054C65CDABBB}|PetClinicSystem\\PetClinicSystem.csproj|solutionrelative:petclinicsystem\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{CF82C2DF-C7B2-17F2-4FF6-054C65CDABBB}|PetClinicSystem\\PetClinicSystem.csproj|c:\\users\\cj lumanglas\\documents\\c#\\petclinicsystem\\petclinicsystem\\models\\pet.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{CF82C2DF-C7B2-17F2-4FF6-054C65CDABBB}|PetClinicSystem\\PetClinicSystem.csproj|solutionrelative:petclinicsystem\\models\\pet.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
       "AbsoluteMoniker": "D:0:0:{CF82C2DF-C7B2-17F2-4FF6-054C65CDABBB}|PetClinicSystem\\PetClinicSystem.csproj|c:\\users\\cj lumanglas\\documents\\c#\\petclinicsystem\\petclinicsystem\\controllers\\petscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{CF82C2DF-C7B2-17F2-4FF6-054C65CDABBB}|PetClinicSystem\\PetClinicSystem.csproj|solutionrelative:petclinicsystem\\controllers\\petscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{CF82C2DF-C7B2-17F2-4FF6-054C65CDABBB}|PetClinicSystem\\PetClinicSystem.csproj|c:\\users\\cj lumanglas\\documents\\c#\\petclinicsystem\\petclinicsystem\\views\\pets\\_modal_createpet.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
-      "RelativeMoniker": "D:0:0:{CF82C2DF-C7B2-17F2-4FF6-054C65CDABBB}|PetClinicSystem\\PetClinicSystem.csproj|solutionrelative:petclinicsystem\\views\\pets\\_modal_createpet.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{CF82C2DF-C7B2-17F2-4FF6-054C65CDABBB}|PetClinicSystem\\PetClinicSystem.csproj|c:\\users\\cj lumanglas\\documents\\c#\\petclinicsystem\\petclinicsystem\\views\\pets\\_modal_editpet.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
-      "RelativeMoniker": "D:0:0:{CF82C2DF-C7B2-17F2-4FF6-054C65CDABBB}|PetClinicSystem\\PetClinicSystem.csproj|solutionrelative:petclinicsystem\\views\\pets\\_modal_editpet.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{CF82C2DF-C7B2-17F2-4FF6-054C65CDABBB}|PetClinicSystem\\PetClinicSystem.csproj|c:\\users\\cj lumanglas\\documents\\c#\\petclinicsystem\\petclinicsystem\\views\\pets\\_modal_deletepet.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
-      "RelativeMoniker": "D:0:0:{CF82C2DF-C7B2-17F2-4FF6-054C65CDABBB}|PetClinicSystem\\PetClinicSystem.csproj|solutionrelative:petclinicsystem\\views\\pets\\_modal_deletepet.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{CF82C2DF-C7B2-17F2-4FF6-054C65CDABBB}|PetClinicSystem\\PetClinicSystem.csproj|c:\\users\\cj lumanglas\\documents\\c#\\petclinicsystem\\petclinicsystem\\models\\schedule.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
@@ -341,14 +385,6 @@
     {
       "AbsoluteMoniker": "D:0:0:{CF82C2DF-C7B2-17F2-4FF6-054C65CDABBB}|PetClinicSystem\\PetClinicSystem.csproj|c:\\users\\cj lumanglas\\documents\\c#\\petclinicsystem\\petclinicsystem\\controllers\\homecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{CF82C2DF-C7B2-17F2-4FF6-054C65CDABBB}|PetClinicSystem\\PetClinicSystem.csproj|solutionrelative:petclinicsystem\\controllers\\homecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{CF82C2DF-C7B2-17F2-4FF6-054C65CDABBB}|PetClinicSystem\\PetClinicSystem.csproj|c:\\users\\cj lumanglas\\documents\\c#\\petclinicsystem\\petclinicsystem\\views\\shared\\_layout_client.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
-      "RelativeMoniker": "D:0:0:{CF82C2DF-C7B2-17F2-4FF6-054C65CDABBB}|PetClinicSystem\\PetClinicSystem.csproj|solutionrelative:petclinicsystem\\views\\shared\\_layout_client.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{CF82C2DF-C7B2-17F2-4FF6-054C65CDABBB}|PetClinicSystem\\PetClinicSystem.csproj|c:\\users\\cj lumanglas\\documents\\c#\\petclinicsystem\\petclinicsystem\\views\\shared\\_layout_staff.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
-      "RelativeMoniker": "D:0:0:{CF82C2DF-C7B2-17F2-4FF6-054C65CDABBB}|PetClinicSystem\\PetClinicSystem.csproj|solutionrelative:petclinicsystem\\views\\shared\\_layout_staff.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
     }
   ],
   "DocumentGroupContainers": [
@@ -358,7 +394,7 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 7,
+          "SelectedChildIndex": 4,
           "Children": [
             {
               "$type": "Bookmark",
@@ -369,437 +405,81 @@
               "Name": "ST:0:0:{3ae79031-e1bc-11d0-8f78-00a0c9110057}"
             },
             {
-              "$type": "Document",
-              "DocumentIndex": 2,
-              "Title": "_Modal_ChangePassword.cshtml",
-              "DocumentMoniker": "C:\\Users\\CJ LUMANGLAS\\Documents\\C#\\PetClinicSystem\\PetClinicSystem\\Views\\Settings\\_Modal_ChangePassword.cshtml",
-              "RelativeDocumentMoniker": "PetClinicSystem\\Views\\Settings\\_Modal_ChangePassword.cshtml",
-              "ToolTip": "C:\\Users\\CJ LUMANGLAS\\Documents\\C#\\PetClinicSystem\\PetClinicSystem\\Views\\Settings\\_Modal_ChangePassword.cshtml",
-              "RelativeToolTip": "PetClinicSystem\\Views\\Settings\\_Modal_ChangePassword.cshtml",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAACQAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2025-11-26T20:22:43.558Z",
-              "EditorCaption": ""
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{b1e99781-ab81-11d0-b683-00aa00a3ee26}"
             },
             {
-              "$type": "Document",
-              "DocumentIndex": 4,
-              "Title": "Index.cshtml",
-              "DocumentMoniker": "C:\\Users\\CJ LUMANGLAS\\Documents\\C#\\PetClinicSystem\\PetClinicSystem\\Views\\Settings\\Index.cshtml",
-              "RelativeDocumentMoniker": "PetClinicSystem\\Views\\Settings\\Index.cshtml",
-              "ToolTip": "C:\\Users\\CJ LUMANGLAS\\Documents\\C#\\PetClinicSystem\\PetClinicSystem\\Views\\Settings\\Index.cshtml",
-              "RelativeToolTip": "PetClinicSystem\\Views\\Settings\\Index.cshtml",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAGwAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2025-11-26T20:21:21.218Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 6,
-              "Title": "SettingsController.cs",
-              "DocumentMoniker": "C:\\Users\\CJ LUMANGLAS\\Documents\\C#\\PetClinicSystem\\PetClinicSystem\\Controllers\\SettingsController.cs",
-              "RelativeDocumentMoniker": "PetClinicSystem\\Controllers\\SettingsController.cs",
-              "ToolTip": "C:\\Users\\CJ LUMANGLAS\\Documents\\C#\\PetClinicSystem\\PetClinicSystem\\Controllers\\SettingsController.cs",
-              "RelativeToolTip": "PetClinicSystem\\Controllers\\SettingsController.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAJ4AAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-11-26T20:20:19.938Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 3,
-              "Title": "_Modal_EditProfile.cshtml",
-              "DocumentMoniker": "C:\\Users\\CJ LUMANGLAS\\Documents\\C#\\PetClinicSystem\\PetClinicSystem\\Views\\Settings\\_Modal_EditProfile.cshtml",
-              "RelativeDocumentMoniker": "PetClinicSystem\\Views\\Settings\\_Modal_EditProfile.cshtml",
-              "ToolTip": "C:\\Users\\CJ LUMANGLAS\\Documents\\C#\\PetClinicSystem\\PetClinicSystem\\Views\\Settings\\_Modal_EditProfile.cshtml",
-              "RelativeToolTip": "PetClinicSystem\\Views\\Settings\\_Modal_EditProfile.cshtml",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAACAAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2025-11-26T20:21:44.031Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 1,
-              "Title": "settings.js",
-              "DocumentMoniker": "C:\\Users\\CJ LUMANGLAS\\Documents\\C#\\PetClinicSystem\\PetClinicSystem\\wwwroot\\js\\settings.js",
-              "RelativeDocumentMoniker": "PetClinicSystem\\wwwroot\\js\\settings.js",
-              "ToolTip": "C:\\Users\\CJ LUMANGLAS\\Documents\\C#\\PetClinicSystem\\PetClinicSystem\\wwwroot\\js\\settings.js",
-              "RelativeToolTip": "PetClinicSystem\\wwwroot\\js\\settings.js",
-              "ViewState": "AgIAACkAAAAAAAAAAAAwwFkAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001646|",
-              "WhenOpened": "2025-11-26T20:24:38.105Z",
-              "EditorCaption": ""
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{eefa5220-e298-11d0-8f78-00a0c9110057}"
             },
             {
               "$type": "Document",
               "DocumentIndex": 0,
-              "Title": "AccountController.cs",
-              "DocumentMoniker": "C:\\Users\\CJ LUMANGLAS\\Documents\\C#\\PetClinicSystem\\PetClinicSystem\\Controllers\\AccountController.cs",
-              "RelativeDocumentMoniker": "PetClinicSystem\\Controllers\\AccountController.cs",
-              "ToolTip": "C:\\Users\\CJ LUMANGLAS\\Documents\\C#\\PetClinicSystem\\PetClinicSystem\\Controllers\\AccountController.cs",
-              "RelativeToolTip": "PetClinicSystem\\Controllers\\AccountController.cs",
-              "ViewState": "AgIAABYAAAAAAAAAAAAQwEkAAAAkAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-11-25T04:49:33.516Z",
+              "Title": "_POS_Scripts.cshtml",
+              "DocumentMoniker": "C:\\Users\\CJ LUMANGLAS\\Documents\\C#\\PetClinicSystem\\PetClinicSystem\\Views\\BillingPharmacy\\_POS_Scripts.cshtml",
+              "RelativeDocumentMoniker": "PetClinicSystem\\Views\\BillingPharmacy\\_POS_Scripts.cshtml",
+              "ToolTip": "C:\\Users\\CJ LUMANGLAS\\Documents\\C#\\PetClinicSystem\\PetClinicSystem\\Views\\BillingPharmacy\\_POS_Scripts.cshtml",
+              "RelativeToolTip": "PetClinicSystem\\Views\\BillingPharmacy\\_POS_Scripts.cshtml",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAB8AAAAGAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-11-25T20:17:47.843Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "Index.cshtml",
+              "DocumentMoniker": "C:\\Users\\CJ LUMANGLAS\\Documents\\C#\\PetClinicSystem\\PetClinicSystem\\Views\\BillingPharmacy\\Index.cshtml",
+              "RelativeDocumentMoniker": "PetClinicSystem\\Views\\BillingPharmacy\\Index.cshtml",
+              "ToolTip": "C:\\Users\\CJ LUMANGLAS\\Documents\\C#\\PetClinicSystem\\PetClinicSystem\\Views\\BillingPharmacy\\Index.cshtml",
+              "RelativeToolTip": "PetClinicSystem\\Views\\BillingPharmacy\\Index.cshtml",
+              "ViewState": "AgIAABkAAAAAAAAAAAAAACYAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-11-25T17:49:38.845Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 7,
-              "Title": "_Modal_EditDrug.cshtml",
-              "DocumentMoniker": "C:\\Users\\CJ LUMANGLAS\\Documents\\C#\\PetClinicSystem\\PetClinicSystem\\Views\\BillingPharmacy\\_Modal_EditDrug.cshtml",
-              "RelativeDocumentMoniker": "PetClinicSystem\\Views\\BillingPharmacy\\_Modal_EditDrug.cshtml",
-              "ToolTip": "C:\\Users\\CJ LUMANGLAS\\Documents\\C#\\PetClinicSystem\\PetClinicSystem\\Views\\BillingPharmacy\\_Modal_EditDrug.cshtml",
-              "RelativeToolTip": "PetClinicSystem\\Views\\BillingPharmacy\\_Modal_EditDrug.cshtml",
-              "ViewState": "AgIAAAIAAAAAAAAAAIAwwBsAAAAuAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2025-11-26T12:40:06.526Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 5,
-              "Title": "_Layout_Admin.cshtml",
-              "DocumentMoniker": "C:\\Users\\CJ LUMANGLAS\\Documents\\C#\\PetClinicSystem\\PetClinicSystem\\Views\\Shared\\_Layout_Admin.cshtml",
-              "RelativeDocumentMoniker": "PetClinicSystem\\Views\\Shared\\_Layout_Admin.cshtml",
-              "ToolTip": "C:\\Users\\CJ LUMANGLAS\\Documents\\C#\\PetClinicSystem\\PetClinicSystem\\Views\\Shared\\_Layout_Admin.cshtml",
-              "RelativeToolTip": "PetClinicSystem\\Views\\Shared\\_Layout_Admin.cshtml",
-              "ViewState": "AgIAAHUAAAAAAAAAAAAAAMYAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2025-11-25T05:19:11.429Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 12,
-              "Title": "Index.cshtml",
-              "DocumentMoniker": "C:\\Users\\CJ LUMANGLAS\\Documents\\C#\\PetClinicSystem\\PetClinicSystem\\Views\\ManageAccounts\\Index.cshtml",
-              "RelativeDocumentMoniker": "PetClinicSystem\\Views\\ManageAccounts\\Index.cshtml",
-              "ToolTip": "C:\\Users\\CJ LUMANGLAS\\Documents\\C#\\PetClinicSystem\\PetClinicSystem\\Views\\ManageAccounts\\Index.cshtml",
-              "RelativeToolTip": "PetClinicSystem\\Views\\ManageAccounts\\Index.cshtml",
-              "ViewState": "AgIAADMAAAAAAAAAAAAAAEwAAAAWAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2025-11-26T17:28:29.556Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 11,
-              "Title": "MedicalRecordsController.cs",
-              "DocumentMoniker": "C:\\Users\\CJ LUMANGLAS\\Documents\\C#\\PetClinicSystem\\PetClinicSystem\\Controllers\\MedicalRecordsController.cs",
-              "RelativeDocumentMoniker": "PetClinicSystem\\Controllers\\MedicalRecordsController.cs",
-              "ToolTip": "C:\\Users\\CJ LUMANGLAS\\Documents\\C#\\PetClinicSystem\\PetClinicSystem\\Controllers\\MedicalRecordsController.cs",
-              "RelativeToolTip": "PetClinicSystem\\Controllers\\MedicalRecordsController.cs",
-              "ViewState": "AgIAAAsAAAAAAAAAAAAqwBcAAAAMAAAAAAAAAA==",
+              "Title": "Pet.cs",
+              "DocumentMoniker": "C:\\Users\\CJ LUMANGLAS\\Documents\\C#\\PetClinicSystem\\PetClinicSystem\\Models\\Pet.cs",
+              "RelativeDocumentMoniker": "PetClinicSystem\\Models\\Pet.cs",
+              "ToolTip": "C:\\Users\\CJ LUMANGLAS\\Documents\\C#\\PetClinicSystem\\PetClinicSystem\\Models\\Pet.cs",
+              "RelativeToolTip": "PetClinicSystem\\Models\\Pet.cs",
+              "ViewState": "AgIAAA0AAAAAAAAAAAAQwC0AAAABAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-11-26T19:51:07.978Z",
+              "WhenOpened": "2025-11-25T04:40:39.604Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 10,
-              "Title": "MedicalRecord.cs",
-              "DocumentMoniker": "C:\\Users\\CJ LUMANGLAS\\Documents\\C#\\PetClinicSystem\\PetClinicSystem\\Models\\MedicalRecord.cs",
-              "RelativeDocumentMoniker": "PetClinicSystem\\Models\\MedicalRecord.cs",
-              "ToolTip": "C:\\Users\\CJ LUMANGLAS\\Documents\\C#\\PetClinicSystem\\PetClinicSystem\\Models\\MedicalRecord.cs",
-              "RelativeToolTip": "PetClinicSystem\\Models\\MedicalRecord.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAABMAAAAcAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-11-25T04:42:29.613Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 9,
-              "Title": "medicalrecords.js",
-              "DocumentMoniker": "C:\\Users\\CJ LUMANGLAS\\Documents\\C#\\PetClinicSystem\\PetClinicSystem\\wwwroot\\js\\medicalrecords.js",
-              "RelativeDocumentMoniker": "PetClinicSystem\\wwwroot\\js\\medicalrecords.js",
-              "ToolTip": "C:\\Users\\CJ LUMANGLAS\\Documents\\C#\\PetClinicSystem\\PetClinicSystem\\wwwroot\\js\\medicalrecords.js",
-              "RelativeToolTip": "PetClinicSystem\\wwwroot\\js\\medicalrecords.js",
-              "ViewState": "AgIAAIUAAAAAAAAAAAAAAIUAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001646|",
-              "WhenOpened": "2025-11-26T19:54:06.88Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 8,
-              "Title": "accounts.js",
-              "DocumentMoniker": "C:\\Users\\CJ LUMANGLAS\\Documents\\C#\\PetClinicSystem\\PetClinicSystem\\wwwroot\\js\\accounts.js",
-              "RelativeDocumentMoniker": "PetClinicSystem\\wwwroot\\js\\accounts.js",
-              "ToolTip": "C:\\Users\\CJ LUMANGLAS\\Documents\\C#\\PetClinicSystem\\PetClinicSystem\\wwwroot\\js\\accounts.js",
-              "RelativeToolTip": "PetClinicSystem\\wwwroot\\js\\accounts.js",
-              "ViewState": "AgIAAF8AAAAAAAAAAAAwwI8AAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001646|",
-              "WhenOpened": "2025-11-26T17:53:39.302Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 18,
-              "Title": "Index.cshtml",
-              "DocumentMoniker": "C:\\Users\\CJ LUMANGLAS\\Documents\\C#\\PetClinicSystem\\PetClinicSystem\\Views\\MedicalRecords\\Index.cshtml",
-              "RelativeDocumentMoniker": "PetClinicSystem\\Views\\MedicalRecords\\Index.cshtml",
-              "ToolTip": "C:\\Users\\CJ LUMANGLAS\\Documents\\C#\\PetClinicSystem\\PetClinicSystem\\Views\\MedicalRecords\\Index.cshtml",
-              "RelativeToolTip": "PetClinicSystem\\Views\\MedicalRecords\\Index.cshtml",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAEIAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2025-11-26T19:52:20.284Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 17,
-              "Title": "_MedicalRecords.cshtml",
-              "DocumentMoniker": "C:\\Users\\CJ LUMANGLAS\\Documents\\C#\\PetClinicSystem\\PetClinicSystem\\Views\\MedicalRecords\\_MedicalRecords.cshtml",
-              "RelativeDocumentMoniker": "PetClinicSystem\\Views\\MedicalRecords\\_MedicalRecords.cshtml",
-              "ToolTip": "C:\\Users\\CJ LUMANGLAS\\Documents\\C#\\PetClinicSystem\\PetClinicSystem\\Views\\MedicalRecords\\_MedicalRecords.cshtml",
-              "RelativeToolTip": "PetClinicSystem\\Views\\MedicalRecords\\_MedicalRecords.cshtml",
-              "ViewState": "AgIAAAMAAAAAAAAAAAAwwDMAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2025-11-26T19:52:46.488Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 16,
-              "Title": "_Modal_CreateMedicalRecord.cshtml",
-              "DocumentMoniker": "C:\\Users\\CJ LUMANGLAS\\Documents\\C#\\PetClinicSystem\\PetClinicSystem\\Views\\MedicalRecords\\_Modal_CreateMedicalRecord.cshtml",
-              "RelativeDocumentMoniker": "PetClinicSystem\\Views\\MedicalRecords\\_Modal_CreateMedicalRecord.cshtml",
-              "ToolTip": "C:\\Users\\CJ LUMANGLAS\\Documents\\C#\\PetClinicSystem\\PetClinicSystem\\Views\\MedicalRecords\\_Modal_CreateMedicalRecord.cshtml",
-              "RelativeToolTip": "PetClinicSystem\\Views\\MedicalRecords\\_Modal_CreateMedicalRecord.cshtml",
-              "ViewState": "AgIAACQAAAAAAAAAAAAwwFYAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2025-11-26T19:53:04.608Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 15,
-              "Title": "_Modal_EditMedicalRecord.cshtml",
-              "DocumentMoniker": "C:\\Users\\CJ LUMANGLAS\\Documents\\C#\\PetClinicSystem\\PetClinicSystem\\Views\\MedicalRecords\\_Modal_EditMedicalRecord.cshtml",
-              "RelativeDocumentMoniker": "PetClinicSystem\\Views\\MedicalRecords\\_Modal_EditMedicalRecord.cshtml",
-              "ToolTip": "C:\\Users\\CJ LUMANGLAS\\Documents\\C#\\PetClinicSystem\\PetClinicSystem\\Views\\MedicalRecords\\_Modal_EditMedicalRecord.cshtml",
-              "RelativeToolTip": "PetClinicSystem\\Views\\MedicalRecords\\_Modal_EditMedicalRecord.cshtml",
-              "ViewState": "AgIAADgAAAAAAAAAAAAwwGoAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2025-11-26T19:53:28.014Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 13,
-              "Title": "_AccountCards.cshtml",
-              "DocumentMoniker": "C:\\Users\\CJ LUMANGLAS\\Documents\\C#\\PetClinicSystem\\PetClinicSystem\\Views\\ManageAccounts\\_AccountCards.cshtml",
-              "RelativeDocumentMoniker": "PetClinicSystem\\Views\\ManageAccounts\\_AccountCards.cshtml",
-              "ToolTip": "C:\\Users\\CJ LUMANGLAS\\Documents\\C#\\PetClinicSystem\\PetClinicSystem\\Views\\ManageAccounts\\_AccountCards.cshtml",
-              "RelativeToolTip": "PetClinicSystem\\Views\\ManageAccounts\\_AccountCards.cshtml",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAHcAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2025-11-26T17:44:45.048Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 14,
-              "Title": "_Modal_DeleteMedicalRecord.cshtml",
-              "DocumentMoniker": "C:\\Users\\CJ LUMANGLAS\\Documents\\C#\\PetClinicSystem\\PetClinicSystem\\Views\\MedicalRecords\\_Modal_DeleteMedicalRecord.cshtml",
-              "RelativeDocumentMoniker": "PetClinicSystem\\Views\\MedicalRecords\\_Modal_DeleteMedicalRecord.cshtml",
-              "ToolTip": "C:\\Users\\CJ LUMANGLAS\\Documents\\C#\\PetClinicSystem\\PetClinicSystem\\Views\\MedicalRecords\\_Modal_DeleteMedicalRecord.cshtml",
-              "RelativeToolTip": "PetClinicSystem\\Views\\MedicalRecords\\_Modal_DeleteMedicalRecord.cshtml",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAACAAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2025-11-26T19:53:48.679Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 22,
-              "Title": "BillingPharmacyController.cs",
-              "DocumentMoniker": "C:\\Users\\CJ LUMANGLAS\\Documents\\C#\\PetClinicSystem\\PetClinicSystem\\Controllers\\BillingPharmacyController.cs",
-              "RelativeDocumentMoniker": "PetClinicSystem\\Controllers\\BillingPharmacyController.cs",
-              "ToolTip": "C:\\Users\\CJ LUMANGLAS\\Documents\\C#\\PetClinicSystem\\PetClinicSystem\\Controllers\\BillingPharmacyController.cs",
-              "RelativeToolTip": "PetClinicSystem\\Controllers\\BillingPharmacyController.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAMkBAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-11-25T17:48:36.786Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 19,
-              "Title": "ManageAccountsController.cs",
-              "DocumentMoniker": "C:\\Users\\CJ LUMANGLAS\\Documents\\C#\\PetClinicSystem\\PetClinicSystem\\Controllers\\ManageAccountsController.cs",
-              "RelativeDocumentMoniker": "PetClinicSystem\\Controllers\\ManageAccountsController.cs",
-              "ToolTip": "C:\\Users\\CJ LUMANGLAS\\Documents\\C#\\PetClinicSystem\\PetClinicSystem\\Controllers\\ManageAccountsController.cs",
-              "RelativeToolTip": "PetClinicSystem\\Controllers\\ManageAccountsController.cs",
-              "ViewState": "AgIAAI0AAAAAAAAAAADwv7sAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-11-26T17:21:42.851Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 20,
-              "Title": "_Modal_CreateAccount.cshtml",
-              "DocumentMoniker": "C:\\Users\\CJ LUMANGLAS\\Documents\\C#\\PetClinicSystem\\PetClinicSystem\\Views\\ManageAccounts\\_Modal_CreateAccount.cshtml",
-              "RelativeDocumentMoniker": "PetClinicSystem\\Views\\ManageAccounts\\_Modal_CreateAccount.cshtml",
-              "ToolTip": "C:\\Users\\CJ LUMANGLAS\\Documents\\C#\\PetClinicSystem\\PetClinicSystem\\Views\\ManageAccounts\\_Modal_CreateAccount.cshtml",
-              "RelativeToolTip": "PetClinicSystem\\Views\\ManageAccounts\\_Modal_CreateAccount.cshtml",
-              "ViewState": "AgIAAAkAAAAAAAAAAAAwwDMAAAASAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2025-11-26T17:49:35.905Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 21,
-              "Title": "_Modal_EditAccount.cshtml",
-              "DocumentMoniker": "C:\\Users\\CJ LUMANGLAS\\Documents\\C#\\PetClinicSystem\\PetClinicSystem\\Views\\ManageAccounts\\_Modal_EditAccount.cshtml",
-              "RelativeDocumentMoniker": "PetClinicSystem\\Views\\ManageAccounts\\_Modal_EditAccount.cshtml",
-              "ToolTip": "C:\\Users\\CJ LUMANGLAS\\Documents\\C#\\PetClinicSystem\\PetClinicSystem\\Views\\ManageAccounts\\_Modal_EditAccount.cshtml",
-              "RelativeToolTip": "PetClinicSystem\\Views\\ManageAccounts\\_Modal_EditAccount.cshtml",
-              "ViewState": "AgIAADcAAAAAAAAAAAAAAFEAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2025-11-26T17:49:56.172Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 23,
-              "Title": "ClientController.cs",
-              "DocumentMoniker": "C:\\Users\\CJ LUMANGLAS\\Documents\\C#\\PetClinicSystem\\PetClinicSystem\\Controllers\\ClientController.cs",
-              "RelativeDocumentMoniker": "PetClinicSystem\\Controllers\\ClientController.cs",
-              "ToolTip": "C:\\Users\\CJ LUMANGLAS\\Documents\\C#\\PetClinicSystem\\PetClinicSystem\\Controllers\\ClientController.cs",
-              "RelativeToolTip": "PetClinicSystem\\Controllers\\ClientController.cs",
-              "ViewState": "AgIAAAsAAAAAAAAAAAAAABsAAAAMAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-11-25T05:28:38.729Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 24,
-              "Title": "_Modal_DeleteAccount.cshtml",
-              "DocumentMoniker": "C:\\Users\\CJ LUMANGLAS\\Documents\\C#\\PetClinicSystem\\PetClinicSystem\\Views\\ManageAccounts\\_Modal_DeleteAccount.cshtml",
-              "RelativeDocumentMoniker": "PetClinicSystem\\Views\\ManageAccounts\\_Modal_DeleteAccount.cshtml",
-              "ToolTip": "C:\\Users\\CJ LUMANGLAS\\Documents\\C#\\PetClinicSystem\\PetClinicSystem\\Views\\ManageAccounts\\_Modal_DeleteAccount.cshtml",
-              "RelativeToolTip": "PetClinicSystem\\Views\\ManageAccounts\\_Modal_DeleteAccount.cshtml",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAABwAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2025-11-26T17:52:34.334Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 25,
-              "Title": "_Modal_ViewAccount.cshtml",
-              "DocumentMoniker": "C:\\Users\\CJ LUMANGLAS\\Documents\\C#\\PetClinicSystem\\PetClinicSystem\\Views\\ManageAccounts\\_Modal_ViewAccount.cshtml",
-              "RelativeDocumentMoniker": "PetClinicSystem\\Views\\ManageAccounts\\_Modal_ViewAccount.cshtml",
-              "ToolTip": "C:\\Users\\CJ LUMANGLAS\\Documents\\C#\\PetClinicSystem\\PetClinicSystem\\Views\\ManageAccounts\\_Modal_ViewAccount.cshtml",
-              "RelativeToolTip": "PetClinicSystem\\Views\\ManageAccounts\\_Modal_ViewAccount.cshtml",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAACsAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2025-11-26T17:52:11.705Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 26,
-              "Title": "Account.cs",
-              "DocumentMoniker": "C:\\Users\\CJ LUMANGLAS\\Documents\\C#\\PetClinicSystem\\PetClinicSystem\\Models\\Account.cs",
-              "RelativeDocumentMoniker": "PetClinicSystem\\Models\\Account.cs",
-              "ToolTip": "C:\\Users\\CJ LUMANGLAS\\Documents\\C#\\PetClinicSystem\\PetClinicSystem\\Models\\Account.cs",
-              "RelativeToolTip": "PetClinicSystem\\Models\\Account.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAABcAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-11-25T04:40:04.399Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 27,
-              "Title": "StaffController.cs",
-              "DocumentMoniker": "C:\\Users\\CJ LUMANGLAS\\Documents\\C#\\PetClinicSystem\\PetClinicSystem\\Controllers\\StaffController.cs",
-              "RelativeDocumentMoniker": "PetClinicSystem\\Controllers\\StaffController.cs",
-              "ToolTip": "C:\\Users\\CJ LUMANGLAS\\Documents\\C#\\PetClinicSystem\\PetClinicSystem\\Controllers\\StaffController.cs",
-              "RelativeToolTip": "PetClinicSystem\\Controllers\\StaffController.cs",
-              "ViewState": "AgIAACIAAAAAAAAAAAAAACIAAAAMAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-11-25T05:25:41.728Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 29,
+              "DocumentIndex": 6,
               "Title": "prescriptions.js",
               "DocumentMoniker": "C:\\Users\\CJ LUMANGLAS\\Documents\\C#\\PetClinicSystem\\PetClinicSystem\\wwwroot\\js\\prescriptions.js",
               "RelativeDocumentMoniker": "PetClinicSystem\\wwwroot\\js\\prescriptions.js",
               "ToolTip": "C:\\Users\\CJ LUMANGLAS\\Documents\\C#\\PetClinicSystem\\PetClinicSystem\\wwwroot\\js\\prescriptions.js",
               "RelativeToolTip": "PetClinicSystem\\wwwroot\\js\\prescriptions.js",
-              "ViewState": "AgIAAGUAAAAAAAAAAAAAAJsAAAAAAAAAAAAAAA==",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAMkAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001646|",
               "WhenOpened": "2025-11-26T10:18:30.954Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 34,
-              "Title": "_Modal_CreatePrescription.cshtml",
-              "DocumentMoniker": "C:\\Users\\CJ LUMANGLAS\\Documents\\C#\\PetClinicSystem\\PetClinicSystem\\Views\\BillingPharmacy\\_Modal_CreatePrescription.cshtml",
-              "RelativeDocumentMoniker": "PetClinicSystem\\Views\\BillingPharmacy\\_Modal_CreatePrescription.cshtml",
-              "ToolTip": "C:\\Users\\CJ LUMANGLAS\\Documents\\C#\\PetClinicSystem\\PetClinicSystem\\Views\\BillingPharmacy\\_Modal_CreatePrescription.cshtml",
-              "RelativeToolTip": "PetClinicSystem\\Views\\BillingPharmacy\\_Modal_CreatePrescription.cshtml",
-              "ViewState": "AgIAAGAAAAAAAAAAAAAAAGAAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2025-11-26T10:17:18.41Z",
+              "DocumentIndex": 4,
+              "Title": "BillingPharmacyController.cs",
+              "DocumentMoniker": "C:\\Users\\CJ LUMANGLAS\\Documents\\C#\\PetClinicSystem\\PetClinicSystem\\Controllers\\BillingPharmacyController.cs",
+              "RelativeDocumentMoniker": "PetClinicSystem\\Controllers\\BillingPharmacyController.cs",
+              "ToolTip": "C:\\Users\\CJ LUMANGLAS\\Documents\\C#\\PetClinicSystem\\PetClinicSystem\\Controllers\\BillingPharmacyController.cs",
+              "RelativeToolTip": "PetClinicSystem\\Controllers\\BillingPharmacyController.cs",
+              "ViewState": "AgIAAO0AAAAAAAAAAAAAAKEAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-11-25T17:48:36.786Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 28,
-              "Title": "_Modal_ViewPet.cshtml",
-              "DocumentMoniker": "C:\\Users\\CJ LUMANGLAS\\Documents\\C#\\PetClinicSystem\\PetClinicSystem\\Views\\Pets\\_Modal_ViewPet.cshtml",
-              "RelativeDocumentMoniker": "PetClinicSystem\\Views\\Pets\\_Modal_ViewPet.cshtml",
-              "ToolTip": "C:\\Users\\CJ LUMANGLAS\\Documents\\C#\\PetClinicSystem\\PetClinicSystem\\Views\\Pets\\_Modal_ViewPet.cshtml",
-              "RelativeToolTip": "PetClinicSystem\\Views\\Pets\\_Modal_ViewPet.cshtml",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAYAAAA0AAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2025-11-25T12:48:57.074Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 30,
-              "Title": "_Modal_DeletePrescription.cshtml",
-              "DocumentMoniker": "C:\\Users\\CJ LUMANGLAS\\Documents\\C#\\PetClinicSystem\\PetClinicSystem\\Views\\BillingPharmacy\\_Modal_DeletePrescription.cshtml",
-              "RelativeDocumentMoniker": "PetClinicSystem\\Views\\BillingPharmacy\\_Modal_DeletePrescription.cshtml",
-              "ToolTip": "C:\\Users\\CJ LUMANGLAS\\Documents\\C#\\PetClinicSystem\\PetClinicSystem\\Views\\BillingPharmacy\\_Modal_DeletePrescription.cshtml",
-              "RelativeToolTip": "PetClinicSystem\\Views\\BillingPharmacy\\_Modal_DeletePrescription.cshtml",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAABwAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2025-11-26T10:18:10.325Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 31,
-              "Title": "_Modal_ViewPrescription.cshtml",
-              "DocumentMoniker": "C:\\Users\\CJ LUMANGLAS\\Documents\\C#\\PetClinicSystem\\PetClinicSystem\\Views\\BillingPharmacy\\_Modal_ViewPrescription.cshtml",
-              "RelativeDocumentMoniker": "PetClinicSystem\\Views\\BillingPharmacy\\_Modal_ViewPrescription.cshtml",
-              "ToolTip": "C:\\Users\\CJ LUMANGLAS\\Documents\\C#\\PetClinicSystem\\PetClinicSystem\\Views\\BillingPharmacy\\_Modal_ViewPrescription.cshtml",
-              "RelativeToolTip": "PetClinicSystem\\Views\\BillingPharmacy\\_Modal_ViewPrescription.cshtml",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAACsAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2025-11-26T10:17:35.23Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 32,
+              "DocumentIndex": 5,
               "Title": "_Modal_ViewVaccination.cshtml",
               "DocumentMoniker": "C:\\Users\\CJ LUMANGLAS\\Documents\\C#\\PetClinicSystem\\PetClinicSystem\\Views\\BillingPharmacy\\_Modal_ViewVaccination.cshtml",
               "RelativeDocumentMoniker": "PetClinicSystem\\Views\\BillingPharmacy\\_Modal_ViewVaccination.cshtml",
@@ -812,46 +492,738 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 35,
-              "Title": "Index.cshtml",
-              "DocumentMoniker": "C:\\Users\\CJ LUMANGLAS\\Documents\\C#\\PetClinicSystem\\PetClinicSystem\\Views\\BillingPharmacy\\Index.cshtml",
-              "RelativeDocumentMoniker": "PetClinicSystem\\Views\\BillingPharmacy\\Index.cshtml",
-              "ToolTip": "C:\\Users\\CJ LUMANGLAS\\Documents\\C#\\PetClinicSystem\\PetClinicSystem\\Views\\BillingPharmacy\\Index.cshtml",
-              "RelativeToolTip": "PetClinicSystem\\Views\\BillingPharmacy\\Index.cshtml",
-              "ViewState": "AgIAAA4BAAAAAAAAAAAAACMBAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2025-11-25T17:49:38.845Z",
+              "DocumentIndex": 1,
+              "Title": "pos.js",
+              "DocumentMoniker": "C:\\Users\\CJ LUMANGLAS\\Documents\\C#\\PetClinicSystem\\PetClinicSystem\\wwwroot\\js\\pos.js",
+              "RelativeDocumentMoniker": "PetClinicSystem\\wwwroot\\js\\pos.js",
+              "ToolTip": "C:\\Users\\CJ LUMANGLAS\\Documents\\C#\\PetClinicSystem\\PetClinicSystem\\wwwroot\\js\\pos.js",
+              "RelativeToolTip": "PetClinicSystem\\wwwroot\\js\\pos.js",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAEAAAAQAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001646|",
+              "WhenOpened": "2025-11-25T17:57:05.473Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 33,
+              "DocumentIndex": 3,
+              "Title": "_POS.cshtml",
+              "DocumentMoniker": "C:\\Users\\CJ LUMANGLAS\\Documents\\C#\\PetClinicSystem\\PetClinicSystem\\Views\\BillingPharmacy\\_POS.cshtml",
+              "RelativeDocumentMoniker": "PetClinicSystem\\Views\\BillingPharmacy\\_POS.cshtml",
+              "ToolTip": "C:\\Users\\CJ LUMANGLAS\\Documents\\C#\\PetClinicSystem\\PetClinicSystem\\Views\\BillingPharmacy\\_POS.cshtml",
+              "RelativeToolTip": "PetClinicSystem\\Views\\BillingPharmacy\\_POS.cshtml",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAEIAAAAjAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-11-25T17:50:07.946Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 8,
+              "Title": "OwnersController.cs",
+              "DocumentMoniker": "C:\\Users\\CJ LUMANGLAS\\Documents\\C#\\PetClinicSystem\\PetClinicSystem\\Controllers\\OwnersController.cs",
+              "RelativeDocumentMoniker": "PetClinicSystem\\Controllers\\OwnersController.cs",
+              "ToolTip": "C:\\Users\\CJ LUMANGLAS\\Documents\\C#\\PetClinicSystem\\PetClinicSystem\\Controllers\\OwnersController.cs",
+              "RelativeToolTip": "PetClinicSystem\\Controllers\\OwnersController.cs",
+              "ViewState": "AgIAAD8AAAAAAAAAAAAAAEsAAAAJAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-11-27T20:24:28.389Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 12,
+              "Title": "_Modal_ViewOwner.cshtml",
+              "DocumentMoniker": "C:\\Users\\CJ LUMANGLAS\\Documents\\C#\\PetClinicSystem\\PetClinicSystem\\Views\\Owners\\_Modal_ViewOwner.cshtml",
+              "RelativeDocumentMoniker": "PetClinicSystem\\Views\\Owners\\_Modal_ViewOwner.cshtml",
+              "ToolTip": "C:\\Users\\CJ LUMANGLAS\\Documents\\C#\\PetClinicSystem\\PetClinicSystem\\Views\\Owners\\_Modal_ViewOwner.cshtml",
+              "RelativeToolTip": "PetClinicSystem\\Views\\Owners\\_Modal_ViewOwner.cshtml",
+              "ViewState": "AgIAAAQAAAAAAAAAAADwvy8AAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-11-27T20:26:43.688Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 11,
+              "Title": "_Modal_EditOwner.cshtml",
+              "DocumentMoniker": "C:\\Users\\CJ LUMANGLAS\\Documents\\C#\\PetClinicSystem\\PetClinicSystem\\Views\\Owners\\_Modal_EditOwner.cshtml",
+              "RelativeDocumentMoniker": "PetClinicSystem\\Views\\Owners\\_Modal_EditOwner.cshtml",
+              "ToolTip": "C:\\Users\\CJ LUMANGLAS\\Documents\\C#\\PetClinicSystem\\PetClinicSystem\\Views\\Owners\\_Modal_EditOwner.cshtml",
+              "RelativeToolTip": "PetClinicSystem\\Views\\Owners\\_Modal_EditOwner.cshtml",
+              "ViewState": "AgIAAAcAAAAAAAAAAAAAADIAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-11-27T20:26:59.842Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 10,
+              "Title": "_Modal_DeleteOwner.cshtml",
+              "DocumentMoniker": "C:\\Users\\CJ LUMANGLAS\\Documents\\C#\\PetClinicSystem\\PetClinicSystem\\Views\\Owners\\_Modal_DeleteOwner.cshtml",
+              "RelativeDocumentMoniker": "PetClinicSystem\\Views\\Owners\\_Modal_DeleteOwner.cshtml",
+              "ToolTip": "C:\\Users\\CJ LUMANGLAS\\Documents\\C#\\PetClinicSystem\\PetClinicSystem\\Views\\Owners\\_Modal_DeleteOwner.cshtml",
+              "RelativeToolTip": "PetClinicSystem\\Views\\Owners\\_Modal_DeleteOwner.cshtml",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABcAAAAEAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-11-27T20:27:16.613Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 9,
+              "Title": "owners.js",
+              "DocumentMoniker": "C:\\Users\\CJ LUMANGLAS\\Documents\\C#\\PetClinicSystem\\PetClinicSystem\\wwwroot\\js\\owners.js",
+              "RelativeDocumentMoniker": "PetClinicSystem\\wwwroot\\js\\owners.js",
+              "ToolTip": "C:\\Users\\CJ LUMANGLAS\\Documents\\C#\\PetClinicSystem\\PetClinicSystem\\wwwroot\\js\\owners.js",
+              "RelativeToolTip": "PetClinicSystem\\wwwroot\\js\\owners.js",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAJkAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001646|",
+              "WhenOpened": "2025-11-27T20:27:38.272Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 13,
+              "Title": "_Modal_CreateOwner.cshtml",
+              "DocumentMoniker": "C:\\Users\\CJ LUMANGLAS\\Documents\\C#\\PetClinicSystem\\PetClinicSystem\\Views\\Owners\\_Modal_CreateOwner.cshtml",
+              "RelativeDocumentMoniker": "PetClinicSystem\\Views\\Owners\\_Modal_CreateOwner.cshtml",
+              "ToolTip": "C:\\Users\\CJ LUMANGLAS\\Documents\\C#\\PetClinicSystem\\PetClinicSystem\\Views\\Owners\\_Modal_CreateOwner.cshtml",
+              "RelativeToolTip": "PetClinicSystem\\Views\\Owners\\_Modal_CreateOwner.cshtml",
+              "ViewState": "AgIAAAUAAAAAAAAAAADwvzAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-11-27T20:26:27.815Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 14,
+              "Title": "_OwnerCards.cshtml",
+              "DocumentMoniker": "C:\\Users\\CJ LUMANGLAS\\Documents\\C#\\PetClinicSystem\\PetClinicSystem\\Views\\Owners\\_OwnerCards.cshtml",
+              "RelativeDocumentMoniker": "PetClinicSystem\\Views\\Owners\\_OwnerCards.cshtml",
+              "ToolTip": "C:\\Users\\CJ LUMANGLAS\\Documents\\C#\\PetClinicSystem\\PetClinicSystem\\Views\\Owners\\_OwnerCards.cshtml",
+              "RelativeToolTip": "PetClinicSystem\\Views\\Owners\\_OwnerCards.cshtml",
+              "ViewState": "AgIAAAYAAAAAAAAAAADwvzEAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-11-27T20:26:08.76Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 15,
+              "Title": "Index.cshtml",
+              "DocumentMoniker": "C:\\Users\\CJ LUMANGLAS\\Documents\\C#\\PetClinicSystem\\PetClinicSystem\\Views\\Owners\\Index.cshtml",
+              "RelativeDocumentMoniker": "PetClinicSystem\\Views\\Owners\\Index.cshtml",
+              "ToolTip": "C:\\Users\\CJ LUMANGLAS\\Documents\\C#\\PetClinicSystem\\PetClinicSystem\\Views\\Owners\\Index.cshtml",
+              "RelativeToolTip": "PetClinicSystem\\Views\\Owners\\Index.cshtml",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAF4AAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-11-27T20:25:40.174Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 20,
+              "Title": "_Modal_ViewAppointment.cshtml",
+              "DocumentMoniker": "C:\\Users\\CJ LUMANGLAS\\Documents\\C#\\PetClinicSystem\\PetClinicSystem\\Views\\Appointments\\_Modal_ViewAppointment.cshtml",
+              "RelativeDocumentMoniker": "PetClinicSystem\\Views\\Appointments\\_Modal_ViewAppointment.cshtml",
+              "ToolTip": "C:\\Users\\CJ LUMANGLAS\\Documents\\C#\\PetClinicSystem\\PetClinicSystem\\Views\\Appointments\\_Modal_ViewAppointment.cshtml",
+              "RelativeToolTip": "PetClinicSystem\\Views\\Appointments\\_Modal_ViewAppointment.cshtml",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAmwDEAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-11-25T07:34:08.828Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 19,
+              "Title": "_Modal_CreateAppointment.cshtml",
+              "DocumentMoniker": "C:\\Users\\CJ LUMANGLAS\\Documents\\C#\\PetClinicSystem\\PetClinicSystem\\Views\\Appointments\\_Modal_CreateAppointment.cshtml",
+              "RelativeDocumentMoniker": "PetClinicSystem\\Views\\Appointments\\_Modal_CreateAppointment.cshtml",
+              "ToolTip": "C:\\Users\\CJ LUMANGLAS\\Documents\\C#\\PetClinicSystem\\PetClinicSystem\\Views\\Appointments\\_Modal_CreateAppointment.cshtml",
+              "RelativeToolTip": "PetClinicSystem\\Views\\Appointments\\_Modal_CreateAppointment.cshtml",
+              "ViewState": "AgIAAB4AAAAAAAAAAAAqwF0AAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-11-25T07:34:33.473Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 18,
+              "Title": "_Modal_EditAppointment.cshtml",
+              "DocumentMoniker": "C:\\Users\\CJ LUMANGLAS\\Documents\\C#\\PetClinicSystem\\PetClinicSystem\\Views\\Appointments\\_Modal_EditAppointment.cshtml",
+              "RelativeDocumentMoniker": "PetClinicSystem\\Views\\Appointments\\_Modal_EditAppointment.cshtml",
+              "ToolTip": "C:\\Users\\CJ LUMANGLAS\\Documents\\C#\\PetClinicSystem\\PetClinicSystem\\Views\\Appointments\\_Modal_EditAppointment.cshtml",
+              "RelativeToolTip": "PetClinicSystem\\Views\\Appointments\\_Modal_EditAppointment.cshtml",
+              "ViewState": "AgIAAB8AAAAAAAAAAAAAAGQAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-11-25T07:35:43.492Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 17,
+              "Title": "_Modal_DeleteAppointment.cshtml",
+              "DocumentMoniker": "C:\\Users\\CJ LUMANGLAS\\Documents\\C#\\PetClinicSystem\\PetClinicSystem\\Views\\Appointments\\_Modal_DeleteAppointment.cshtml",
+              "RelativeDocumentMoniker": "PetClinicSystem\\Views\\Appointments\\_Modal_DeleteAppointment.cshtml",
+              "ToolTip": "C:\\Users\\CJ LUMANGLAS\\Documents\\C#\\PetClinicSystem\\PetClinicSystem\\Views\\Appointments\\_Modal_DeleteAppointment.cshtml",
+              "RelativeToolTip": "PetClinicSystem\\Views\\Appointments\\_Modal_DeleteAppointment.cshtml",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABgAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-11-25T07:49:41.569Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 16,
+              "Title": "_Layout_Admin.cshtml",
+              "DocumentMoniker": "C:\\Users\\CJ LUMANGLAS\\Documents\\C#\\PetClinicSystem\\PetClinicSystem\\Views\\Shared\\_Layout_Admin.cshtml",
+              "RelativeDocumentMoniker": "PetClinicSystem\\Views\\Shared\\_Layout_Admin.cshtml",
+              "ToolTip": "C:\\Users\\CJ LUMANGLAS\\Documents\\C#\\PetClinicSystem\\PetClinicSystem\\Views\\Shared\\_Layout_Admin.cshtml",
+              "RelativeToolTip": "PetClinicSystem\\Views\\Shared\\_Layout_Admin.cshtml",
+              "ViewState": "AgIAABgAAAAAAAAAAAAAAC0AAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-11-25T05:19:11.429Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 21,
+              "Title": "_Modal_EditPet.cshtml",
+              "DocumentMoniker": "C:\\Users\\CJ LUMANGLAS\\Documents\\C#\\PetClinicSystem\\PetClinicSystem\\Views\\Pets\\_Modal_EditPet.cshtml",
+              "RelativeDocumentMoniker": "PetClinicSystem\\Views\\Pets\\_Modal_EditPet.cshtml",
+              "ToolTip": "C:\\Users\\CJ LUMANGLAS\\Documents\\C#\\PetClinicSystem\\PetClinicSystem\\Views\\Pets\\_Modal_EditPet.cshtml",
+              "RelativeToolTip": "PetClinicSystem\\Views\\Pets\\_Modal_EditPet.cshtml",
+              "ViewState": "AgIAACwAAAAAAAAAAAAAAEMAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-11-25T12:45:27.79Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 22,
+              "Title": "_Modal_DeletePet.cshtml",
+              "DocumentMoniker": "C:\\Users\\CJ LUMANGLAS\\Documents\\C#\\PetClinicSystem\\PetClinicSystem\\Views\\Pets\\_Modal_DeletePet.cshtml",
+              "RelativeDocumentMoniker": "PetClinicSystem\\Views\\Pets\\_Modal_DeletePet.cshtml",
+              "ToolTip": "C:\\Users\\CJ LUMANGLAS\\Documents\\C#\\PetClinicSystem\\PetClinicSystem\\Views\\Pets\\_Modal_DeletePet.cshtml",
+              "RelativeToolTip": "PetClinicSystem\\Views\\Pets\\_Modal_DeletePet.cshtml",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABcAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-11-25T12:48:40.114Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 23,
+              "Title": "_Modal_ViewPet.cshtml",
+              "DocumentMoniker": "C:\\Users\\CJ LUMANGLAS\\Documents\\C#\\PetClinicSystem\\PetClinicSystem\\Views\\Pets\\_Modal_ViewPet.cshtml",
+              "RelativeDocumentMoniker": "PetClinicSystem\\Views\\Pets\\_Modal_ViewPet.cshtml",
+              "ToolTip": "C:\\Users\\CJ LUMANGLAS\\Documents\\C#\\PetClinicSystem\\PetClinicSystem\\Views\\Pets\\_Modal_ViewPet.cshtml",
+              "RelativeToolTip": "PetClinicSystem\\Views\\Pets\\_Modal_ViewPet.cshtml",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAACkAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-11-25T12:48:57.074Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 26,
+              "Title": "_Modal_CreatePrescription.cshtml",
+              "DocumentMoniker": "C:\\Users\\CJ LUMANGLAS\\Documents\\C#\\PetClinicSystem\\PetClinicSystem\\Views\\BillingPharmacy\\_Modal_CreatePrescription.cshtml",
+              "RelativeDocumentMoniker": "PetClinicSystem\\Views\\BillingPharmacy\\_Modal_CreatePrescription.cshtml",
+              "ToolTip": "C:\\Users\\CJ LUMANGLAS\\Documents\\C#\\PetClinicSystem\\PetClinicSystem\\Views\\BillingPharmacy\\_Modal_CreatePrescription.cshtml",
+              "RelativeToolTip": "PetClinicSystem\\Views\\BillingPharmacy\\_Modal_CreatePrescription.cshtml",
+              "ViewState": "AgIAABwAAAAAAAAAAAAAAKYAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-11-26T10:17:18.41Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 24,
+              "Title": "_Modal_CreatePet.cshtml",
+              "DocumentMoniker": "C:\\Users\\CJ LUMANGLAS\\Documents\\C#\\PetClinicSystem\\PetClinicSystem\\Views\\Pets\\_Modal_CreatePet.cshtml",
+              "RelativeDocumentMoniker": "PetClinicSystem\\Views\\Pets\\_Modal_CreatePet.cshtml",
+              "ToolTip": "C:\\Users\\CJ LUMANGLAS\\Documents\\C#\\PetClinicSystem\\PetClinicSystem\\Views\\Pets\\_Modal_CreatePet.cshtml",
+              "RelativeToolTip": "PetClinicSystem\\Views\\Pets\\_Modal_CreatePet.cshtml",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAGUAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-11-25T12:45:08.841Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 29,
+              "Title": "_Modal_ViewPrescription.cshtml",
+              "DocumentMoniker": "C:\\Users\\CJ LUMANGLAS\\Documents\\C#\\PetClinicSystem\\PetClinicSystem\\Views\\BillingPharmacy\\_Modal_ViewPrescription.cshtml",
+              "RelativeDocumentMoniker": "PetClinicSystem\\Views\\BillingPharmacy\\_Modal_ViewPrescription.cshtml",
+              "ToolTip": "C:\\Users\\CJ LUMANGLAS\\Documents\\C#\\PetClinicSystem\\PetClinicSystem\\Views\\BillingPharmacy\\_Modal_ViewPrescription.cshtml",
+              "RelativeToolTip": "PetClinicSystem\\Views\\BillingPharmacy\\_Modal_ViewPrescription.cshtml",
+              "ViewState": "AgIAAAQAAAAAAAAAAAAmwCgAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-11-26T10:17:35.23Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 25,
+              "Title": "Prescription.cs",
+              "DocumentMoniker": "C:\\Users\\CJ LUMANGLAS\\Documents\\C#\\PetClinicSystem\\PetClinicSystem\\Models\\Prescription.cs",
+              "RelativeDocumentMoniker": "PetClinicSystem\\Models\\Prescription.cs",
+              "ToolTip": "C:\\Users\\CJ LUMANGLAS\\Documents\\C#\\PetClinicSystem\\PetClinicSystem\\Models\\Prescription.cs",
+              "RelativeToolTip": "PetClinicSystem\\Models\\Prescription.cs",
+              "ViewState": "AgIAACoAAAAAAAAAAAAywDoAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-11-25T04:41:47.249Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 27,
               "Title": "_Modal_EditPrescription.cshtml",
               "DocumentMoniker": "C:\\Users\\CJ LUMANGLAS\\Documents\\C#\\PetClinicSystem\\PetClinicSystem\\Views\\BillingPharmacy\\_Modal_EditPrescription.cshtml",
               "RelativeDocumentMoniker": "PetClinicSystem\\Views\\BillingPharmacy\\_Modal_EditPrescription.cshtml",
               "ToolTip": "C:\\Users\\CJ LUMANGLAS\\Documents\\C#\\PetClinicSystem\\PetClinicSystem\\Views\\BillingPharmacy\\_Modal_EditPrescription.cshtml",
               "RelativeToolTip": "PetClinicSystem\\Views\\BillingPharmacy\\_Modal_EditPrescription.cshtml",
-              "ViewState": "AgIAAHIAAAAAAAAAAAAAAHIAAAAAAAAAAAAAAA==",
+              "ViewState": "AgIAABIAAAAAAAAAAAAAAGMAAAAnAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
               "WhenOpened": "2025-11-26T10:17:49.969Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 36,
+              "DocumentIndex": 28,
+              "Title": "_Modal_DeletePrescription.cshtml",
+              "DocumentMoniker": "C:\\Users\\CJ LUMANGLAS\\Documents\\C#\\PetClinicSystem\\PetClinicSystem\\Views\\BillingPharmacy\\_Modal_DeletePrescription.cshtml",
+              "RelativeDocumentMoniker": "PetClinicSystem\\Views\\BillingPharmacy\\_Modal_DeletePrescription.cshtml",
+              "ToolTip": "C:\\Users\\CJ LUMANGLAS\\Documents\\C#\\PetClinicSystem\\PetClinicSystem\\Views\\BillingPharmacy\\_Modal_DeletePrescription.cshtml",
+              "RelativeToolTip": "PetClinicSystem\\Views\\BillingPharmacy\\_Modal_DeletePrescription.cshtml",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAB8AAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-11-26T10:18:10.325Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 30,
               "Title": "_Prescriptions.cshtml",
               "DocumentMoniker": "C:\\Users\\CJ LUMANGLAS\\Documents\\C#\\PetClinicSystem\\PetClinicSystem\\Views\\BillingPharmacy\\_Prescriptions.cshtml",
               "RelativeDocumentMoniker": "PetClinicSystem\\Views\\BillingPharmacy\\_Prescriptions.cshtml",
               "ToolTip": "C:\\Users\\CJ LUMANGLAS\\Documents\\C#\\PetClinicSystem\\PetClinicSystem\\Views\\BillingPharmacy\\_Prescriptions.cshtml",
               "RelativeToolTip": "PetClinicSystem\\Views\\BillingPharmacy\\_Prescriptions.cshtml",
-              "ViewState": "AgIAAAwAAAAAAAAAAAAwwDwAAAAAAAAAAAAAAA==",
+              "ViewState": "AgIAABoAAAAAAAAAAAAmwD4AAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
               "WhenOpened": "2025-11-26T10:32:54.658Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
+              "DocumentIndex": 31,
+              "Title": "settings.js",
+              "DocumentMoniker": "C:\\Users\\CJ LUMANGLAS\\Documents\\C#\\PetClinicSystem\\PetClinicSystem\\wwwroot\\js\\settings.js",
+              "RelativeDocumentMoniker": "PetClinicSystem\\wwwroot\\js\\settings.js",
+              "ToolTip": "C:\\Users\\CJ LUMANGLAS\\Documents\\C#\\PetClinicSystem\\PetClinicSystem\\wwwroot\\js\\settings.js",
+              "RelativeToolTip": "PetClinicSystem\\wwwroot\\js\\settings.js",
+              "ViewState": "AgIAACkAAAAAAAAAAAAwwFkAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001646|",
+              "WhenOpened": "2025-11-26T20:24:38.105Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 32,
+              "Title": "AccountController.cs",
+              "DocumentMoniker": "C:\\Users\\CJ LUMANGLAS\\Documents\\C#\\PetClinicSystem\\PetClinicSystem\\Controllers\\AccountController.cs",
+              "RelativeDocumentMoniker": "PetClinicSystem\\Controllers\\AccountController.cs",
+              "ToolTip": "C:\\Users\\CJ LUMANGLAS\\Documents\\C#\\PetClinicSystem\\PetClinicSystem\\Controllers\\AccountController.cs",
+              "RelativeToolTip": "PetClinicSystem\\Controllers\\AccountController.cs",
+              "ViewState": "AgIAAGsAAAAAAAAAAAAAAIAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-11-25T04:49:33.516Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 33,
+              "Title": "_Layout_Public.cshtml",
+              "DocumentMoniker": "C:\\Users\\CJ LUMANGLAS\\Documents\\C#\\PetClinicSystem\\PetClinicSystem\\Views\\Shared\\_Layout_Public.cshtml",
+              "RelativeDocumentMoniker": "PetClinicSystem\\Views\\Shared\\_Layout_Public.cshtml",
+              "ToolTip": "C:\\Users\\CJ LUMANGLAS\\Documents\\C#\\PetClinicSystem\\PetClinicSystem\\Views\\Shared\\_Layout_Public.cshtml",
+              "RelativeToolTip": "PetClinicSystem\\Views\\Shared\\_Layout_Public.cshtml",
+              "ViewState": "AgIAADQAAAAAAAAAAAAAAK8AAAAuAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-11-25T04:43:48.722Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 35,
+              "Title": "_Modal_EditAccount.cshtml",
+              "DocumentMoniker": "C:\\Users\\CJ LUMANGLAS\\Documents\\C#\\PetClinicSystem\\PetClinicSystem\\Views\\ManageAccounts\\_Modal_EditAccount.cshtml",
+              "RelativeDocumentMoniker": "PetClinicSystem\\Views\\ManageAccounts\\_Modal_EditAccount.cshtml",
+              "ToolTip": "C:\\Users\\CJ LUMANGLAS\\Documents\\C#\\PetClinicSystem\\PetClinicSystem\\Views\\ManageAccounts\\_Modal_EditAccount.cshtml",
+              "RelativeToolTip": "PetClinicSystem\\Views\\ManageAccounts\\_Modal_EditAccount.cshtml",
+              "ViewState": "AgIAADcAAAAAAAAAAAAAAFEAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-11-26T17:49:56.172Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 34,
+              "Title": "Index.cshtml",
+              "DocumentMoniker": "C:\\Users\\CJ LUMANGLAS\\Documents\\C#\\PetClinicSystem\\PetClinicSystem\\Views\\Home\\Index.cshtml",
+              "RelativeDocumentMoniker": "PetClinicSystem\\Views\\Home\\Index.cshtml",
+              "ToolTip": "C:\\Users\\CJ LUMANGLAS\\Documents\\C#\\PetClinicSystem\\PetClinicSystem\\Views\\Home\\Index.cshtml",
+              "RelativeToolTip": "PetClinicSystem\\Views\\Home\\Index.cshtml",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-11-25T04:45:11.138Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 36,
+              "Title": "_Layout.cshtml",
+              "DocumentMoniker": "C:\\Users\\CJ LUMANGLAS\\Documents\\C#\\PetClinicSystem\\PetClinicSystem\\Views\\Shared\\_Layout.cshtml",
+              "RelativeDocumentMoniker": "PetClinicSystem\\Views\\Shared\\_Layout.cshtml",
+              "ToolTip": "C:\\Users\\CJ LUMANGLAS\\Documents\\C#\\PetClinicSystem\\PetClinicSystem\\Views\\Shared\\_Layout.cshtml",
+              "RelativeToolTip": "PetClinicSystem\\Views\\Shared\\_Layout.cshtml",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAsAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-11-25T04:47:14.249Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
               "DocumentIndex": 37,
+              "Title": "Landing.cshtml",
+              "DocumentMoniker": "C:\\Users\\CJ LUMANGLAS\\Documents\\C#\\PetClinicSystem\\PetClinicSystem\\Views\\Account\\Landing.cshtml",
+              "RelativeDocumentMoniker": "PetClinicSystem\\Views\\Account\\Landing.cshtml",
+              "ToolTip": "C:\\Users\\CJ LUMANGLAS\\Documents\\C#\\PetClinicSystem\\PetClinicSystem\\Views\\Account\\Landing.cshtml",
+              "RelativeToolTip": "PetClinicSystem\\Views\\Account\\Landing.cshtml",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAIAAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-11-27T17:01:59.713Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 39,
+              "Title": "_Layout_Client.cshtml",
+              "DocumentMoniker": "C:\\Users\\CJ LUMANGLAS\\Documents\\C#\\PetClinicSystem\\PetClinicSystem\\Views\\Shared\\_Layout_Client.cshtml",
+              "RelativeDocumentMoniker": "PetClinicSystem\\Views\\Shared\\_Layout_Client.cshtml",
+              "ToolTip": "C:\\Users\\CJ LUMANGLAS\\Documents\\C#\\PetClinicSystem\\PetClinicSystem\\Views\\Shared\\_Layout_Client.cshtml",
+              "RelativeToolTip": "PetClinicSystem\\Views\\Shared\\_Layout_Client.cshtml",
+              "ViewState": "AgIAABYAAAAAAAAAAAAAAEgAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-11-25T05:19:50.347Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 40,
+              "Title": "Index.cshtml",
+              "DocumentMoniker": "C:\\Users\\CJ LUMANGLAS\\Documents\\C#\\PetClinicSystem\\PetClinicSystem\\Views\\ManageAccounts\\Index.cshtml",
+              "RelativeDocumentMoniker": "PetClinicSystem\\Views\\ManageAccounts\\Index.cshtml",
+              "ToolTip": "C:\\Users\\CJ LUMANGLAS\\Documents\\C#\\PetClinicSystem\\PetClinicSystem\\Views\\ManageAccounts\\Index.cshtml",
+              "RelativeToolTip": "PetClinicSystem\\Views\\ManageAccounts\\Index.cshtml",
+              "ViewState": "AgIAAAwAAAAAAAAAAAAAABgAAAA+AAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-11-26T17:28:29.556Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 38,
+              "Title": "_Layout_Staff.cshtml",
+              "DocumentMoniker": "C:\\Users\\CJ LUMANGLAS\\Documents\\C#\\PetClinicSystem\\PetClinicSystem\\Views\\Shared\\_Layout_Staff.cshtml",
+              "RelativeDocumentMoniker": "PetClinicSystem\\Views\\Shared\\_Layout_Staff.cshtml",
+              "ToolTip": "C:\\Users\\CJ LUMANGLAS\\Documents\\C#\\PetClinicSystem\\PetClinicSystem\\Views\\Shared\\_Layout_Staff.cshtml",
+              "RelativeToolTip": "PetClinicSystem\\Views\\Shared\\_Layout_Staff.cshtml",
+              "ViewState": "AgIAABYAAAAAAAAAAAAuwE0AAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-11-25T05:19:33.761Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 41,
+              "Title": "Program.cs",
+              "DocumentMoniker": "C:\\Users\\CJ LUMANGLAS\\Documents\\C#\\PetClinicSystem\\PetClinicSystem\\Program.cs",
+              "RelativeDocumentMoniker": "PetClinicSystem\\Program.cs",
+              "ToolTip": "C:\\Users\\CJ LUMANGLAS\\Documents\\C#\\PetClinicSystem\\PetClinicSystem\\Program.cs",
+              "RelativeToolTip": "PetClinicSystem\\Program.cs",
+              "ViewState": "AgIAAAoAAAAAAAAAAAAwwCEAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-11-25T04:33:37.711Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 43,
+              "Title": "_Modal_ChangePassword.cshtml",
+              "DocumentMoniker": "C:\\Users\\CJ LUMANGLAS\\Documents\\C#\\PetClinicSystem\\PetClinicSystem\\Views\\Settings\\_Modal_ChangePassword.cshtml",
+              "RelativeDocumentMoniker": "PetClinicSystem\\Views\\Settings\\_Modal_ChangePassword.cshtml",
+              "ToolTip": "C:\\Users\\CJ LUMANGLAS\\Documents\\C#\\PetClinicSystem\\PetClinicSystem\\Views\\Settings\\_Modal_ChangePassword.cshtml",
+              "RelativeToolTip": "PetClinicSystem\\Views\\Settings\\_Modal_ChangePassword.cshtml",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAACQAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-11-26T20:22:43.558Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 42,
+              "Title": "_Modal_EditDrug.cshtml",
+              "DocumentMoniker": "C:\\Users\\CJ LUMANGLAS\\Documents\\C#\\PetClinicSystem\\PetClinicSystem\\Views\\BillingPharmacy\\_Modal_EditDrug.cshtml",
+              "RelativeDocumentMoniker": "PetClinicSystem\\Views\\BillingPharmacy\\_Modal_EditDrug.cshtml",
+              "ToolTip": "C:\\Users\\CJ LUMANGLAS\\Documents\\C#\\PetClinicSystem\\PetClinicSystem\\Views\\BillingPharmacy\\_Modal_EditDrug.cshtml",
+              "RelativeToolTip": "PetClinicSystem\\Views\\BillingPharmacy\\_Modal_EditDrug.cshtml",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAFEAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-11-26T12:40:06.526Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 44,
+              "Title": "_Modal_EditProfile.cshtml",
+              "DocumentMoniker": "C:\\Users\\CJ LUMANGLAS\\Documents\\C#\\PetClinicSystem\\PetClinicSystem\\Views\\Settings\\_Modal_EditProfile.cshtml",
+              "RelativeDocumentMoniker": "PetClinicSystem\\Views\\Settings\\_Modal_EditProfile.cshtml",
+              "ToolTip": "C:\\Users\\CJ LUMANGLAS\\Documents\\C#\\PetClinicSystem\\PetClinicSystem\\Views\\Settings\\_Modal_EditProfile.cshtml",
+              "RelativeToolTip": "PetClinicSystem\\Views\\Settings\\_Modal_EditProfile.cshtml",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAACAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-11-26T20:21:44.031Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 46,
+              "Title": "SettingsController.cs",
+              "DocumentMoniker": "C:\\Users\\CJ LUMANGLAS\\Documents\\C#\\PetClinicSystem\\PetClinicSystem\\Controllers\\SettingsController.cs",
+              "RelativeDocumentMoniker": "PetClinicSystem\\Controllers\\SettingsController.cs",
+              "ToolTip": "C:\\Users\\CJ LUMANGLAS\\Documents\\C#\\PetClinicSystem\\PetClinicSystem\\Controllers\\SettingsController.cs",
+              "RelativeToolTip": "PetClinicSystem\\Controllers\\SettingsController.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAJ4AAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-11-26T20:20:19.938Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 45,
+              "Title": "Index.cshtml",
+              "DocumentMoniker": "C:\\Users\\CJ LUMANGLAS\\Documents\\C#\\PetClinicSystem\\PetClinicSystem\\Views\\Settings\\Index.cshtml",
+              "RelativeDocumentMoniker": "PetClinicSystem\\Views\\Settings\\Index.cshtml",
+              "ToolTip": "C:\\Users\\CJ LUMANGLAS\\Documents\\C#\\PetClinicSystem\\PetClinicSystem\\Views\\Settings\\Index.cshtml",
+              "RelativeToolTip": "PetClinicSystem\\Views\\Settings\\Index.cshtml",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAGwAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-11-26T20:21:21.218Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 50,
+              "Title": "MedicalRecordsController.cs",
+              "DocumentMoniker": "C:\\Users\\CJ LUMANGLAS\\Documents\\C#\\PetClinicSystem\\PetClinicSystem\\Controllers\\MedicalRecordsController.cs",
+              "RelativeDocumentMoniker": "PetClinicSystem\\Controllers\\MedicalRecordsController.cs",
+              "ToolTip": "C:\\Users\\CJ LUMANGLAS\\Documents\\C#\\PetClinicSystem\\PetClinicSystem\\Controllers\\MedicalRecordsController.cs",
+              "RelativeToolTip": "PetClinicSystem\\Controllers\\MedicalRecordsController.cs",
+              "ViewState": "AgIAAAsAAAAAAAAAAAAqwBcAAAAMAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-11-26T19:51:07.978Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 49,
+              "Title": "MedicalRecord.cs",
+              "DocumentMoniker": "C:\\Users\\CJ LUMANGLAS\\Documents\\C#\\PetClinicSystem\\PetClinicSystem\\Models\\MedicalRecord.cs",
+              "RelativeDocumentMoniker": "PetClinicSystem\\Models\\MedicalRecord.cs",
+              "ToolTip": "C:\\Users\\CJ LUMANGLAS\\Documents\\C#\\PetClinicSystem\\PetClinicSystem\\Models\\MedicalRecord.cs",
+              "RelativeToolTip": "PetClinicSystem\\Models\\MedicalRecord.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABMAAAAcAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-11-25T04:42:29.613Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 48,
+              "Title": "medicalrecords.js",
+              "DocumentMoniker": "C:\\Users\\CJ LUMANGLAS\\Documents\\C#\\PetClinicSystem\\PetClinicSystem\\wwwroot\\js\\medicalrecords.js",
+              "RelativeDocumentMoniker": "PetClinicSystem\\wwwroot\\js\\medicalrecords.js",
+              "ToolTip": "C:\\Users\\CJ LUMANGLAS\\Documents\\C#\\PetClinicSystem\\PetClinicSystem\\wwwroot\\js\\medicalrecords.js",
+              "RelativeToolTip": "PetClinicSystem\\wwwroot\\js\\medicalrecords.js",
+              "ViewState": "AgIAAIUAAAAAAAAAAAAAAIUAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001646|",
+              "WhenOpened": "2025-11-26T19:54:06.88Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 47,
+              "Title": "accounts.js",
+              "DocumentMoniker": "C:\\Users\\CJ LUMANGLAS\\Documents\\C#\\PetClinicSystem\\PetClinicSystem\\wwwroot\\js\\accounts.js",
+              "RelativeDocumentMoniker": "PetClinicSystem\\wwwroot\\js\\accounts.js",
+              "ToolTip": "C:\\Users\\CJ LUMANGLAS\\Documents\\C#\\PetClinicSystem\\PetClinicSystem\\wwwroot\\js\\accounts.js",
+              "RelativeToolTip": "PetClinicSystem\\wwwroot\\js\\accounts.js",
+              "ViewState": "AgIAAF8AAAAAAAAAAAAwwI8AAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001646|",
+              "WhenOpened": "2025-11-26T17:53:39.302Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 56,
+              "Title": "Index.cshtml",
+              "DocumentMoniker": "C:\\Users\\CJ LUMANGLAS\\Documents\\C#\\PetClinicSystem\\PetClinicSystem\\Views\\MedicalRecords\\Index.cshtml",
+              "RelativeDocumentMoniker": "PetClinicSystem\\Views\\MedicalRecords\\Index.cshtml",
+              "ToolTip": "C:\\Users\\CJ LUMANGLAS\\Documents\\C#\\PetClinicSystem\\PetClinicSystem\\Views\\MedicalRecords\\Index.cshtml",
+              "RelativeToolTip": "PetClinicSystem\\Views\\MedicalRecords\\Index.cshtml",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAEIAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-11-26T19:52:20.284Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 55,
+              "Title": "_MedicalRecords.cshtml",
+              "DocumentMoniker": "C:\\Users\\CJ LUMANGLAS\\Documents\\C#\\PetClinicSystem\\PetClinicSystem\\Views\\MedicalRecords\\_MedicalRecords.cshtml",
+              "RelativeDocumentMoniker": "PetClinicSystem\\Views\\MedicalRecords\\_MedicalRecords.cshtml",
+              "ToolTip": "C:\\Users\\CJ LUMANGLAS\\Documents\\C#\\PetClinicSystem\\PetClinicSystem\\Views\\MedicalRecords\\_MedicalRecords.cshtml",
+              "RelativeToolTip": "PetClinicSystem\\Views\\MedicalRecords\\_MedicalRecords.cshtml",
+              "ViewState": "AgIAAAMAAAAAAAAAAAAwwDMAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-11-26T19:52:46.488Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 54,
+              "Title": "_Modal_CreateMedicalRecord.cshtml",
+              "DocumentMoniker": "C:\\Users\\CJ LUMANGLAS\\Documents\\C#\\PetClinicSystem\\PetClinicSystem\\Views\\MedicalRecords\\_Modal_CreateMedicalRecord.cshtml",
+              "RelativeDocumentMoniker": "PetClinicSystem\\Views\\MedicalRecords\\_Modal_CreateMedicalRecord.cshtml",
+              "ToolTip": "C:\\Users\\CJ LUMANGLAS\\Documents\\C#\\PetClinicSystem\\PetClinicSystem\\Views\\MedicalRecords\\_Modal_CreateMedicalRecord.cshtml",
+              "RelativeToolTip": "PetClinicSystem\\Views\\MedicalRecords\\_Modal_CreateMedicalRecord.cshtml",
+              "ViewState": "AgIAACQAAAAAAAAAAAAwwFYAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-11-26T19:53:04.608Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 53,
+              "Title": "_Modal_EditMedicalRecord.cshtml",
+              "DocumentMoniker": "C:\\Users\\CJ LUMANGLAS\\Documents\\C#\\PetClinicSystem\\PetClinicSystem\\Views\\MedicalRecords\\_Modal_EditMedicalRecord.cshtml",
+              "RelativeDocumentMoniker": "PetClinicSystem\\Views\\MedicalRecords\\_Modal_EditMedicalRecord.cshtml",
+              "ToolTip": "C:\\Users\\CJ LUMANGLAS\\Documents\\C#\\PetClinicSystem\\PetClinicSystem\\Views\\MedicalRecords\\_Modal_EditMedicalRecord.cshtml",
+              "RelativeToolTip": "PetClinicSystem\\Views\\MedicalRecords\\_Modal_EditMedicalRecord.cshtml",
+              "ViewState": "AgIAADgAAAAAAAAAAAAwwGoAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-11-26T19:53:28.014Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 51,
+              "Title": "_AccountCards.cshtml",
+              "DocumentMoniker": "C:\\Users\\CJ LUMANGLAS\\Documents\\C#\\PetClinicSystem\\PetClinicSystem\\Views\\ManageAccounts\\_AccountCards.cshtml",
+              "RelativeDocumentMoniker": "PetClinicSystem\\Views\\ManageAccounts\\_AccountCards.cshtml",
+              "ToolTip": "C:\\Users\\CJ LUMANGLAS\\Documents\\C#\\PetClinicSystem\\PetClinicSystem\\Views\\ManageAccounts\\_AccountCards.cshtml",
+              "RelativeToolTip": "PetClinicSystem\\Views\\ManageAccounts\\_AccountCards.cshtml",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAHcAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-11-26T17:44:45.048Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 52,
+              "Title": "_Modal_DeleteMedicalRecord.cshtml",
+              "DocumentMoniker": "C:\\Users\\CJ LUMANGLAS\\Documents\\C#\\PetClinicSystem\\PetClinicSystem\\Views\\MedicalRecords\\_Modal_DeleteMedicalRecord.cshtml",
+              "RelativeDocumentMoniker": "PetClinicSystem\\Views\\MedicalRecords\\_Modal_DeleteMedicalRecord.cshtml",
+              "ToolTip": "C:\\Users\\CJ LUMANGLAS\\Documents\\C#\\PetClinicSystem\\PetClinicSystem\\Views\\MedicalRecords\\_Modal_DeleteMedicalRecord.cshtml",
+              "RelativeToolTip": "PetClinicSystem\\Views\\MedicalRecords\\_Modal_DeleteMedicalRecord.cshtml",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAACAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-11-26T19:53:48.679Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 57,
+              "Title": "ManageAccountsController.cs",
+              "DocumentMoniker": "C:\\Users\\CJ LUMANGLAS\\Documents\\C#\\PetClinicSystem\\PetClinicSystem\\Controllers\\ManageAccountsController.cs",
+              "RelativeDocumentMoniker": "PetClinicSystem\\Controllers\\ManageAccountsController.cs",
+              "ToolTip": "C:\\Users\\CJ LUMANGLAS\\Documents\\C#\\PetClinicSystem\\PetClinicSystem\\Controllers\\ManageAccountsController.cs",
+              "RelativeToolTip": "PetClinicSystem\\Controllers\\ManageAccountsController.cs",
+              "ViewState": "AgIAAI0AAAAAAAAAAADwv7sAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-11-26T17:21:42.851Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 58,
+              "Title": "_Modal_CreateAccount.cshtml",
+              "DocumentMoniker": "C:\\Users\\CJ LUMANGLAS\\Documents\\C#\\PetClinicSystem\\PetClinicSystem\\Views\\ManageAccounts\\_Modal_CreateAccount.cshtml",
+              "RelativeDocumentMoniker": "PetClinicSystem\\Views\\ManageAccounts\\_Modal_CreateAccount.cshtml",
+              "ToolTip": "C:\\Users\\CJ LUMANGLAS\\Documents\\C#\\PetClinicSystem\\PetClinicSystem\\Views\\ManageAccounts\\_Modal_CreateAccount.cshtml",
+              "RelativeToolTip": "PetClinicSystem\\Views\\ManageAccounts\\_Modal_CreateAccount.cshtml",
+              "ViewState": "AgIAAAkAAAAAAAAAAAAwwDMAAAASAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-11-26T17:49:35.905Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 59,
+              "Title": "ClientController.cs",
+              "DocumentMoniker": "C:\\Users\\CJ LUMANGLAS\\Documents\\C#\\PetClinicSystem\\PetClinicSystem\\Controllers\\ClientController.cs",
+              "RelativeDocumentMoniker": "PetClinicSystem\\Controllers\\ClientController.cs",
+              "ToolTip": "C:\\Users\\CJ LUMANGLAS\\Documents\\C#\\PetClinicSystem\\PetClinicSystem\\Controllers\\ClientController.cs",
+              "RelativeToolTip": "PetClinicSystem\\Controllers\\ClientController.cs",
+              "ViewState": "AgIAAAsAAAAAAAAAAAAAABsAAAAMAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-11-25T05:28:38.729Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 60,
+              "Title": "_Modal_DeleteAccount.cshtml",
+              "DocumentMoniker": "C:\\Users\\CJ LUMANGLAS\\Documents\\C#\\PetClinicSystem\\PetClinicSystem\\Views\\ManageAccounts\\_Modal_DeleteAccount.cshtml",
+              "RelativeDocumentMoniker": "PetClinicSystem\\Views\\ManageAccounts\\_Modal_DeleteAccount.cshtml",
+              "ToolTip": "C:\\Users\\CJ LUMANGLAS\\Documents\\C#\\PetClinicSystem\\PetClinicSystem\\Views\\ManageAccounts\\_Modal_DeleteAccount.cshtml",
+              "RelativeToolTip": "PetClinicSystem\\Views\\ManageAccounts\\_Modal_DeleteAccount.cshtml",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABwAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-11-26T17:52:34.334Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 61,
+              "Title": "_Modal_ViewAccount.cshtml",
+              "DocumentMoniker": "C:\\Users\\CJ LUMANGLAS\\Documents\\C#\\PetClinicSystem\\PetClinicSystem\\Views\\ManageAccounts\\_Modal_ViewAccount.cshtml",
+              "RelativeDocumentMoniker": "PetClinicSystem\\Views\\ManageAccounts\\_Modal_ViewAccount.cshtml",
+              "ToolTip": "C:\\Users\\CJ LUMANGLAS\\Documents\\C#\\PetClinicSystem\\PetClinicSystem\\Views\\ManageAccounts\\_Modal_ViewAccount.cshtml",
+              "RelativeToolTip": "PetClinicSystem\\Views\\ManageAccounts\\_Modal_ViewAccount.cshtml",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAACsAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-11-26T17:52:11.705Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 62,
+              "Title": "Account.cs",
+              "DocumentMoniker": "C:\\Users\\CJ LUMANGLAS\\Documents\\C#\\PetClinicSystem\\PetClinicSystem\\Models\\Account.cs",
+              "RelativeDocumentMoniker": "PetClinicSystem\\Models\\Account.cs",
+              "ToolTip": "C:\\Users\\CJ LUMANGLAS\\Documents\\C#\\PetClinicSystem\\PetClinicSystem\\Models\\Account.cs",
+              "RelativeToolTip": "PetClinicSystem\\Models\\Account.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABcAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-11-25T04:40:04.399Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 63,
+              "Title": "StaffController.cs",
+              "DocumentMoniker": "C:\\Users\\CJ LUMANGLAS\\Documents\\C#\\PetClinicSystem\\PetClinicSystem\\Controllers\\StaffController.cs",
+              "RelativeDocumentMoniker": "PetClinicSystem\\Controllers\\StaffController.cs",
+              "ToolTip": "C:\\Users\\CJ LUMANGLAS\\Documents\\C#\\PetClinicSystem\\PetClinicSystem\\Controllers\\StaffController.cs",
+              "RelativeToolTip": "PetClinicSystem\\Controllers\\StaffController.cs",
+              "ViewState": "AgIAACIAAAAAAAAAAAAAACIAAAAMAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-11-25T05:25:41.728Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 64,
               "Title": "vaccinations.js",
               "DocumentMoniker": "C:\\Users\\CJ LUMANGLAS\\Documents\\C#\\PetClinicSystem\\PetClinicSystem\\wwwroot\\js\\vaccinations.js",
               "RelativeDocumentMoniker": "PetClinicSystem\\wwwroot\\js\\vaccinations.js",
@@ -859,12 +1231,11 @@
               "RelativeToolTip": "PetClinicSystem\\wwwroot\\js\\vaccinations.js",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAsAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001646|",
-              "WhenOpened": "2025-11-26T14:48:31.093Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-11-26T14:48:31.093Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 38,
+              "DocumentIndex": 65,
               "Title": "_Modal_DeleteVaccination.cshtml",
               "DocumentMoniker": "C:\\Users\\CJ LUMANGLAS\\Documents\\C#\\PetClinicSystem\\PetClinicSystem\\Views\\BillingPharmacy\\_Modal_DeleteVaccination.cshtml",
               "RelativeDocumentMoniker": "PetClinicSystem\\Views\\BillingPharmacy\\_Modal_DeleteVaccination.cshtml",
@@ -872,12 +1243,11 @@
               "RelativeToolTip": "PetClinicSystem\\Views\\BillingPharmacy\\_Modal_DeleteVaccination.cshtml",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAABwAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2025-11-26T14:48:15.685Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-11-26T14:48:15.685Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 39,
+              "DocumentIndex": 66,
               "Title": "_Modal_EditVaccination.cshtml",
               "DocumentMoniker": "C:\\Users\\CJ LUMANGLAS\\Documents\\C#\\PetClinicSystem\\PetClinicSystem\\Views\\BillingPharmacy\\_Modal_EditVaccination.cshtml",
               "RelativeDocumentMoniker": "PetClinicSystem\\Views\\BillingPharmacy\\_Modal_EditVaccination.cshtml",
@@ -885,12 +1255,11 @@
               "RelativeToolTip": "PetClinicSystem\\Views\\BillingPharmacy\\_Modal_EditVaccination.cshtml",
               "ViewState": "AgIAACMAAAAAAAAAAAAwwFMAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2025-11-26T14:47:38.105Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-11-26T14:47:38.105Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 40,
+              "DocumentIndex": 67,
               "Title": "_Modal_CreateVaccination.cshtml",
               "DocumentMoniker": "C:\\Users\\CJ LUMANGLAS\\Documents\\C#\\PetClinicSystem\\PetClinicSystem\\Views\\BillingPharmacy\\_Modal_CreateVaccination.cshtml",
               "RelativeDocumentMoniker": "PetClinicSystem\\Views\\BillingPharmacy\\_Modal_CreateVaccination.cshtml",
@@ -898,12 +1267,11 @@
               "RelativeToolTip": "PetClinicSystem\\Views\\BillingPharmacy\\_Modal_CreateVaccination.cshtml",
               "ViewState": "AgIAAEsAAAAAAAAAAAAAAEsAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2025-11-26T14:47:22.465Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-11-26T14:47:22.465Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 41,
+              "DocumentIndex": 68,
               "Title": "_Vaccinations.cshtml",
               "DocumentMoniker": "C:\\Users\\CJ LUMANGLAS\\Documents\\C#\\PetClinicSystem\\PetClinicSystem\\Views\\BillingPharmacy\\_Vaccinations.cshtml",
               "RelativeDocumentMoniker": "PetClinicSystem\\Views\\BillingPharmacy\\_Vaccinations.cshtml",
@@ -911,12 +1279,11 @@
               "RelativeToolTip": "PetClinicSystem\\Views\\BillingPharmacy\\_Vaccinations.cshtml",
               "ViewState": "AgIAABgAAAAAAAAAAAAwwEgAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2025-11-26T14:47:00.172Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-11-26T14:47:00.172Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 42,
+              "DocumentIndex": 69,
               "Title": "Vaccination.cs",
               "DocumentMoniker": "C:\\Users\\CJ LUMANGLAS\\Documents\\C#\\PetClinicSystem\\PetClinicSystem\\Models\\Vaccination.cs",
               "RelativeDocumentMoniker": "PetClinicSystem\\Models\\Vaccination.cs",
@@ -924,25 +1291,11 @@
               "RelativeToolTip": "PetClinicSystem\\Models\\Vaccination.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAB8AAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-11-25T04:42:00.98Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-11-25T04:42:00.98Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 43,
-              "Title": "Prescription.cs",
-              "DocumentMoniker": "C:\\Users\\CJ LUMANGLAS\\Documents\\C#\\PetClinicSystem\\PetClinicSystem\\Models\\Prescription.cs",
-              "RelativeDocumentMoniker": "PetClinicSystem\\Models\\Prescription.cs",
-              "ToolTip": "C:\\Users\\CJ LUMANGLAS\\Documents\\C#\\PetClinicSystem\\PetClinicSystem\\Models\\Prescription.cs",
-              "RelativeToolTip": "PetClinicSystem\\Models\\Prescription.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAC8AAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-11-25T04:41:47.249Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 44,
+              "DocumentIndex": 70,
               "Title": "_Drugs.cshtml",
               "DocumentMoniker": "C:\\Users\\CJ LUMANGLAS\\Documents\\C#\\PetClinicSystem\\PetClinicSystem\\Views\\BillingPharmacy\\_Drugs.cshtml",
               "RelativeDocumentMoniker": "PetClinicSystem\\Views\\BillingPharmacy\\_Drugs.cshtml",
@@ -950,12 +1303,11 @@
               "RelativeToolTip": "PetClinicSystem\\Views\\BillingPharmacy\\_Drugs.cshtml",
               "ViewState": "AgIAABMAAAAAAAAAAAAwwEUAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2025-11-26T12:36:44.523Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-11-26T12:36:44.523Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 45,
+              "DocumentIndex": 71,
               "Title": "Drug.cs",
               "DocumentMoniker": "C:\\Users\\CJ LUMANGLAS\\Documents\\C#\\PetClinicSystem\\PetClinicSystem\\Models\\Drug.cs",
               "RelativeDocumentMoniker": "PetClinicSystem\\Models\\Drug.cs",
@@ -963,12 +1315,11 @@
               "RelativeToolTip": "PetClinicSystem\\Models\\Drug.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAB0AAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-11-25T04:41:35.068Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-11-25T04:41:35.068Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 46,
+              "DocumentIndex": 72,
               "Title": "_Modal_CreateDrug.cshtml",
               "DocumentMoniker": "C:\\Users\\CJ LUMANGLAS\\Documents\\C#\\PetClinicSystem\\PetClinicSystem\\Views\\BillingPharmacy\\_Modal_CreateDrug.cshtml",
               "RelativeDocumentMoniker": "PetClinicSystem\\Views\\BillingPharmacy\\_Modal_CreateDrug.cshtml",
@@ -976,12 +1327,11 @@
               "RelativeToolTip": "PetClinicSystem\\Views\\BillingPharmacy\\_Modal_CreateDrug.cshtml",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAABQAAAASAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2025-11-26T12:39:49.974Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-11-26T12:39:49.974Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 47,
+              "DocumentIndex": 73,
               "Title": "_Modal_DeleteDrug.cshtml",
               "DocumentMoniker": "C:\\Users\\CJ LUMANGLAS\\Documents\\C#\\PetClinicSystem\\PetClinicSystem\\Views\\BillingPharmacy\\_Modal_DeleteDrug.cshtml",
               "RelativeDocumentMoniker": "PetClinicSystem\\Views\\BillingPharmacy\\_Modal_DeleteDrug.cshtml",
@@ -989,12 +1339,11 @@
               "RelativeToolTip": "PetClinicSystem\\Views\\BillingPharmacy\\_Modal_DeleteDrug.cshtml",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAABYAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2025-11-26T12:40:20.261Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-11-26T12:40:20.261Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 48,
+              "DocumentIndex": 74,
               "Title": "drugs.js",
               "DocumentMoniker": "C:\\Users\\CJ LUMANGLAS\\Documents\\C#\\PetClinicSystem\\PetClinicSystem\\wwwroot\\js\\drugs.js",
               "RelativeDocumentMoniker": "PetClinicSystem\\wwwroot\\js\\drugs.js",
@@ -1002,12 +1351,11 @@
               "RelativeToolTip": "PetClinicSystem\\wwwroot\\js\\drugs.js",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAFcAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001646|",
-              "WhenOpened": "2025-11-26T12:41:11.112Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-11-26T12:41:11.112Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 49,
+              "DocumentIndex": 75,
               "Title": "VaccinationsController.cs",
               "DocumentMoniker": "C:\\Users\\CJ LUMANGLAS\\Documents\\C#\\PetClinicSystem\\PetClinicSystem\\Controllers\\VaccinationsController.cs",
               "RelativeDocumentMoniker": "PetClinicSystem\\Controllers\\VaccinationsController.cs",
@@ -1015,12 +1363,11 @@
               "RelativeToolTip": "PetClinicSystem\\Controllers\\VaccinationsController.cs",
               "ViewState": "AgIAAD4AAAAAAAAAAAAwwG4AAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-11-26T11:49:10.414Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-11-26T11:49:10.414Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 50,
+              "DocumentIndex": 76,
               "Title": "Index.cshtml",
               "DocumentMoniker": "C:\\Users\\CJ LUMANGLAS\\Documents\\C#\\PetClinicSystem\\PetClinicSystem\\Views\\Client\\Index.cshtml",
               "RelativeDocumentMoniker": "PetClinicSystem\\Views\\Client\\Index.cshtml",
@@ -1028,12 +1375,11 @@
               "RelativeToolTip": "PetClinicSystem\\Views\\Client\\Index.cshtml",
               "ViewState": "AgIAAFEAAAAAAAAAAAAAAIEAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2025-11-25T05:29:34.015Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-11-25T05:29:34.015Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 51,
+              "DocumentIndex": 77,
               "Title": "Owner.cs",
               "DocumentMoniker": "C:\\Users\\CJ LUMANGLAS\\Documents\\C#\\PetClinicSystem\\PetClinicSystem\\Models\\Owner.cs",
               "RelativeDocumentMoniker": "PetClinicSystem\\Models\\Owner.cs",
@@ -1045,7 +1391,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 52,
+              "DocumentIndex": 78,
               "Title": "Index.cshtml",
               "DocumentMoniker": "C:\\Users\\CJ LUMANGLAS\\Documents\\C#\\PetClinicSystem\\PetClinicSystem\\Views\\Appointments\\Index.cshtml",
               "RelativeDocumentMoniker": "PetClinicSystem\\Views\\Appointments\\Index.cshtml",
@@ -1057,79 +1403,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 53,
-              "Title": "_Modal_DeleteAppointment.cshtml",
-              "DocumentMoniker": "C:\\Users\\CJ LUMANGLAS\\Documents\\C#\\PetClinicSystem\\PetClinicSystem\\Views\\Appointments\\_Modal_DeleteAppointment.cshtml",
-              "RelativeDocumentMoniker": "PetClinicSystem\\Views\\Appointments\\_Modal_DeleteAppointment.cshtml",
-              "ToolTip": "C:\\Users\\CJ LUMANGLAS\\Documents\\C#\\PetClinicSystem\\PetClinicSystem\\Views\\Appointments\\_Modal_DeleteAppointment.cshtml",
-              "RelativeToolTip": "PetClinicSystem\\Views\\Appointments\\_Modal_DeleteAppointment.cshtml",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA0AAABCAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2025-11-25T07:49:41.569Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 54,
-              "Title": "_Modal_CreateAppointment.cshtml",
-              "DocumentMoniker": "C:\\Users\\CJ LUMANGLAS\\Documents\\C#\\PetClinicSystem\\PetClinicSystem\\Views\\Appointments\\_Modal_CreateAppointment.cshtml",
-              "RelativeDocumentMoniker": "PetClinicSystem\\Views\\Appointments\\_Modal_CreateAppointment.cshtml",
-              "ToolTip": "C:\\Users\\CJ LUMANGLAS\\Documents\\C#\\PetClinicSystem\\PetClinicSystem\\Views\\Appointments\\_Modal_CreateAppointment.cshtml",
-              "RelativeToolTip": "PetClinicSystem\\Views\\Appointments\\_Modal_CreateAppointment.cshtml",
-              "ViewState": "AgIAACoAAAAAAAAAAAAAADUAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2025-11-25T07:34:33.473Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 55,
-              "Title": "_POS.cshtml",
-              "DocumentMoniker": "C:\\Users\\CJ LUMANGLAS\\Documents\\C#\\PetClinicSystem\\PetClinicSystem\\Views\\BillingPharmacy\\_POS.cshtml",
-              "RelativeDocumentMoniker": "PetClinicSystem\\Views\\BillingPharmacy\\_POS.cshtml",
-              "ToolTip": "C:\\Users\\CJ LUMANGLAS\\Documents\\C#\\PetClinicSystem\\PetClinicSystem\\Views\\BillingPharmacy\\_POS.cshtml",
-              "RelativeToolTip": "PetClinicSystem\\Views\\BillingPharmacy\\_POS.cshtml",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAACYAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2025-11-25T17:50:07.946Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 56,
-              "Title": "_POS_Scripts.cshtml",
-              "DocumentMoniker": "C:\\Users\\CJ LUMANGLAS\\Documents\\C#\\PetClinicSystem\\PetClinicSystem\\Views\\BillingPharmacy\\_POS_Scripts.cshtml",
-              "RelativeDocumentMoniker": "PetClinicSystem\\Views\\BillingPharmacy\\_POS_Scripts.cshtml",
-              "ToolTip": "C:\\Users\\CJ LUMANGLAS\\Documents\\C#\\PetClinicSystem\\PetClinicSystem\\Views\\BillingPharmacy\\_POS_Scripts.cshtml",
-              "RelativeToolTip": "PetClinicSystem\\Views\\BillingPharmacy\\_POS_Scripts.cshtml",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAOwAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2025-11-25T20:17:47.843Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 59,
-              "Title": "_Layout_Public.cshtml",
-              "DocumentMoniker": "C:\\Users\\CJ LUMANGLAS\\Documents\\C#\\PetClinicSystem\\PetClinicSystem\\Views\\Shared\\_Layout_Public.cshtml",
-              "RelativeDocumentMoniker": "PetClinicSystem\\Views\\Shared\\_Layout_Public.cshtml",
-              "ToolTip": "C:\\Users\\CJ LUMANGLAS\\Documents\\C#\\PetClinicSystem\\PetClinicSystem\\Views\\Shared\\_Layout_Public.cshtml",
-              "RelativeToolTip": "PetClinicSystem\\Views\\Shared\\_Layout_Public.cshtml",
-              "ViewState": "AgIAAJMAAAAAAAAAAAAAABAAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2025-11-25T04:43:48.722Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 58,
-              "Title": "Index.cshtml",
-              "DocumentMoniker": "C:\\Users\\CJ LUMANGLAS\\Documents\\C#\\PetClinicSystem\\PetClinicSystem\\Views\\Home\\Index.cshtml",
-              "RelativeDocumentMoniker": "PetClinicSystem\\Views\\Home\\Index.cshtml",
-              "ToolTip": "C:\\Users\\CJ LUMANGLAS\\Documents\\C#\\PetClinicSystem\\PetClinicSystem\\Views\\Home\\Index.cshtml",
-              "RelativeToolTip": "PetClinicSystem\\Views\\Home\\Index.cshtml",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAACkAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2025-11-25T04:45:11.138Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 57,
+              "DocumentIndex": 79,
               "Title": "Index.cshtml",
               "DocumentMoniker": "C:\\Users\\CJ LUMANGLAS\\Documents\\C#\\PetClinicSystem\\PetClinicSystem\\Views\\Admin\\Index.cshtml",
               "RelativeDocumentMoniker": "PetClinicSystem\\Views\\Admin\\Index.cshtml",
@@ -1141,43 +1415,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 60,
-              "Title": "_Modal_ViewAppointment.cshtml",
-              "DocumentMoniker": "C:\\Users\\CJ LUMANGLAS\\Documents\\C#\\PetClinicSystem\\PetClinicSystem\\Views\\Appointments\\_Modal_ViewAppointment.cshtml",
-              "RelativeDocumentMoniker": "PetClinicSystem\\Views\\Appointments\\_Modal_ViewAppointment.cshtml",
-              "ToolTip": "C:\\Users\\CJ LUMANGLAS\\Documents\\C#\\PetClinicSystem\\PetClinicSystem\\Views\\Appointments\\_Modal_ViewAppointment.cshtml",
-              "RelativeToolTip": "PetClinicSystem\\Views\\Appointments\\_Modal_ViewAppointment.cshtml",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAFkAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2025-11-25T07:34:08.828Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 61,
-              "Title": "_Modal_EditAppointment.cshtml",
-              "DocumentMoniker": "C:\\Users\\CJ LUMANGLAS\\Documents\\C#\\PetClinicSystem\\PetClinicSystem\\Views\\Appointments\\_Modal_EditAppointment.cshtml",
-              "RelativeDocumentMoniker": "PetClinicSystem\\Views\\Appointments\\_Modal_EditAppointment.cshtml",
-              "ToolTip": "C:\\Users\\CJ LUMANGLAS\\Documents\\C#\\PetClinicSystem\\PetClinicSystem\\Views\\Appointments\\_Modal_EditAppointment.cshtml",
-              "RelativeToolTip": "PetClinicSystem\\Views\\Appointments\\_Modal_EditAppointment.cshtml",
-              "ViewState": "AgIAABsAAAAAAAAAAAAAAA0AAAA6AAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2025-11-25T07:35:43.492Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 62,
-              "Title": "pos.js",
-              "DocumentMoniker": "C:\\Users\\CJ LUMANGLAS\\Documents\\C#\\PetClinicSystem\\PetClinicSystem\\wwwroot\\js\\pos.js",
-              "RelativeDocumentMoniker": "PetClinicSystem\\wwwroot\\js\\pos.js",
-              "ToolTip": "C:\\Users\\CJ LUMANGLAS\\Documents\\C#\\PetClinicSystem\\PetClinicSystem\\wwwroot\\js\\pos.js",
-              "RelativeToolTip": "PetClinicSystem\\wwwroot\\js\\pos.js",
-              "ViewState": "AgIAAGkAAAAAAAAAAAAAAIcAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001646|",
-              "WhenOpened": "2025-11-25T17:57:05.473Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 63,
+              "DocumentIndex": 80,
               "Title": "pos.css",
               "DocumentMoniker": "C:\\Users\\CJ LUMANGLAS\\Documents\\C#\\PetClinicSystem\\PetClinicSystem\\wwwroot\\css\\pos.css",
               "RelativeDocumentMoniker": "PetClinicSystem\\wwwroot\\css\\pos.css",
@@ -1189,7 +1427,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 65,
+              "DocumentIndex": 82,
               "Title": "Billing.cs",
               "DocumentMoniker": "C:\\Users\\CJ LUMANGLAS\\Documents\\C#\\PetClinicSystem\\PetClinicSystem\\Models\\Billing.cs",
               "RelativeDocumentMoniker": "PetClinicSystem\\Models\\Billing.cs",
@@ -1201,7 +1439,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 64,
+              "DocumentIndex": 81,
               "Title": "AdminController.cs",
               "DocumentMoniker": "C:\\Users\\CJ LUMANGLAS\\Documents\\C#\\PetClinicSystem\\PetClinicSystem\\Controllers\\AdminController.cs",
               "RelativeDocumentMoniker": "PetClinicSystem\\Controllers\\AdminController.cs",
@@ -1213,7 +1451,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 66,
+              "DocumentIndex": 83,
               "Title": "Grooming.cs",
               "DocumentMoniker": "C:\\Users\\CJ LUMANGLAS\\Documents\\C#\\PetClinicSystem\\PetClinicSystem\\Models\\Grooming.cs",
               "RelativeDocumentMoniker": "PetClinicSystem\\Models\\Grooming.cs",
@@ -1225,7 +1463,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 67,
+              "DocumentIndex": 84,
               "Title": "AppointmentsController.cs",
               "DocumentMoniker": "C:\\Users\\CJ LUMANGLAS\\Documents\\C#\\PetClinicSystem\\PetClinicSystem\\Controllers\\AppointmentsController.cs",
               "RelativeDocumentMoniker": "PetClinicSystem\\Controllers\\AppointmentsController.cs",
@@ -1237,7 +1475,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 68,
+              "DocumentIndex": 85,
               "Title": "site.js",
               "DocumentMoniker": "C:\\Users\\CJ LUMANGLAS\\Documents\\C#\\PetClinicSystem\\PetClinicSystem\\wwwroot\\js\\site.js",
               "RelativeDocumentMoniker": "PetClinicSystem\\wwwroot\\js\\site.js",
@@ -1249,31 +1487,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 73,
-              "Title": "Program.cs",
-              "DocumentMoniker": "C:\\Users\\CJ LUMANGLAS\\Documents\\C#\\PetClinicSystem\\PetClinicSystem\\Program.cs",
-              "RelativeDocumentMoniker": "PetClinicSystem\\Program.cs",
-              "ToolTip": "C:\\Users\\CJ LUMANGLAS\\Documents\\C#\\PetClinicSystem\\PetClinicSystem\\Program.cs",
-              "RelativeToolTip": "PetClinicSystem\\Program.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAABgAAAAVAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-11-25T04:33:37.711Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 74,
-              "Title": "Pet.cs",
-              "DocumentMoniker": "C:\\Users\\CJ LUMANGLAS\\Documents\\C#\\PetClinicSystem\\PetClinicSystem\\Models\\Pet.cs",
-              "RelativeDocumentMoniker": "PetClinicSystem\\Models\\Pet.cs",
-              "ToolTip": "C:\\Users\\CJ LUMANGLAS\\Documents\\C#\\PetClinicSystem\\PetClinicSystem\\Models\\Pet.cs",
-              "RelativeToolTip": "PetClinicSystem\\Models\\Pet.cs",
-              "ViewState": "AgIAAAwAAAAAAAAAAAAqwCwAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-11-25T04:40:39.604Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 69,
+              "DocumentIndex": 86,
               "Title": "site.css",
               "DocumentMoniker": "C:\\Users\\CJ LUMANGLAS\\Documents\\C#\\PetClinicSystem\\PetClinicSystem\\wwwroot\\css\\site.css",
               "RelativeDocumentMoniker": "PetClinicSystem\\wwwroot\\css\\site.css",
@@ -1285,19 +1499,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 70,
-              "Title": "_Layout.cshtml",
-              "DocumentMoniker": "C:\\Users\\CJ LUMANGLAS\\Documents\\C#\\PetClinicSystem\\PetClinicSystem\\Views\\Shared\\_Layout.cshtml",
-              "RelativeDocumentMoniker": "PetClinicSystem\\Views\\Shared\\_Layout.cshtml",
-              "ToolTip": "C:\\Users\\CJ LUMANGLAS\\Documents\\C#\\PetClinicSystem\\PetClinicSystem\\Views\\Shared\\_Layout.cshtml",
-              "RelativeToolTip": "PetClinicSystem\\Views\\Shared\\_Layout.cshtml",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAsAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2025-11-25T04:47:14.249Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 75,
+              "DocumentIndex": 89,
               "Title": "PetsController.cs",
               "DocumentMoniker": "C:\\Users\\CJ LUMANGLAS\\Documents\\C#\\PetClinicSystem\\PetClinicSystem\\Controllers\\PetsController.cs",
               "RelativeDocumentMoniker": "PetClinicSystem\\Controllers\\PetsController.cs",
@@ -1309,7 +1511,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 72,
+              "DocumentIndex": 88,
               "Title": "Index.cshtml",
               "DocumentMoniker": "C:\\Users\\CJ LUMANGLAS\\Documents\\C#\\PetClinicSystem\\PetClinicSystem\\Views\\Pets\\Index.cshtml",
               "RelativeDocumentMoniker": "PetClinicSystem\\Views\\Pets\\Index.cshtml",
@@ -1321,7 +1523,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 71,
+              "DocumentIndex": 87,
               "Title": "Index.cshtml",
               "DocumentMoniker": "C:\\Users\\CJ LUMANGLAS\\Documents\\C#\\PetClinicSystem\\PetClinicSystem\\Views\\Staff\\Index.cshtml",
               "RelativeDocumentMoniker": "PetClinicSystem\\Views\\Staff\\Index.cshtml",
@@ -1333,43 +1535,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 76,
-              "Title": "_Modal_CreatePet.cshtml",
-              "DocumentMoniker": "C:\\Users\\CJ LUMANGLAS\\Documents\\C#\\PetClinicSystem\\PetClinicSystem\\Views\\Pets\\_Modal_CreatePet.cshtml",
-              "RelativeDocumentMoniker": "PetClinicSystem\\Views\\Pets\\_Modal_CreatePet.cshtml",
-              "ToolTip": "C:\\Users\\CJ LUMANGLAS\\Documents\\C#\\PetClinicSystem\\PetClinicSystem\\Views\\Pets\\_Modal_CreatePet.cshtml",
-              "RelativeToolTip": "PetClinicSystem\\Views\\Pets\\_Modal_CreatePet.cshtml",
-              "ViewState": "AgIAAB8AAAAAAAAAAAAkwDMAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2025-11-25T12:45:08.841Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 77,
-              "Title": "_Modal_EditPet.cshtml",
-              "DocumentMoniker": "C:\\Users\\CJ LUMANGLAS\\Documents\\C#\\PetClinicSystem\\PetClinicSystem\\Views\\Pets\\_Modal_EditPet.cshtml",
-              "RelativeDocumentMoniker": "PetClinicSystem\\Views\\Pets\\_Modal_EditPet.cshtml",
-              "ToolTip": "C:\\Users\\CJ LUMANGLAS\\Documents\\C#\\PetClinicSystem\\PetClinicSystem\\Views\\Pets\\_Modal_EditPet.cshtml",
-              "RelativeToolTip": "PetClinicSystem\\Views\\Pets\\_Modal_EditPet.cshtml",
-              "ViewState": "AgIAAFwAAAAAAAAAAAAAAD4AAAA5AAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2025-11-25T12:45:27.79Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 78,
-              "Title": "_Modal_DeletePet.cshtml",
-              "DocumentMoniker": "C:\\Users\\CJ LUMANGLAS\\Documents\\C#\\PetClinicSystem\\PetClinicSystem\\Views\\Pets\\_Modal_DeletePet.cshtml",
-              "RelativeDocumentMoniker": "PetClinicSystem\\Views\\Pets\\_Modal_DeletePet.cshtml",
-              "ToolTip": "C:\\Users\\CJ LUMANGLAS\\Documents\\C#\\PetClinicSystem\\PetClinicSystem\\Views\\Pets\\_Modal_DeletePet.cshtml",
-              "RelativeToolTip": "PetClinicSystem\\Views\\Pets\\_Modal_DeletePet.cshtml",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAABMAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2025-11-25T12:48:40.114Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 79,
+              "DocumentIndex": 90,
               "Title": "Schedule.cs",
               "DocumentMoniker": "C:\\Users\\CJ LUMANGLAS\\Documents\\C#\\PetClinicSystem\\PetClinicSystem\\Models\\Schedule.cs",
               "RelativeDocumentMoniker": "PetClinicSystem\\Models\\Schedule.cs",
@@ -1381,7 +1547,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 80,
+              "DocumentIndex": 91,
               "Title": "_ViewImports.cshtml",
               "DocumentMoniker": "C:\\Users\\CJ LUMANGLAS\\Documents\\C#\\PetClinicSystem\\PetClinicSystem\\Views\\_ViewImports.cshtml",
               "RelativeDocumentMoniker": "PetClinicSystem\\Views\\_ViewImports.cshtml",
@@ -1393,7 +1559,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 81,
+              "DocumentIndex": 92,
               "Title": "ApplicationDbContext.cs",
               "DocumentMoniker": "C:\\Users\\CJ LUMANGLAS\\Documents\\C#\\PetClinicSystem\\PetClinicSystem\\Data\\ApplicationDbContext.cs",
               "RelativeDocumentMoniker": "PetClinicSystem\\Data\\ApplicationDbContext.cs",
@@ -1405,7 +1571,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 82,
+              "DocumentIndex": 93,
               "Title": "appsettings.json",
               "DocumentMoniker": "C:\\Users\\CJ LUMANGLAS\\Documents\\C#\\PetClinicSystem\\PetClinicSystem\\appsettings.json",
               "RelativeDocumentMoniker": "PetClinicSystem\\appsettings.json",
@@ -1417,7 +1583,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 83,
+              "DocumentIndex": 94,
               "Title": "ErrorViewModel.cs",
               "DocumentMoniker": "C:\\Users\\CJ LUMANGLAS\\Documents\\C#\\PetClinicSystem\\PetClinicSystem\\Models\\ErrorViewModel.cs",
               "RelativeDocumentMoniker": "PetClinicSystem\\Models\\ErrorViewModel.cs",
@@ -1429,7 +1595,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 84,
+              "DocumentIndex": 95,
               "Title": "HomeController.cs",
               "DocumentMoniker": "C:\\Users\\CJ LUMANGLAS\\Documents\\C#\\PetClinicSystem\\PetClinicSystem\\Controllers\\HomeController.cs",
               "RelativeDocumentMoniker": "PetClinicSystem\\Controllers\\HomeController.cs",
@@ -1438,30 +1604,16 @@
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAA0AAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-11-25T04:44:19.323Z"
-            },
+            }
+          ]
+        },
+        {
+          "DockedWidth": 144,
+          "SelectedChildIndex": -1,
+          "Children": [
             {
-              "$type": "Document",
-              "DocumentIndex": 85,
-              "Title": "_Layout_Client.cshtml",
-              "DocumentMoniker": "C:\\Users\\CJ LUMANGLAS\\Documents\\C#\\PetClinicSystem\\PetClinicSystem\\Views\\Shared\\_Layout_Client.cshtml",
-              "RelativeDocumentMoniker": "PetClinicSystem\\Views\\Shared\\_Layout_Client.cshtml",
-              "ToolTip": "C:\\Users\\CJ LUMANGLAS\\Documents\\C#\\PetClinicSystem\\PetClinicSystem\\Views\\Shared\\_Layout_Client.cshtml",
-              "RelativeToolTip": "PetClinicSystem\\Views\\Shared\\_Layout_Client.cshtml",
-              "ViewState": "AgIAADQAAAAAAAAAAAAmwEgAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2025-11-25T05:19:50.347Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 86,
-              "Title": "_Layout_Staff.cshtml",
-              "DocumentMoniker": "C:\\Users\\CJ LUMANGLAS\\Documents\\C#\\PetClinicSystem\\PetClinicSystem\\Views\\Shared\\_Layout_Staff.cshtml",
-              "RelativeDocumentMoniker": "PetClinicSystem\\Views\\Shared\\_Layout_Staff.cshtml",
-              "ToolTip": "C:\\Users\\CJ LUMANGLAS\\Documents\\C#\\PetClinicSystem\\PetClinicSystem\\Views\\Shared\\_Layout_Staff.cshtml",
-              "RelativeToolTip": "PetClinicSystem\\Views\\Shared\\_Layout_Staff.cshtml",
-              "ViewState": "AgIAACIAAAAAAAAAAAAuwE0AAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2025-11-25T05:19:33.761Z"
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{34e76e81-ee4a-11d0-ae2e-00a0c90fffc3}"
             }
           ]
         }

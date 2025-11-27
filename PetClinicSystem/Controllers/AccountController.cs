@@ -1,6 +1,9 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Http;
 using PetClinicSystem.Data;
 using PetClinicSystem.Models;
+using System;
+using System.Linq;
 using System.Security.Cryptography;
 using System.Text;
 
@@ -15,51 +18,86 @@ namespace PetClinicSystem.Controllers
             _db = db;
         }
 
-        // Hash Password
+        // ===================== HASH HELPER =====================
         private string HashPassword(string password)
         {
-            using (SHA256 sha = SHA256.Create())
+            if (string.IsNullOrWhiteSpace(password))
+                return null;
+
+            using (var sha = SHA256.Create())
             {
-                byte[] bytes = sha.ComputeHash(Encoding.UTF8.GetBytes(password));
-                return BitConverter.ToString(bytes).Replace("-", "").ToLower();
+                var bytes = Encoding.UTF8.GetBytes(password);
+                var hashBytes = sha.ComputeHash(bytes);
+                var sb = new StringBuilder();
+                foreach (var b in hashBytes)
+                    sb.Append(b.ToString("x2"));
+                return sb.ToString();
             }
         }
-        //login
-        [HttpPost]
-        public IActionResult Login(string Username, string Password)
+
+        // ===================== LANDING / DEFAULT =====================
+
+        // /Account or /Account/Index  → send to public landing page (Home/Index)
+        [HttpGet]
+        public IActionResult Index()
         {
-            var hash = HashPassword(Password);
+            return RedirectToAction("Index", "Home");
+        }
+
+        // ===================== LOGIN =====================
+
+        [HttpGet]
+        public IActionResult Login()
+        {
+            // if you want login form on Home/Index only, you can
+            // also redirect there instead of returning a view here.
+            return View();
+        }
+
+        [HttpPost]
+        public IActionResult Login(string username, string password)
+        {
+            if (string.IsNullOrWhiteSpace(username) || string.IsNullOrWhiteSpace(password))
+            {
+                ViewBag.Error = "Username and password are required.";
+                return View();
+            }
+
+            var hash = HashPassword(password);
 
             var user = _db.Accounts
-                .FirstOrDefault(a => a.Username == Username &&
-                                     a.PasswordHash == hash &&
-                                     a.IsActive == true);
+                .FirstOrDefault(a =>
+                    a.Username == username &&
+                    a.PasswordHash == hash &&
+                    a.IsActive == true);
 
             if (user == null)
             {
-                TempData["Error"] = "Invalid username or password.";
-                return RedirectToAction("Index", "Home");
+                ViewBag.Error = "Invalid username or password, or account is inactive.";
+                return View();
             }
 
-            // Set session
+            // save info in session for layouts
             HttpContext.Session.SetInt32("UserId", user.AccountId);
-            HttpContext.Session.SetInt32("UserRole", user.IsAdmin);
-            HttpContext.Session.SetString("UserName", user.FullName);
+            HttpContext.Session.SetString("UserName", user.FullName ?? user.Username);
+            HttpContext.Session.SetInt32("UserRole", user.IsAdmin);  // 1=Admin, 2=Staff, 0=Client
 
-            // Show success message
-            TempData["Success"] = $"Welcome back, {user.FullName}!";
-
-            // Redirect by role
-            return user.IsAdmin switch
+            // redirect based on role
+            if (user.IsAdmin == 1)
             {
-                1 => RedirectToAction("Index", "Admin"),
-                2 => RedirectToAction("Index", "Staff"),
-                _ => RedirectToAction("Index", "Client")
-            };
+                return RedirectToAction("Index", "Admin");
+            }
+            else if (user.IsAdmin == 2)
+            {
+                return RedirectToAction("Index", "Staff");
+            }
+            else
+            {
+                // client
+                return RedirectToAction("Index", "Client");
+            }
         }
 
-
-        // SIGN UP POST
         [HttpPost]
         public IActionResult Register(string FullName, string Email, string Username, string Password)
         {
@@ -88,6 +126,22 @@ namespace PetClinicSystem.Controllers
 
             return RedirectToAction("Index", "Home");
         }
+
+
+        // ===================== LOGOUT =====================
+        [HttpPost]
+        public IActionResult Logout()
+        {
+            // Clear all session data
+            HttpContext.Session.Clear();
+
+            // One-time message for the next request
+            TempData["LogoutMessage"] = "You have been logged out.";
+
+            // Go back to the public landing page
+            return RedirectToAction("Index", "Home");
+        }
+
 
     }
 }

@@ -1,17 +1,21 @@
 ﻿@model PetClinicSystem.Models.Prescription
 
 <div class="modal-header border-0">
-    <h5 class="modal-title fw-bold">Prescription Details</h5>
-    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+    <h5 class="modal-title fw-semibold">Prescription Details</h5>
+    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
 </div>
 
 <div class="modal-body">
-    <div class="mb-3">
-        <h5 class="mb-0">@Model.Pet?.Name</h5>
-        <small class="text-muted">@Model.Pet?.Owner?.FullName</small>
-    </div>
-
     <dl class="row">
+        <dt class="col-sm-3">Date</dt>
+        <dd class="col-sm-9">@Model.Date.ToString("yyyy-MM-dd")</dd>
+
+        <dt class="col-sm-3">Patient</dt>
+        <dd class="col-sm-9">@Model.Pet?.Name (@Model.Pet?.Owner?.FullName)</dd>
+
+        <dt class="col-sm-3">Doctor</dt>
+        <dd class="col-sm-9">@Model.Staff?.FullName</dd>
+
         <dt class="col-sm-3">Medication</dt>
         <dd class="col-sm-9">@Model.Medication</dd>
 
@@ -24,20 +28,13 @@
         <dt class="col-sm-3">Duration</dt>
         <dd class="col-sm-9">@Model.Duration</dd>
 
-        <dt class="col-sm-3">Doctor</dt>
-        <dd class="col-sm-9">@Model.Staff?.FullName</dd>
-
-        <dt class="col-sm-3">Date</dt>
-        <dd class="col-sm-9">@Model.Date.ToString("MMM dd, yyyy")</dd>
-
-        @if (!string.IsNullOrWhiteSpace(Model.Notes))
-        {
-            <dt class="col-sm-3">Notes</dt>
-            <dd class="col-sm-9">@Model.Notes</dd>
-        }
+        <dt class="col-sm-3">Notes</dt>
+        <dd class="col-sm-9">@Model.Notes</dd>
     </dl>
 </div>
 
-<div class="modal-footer border-0">
-    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+<div class="modal-footer bg-light border-0">
+    <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">
+        Close
+    </button>
 </div>

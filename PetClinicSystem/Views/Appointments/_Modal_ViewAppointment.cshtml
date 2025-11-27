@@ -1,89 +1,49 @@
 ﻿@model PetClinicSystem.Models.Schedule
 
-<div class="modal-dialog modal-dialog-centered modal-lg">
-    <div class="modal-content p-4 rounded-4 border-0 shadow">
+<div class="modal-header border-0">
+    <h5 class="modal-title fw-bold">Appointment Details</h5>
+    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+</div>
 
-        <!-- HEADER -->
-        <div class="d-flex justify-content-between align-items-center mb-3">
-            <h4 class="fw-bold">Appointment Details</h4>
-            <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
-        </div>
+<div class="modal-body">
+    <div class="border rounded-4 p-4 shadow-sm">
 
-        <!-- SUMMARY -->
-        <div class="row g-3">
-
-            <!-- DATE & TIME -->
-            <div class="col-md-4">
-                <div class="p-3 rounded-3 bg-light">
-                    <h5 class="fw-bold text-success mb-1">
-                        @Model.ScheduleTime?.ToString(@"hh\:mm")
-                    </h5>
-                    <small class="text-secondary">
-                        @Model.ScheduleDateOld?.ToString("MMM dd, yyyy")
-                    </small>
-                </div>
-            </div>
-
-            <!-- STATUS -->
-            <div class="col-md-4 d-flex align-items-center">
-                <span class="badge bg-success px-3 py-2 rounded-pill">@Model.Status</span>
-            </div>
-
-            <!-- EDIT BUTTON -->
-            <div class="col-md-4 text-end">
-                <button class="btn btn-outline-primary"
-                        data-bs-toggle="modal"
-                        data-bs-target="#editModal"
-                        onclick="loadEdit(@Model.ScheduleId)">
-                    Edit
-                </button>
-            </div>
-
+        <h6 class="fw-bold mb-2">Appointment Info</h6>
+        <div class="text-secondary mb-3">
+            <div><strong>Service:</strong> @Model.Service</div>
+            <div><strong>Date:</strong> @(Model.ScheduleDateOld?.ToString("MMM dd, yyyy") ?? "-")</div>
+            <div><strong>Time:</strong> @(Model.ScheduleTime?.ToString(@"hh\:mm") ?? "-")</div>
+            <div><strong>Status:</strong> @Model.Status</div>
         </div>
 
         <hr />
 
-        <!-- PET INFO -->
-        <h5 class="fw-bold mt-3">Pet Information</h5>
-        <div class="text-secondary">
+        <h6 class="fw-bold mb-2">Patient</h6>
+        <div class="text-secondary mb-3">
             <div><strong>Name:</strong> @Model.Pet?.Name</div>
             <div><strong>Species:</strong> @Model.Pet?.Species</div>
             <div><strong>Breed:</strong> @Model.Pet?.Breed</div>
-            <div><strong>Gender:</strong> @Model.Pet?.Gender</div>
-            <div><strong>Birthdate:</strong> @Model.Pet?.BirthDate.ToString("MMM dd, yyyy")</div>
-            <div><strong>Color Markings:</strong> @Model.Pet?.ColorMarkings</div>
-            <div><strong>Weight:</strong> @Model.Pet?.Weight kg</div>
-            <div><strong>Medical History:</strong> @Model.Pet?.MedicalHistory</div>
         </div>
 
         <hr />
 
-        <!-- OWNER INFO -->
-        <h5 class="fw-bold mt-3">Owner Information</h5>
-        <div class="text-secondary">
+        <h6 class="fw-bold mb-2">Owner</h6>
+        <div class="text-secondary mb-3">
             <div><strong>Name:</strong> @Model.Pet?.Owner?.FullName</div>
             <div><strong>Phone:</strong> @Model.Pet?.Owner?.PhoneNumber</div>
             <div><strong>Email:</strong> @Model.Pet?.Owner?.Email</div>
-            <div><strong>Address:</strong> @Model.Pet?.Owner?.Address</div>
-            <div>
-                <strong>Emergency Contacts:</strong>
-                @Model.Pet?.Owner?.EmergencyContact1,
-                @Model.Pet?.Owner?.EmergencyContact2
-            </div>
         </div>
 
         <hr />
 
-        <!-- APPOINTMENT DETAILS -->
-        <h5 class="fw-bold mt-3">Appointment Details</h5>
+        <h6 class="fw-bold mb-2">Assigned Staff</h6>
         <div class="text-secondary">
-            <div><strong>Doctor:</strong> @Model.Staff?.FullName</div>
-            <div><strong>Reason / Service:</strong> @Model.Service</div>
-        </div>
-
-        <div class="text-end mt-4">
-            <button class="btn btn-outline-secondary" data-bs-dismiss="modal">Close</button>
+            <div><strong>Name:</strong> @Model.Staff?.FullName</div>
         </div>
 
     </div>
+</div>
+
+<div class="modal-footer border-0">
+    <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">Close</button>
 </div>

@@ -6,6 +6,7 @@ wwwroot\images\pets.jpg
 wwwroot\js\accounts.js
 wwwroot\js\drugs.js
 wwwroot\js\medicalrecords.js
+wwwroot\js\owners.js
 wwwroot\js\pos.js
 wwwroot\js\prescriptions.js
 wwwroot\js\settings.js

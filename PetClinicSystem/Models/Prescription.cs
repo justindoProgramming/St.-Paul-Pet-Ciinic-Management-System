@@ -1,6 +1,7 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using Microsoft.AspNetCore.Mvc.ModelBinding.Validation;
 
 namespace PetClinicSystem.Models
 {
@@ -13,22 +14,32 @@ namespace PetClinicSystem.Models
 
         [Column("pet_id")]
         public int PetId { get; set; }
-        public Pet Pet { get; set; }
+
+        // Navigation property – DO NOT VALIDATE
+        [ValidateNever]
+        public Pet? Pet { get; set; }
 
         [Column("staff_id")]
         public int StaffId { get; set; }
-        public Account Staff { get; set; }
+
+        // Navigation property – DO NOT VALIDATE
+        [ValidateNever]
+        public Account? Staff { get; set; }
 
         [Column("medication")]
+        [Required]
         public string Medication { get; set; } = "";
 
         [Column("dosage")]
+        [Required]
         public string Dosage { get; set; } = "";
 
         [Column("frequency")]
+        [Required]
         public string Frequency { get; set; } = "";
 
         [Column("duration")]
+        [Required]
         public string Duration { get; set; } = "";
 
         [Column("notes")]

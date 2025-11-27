@@ -1,109 +1,104 @@
 ﻿@model PetClinicSystem.Models.Pet
+@using PetClinicSystem.Models
+
 @{
-    var owners = ViewBag.Owners as List<PetClinicSystem.Models.Owner>;
+    var owners = ViewBag.Owners as List<Owner>;
 }
 
-<div class="modal-dialog modal-lg modal-dialog-centered">
-<div class="modal-content p-4 shadow rounded-4">
+<div class="modal-header border-0">
+    <h5 class="modal-title fw-bold">Edit Patient</h5>
+    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+</div>
 
-    <h4 class="fw-bold mb-3">Edit Patient</h4>
+<form id="editPetForm" method="post" action="/Pets/Edit">
+    @Html.AntiForgeryToken()
+    <input type="hidden" name="PetId" value="@Model.PetId" />
 
-    <form method="post" action="/Pets/Edit">
-        <input type="hidden" name="PetId" value="@Model.PetId" />
-
+    <div class="modal-body">
         <div class="row g-3">
-
-            <!-- NAME -->
-            <div class="col-md-6">
-                <label class="fw-semibold">Name</label>
-                <input name="Name" class="form-control rounded-3" value="@Model.Name" required />
-            </div>
 
             <!-- OWNER -->
             <div class="col-md-6">
-                <label class="fw-semibold">Owner</label>
-                <select name="OwnerId" class="form-select rounded-3" required>
-                    @foreach (var o in owners)
+                <label class="form-label fw-semibold">Owner</label>
+                <select name="OwnerId" class="form-select" required>
+                    <option value="">Select owner…</option>
+                    @if (owners != null)
                     {
-                        if (o.OwnerId == Model.OwnerId)
+                        foreach (var o in owners)
                         {
-                            <option value="@o.OwnerId" selected>@o.FullName</option>
-                        }
-                        else
-                        {
-                            <option value="@o.OwnerId">@o.FullName</option>
+                            <option value="@o.OwnerId"
+                                    selected="@(o.OwnerId == Model.OwnerId ? "selected" : null)">
+                                @o.FullName
+                            </option>
                         }
                     }
                 </select>
+            </div>
+
+
+            <!-- PET NAME -->
+            <div class="col-md-6">
+                <label class="form-label fw-semibold">Pet Name</label>
+                <input name="Name" class="form-control" value="@Model.Name" required />
             </div>
 
             <!-- SPECIES -->
             <div class="col-md-6">
-                <label class="fw-semibold">Species</label>
-                <input name="Species" class="form-control rounded-3" value="@Model.Species" required />
+                <label class="form-label fw-semibold">Species</label>
+                <input name="Species" class="form-control" value="@Model.Species" required />
             </div>
 
             <!-- BREED -->
             <div class="col-md-6">
-                <label class="fw-semibold">Breed</label>
-                <input name="Breed" class="form-control rounded-3" value="@Model.Breed" />
+                <label class="form-label fw-semibold">Breed</label>
+                <input name="Breed" class="form-control" value="@Model.Breed" />
             </div>
 
             <!-- GENDER -->
-            <div class="col-md-4">
-                <label class="fw-semibold">Gender</label>
-                <select name="Gender" class="form-select rounded-3" required>
-                    @if (Model.Gender == "Male")
-                    {
-                        <option value="Male" selected>Male</option>
-                        <option value="Female">Female</option>
-                    }
-                    else if (Model.Gender == "Female")
-                    {
-                        <option value="Male">Male</option>
-                        <option value="Female" selected>Female</option>
-                    }
-                    else
-                    {
-                        <option value="Male">Male</option>
-                        <option value="Female">Female</option>
-                    }
+            <div class="col-md-6">
+                <label class="form-label fw-semibold">Gender</label>
+                <select name="Gender" class="form-select">
+                    <option value="">Select gender…</option>
+                    <option value="Male"
+                            selected="@(Model.Gender == "Male" ? "selected" : null)">Male</option>
+                    <option value="Female"
+                            selected="@(Model.Gender == "Female" ? "selected" : null)">Female</option>
                 </select>
             </div>
 
+
             <!-- BIRTHDATE -->
-            <div class="col-md-4">
-                <label class="fw-semibold">Birthdate</label>
-                <input type="date" name="BirthDate" class="form-control rounded-3"
+            <div class="col-md-6">
+                <label class="form-label fw-semibold">Birthdate</label>
+                <input name="BirthDate"
+                       type="date"
+                       class="form-control"
                        value="@Model.BirthDate.ToString("yyyy-MM-dd")" />
             </div>
 
-            <!-- WEIGHT -->
-            <div class="col-md-4">
-                <label class="fw-semibold">Weight (kg)</label>
-                <input type="number" step="0.1" name="Weight" class="form-control rounded-3" value="@Model.Weight" />
+            <!-- COLOR / MARKINGS -->
+            <div class="col-md-6">
+                <label class="form-label fw-semibold">Color / Markings</label>
+                <input name="ColorMarkings" class="form-control" value="@Model.ColorMarkings" />
             </div>
 
-            <!-- COLOR MARKINGS -->
-            <div class="col-md-12">
-                <label class="fw-semibold">Color Markings</label>
-                <input name="ColorMarkings" class="form-control rounded-3" value="@Model.ColorMarkings" />
+            <!-- WEIGHT -->
+            <div class="col-md-6">
+                <label class="form-label fw-semibold">Weight (kg)</label>
+                <input name="Weight" type="number" step="0.01" class="form-control" value="@Model.Weight" />
             </div>
 
             <!-- MEDICAL HISTORY -->
-            <div class="col-md-12">
-                <label class="fw-semibold">Medical History</label>
-                <textarea name="MedicalHistory" class="form-control rounded-3">@Model.MedicalHistory</textarea>
+            <div class="col-12">
+                <label class="form-label fw-semibold">Medical History</label>
+                <textarea name="MedicalHistory" class="form-control" rows="3">@Model.MedicalHistory</textarea>
             </div>
 
         </div>
+    </div>
 
-        <div class="text-end mt-4 d-flex justify-content-end gap-2">
-            <button class="btn btn-outline-secondary rounded-3" data-bs-dismiss="modal" type="button">Cancel</button>
-            <button class="btn btn-primary rounded-3" type="submit">Save Changes</button>
-        </div>
-
-    </form>
-
-</div>
-</div>
+    <div class="modal-footer border-0">
+        <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">Cancel</button>
+        <button type="submit" class="btn btn-primary">Save Changes</button>
+    </div>
+</form>

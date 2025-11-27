@@ -1,77 +1,101 @@
 ﻿@model PetClinicSystem.Models.Pet
+@using PetClinicSystem.Models
+
 @{
-    var owners = ViewBag.Owners as List<PetClinicSystem.Models.Owner>;
+    var owners = ViewBag.Owners as List<Owner>;
 }
 
-<div class="modal-dialog modal-lg modal-dialog-centered">
-    <div class="modal-content p-4 rounded-4 shadow">
+<div class="modal-header border-0">
+    <h5 class="modal-title fw-bold">New Patient</h5>
+    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+</div>
 
-        <h4 class="fw-bold mb-3">Add New Patient</h4>
+<form id="createPetForm"
+      asp-action="Create"
+      asp-controller="Pets"
+      method="post">
+    @Html.AntiForgeryToken()   <!-- 👈 this fixes the 400 -->
 
-        <form method="post" action="/Pets/Create">
-            <div class="row g-3">
+    <div class="modal-body">
+        <div class="row g-3">
 
-                <div class="col-md-6">
-                    <label class="fw-semibold">Name</label>
-                    <input name="Name" class="form-control" required />
-                </div>
-
-                <div class="col-md-6">
-                    <label class="fw-semibold">Owner</label>
-                    <select name="OwnerId" class="form-select" required>
-                        <option disabled selected>Select Owner</option>
-                        @foreach (var o in owners)
+            <!-- OWNER -->
+            <div class="col-md-6">
+                <label class="form-label fw-semibold">Owner</label>
+                <select asp-for="OwnerId"
+                        class="form-select"
+                        required>
+                    <option value="">Select owner...</option>
+                    @if (owners != null)
+                    {
+                        foreach (var o in owners)
                         {
                             <option value="@o.OwnerId">@o.FullName</option>
                         }
-                    </select>
-                </div>
-
-                <div class="col-md-6">
-                    <label>Species</label>
-                    <input name="Species" class="form-control" required />
-                </div>
-
-                <div class="col-md-6">
-                    <label>Breed</label>
-                    <input name="Breed" class="form-control" />
-                </div>
-
-                <div class="col-md-4">
-                    <label>Gender</label>
-                    <select name="Gender" class="form-select">
-                        <option>Male</option>
-                        <option>Female</option>
-                    </select>
-                </div>
-
-                <div class="col-md-4">
-                    <label>Birthdate</label>
-                    <input type="date" name="BirthDate" class="form-control" />
-                </div>
-
-                <div class="col-md-4">
-                    <label>Weight (kg)</label>
-                    <input type="number" step="0.1" name="Weight" class="form-control" />
-                </div>
-
-                <div class="col-md-12">
-                    <label>Color Markings</label>
-                    <input name="ColorMarkings" class="form-control" />
-                </div>
-
-                <div class="col-md-12">
-                    <label>Medical History</label>
-                    <textarea name="MedicalHistory" class="form-control"></textarea>
-                </div>
-
+                    }
+                </select>
             </div>
 
-            <div class="text-end mt-4">
-                <button type="button" data-bs-dismiss="modal" class="btn btn-outline-secondary">Cancel</button>
-                <button class="btn btn-success">Add Patient</button>
+            <!-- PET NAME -->
+            <div class="col-md-6">
+                <label class="form-label fw-semibold">Pet Name</label>
+                <input asp-for="Name" class="form-control" required />
             </div>
-        </form>
 
+            <!-- SPECIES -->
+            <div class="col-md-6">
+                <label class="form-label fw-semibold">Species</label>
+                <input asp-for="Species" class="form-control" placeholder="e.g., Dog, Cat" required />
+            </div>
+
+            <!-- BREED -->
+            <div class="col-md-6">
+                <label class="form-label fw-semibold">Breed</label>
+                <input asp-for="Breed" class="form-control" placeholder="e.g., Labrador" />
+            </div>
+
+            <!-- GENDER -->
+            <div class="col-md-6">
+                <label class="form-label fw-semibold">Gender</label>
+                <select asp-for="Gender" class="form-select">
+                    <option value="">Select gender...</option>
+                    <option>Male</option>
+                    <option>Female</option>
+                </select>
+            </div>
+
+            <!-- BIRTHDATE -->
+            <div class="col-md-6">
+                <label class="form-label fw-semibold">Birthdate</label>
+                <input asp-for="BirthDate"
+                       type="date"
+                       class="form-control"
+                       value="@(Model.BirthDate == default ? DateTime.Today.ToString("yyyy-MM-dd") : Model.BirthDate.ToString("yyyy-MM-dd"))" />
+            </div>
+
+            <!-- COLOR / MARKINGS -->
+            <div class="col-md-6">
+                <label class="form-label fw-semibold">Color / Markings</label>
+                <input asp-for="ColorMarkings" class="form-control" />
+            </div>
+
+            <!-- WEIGHT -->
+            <div class="col-md-6">
+                <label class="form-label fw-semibold">Weight (kg)</label>
+                <input asp-for="Weight" type="number" step="0.01" class="form-control" />
+            </div>
+
+            <!-- MEDICAL HISTORY -->
+            <div class="col-12">
+                <label class="form-label fw-semibold">Medical History</label>
+                <textarea asp-for="MedicalHistory" class="form-control" rows="3"></textarea>
+            </div>
+
+        </div>
     </div>
-</div>
+
+    <div class="modal-footer border-0">
+        <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">Cancel</button>
+        <button type="submit" class="btn btn-success">Save Patient</button>
+    </div>
+</form>

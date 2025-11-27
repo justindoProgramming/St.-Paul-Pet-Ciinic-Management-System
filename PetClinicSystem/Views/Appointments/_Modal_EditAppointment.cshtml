@@ -1,91 +1,100 @@
-﻿<div class="modal-dialog modal-dialog-centered modal-lg">
-    <div class="modal-content p-4 rounded-4 border-0 shadow">
+﻿@model PetClinicSystem.Models.Schedule
+@using PetClinicSystem.Models
 
-        @model PetClinicSystem.Models.Schedule
-        @{
-            var pets = ViewBag.Pets as List<PetClinicSystem.Models.Pet>;
-            var staff = ViewBag.Staff as List<PetClinicSystem.Models.Account>;
-        }
+@{
+    var pets = ViewBag.Pets as List<Pet>;
+    var staff = ViewBag.Staff as List<Account>;
+}
 
-        <form method="post" action="/Appointments/Edit">
-
-            <input type="hidden" name="ScheduleId" value="@Model.ScheduleId" />
-
-            <h4 class="fw-bold mb-3">Edit Appointment</h4>
-
-            <div class="row g-3">
-
-                <div class="col-md-6">
-                    <label class="fw-semibold">Pet</label>
-                    <select name="PetId" class="form-select" required>
-                        @foreach (var p in pets)
-                        {
-                            if (Model.PetId == p.PetId)
-                            {
-                                <option value="@p.PetId" selected>
-                                    @p.Name (@p.Owner.FullName)
-                                </option>
-                            }
-                            else
-                            {
-                                <option value="@p.PetId">
-                                    @p.Name (@p.Owner.FullName)
-                                </option>
-                            }
-                        }
-                    </select>
-                </div>
-
-                <div class="col-md-6">
-                    <label class="fw-semibold">Doctor</label>
-                    <select name="StaffId" class="form-select" required>
-                        @foreach (var s in staff)
-                        {
-                            if (Model.StaffId == s.AccountId)
-                            {
-                                <option value="@s.AccountId" selected>
-                                    @s.FullName
-                                </option>
-                            }
-                            else
-                            {
-                                <option value="@s.AccountId">
-                                    @s.FullName
-                                </option>
-                            }
-                        }
-                    </select>
-                </div>
-
-                <div class="col-md-12">
-                    <label class="fw-semibold">Service</label>
-                    <input name="Service" class="form-control" value="@Model.Service" required />
-                </div>
-
-                <div class="col-md-6">
-                    <label class="fw-semibold">Date</label>
-                    <input type="date"
-                           name="ScheduleDateOld"
-                           class="form-control"
-                           value="@Model.ScheduleDateOld?.ToString("yyyy-MM-dd")" />
-                </div>
-
-                <div class="col-md-6">
-                    <label class="fw-semibold">Time</label>
-                    <input type="time"
-                           name="ScheduleTime"
-                           class="form-control"
-                           value="@Model.ScheduleTime?.ToString(@"hh\:mm")" />
-                </div>
-
-            </div>
-
-            <div class="mt-4 text-end">
-                <button class="btn btn-outline-secondary" data-bs-dismiss="modal" type="button">Cancel</button>
-                <button class="btn btn-success" type="submit">Save Changes</button>
-            </div>
-
-        </form>
-
-    </div>
+<div class="modal-header border-0">
+    <h5 class="modal-title fw-bold">Edit Appointment</h5>
+    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
 </div>
+
+<form method="post" action="/Appointments/Edit">
+    <input type="hidden" name="ScheduleId" value="@Model.ScheduleId" />
+
+    <div class="modal-body">
+        <div class="row g-3">
+
+            <!-- PATIENT -->
+            <div class="col-md-6">
+                <label class="form-label fw-semibold">Patient</label>
+                <select name="PetId" class="form-select" required>
+                    <option value="">Select patient…</option>
+                    @if (pets != null)
+                    {
+                        foreach (var p in pets)
+                        {
+                            <option value="@p.PetId"
+                                    selected="@(p.PetId == Model.PetId ? "selected" : null)">
+                                @p.Name (@p.Owner.FullName)
+                            </option>
+                        }
+                    }
+                </select>
+            </div>
+
+            <!-- STAFF -->
+            <div class="col-md-6">
+                <label class="form-label fw-semibold">Assigned Staff</label>
+                <select name="StaffId" class="form-select" required>
+                    <option value="">Select staff…</option>
+                    @if (staff != null)
+                    {
+                        foreach (var s in staff)
+                        {
+                            <option value="@s.AccountId"
+                                    selected="@(s.AccountId == Model.StaffId ? "selected" : null)">
+                                @s.FullName
+                            </option>
+                        }
+                    }
+                </select>
+            </div>
+
+            <!-- SERVICE -->
+            <div class="col-md-12">
+                <label class="form-label fw-semibold">Service</label>
+                <input name="Service" class="form-control" value="@Model.Service" required />
+            </div>
+
+            <!-- DATE -->
+            <div class="col-md-6">
+                <label class="form-label fw-semibold">Date</label>
+                <input name="ScheduleDateOld"
+                       type="date"
+                       class="form-control"
+                       value="@(Model.ScheduleDateOld?.ToString("yyyy-MM-dd") ?? DateTime.Today.ToString("yyyy-MM-dd"))"
+                       required />
+            </div>
+
+            <!-- TIME -->
+            <div class="col-md-6">
+                <label class="form-label fw-semibold">Time</label>
+                <input name="ScheduleTime"
+                       type="time"
+                       class="form-control"
+                       value="@(Model.ScheduleTime?.ToString(@"hh\:mm") ?? "")"
+                       required />
+            </div>
+
+            <!-- STATUS -->
+            <div class="col-md-6">
+                <label class="form-label fw-semibold">Status</label>
+                <select name="Status" class="form-select">
+                    <option value="Pending" selected="@(Model.Status == "Pending" ? "selected" : null)">Pending</option>
+                    <option value="Confirmed" selected="@(Model.Status == "Confirmed" ? "selected" : null)">Confirmed</option>
+                    <option value="Completed" selected="@(Model.Status == "Completed" ? "selected" : null)">Completed</option>
+                    <option value="Cancelled" selected="@(Model.Status == "Cancelled" ? "selected" : null)">Cancelled</option>
+                </select>
+            </div>
+
+        </div>
+    </div>
+
+    <div class="modal-footer border-0">
+        <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">Cancel</button>
+        <button type="submit" class="btn btn-primary">Save Changes</button>
+    </div>
+</form>

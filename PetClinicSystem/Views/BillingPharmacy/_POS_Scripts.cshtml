@@ -1,9 +1,8 @@
 ﻿<script>
-
     // ============================
-    // 1. HARDCODED SERVICES
+    // 1. Default Services
     // ============================
-        const services = [
+    const services = [
         { name: "General Consultation", price: 50 },
         { name: "Vaccination", price: 35 },
         { name: "Dental Cleaning", price: 120 },
@@ -32,31 +31,31 @@
         { name: "Skin Scraping Test", price: 50 }
     ];
 
-
+    let cart = [];
 
     // ============================
-    // 2. LOAD SERVICE CARDS
+    // 2. Load Services
     // ============================
     function loadServices(filter = "") {
-        let html = "";
-        let lower = filter.toLowerCase();
+        const container = document.getElementById("servicesContainer");
+        if (!container) return;
 
-        services
-            .filter(s => s.name.toLowerCase().includes(lower))
-            .forEach((s, i) => {
-                html += `
-                    <div class="col-md-6">
-                        <div class="card p-3 shadow-sm rounded-4">
-                            <h6 class="fw-bold">${s.name}</h6>
-                            <p class="text-secondary">$${s.price.toFixed(2)}</p>
-                            <button class="btn btn-success btn-sm" onclick="addToCart(${i})">
-                                <i class="fa-solid fa-plus"></i> Add
-                            </button>
-                        </div>
-                    </div>`;
-            });
+        const search = (filter || "").toLowerCase();
+        const filtered = services.filter(s => s.name.toLowerCase().includes(search));
+        container.innerHTML = "";
 
-        document.getElementById("servicesContainer").innerHTML = html;
+        filtered.forEach((s, i) => {
+            container.innerHTML += `
+                <div class="col-md-6">
+                    <div class="card p-3 shadow-sm rounded-4 h-100">
+                        <h6 class="fw-bold">${s.name}</h6>
+                        <p class="text-secondary mb-2">$${s.price.toFixed(2)}</p>
+                        <button class="btn btn-success btn-sm w-100" onclick="addToCart(${i})">
+                            + Add
+                        </button>
+                    </div>
+                </div>`;
+        });
     }
 
     loadServices();
@@ -65,25 +64,57 @@
         loadServices(text);
     }
 
-
     // ============================
-    // 3. CART SYSTEM
+    // 3. ADD NEW SERVICE (from modal)
     // ============================
-    let cart = [];
+    function submitNewService(e) {
+        e.preventDefault();
 
-    function addToCart(i) {
-        let item = services[i];
-        let existing = cart.find(c => c.name === item.name);
+        const nameInput = document.getElementById("newServiceName");
+        const priceInput = document.getElementById("newServicePrice");
 
-        if (existing) {
-            existing.qty++;
-        } else {
-            cart.push({
-                name: item.name,
-                price: item.price,
-                qty: 1
-            });
+        const name = nameInput.value.trim();
+        const price = parseFloat(priceInput.value);
+
+        if (!name || isNaN(price) || price <= 0) {
+            showToast("Enter a valid service name and price.", "warning");
+            return false;
         }
+
+        // Add to the services array
+        services.push({ name: name, price: price });
+
+        // Reload list, keeping current search value if any
+        const searchBox = document.querySelector('#tab-pos input[placeholder="Search services..."]');
+        const filterText = searchBox ? searchBox.value : "";
+        loadServices(filterText);
+
+        // Reset form fields
+        nameInput.value = "";
+        priceInput.value = "";
+
+        // Close modal
+        const modalEl = document.getElementById("addServiceModal");
+        if (modalEl && window.bootstrap) {
+            const modal = bootstrap.Modal.getInstance(modalEl) || new bootstrap.Modal(modalEl);
+            modal.hide();
+        }
+
+        showToast("Service added successfully.", "success");
+        return false;
+    }
+
+    // ============================
+    // 4. Cart Operations
+    // ============================
+    function addToCart(i) {
+        const s = services[i];
+        if (!s) return;
+
+        const existing = cart.find(c => c.name === s.name);
+
+        if (existing) existing.qty++;
+        else cart.push({ ...s, qty: 1 });
 
         renderCart();
     }
@@ -94,46 +125,40 @@
     }
 
     function renderCart() {
-        let html = "";
+        const list = document.getElementById("cartItems");
+        const subtotalEl = document.getElementById("subtotal");
+        if (!list || !subtotalEl) return;
+
         let subtotal = 0;
+        list.innerHTML = "";
 
         cart.forEach(c => {
             subtotal += c.price * c.qty;
-
-            html += `
+            list.innerHTML += `
                 <div class="d-flex justify-content-between align-items-center mb-2">
                     <div>
-                        <strong>${c.name}</strong> <br/>
-                        <small>$${c.price.toFixed(2)}</small>
+                        <strong>${c.name}</strong><br>
+                        <small>$${c.price.toFixed(2)} x ${c.qty}</small>
                     </div>
-
-                    <div class="d-flex align-items-center gap-2">
-                        <span class="badge bg-secondary">${c.qty}</span>
-                        <button class="btn btn-sm btn-outline-danger" onclick="removeItem('${c.name}')">
-                            <i class="fa-solid fa-trash"></i>
-                        </button>
-                    </div>
-                </div>
-            `;
+                    <button class="btn btn-sm btn-outline-danger" onclick="removeItem('${c.name}')">
+                        <i class="fa-solid fa-trash"></i>
+                    </button>
+                </div>`;
         });
 
-        document.getElementById("cartItems").innerHTML = html;
-        document.getElementById("subtotal").innerText = "$" + subtotal.toFixed(2);
+        subtotalEl.innerText = `$${subtotal.toFixed(2)}`;
     }
 
-
     // ============================
-    // 4. CHECKOUT – SAVE TO DATABASE
+    // 5. Checkout
     // ============================
     function checkout() {
-        let petId = document.getElementById("petSelect").value;
+        const petId = document.getElementById("petSelect").value;
         if (!petId) return showToast("Please select a patient.", "warning");
-
         if (cart.length === 0) return showToast("Cart is empty!", "warning");
 
-        let staffId = 1; // PLACEHOLDER — replace with logged-in user
-
-        let items = cart.map(c => ({
+        const staffId = 1; // TODO: replace with actual logged-in user id
+        const items = cart.map(c => ({
             petId: parseInt(petId),
             staffId: staffId,
             serviceName: c.name,
@@ -147,93 +172,41 @@
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify(items)
         })
-        .then(r => r.json())
-        .then(res => {
-            showToast(res.message, "success");
-            cart = [];
-            renderCart();
-        })
-        .catch(() => showToast("Fill out all inputs before proceeding.", "danger"));
+            .then(r => r.ok ? r.json() : r.text())
+            .then(res => {
+                showToast("Transaction completed successfully.", "success");
+                cart = [];
+                renderCart();
+            })
+            .catch(() => showToast("Error processing payment.", "danger"));
     }
 
-
     // ============================
-    // 5. TAB SYSTEM
+    // 6. Toast Helper
     // ============================
-    function showTab(tab) {
-        document.querySelectorAll(".tab-section").forEach(s => s.classList.add("d-none"));
-        document.querySelectorAll(".tab-btn").forEach(b => b.classList.remove("active"));
-
-        if (tab === "pos") {
-            document.getElementById("tab-pos").classList.remove("d-none");
-            document.getElementById("tabPosBtn").classList.add("active");
-
-        } else if (tab === "prescriptions") {
-            document.getElementById("tab-prescriptions").classList.remove("d-none");
-            event.target.classList.add("active");
-
-        } else if (tab === "inventory") {
-            document.getElementById("tab-inventory").classList.remove("d-none");
-            event.target.classList.add("active");
-
-        } else if (tab === "vaccines") {
-            document.getElementById("tab-vaccines").classList.remove("d-none");
-            event.target.classList.add("active");
+    function showToast(message, type = "success") {
+        // If Billing & Pharmacy toast helper exists, use it
+        if (typeof showBpToast === "function") {
+            // map bootstrap type to your bp types
+            const bpType = (type === "danger" || type === "error") ? "error" : "success";
+            showBpToast(message, bpType);
+            return;
         }
-    }
 
-
-
-    // ============================
-    // 6. TOAST NOTIFICATION
-    // ============================
-    function showToast(msg, type = "success") {
-        let toast = document.createElement("div");
+        // Fallback simple toast
+        const toast = document.createElement("div");
         toast.className = `toast align-items-center text-white bg-${type} border-0 show`;
         toast.role = "alert";
+        toast.style.position = "fixed";
+        toast.style.top = "20px";
+        toast.style.right = "20px";
+        toast.style.zIndex = "9999";
         toast.innerHTML = `
             <div class="d-flex">
-                <div class="toast-body">${msg}</div>
-                <button class="btn-close btn-close-white me-2 m-auto"
-                        onclick="this.parentElement.parentElement.remove()"></button>
-            </div>
-        `;
-
-        Object.assign(toast.style, {
-            position: "fixed",
-            top: "20px",
-            right: "20px",
-            zIndex: "9999"
-        });
-
+                <div class="toast-body fw-semibold">${message}</div>
+                <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast"></button>
+            </div>`;
         document.body.appendChild(toast);
-
         setTimeout(() => toast.remove(), 3000);
     }
-
-        function loadPrescriptionCreate() {
-        $("#mainModal .modal-content").load("/Prescriptions/Create", function () {
-            new bootstrap.Modal(document.getElementById("mainModal")).show();
-        });
-    }
-
-    function loadPrescriptionView(id) {
-        $("#mainModal .modal-content").load("/Prescriptions/ViewPrescription/" + id, function () {
-            new bootstrap.Modal(document.getElementById("mainModal")).show();
-        });
-    }
-
-    function loadPrescriptionEdit(id) {
-        $("#mainModal .modal-content").load("/Prescriptions/Edit/" + id, function () {
-            new bootstrap.Modal(document.getElementById("mainModal")).show();
-        });
-    }
-
-    function loadPrescriptionDelete(id) {
-        $("#mainModal .modal-content").load("/Prescriptions/Delete/" + id, function () {
-            new bootstrap.Modal(document.getElementById("mainModal")).show();
-        });
-    }
-
-
 </script>

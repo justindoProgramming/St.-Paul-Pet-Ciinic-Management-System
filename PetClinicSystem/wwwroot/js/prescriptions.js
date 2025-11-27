@@ -1,9 +1,32 @@
-﻿// Refresh prescriptions list into the prescriptions tab
+﻿// Bootstrap 5 compatibility for old jQuery `.modal()` calls
+// This lets us keep using $("#...").modal("show") even though Bootstrap 5
+// removed the jQuery plugin.
+(function ($, bootstrap) {
+    if (!$ || !bootstrap) return;
+    if (!$.fn.modal) {
+        $.fn.modal = function (command) {
+            return this.each(function () {
+                var modalEl = this;
+                var instance = bootstrap.Modal.getOrCreateInstance(modalEl);
+                if (command === "show") {
+                    instance.show();
+                } else if (command === "hide") {
+                    instance.hide();
+                } else if (command === "toggle") {
+                    instance.toggle();
+                }
+            });
+        };
+    }
+})(window.jQuery, window.bootstrap);
+
+// ================== LIST RELOAD ==================
 function loadPrescriptions() {
     $("#prescriptionsList").load("/BillingPharmacy/PrescriptionList");
 }
 
-// ===== OPEN MODALS =====
+// ================== LOAD MODALS ==================
+
 function loadPrescriptionCreate() {
     $("#prescCreateContent").load("/BillingPharmacy/CreatePrescription", function (response, status, xhr) {
         if (status === "error") {
@@ -60,7 +83,9 @@ function loadPrescriptionDelete(id) {
     });
 }
 
-// ===== AJAX FORM SUBMIT =====
+// ================== FORM SUBMIT (AJAX) ==================
+
+// CREATE
 $(document).on("submit", "#createPrescriptionForm", function (e) {
     e.preventDefault();
     var $form = $(this);
@@ -74,9 +99,9 @@ $(document).on("submit", "#createPrescriptionForm", function (e) {
             loadPrescriptions();
 
             if (typeof showBpToast === "function") {
-                showBpToast(res && res.message ? res.message : "Prescription created successfully.", "success");
+                showBpToast(res && res.message ? res.message : "Prescription created.", "success");
             } else {
-                alert(res && res.message ? res.message : "Prescription created successfully.");
+                alert(res && res.message ? res.message : "Prescription created.");
             }
         },
         error: function (xhr) {
@@ -89,6 +114,7 @@ $(document).on("submit", "#createPrescriptionForm", function (e) {
     });
 });
 
+// EDIT
 $(document).on("submit", "#editPrescriptionForm", function (e) {
     e.preventDefault();
     var $form = $(this);
@@ -102,9 +128,9 @@ $(document).on("submit", "#editPrescriptionForm", function (e) {
             loadPrescriptions();
 
             if (typeof showBpToast === "function") {
-                showBpToast(res && res.message ? res.message : "Prescription updated successfully.", "success");
+                showBpToast(res && res.message ? res.message : "Prescription updated.", "success");
             } else {
-                alert(res && res.message ? res.message : "Prescription updated successfully.");
+                alert(res && res.message ? res.message : "Prescription updated.");
             }
         },
         error: function (xhr) {
@@ -117,6 +143,7 @@ $(document).on("submit", "#editPrescriptionForm", function (e) {
     });
 });
 
+// DELETE
 $(document).on("submit", "#deletePrescriptionForm", function (e) {
     e.preventDefault();
     var $form = $(this);
@@ -145,11 +172,30 @@ $(document).on("submit", "#deletePrescriptionForm", function (e) {
     });
 });
 
-// Optional: simple client-side filter
+// ================== SEARCH FILTER ==================
+
 function filterPrescriptions(term) {
-    term = term.toLowerCase();
+    term = (term || "").toLowerCase();
     $("#prescriptionsTable tbody tr").each(function () {
-        const text = $(this).text().toLowerCase();
+        var text = $(this).text().toLowerCase();
         $(this).toggle(text.indexOf(term) !== -1);
     });
 }
+
+// Ensure our functions win over any legacy ones (e.g. in _POS_Scripts)
+(function () {
+    function bindPrescriptionGlobals() {
+        window.loadPrescriptions = loadPrescriptions;
+        window.loadPrescriptionCreate = loadPrescriptionCreate;
+        window.loadPrescriptionView = loadPrescriptionView;
+        window.loadPrescriptionEdit = loadPrescriptionEdit;
+        window.loadPrescriptionDelete = loadPrescriptionDelete;
+    }
+
+    if (document.readyState === "loading") {
+        document.addEventListener("DOMContentLoaded", bindPrescriptionGlobals);
+    } else {
+        // DOM already parsed; run soon so we override any earlier definitions
+        setTimeout(bindPrescriptionGlobals, 0);
+    }
+})();

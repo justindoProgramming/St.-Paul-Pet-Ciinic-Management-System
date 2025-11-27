@@ -22,6 +22,10 @@ build_property._RazorSourceGeneratorDebug =
 build_property.EffectiveAnalysisLevelStyle = 8.0
 build_property.EnableCodeStyleSeverity = 
 
+[C:/Users/CJ LUMANGLAS/Documents/C\#/PetClinicSystem/PetClinicSystem/Views/Account/Landing.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWNjb3VudFxMYW5kaW5nLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
 [C:/Users/CJ LUMANGLAS/Documents/C\#/PetClinicSystem/PetClinicSystem/Views/Admin/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWRtaW5cSW5kZXguY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
@@ -168,6 +172,30 @@ build_metadata.AdditionalFiles.CssScope =
 
 [C:/Users/CJ LUMANGLAS/Documents/C\#/PetClinicSystem/PetClinicSystem/Views/MedicalRecords/_Modal_EditMedicalRecord.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcTWVkaWNhbFJlY29yZHNcX01vZGFsX0VkaXRNZWRpY2FsUmVjb3JkLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/CJ LUMANGLAS/Documents/C\#/PetClinicSystem/PetClinicSystem/Views/Owners/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcT3duZXJzXEluZGV4LmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/CJ LUMANGLAS/Documents/C\#/PetClinicSystem/PetClinicSystem/Views/Owners/_Modal_CreateOwner.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcT3duZXJzXF9Nb2RhbF9DcmVhdGVPd25lci5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/CJ LUMANGLAS/Documents/C\#/PetClinicSystem/PetClinicSystem/Views/Owners/_Modal_DeleteOwner.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcT3duZXJzXF9Nb2RhbF9EZWxldGVPd25lci5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/CJ LUMANGLAS/Documents/C\#/PetClinicSystem/PetClinicSystem/Views/Owners/_Modal_EditOwner.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcT3duZXJzXF9Nb2RhbF9FZGl0T3duZXIuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/CJ LUMANGLAS/Documents/C\#/PetClinicSystem/PetClinicSystem/Views/Owners/_Modal_ViewOwner.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcT3duZXJzXF9Nb2RhbF9WaWV3T3duZXIuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/CJ LUMANGLAS/Documents/C\#/PetClinicSystem/PetClinicSystem/Views/Owners/_OwnerCards.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcT3duZXJzXF9Pd25lckNhcmRzLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
 [C:/Users/CJ LUMANGLAS/Documents/C\#/PetClinicSystem/PetClinicSystem/Views/Pets/Index.cshtml]

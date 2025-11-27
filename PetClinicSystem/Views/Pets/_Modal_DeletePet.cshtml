@@ -1,19 +1,23 @@
 ﻿@model PetClinicSystem.Models.Pet
 
-<div class="modal-dialog modal-dialog-centered">
-    <div class="modal-content p-4 rounded-4 shadow">
-
-        <h4 class="fw-bold">Delete Patient</h4>
-        <p class="text-secondary">Are you sure you want to delete <strong>@Model.Name</strong>?</p>
-
-        <form method="post" action="/Pets/DeleteConfirmed">
-            <input type="hidden" name="petId" value="@Model.PetId" />
-
-            <div class="text-end mt-3">
-                <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">Cancel</button>
-                <button class="btn btn-danger">Delete</button>
-            </div>
-        </form>
-
-    </div>
+<div class="modal-header border-0">
+    <h5 class="modal-title fw-bold">Delete Patient</h5>
+    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
 </div>
+
+<form method="post" action="/Pets/DeleteConfirmed">
+    @Html.AntiForgeryToken()
+    <input type="hidden" name="petId" value="@Model.PetId" />
+
+    <div class="modal-body">
+        <p class="mb-0">
+            Are you sure you want to delete
+            <strong>@Model.Name</strong>?
+        </p>
+    </div>
+
+    <div class="modal-footer border-0">
+        <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">Cancel</button>
+        <button type="submit" class="btn btn-danger">Delete</button>
+    </div>
+</form>

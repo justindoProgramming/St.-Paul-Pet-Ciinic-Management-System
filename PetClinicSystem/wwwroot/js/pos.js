@@ -1,15 +1,33 @@
 ﻿// ==============================
-// SERVICE LIST (same as screenshot)
+// SERVICE LIST 
 // ==============================
 const services = [
-    { name: "General Consultation", price: 50.00, tag: "Service" },
-    { name: "Dental Cleaning", price: 120.00, tag: "Service" },
-    { name: "X-Ray", price: 150.00, tag: "Diagnostic" },
-    { name: "Ultrasound", price: 180.00, tag: "Diagnostic" },
-    { name: "Vaccination", price: 35.00, tag: "Service" },
-    { name: "Surgery Consultation", price: 80.00, tag: "Service" },
-    { name: "Blood Test", price: 75.00, tag: "Diagnostic" },
-    { name: "Deworming Tablet", price: 15.00, tag: "Medication" }
+    { name: "General Consultation", price: 50 },
+    { name: "Vaccination", price: 35 },
+    { name: "Dental Cleaning", price: 120 },
+    { name: "Surgery Consultation", price: 80 },
+    { name: "X-Ray", price: 150 },
+    { name: "Blood Test", price: 75 },
+    { name: "Ultrasound", price: 200 },
+    { name: "Deworming Tablet", price: 30 },
+    { name: "Parvo Test", price: 45 },
+    { name: "Heartworm Test", price: 60 },
+    { name: "Grooming (Basic)", price: 40 },
+    { name: "Grooming (Full)", price: 80 },
+    { name: "Nail Trimming", price: 15 },
+    { name: "Ear Cleaning", price: 20 },
+    { name: "Spay Surgery", price: 250 },
+    { name: "Neuter Surgery", price: 220 },
+    { name: "Microchipping", price: 50 },
+    { name: "Fecal Test", price: 35 },
+    { name: "Allergy Test", price: 90 },
+    { name: "Fluid Therapy", price: 100 },
+    { name: "Wound Treatment", price: 60 },
+    { name: "Hospitalization (per day)", price: 180 },
+    { name: "Rabies Vaccination", price: 25 },
+    { name: "Tick & Flea Treatment", price: 40 },
+    { name: "Kennel Cough Vaccination", price: 45 },
+    { name: "Skin Scraping Test", price: 50 }
 ];
 
 let cart = [];

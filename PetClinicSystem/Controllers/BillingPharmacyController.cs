@@ -113,45 +113,53 @@ namespace PetClinicSystem.Controllers
         [HttpPost]
         public IActionResult CreatePrescription(Prescription model)
         {
+            // 1️⃣ Debug: print validation issues if any
             if (!ModelState.IsValid)
-                return BadRequest("Invalid prescription data.");
+            {
+                var errors = ModelState.Values
+                    .SelectMany(v => v.Errors)
+                    .Select(e => e.ErrorMessage)
+                    .ToList();
+
+                var joined = string.Join("; ", errors);
+                return BadRequest("Invalid prescription data. Details: " + joined);
+            }
 
             using var transaction = _db.Database.BeginTransaction();
+
             try
             {
+                // 2️⃣ Save the prescription record
                 _db.Prescriptions.Add(model);
+                _db.SaveChanges();
 
-                // Optional drug link: SelectedDrugId + DispensedQuantity (if you added those NotMapped props)
+                // 3️⃣ Reduce stock if linked to a drug
                 if (model.SelectedDrugId.HasValue &&
                     model.DispensedQuantity.HasValue &&
                     model.DispensedQuantity.Value > 0)
                 {
-                    var drug = _db.Drugs
-                        .FirstOrDefault(d => d.DrugId == model.SelectedDrugId.Value);
+                    var drug = _db.Drugs.FirstOrDefault(d => d.DrugId == model.SelectedDrugId.Value);
+                    if (drug == null)
+                        return BadRequest("Selected drug not found.");
 
-                    if (drug != null)
-                    {
-                        if (drug.Quantity < model.DispensedQuantity.Value)
-                        {
-                            return BadRequest("Not enough stock for selected drug.");
-                        }
+                    if (model.DispensedQuantity.Value > drug.Quantity)
+                        return BadRequest($"Not enough stock for {drug.DrugName}. Current stock: {drug.Quantity}");
 
-                        drug.Quantity -= model.DispensedQuantity.Value;
-                        _db.Drugs.Update(drug);
-                    }
+                    drug.Quantity -= model.DispensedQuantity.Value;
+                    _db.Drugs.Update(drug);
+                    _db.SaveChanges();
                 }
 
-                _db.SaveChanges();
                 transaction.Commit();
-
-                return Ok(new { message = "Prescription created." });
+                return Ok(new { message = "Prescription created successfully." });
             }
-            catch
+            catch (Exception ex)
             {
                 transaction.Rollback();
-                return StatusCode(500, "Error saving prescription.");
+                return StatusCode(500, "Error saving prescription: " + ex.Message);
             }
         }
+
 
         // =========================================
         //  PRESCRIPTIONS — VIEW

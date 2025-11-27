@@ -2,6 +2,20 @@
     Layout = "_Layout_Public";
 }
 
+@if (TempData["LogoutMessage"] != null)
+{
+    <div class="position-fixed top-0 end-0 p-3" style="z-index: 9999;">
+        <div class="alert alert-success alert-dismissible fade show shadow">
+            @TempData["LogoutMessage"]
+            <button type="button"
+                    class="btn-close"
+                    data-bs-dismiss="alert"
+                    aria-label="Close"></button>
+        </div>
+    </div>
+}
+
+
 <section class="py-5">
     <div class="container">
         <div class="row align-items-center">
