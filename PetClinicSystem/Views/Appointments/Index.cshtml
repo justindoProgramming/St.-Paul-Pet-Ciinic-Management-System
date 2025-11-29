@@ -51,8 +51,16 @@
 
         @foreach (var appt in Model)
         {
+            var searchText =
+            $"{appt.Pet?.Name} {appt.Pet?.Species} {appt.Pet?.Breed} " +
+            $"{appt.Pet?.Owner?.FullName} {appt.Pet?.Owner?.PhoneNumber} " +
+            $"{appt.Service} {appt.Staff?.FullName} {appt.Status} " +
+            $"{appt.ScheduleDateOld?.ToString("yyyy-MM-dd")} " +
+            $"{appt.ScheduleTime?.ToString(@"hh\:mm")}";
+
             <div class="col-12">
-                <div class="card shadow-sm border-0 rounded-4 p-3 appointment-card">
+                <div class="card shadow-sm border-0 rounded-4 p-3 appointment-card"
+                     data-search="@searchText">
                     <div class="row g-0">
 
                         <!-- TIME -->
@@ -184,12 +192,27 @@
             });
         }
 
-        // SUCCESS TOAST
+        // SUCCESS TOAST + SEARCH WIRING
         $(document).ready(function () {
             var msg = '@TempData["Success"]';
             if (msg) {
                 showSuccessToast();
             }
+
+            // 🔍 simple client-side search
+            $("#searchBox").on("input", function () {
+                var q = ($(this).val() || "").toLowerCase().trim();
+
+                $(".appointment-card").each(function () {
+                    var text = ($(this).data("search") || "").toString().toLowerCase();
+
+                    if (!q || text.indexOf(q) !== -1) {
+                        $(this).closest(".col-12").removeClass("d-none");
+                    } else {
+                        $(this).closest(".col-12").addClass("d-none");
+                    }
+                });
+            });
         });
     </script>
 }

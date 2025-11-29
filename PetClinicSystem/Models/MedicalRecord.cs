@@ -21,6 +21,16 @@ namespace PetClinicSystem.Models
         public int StaffId { get; set; }
         public Account Staff { get; set; }
 
+        // optional link to prescription
+        [Column("prescription_id")]
+        public int? PrescriptionId { get; set; }
+        public Prescription? Prescription { get; set; }
+
+        // optional link to vaccination
+        [Column("vaccination_id")]
+        public int? VaccinationId { get; set; }
+        public Vaccination? Vaccination { get; set; }
+
         [Column("description")]
         public string Description { get; set; }
 

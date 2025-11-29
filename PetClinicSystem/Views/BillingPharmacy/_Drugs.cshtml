@@ -1,69 +1,99 @@
 ﻿@model List<PetClinicSystem.Models.Drug>
 
-@if (Model == null || !Model.Any())
-{
-    <div class="text-center text-secondary py-5">
-        No drugs in inventory yet.
-    </div>
-}
-else
-{
-    <div class="d-flex justify-content-between align-items-center mb-3">
-        <h5 class="fw-bold mb-0">Drugs Inventory</h5>
-        <button class="btn btn-success" onclick="loadDrugCreate()">
+<div class="d-flex justify-content-between align-items-center mb-3">
+    <h5 class="fw-bold mb-0">Drugs Inventory</h5>
+
+    <div class="d-flex gap-2">
+        <input type="text"
+               id="drugSearchBox"
+               class="form-control"
+               placeholder="Search by name, dosage, notes..."
+               style="max-width: 260px;" />
+
+        <button class="btn btn-success" type="button" onclick="loadDrugCreate()">
             + Add Drug
         </button>
     </div>
+</div>
 
-    <div class="row mb-3">
-        <div class="col-md-6">
-            <input type="text"
-                   class="form-control"
-                   placeholder="Search drugs by name or dosage type..."
-                   oninput="filterDrugs(this.value)" />
-        </div>
-    </div>
-
-    <div class="table-responsive">
-        <table class="table align-middle" id="drugsTable">
-            <thead class="table-light">
-                <tr>
-                    <th>Drug Name</th>
-                    <th>Dosage Type</th>
-                    <th>Quantity</th>
-                    <th>Unit Price</th>
-                    <th>Expiry Date</th>
-                    <th style="width: 150px;">Actions</th>
-                </tr>
-            </thead>
-            <tbody>
-                @foreach (var d in Model)
+<div class="table-responsive">
+    <table class="table table-hover align-middle mb-0">
+        <thead class="table-light">
+            <tr>
+                <th>Name / Dosage</th>
+                <th class="text-center">Quantity</th>
+                <th class="text-end">Unit Price</th>
+                <th class="text-end">Base Price</th>
+                <th class="text-center">Expiry</th>
+                <th class="text-center">Date Added</th>
+                <th>Restock Notes</th>
+                <th class="text-end">Actions</th>
+            </tr>
+        </thead>
+        <tbody id="drugTableBody">
+            @if (Model != null && Model.Any())
+            {
+                foreach (var d in Model)
                 {
-                    <tr>
-                        <td>@d.DrugName</td>
-                        <td>@d.DosageType</td>
-                        <td>@d.Quantity</td>
-                        <td>@d.UnitPrice.ToString("C")</td>
+                    // text that will be searched
+                    var searchText =
+                    $"{d.DrugName} {d.DosageType} {d.RestockNotes} " +
+                    $"{d.Quantity} {d.UnitPrice} {d.BasePrice} " +
+                    $"{d.ExpiryDate:yyyy-MM-dd} {d.DateAdded:yyyy-MM-dd}";
+
+                    <tr class="drug-row" data-search="@searchText">
                         <td>
-                            @(d.ExpiryDate == DateTime.MinValue
-                                                ? ""
-                                                : d.ExpiryDate.ToString("MMM dd, yyyy"))
+                            <div class="fw-semibold">@d.DrugName</div>
+                            <div class="text-muted small">@d.DosageType</div>
                         </td>
-                        <td>
-                            <div class="btn-group btn-group-sm" role="group">
-                                <button class="btn btn-warning text-white"
-                                        onclick="loadDrugEdit(@d.DrugId)">
-                                    Edit
-                                </button>
-                                <button class="btn btn-danger"
-                                        onclick="loadDrugDelete(@d.DrugId)">
-                                    Delete
-                                </button>
-                            </div>
+                        <td class="text-center">
+                            <span class="badge @(d.Quantity <= 10 ? "bg-danger" : d.Quantity <= 30 ? "bg-warning text-dark" : "bg-success")">
+                                @d.Quantity
+                            </span>
+                        </td>
+                        <td class="text-end">₱@d.UnitPrice.ToString("0.00")</td>
+                        <td class="text-end">
+                            @if (d.BasePrice.HasValue)
+                            {
+                                @:₱@d.BasePrice.Value.ToString("0.00")
+                            }
+                            else
+                            {
+                                <span class="text-muted small">–</span>
+                            }
+                        </td>
+                        <td class="text-center">@d.ExpiryDate.ToString("yyyy-MM-dd")</td>
+                        <td class="text-center">
+                            @(d.DateAdded.HasValue? d.DateAdded.Value.ToString("yyyy-MM-dd") : "-")
+                        </td>
+                        <td style="max-width: 260px;">
+                            <span class="small text-muted">
+                                @(string.IsNullOrWhiteSpace(d.RestockNotes) ? "None" : d.RestockNotes)
+                            </span>
+                        </td>
+                        <td class="text-end">
+                            <button type="button"
+                                    class="btn btn-sm btn-outline-primary me-1"
+                                    onclick="loadDrugEdit(@d.DrugId)">
+                                Edit
+                            </button>
+                            <button type="button"
+                                    class="btn btn-sm btn-outline-danger"
+                                    onclick="loadDrugDelete(@d.DrugId)">
+                                Delete
+                            </button>
                         </td>
                     </tr>
                 }
-            </tbody>
-        </table>
-    </div>
-}
+            }
+            else
+            {
+                <tr>
+                    <td colspan="8" class="text-center text-muted py-4">
+                        No drugs in inventory.
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>

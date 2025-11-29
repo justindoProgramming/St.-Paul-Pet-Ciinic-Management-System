@@ -21,18 +21,19 @@ namespace PetClinicSystem.Controllers
         private bool IsStaff => UserRole == 2;
         private bool IsClient => UserRole == 0;
 
+      
         // INDEX -----------------------------------------------------
-        public IActionResult Index()
+        public IActionResult Index(string? search)
         {
             ViewBag.ActiveMenu = "Appointments";
-
-            var today = DateTime.Today;
+            ViewBag.Search = search ?? string.Empty;
 
             var query = _db.Schedule
                 .Include(s => s.Pet).ThenInclude(p => p.Owner)
                 .Include(s => s.Staff)
                 .AsQueryable();
 
+            // keep your role-based filters exactly as before
             if (IsStaff)
                 query = query.Where(s => s.StaffId == UserId);
 
@@ -46,15 +47,28 @@ namespace PetClinicSystem.Controllers
                 query = query.Where(s => myPets.Contains(s.PetId));
             }
 
+            // SEARCH FILTER (pet name, service, status, date)
+            if (!string.IsNullOrWhiteSpace(search))
+            {
+                search = search.Trim().ToLower();
+
+                query = query.Where(s =>
+                    (s.Pet != null && s.Pet.Name.ToLower().Contains(search)) ||
+                    (s.Service != null && s.Service.ToLower().Contains(search)) ||
+                    (s.Status != null && s.Status.ToLower().Contains(search)) ||
+                    (s.ScheduleDateOld.HasValue &&
+                     s.ScheduleDateOld.Value.ToString("yyyy-MM-dd").Contains(search))
+                );
+            }
+
             var list = query
-                 .OrderBy(s => s.ScheduleDateOld ?? DateTime.MaxValue)
-                 .ThenBy(s => s.ScheduleTime ?? TimeSpan.MaxValue)
-                 .ToList();
-
-
+                .OrderBy(s => s.ScheduleDateOld ?? DateTime.MaxValue)
+                .ThenBy(s => s.ScheduleTime ?? TimeSpan.MaxValue)
+                .ToList();
 
             return View(list);
         }
+
 
         // DETAILS ---------------------------------------------------
         public IActionResult Details(int id)

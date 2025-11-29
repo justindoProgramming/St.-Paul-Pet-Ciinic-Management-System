@@ -2,32 +2,32 @@
 // SERVICE LIST 
 // ==============================
 const services = [
-    { name: "General Consultation", price: 50 },
-    { name: "Vaccination", price: 35 },
-    { name: "Dental Cleaning", price: 120 },
-    { name: "Surgery Consultation", price: 80 },
-    { name: "X-Ray", price: 150 },
-    { name: "Blood Test", price: 75 },
-    { name: "Ultrasound", price: 200 },
-    { name: "Deworming Tablet", price: 30 },
-    { name: "Parvo Test", price: 45 },
-    { name: "Heartworm Test", price: 60 },
-    { name: "Grooming (Basic)", price: 40 },
-    { name: "Grooming (Full)", price: 80 },
-    { name: "Nail Trimming", price: 15 },
-    { name: "Ear Cleaning", price: 20 },
-    { name: "Spay Surgery", price: 250 },
-    { name: "Neuter Surgery", price: 220 },
-    { name: "Microchipping", price: 50 },
-    { name: "Fecal Test", price: 35 },
-    { name: "Allergy Test", price: 90 },
-    { name: "Fluid Therapy", price: 100 },
-    { name: "Wound Treatment", price: 60 },
-    { name: "Hospitalization (per day)", price: 180 },
-    { name: "Rabies Vaccination", price: 25 },
-    { name: "Tick & Flea Treatment", price: 40 },
-    { name: "Kennel Cough Vaccination", price: 45 },
-    { name: "Skin Scraping Test", price: 50 }
+    { name: "General Consultation", price: 300 },
+    { name: "Vaccination", price: 450 },
+    { name: "Dental Cleaning", price: 1500 },
+    { name: "Surgery Consultation", price: 500 },
+    { name: "X-Ray", price: 1200 },
+    { name: "Blood Test", price: 550 },
+    { name: "Ultrasound", price: 1500 },
+    { name: "Deworming Tablet", price: 150 },
+    { name: "Parvo Test", price: 850 },
+    { name: "Heartworm Test", price: 700 },
+    { name: "Grooming (Basic)", price: 350 },
+    { name: "Grooming (Full)", price: 700 },
+    { name: "Nail Trimming", price: 120 },
+    { name: "Ear Cleaning", price: 180 },
+    { name: "Spay Surgery", price: 2500 },
+    { name: "Neuter Surgery", price: 2200 },
+    { name: "Microchipping", price: 500 },
+    { name: "Fecal Test", price: 300 },
+    { name: "Allergy Test", price: 1200 },
+    { name: "Fluid Therapy", price: 450 },
+    { name: "Wound Treatment", price: 350 },
+    { name: "Hospitalization (per day)", price: 900 },
+    { name: "Rabies Vaccination", price: 300 },
+    { name: "Tick & Flea Treatment", price: 400 },
+    { name: "Kennel Cough Vaccination", price: 450 },
+    { name: "Skin Scraping Test", price: 500 }
 ];
 
 let cart = [];
@@ -44,8 +44,8 @@ function loadServices() {
             <div class="col-md-6">
                 <div class="card p-3 shadow-sm rounded-4 serviceCard">
                     <div class="fw-bold">${s.name}</div>
-                    <span class="badge bg-light text-dark">${s.tag}</span>
-                    <div class="fw-semibold mt-2">$${s.price.toFixed(2)}</div>
+                    <span class="badge bg-light text-dark">${s.tag || ""}</span>
+                    <div class="fw-semibold mt-2">₱${s.price.toFixed(2)}</div>
 
                     <button class="btn btn-success btn-sm mt-3 rounded-circle addBtn"
                             onclick="addToCart(${index})">
@@ -92,7 +92,7 @@ function renderCart() {
             <div class="cartItem row align-items-center mb-3">
                 <div class="col-6">
                     <strong>${item.name}</strong><br>
-                    <span class="text-secondary small">${item.tag}</span>
+                    <span class="text-secondary small">${item.tag || ""}</span>
                 </div>
 
                 <div class="col-4 d-flex align-items-center">
@@ -112,7 +112,7 @@ function renderCart() {
                     </span>
                 </div>
 
-                <div class="text-end fw-semibold mt-1">$${(item.price * item.qty).toFixed(2)}</div>
+                <div class="text-end fw-semibold mt-1">₱${(item.price * item.qty).toFixed(2)}</div>
             </div>
         `;
     });
@@ -144,12 +144,12 @@ function removeItem(i) {
 // ==============================
 function updateTotals() {
     let subtotal = cart.reduce((sum, i) => sum + i.price * i.qty, 0);
-    let tax = subtotal * 0.08;
+    let tax = subtotal * 0.08; // keep your existing rate
     let total = subtotal + tax;
 
-    document.getElementById("subtotal").innerText = `$${subtotal.toFixed(2)}`;
-    document.getElementById("tax").innerText = `$${tax.toFixed(2)}`;
-    document.getElementById("total").innerText = `$${total.toFixed(2)}`;
+    document.getElementById("subtotal").innerText = `₱${subtotal.toFixed(2)}`;
+    document.getElementById("tax").innerText = `₱${tax.toFixed(2)}`;
+    document.getElementById("total").innerText = `₱${total.toFixed(2)}`;
 }
 
 // ==============================
@@ -160,7 +160,7 @@ document.getElementById("searchServices").addEventListener("input", function () 
 
     let filtered = services.filter(s =>
         s.name.toLowerCase().includes(query) ||
-        s.tag.toLowerCase().includes(query)
+        (s.tag || "").toLowerCase().includes(query)
     );
 
     const container = document.getElementById("serviceList");
@@ -171,8 +171,8 @@ document.getElementById("searchServices").addEventListener("input", function () 
             <div class="col-md-6">
                 <div class="card p-3 shadow-sm rounded-4 serviceCard">
                     <div class="fw-bold">${s.name}</div>
-                    <span class="badge bg-light text-dark">${s.tag}</span>
-                    <div class="fw-semibold mt-2">$${s.price.toFixed(2)}</div>
+                    <span class="badge bg-light text-dark">${s.tag || ""}</span>
+                    <div class="fw-semibold mt-2">₱${s.price.toFixed(2)}</div>
 
                     <button class="btn btn-success btn-sm mt-3 rounded-circle addBtn"
                             onclick="addToCart(${services.indexOf(s)})">

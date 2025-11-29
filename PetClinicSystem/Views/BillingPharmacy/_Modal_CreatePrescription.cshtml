@@ -1,9 +1,22 @@
 ﻿@model PetClinicSystem.Models.Prescription
+@using PetClinicSystem.Models
+@using System.Linq
 
 @{
-    var pets = ViewBag.Pets as List<PetClinicSystem.Models.Pet>;
-    var staff = ViewBag.Staff as List<PetClinicSystem.Models.Account>;
-    var drugs = ViewBag.Drugs as List<PetClinicSystem.Models.Drug>;
+    var pets = ViewBag.Pets as IEnumerable<Pet> ?? Enumerable.Empty<Pet>();
+    var staff = ViewBag.Staff as IEnumerable<Account> ?? Enumerable.Empty<Account>();
+    var drugs = ViewBag.Drugs as IEnumerable<Drug> ?? Enumerable.Empty<Drug>();
+
+    var dosageTypes = drugs
+        .Select(d => d.DosageType)
+        .Where(t => !string.IsNullOrWhiteSpace(t))
+        .Distinct()
+        .OrderBy(t => t)
+        .ToList();
+
+    var dateString = (Model.Date == default
+        ? DateTime.Today.ToString("yyyy-MM-dd")
+        : Model.Date.ToString("yyyy-MM-dd"));
 }
 
 <div class="modal-header border-0">
@@ -11,156 +24,246 @@
     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
 </div>
 
-<form id="createPrescriptionForm" method="post" action="@Url.Action("CreatePrescription", "BillingPharmacy")">
+<form id="createPrescriptionForm"
+      method="post"
+      action="@Url.Action("CreatePrescription", "BillingPharmacy")">
+
     <div class="modal-body">
         <div class="row g-3">
 
-            <!-- PATIENT -->
-            <div class="col-md-6">
-                <label class="form-label fw-semibold">Patient</label>
-                <select name="PetId" class="form-select" required>
-                    <option value="" disabled selected>Select patient...</option>
-                    @if (pets != null)
+            <!-- PET -->
+            <div class="col-md-8">
+                <label class="form-label fw-semibold">Patient (Pet)</label>
+                <select asp-for="PetId" class="form-select" required>
+                    <option value="">Select a pet...</option>
+                    @foreach (var p in pets)
                     {
-                        foreach (var pet in pets)
-                        {
-                            <option value="@pet.PetId">@pet.Name (@pet.Owner.FullName)</option>
-                        }
+                        <option value="@p.PetId">
+                            @p.Name (@p.Species - @p.Owner?.FullName)
+                        </option>
                     }
                 </select>
-            </div>
-
-            <!-- DOCTOR -->
-            <div class="col-md-6">
-                <label class="form-label fw-semibold">Doctor</label>
-                <select name="StaffId" class="form-select" required>
-                    <option value="" disabled selected>Select doctor...</option>
-                    @if (staff != null)
-                    {
-                        foreach (var doc in staff)
-                        {
-                            <option value="@doc.AccountId">@doc.FullName</option>
-                        }
-                    }
-                </select>
-            </div>
-
-            <!-- LINK TO DRUG INVENTORY -->
-            <div class="col-md-6">
-                <label class="form-label fw-semibold">Select Drug (from Inventory)</label>
-                <select name="SelectedDrugId" id="prescSelectedDrugId" class="form-select">
-                    <option value="">-- Custom / Not from stock --</option>
-                    @if (drugs != null)
-                    {
-                        foreach (var d in drugs)
-                        {
-                            <option value="@d.DrugId" data-name="@d.DrugName" data-stock="@d.Quantity">
-                                @d.DrugName (@d.Quantity in stock)
-                            </option>
-                        }
-                    }
-                </select>
-                <small id="prescDrugStockInfo" class="text-muted d-block mt-1"></small>
-            </div>
-
-            <!-- DISPENSE QUANTITY -->
-            <div class="col-md-6">
-                <label class="form-label fw-semibold">Dispense Quantity</label>
-                <input type="number" name="DispensedQuantity" id="prescDispensedQty" class="form-control" min="1" placeholder="Units to dispense">
-                <small id="prescStockLeft" class="text-muted d-block mt-1"></small>
-            </div>
-
-            <!-- MEDICATION (text) -->
-            <div class="col-md-6">
-                <label class="form-label fw-semibold">Medication</label>
-                <input name="Medication" id="prescMedicationText" class="form-control" placeholder="Auto-filled when selecting drug" required />
-            </div>
-
-            <!-- DOSAGE -->
-            <div class="col-md-6">
-                <label class="form-label fw-semibold">Dosage</label>
-                <input name="Dosage" class="form-control" placeholder="e.g., 250mg" required />
-            </div>
-
-            <!-- FREQUENCY -->
-            <div class="col-md-6">
-                <label class="form-label fw-semibold">Frequency</label>
-                <input name="Frequency" class="form-control" placeholder="e.g., Twice daily" required />
-            </div>
-
-            <!-- DURATION -->
-            <div class="col-md-6">
-                <label class="form-label fw-semibold">Duration</label>
-                <input name="Duration" class="form-control" placeholder="e.g., 7 days" required />
-            </div>
-
-            <!-- NOTES -->
-            <div class="col-12">
-                <label class="form-label fw-semibold">Notes</label>
-                <textarea name="Notes" class="form-control" rows="3" placeholder="Additional instructions..."></textarea>
+                <span asp-validation-for="PetId" class="text-danger"></span>
             </div>
 
             <!-- DATE -->
             <div class="col-md-4">
                 <label class="form-label fw-semibold">Date</label>
-                <input type="date" name="Date" class="form-control" value="@DateTime.Today.ToString("yyyy-MM-dd")" required />
+                <input asp-for="Date"
+                       type="date"
+                       class="form-control"
+                       value="@dateString"
+                       required />
+                <span asp-validation-for="Date" class="text-danger"></span>
             </div>
+
+            <!-- DOCTOR / STAFF -->
+            <div class="col-md-6">
+                <label class="form-label fw-semibold">Doctor</label>
+                <select asp-for="StaffId" class="form-select" required>
+                    <option value="">Select doctor...</option>
+                    @foreach (var s in staff)
+                    {
+                        <option value="@s.AccountId">@s.FullName</option>
+                    }
+                </select>
+                <span asp-validation-for="StaffId" class="text-danger"></span>
+            </div>
+
+            <!-- FILTER BY DOSAGE TYPE -->
+            <div class="col-md-6">
+                <label class="form-label fw-semibold">Filter by dosage type</label>
+                <select id="dosageFilter" class="form-select">
+                    <option value="">All dosage types</option>
+                    @foreach (var t in dosageTypes)
+                    {
+                        <option value="@t">@t</option>
+                    }
+                </select>
+            </div>
+
+            <!-- MED FROM INVENTORY -->
+            <div class="col-md-8">
+                <label class="form-label fw-semibold">Medication from inventory (optional)</label>
+                <select asp-for="SelectedDrugId"
+                        class="form-select"
+                        id="drugSelect">
+                    <option value="">No linked drug (manual medication)</option>
+                    @foreach (var d in drugs)
+                    {
+                        <option value="@d.DrugId"
+                                data-dosage="@d.DosageType"
+                                data-name="@d.DrugName">
+                            @d.DrugName (@d.DosageType) - ₱@d.UnitPrice.ToString("0.00")
+                        </option>
+                    }
+                </select>
+                <span asp-validation-for="SelectedDrugId" class="text-danger"></span>
+            </div>
+
+            <div class="col-md-4">
+                <label class="form-label fw-semibold">Quantity to dispense (optional)</label>
+                <input asp-for="DispensedQuantity"
+                       type="number"
+                       min="1"
+                       class="form-control"
+                       placeholder="Units" />
+                <span asp-validation-for="DispensedQuantity" class="text-danger"></span>
+            </div>
+
+            <!-- MEDICATION (TEXT) – AUTOFILLED FROM INVENTORY -->
+            <div class="col-md-6">
+                <label class="form-label fw-semibold">Medication (text)</label>
+                <input asp-for="Medication"
+                       class="form-control"
+                       id="medicationText"
+                       placeholder="e.g., Amoxicillin 250mg"
+                       required />
+                <span asp-validation-for="Medication" class="text-danger"></span>
+            </div>
+
+            <!-- DOSAGE DROPDOWN -->
+            <div class="col-md-6">
+                <label class="form-label fw-semibold">Dosage</label>
+                <select asp-for="Dosage"
+                        class="form-select"
+                        id="dosageSelect"
+                        required>
+                    <option value="">Select dosage...</option>
+                    <option>0.5 tab</option>
+                    <option>1 tab</option>
+                    <option>2 tabs</option>
+                    <option>0.5 mL</option>
+                    <option>1 mL</option>
+                    <option>2 mL</option>
+                    <option>5 mL</option>
+                    <option>1 drop</option>
+                    <option>2 drops</option>
+                    <option>Apply thin layer</option>
+                    <option>See notes</option>
+                </select>
+                <span asp-validation-for="Dosage" class="text-danger"></span>
+            </div>
+
+            <!-- FREQUENCY DROPDOWN -->
+            <div class="col-md-6">
+                <label class="form-label fw-semibold">Frequency</label>
+                <select asp-for="Frequency"
+                        class="form-select"
+                        id="frequencySelect"
+                        required>
+                    <option value="">Select frequency...</option>
+                    <option>Once a day</option>
+                    <option>Twice a day</option>
+                    <option>Three times a day</option>
+                    <option>Every 4 hours</option>
+                    <option>Every 6 hours</option>
+                    <option>Every 8 hours</option>
+                    <option>Every 12 hours</option>
+                    <option>As needed</option>
+                    <option>See notes</option>
+                </select>
+                <span asp-validation-for="Frequency" class="text-danger"></span>
+            </div>
+
+            <!-- DURATION DROPDOWN -->
+            <div class="col-md-6">
+                <label class="form-label fw-semibold">Duration</label>
+                <select asp-for="Duration"
+                        class="form-select"
+                        id="durationSelect"
+                        required>
+                    <option value="">Select duration...</option>
+                    <option>3 days</option>
+                    <option>5 days</option>
+                    <option>7 days</option>
+                    <option>10 days</option>
+                    <option>14 days</option>
+                    <option>21 days</option>
+                    <option>30 days</option>
+                    <option>Until finished</option>
+                    <option>See notes</option>
+                </select>
+                <span asp-validation-for="Duration" class="text-danger"></span>
+            </div>
+
+            <!-- NOTES -->
+            <div class="col-12">
+                <label class="form-label fw-semibold">Notes</label>
+                <textarea asp-for="Notes"
+                          class="form-control"
+                          rows="3"
+                          placeholder="Additional instructions..."></textarea>
+                <span asp-validation-for="Notes" class="text-danger"></span>
+            </div>
+
         </div>
     </div>
 
     <div class="modal-footer border-0">
-        <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">Cancel</button>
-        <button type="submit" class="btn btn-success">Save Prescription</button>
+        <button type="button"
+                class="btn btn-outline-secondary"
+                data-bs-dismiss="modal">
+            Cancel
+        </button>
+        <button type="submit" class="btn btn-success">
+            Save Prescription
+        </button>
     </div>
 </form>
 
-<!-- JavaScript logic for drug linking -->
 <script>
     (function () {
-        const drugSelect = document.getElementById("prescSelectedDrugId");
-        const medInput = document.getElementById("prescMedicationText");
-        const qtyInput = document.getElementById("prescDispensedQty");
-        const stockInfo = document.getElementById("prescDrugStockInfo");
-        const stockLeft = document.getElementById("prescStockLeft");
+        const dosageFilter = document.getElementById("dosageFilter");
+        const drugSelect = document.getElementById("drugSelect");
+        const medicationInput = document.getElementById("medicationText");
 
         if (!drugSelect) return;
 
-        // When user picks a drug
-        drugSelect.addEventListener("change", function () {
-            const selected = this.options[this.selectedIndex];
-            const name = selected.getAttribute("data-name");
-            const stock = selected.getAttribute("data-stock");
+        // ---------- FILTER BY DOSAGE TYPE ----------
+        const allOptions = Array.from(drugSelect.options);
 
-            if (name) medInput.value = name;
-            if (stock) {
-                stockInfo.textContent = "Available stock: " + stock;
-                qtyInput.max = stock;
-            } else {
-                stockInfo.textContent = "";
-                qtyInput.removeAttribute("max");
-            }
-            qtyInput.value = "";
-            stockLeft.textContent = "";
-        });
+        if (dosageFilter) {
+            dosageFilter.addEventListener("change", function () {
+                const selectedType = this.value;
+                const prevValue = drugSelect.value;
 
-        // When user types quantity
-        qtyInput.addEventListener("input", function () {
-            const stock = parseInt(drugSelect.options[drugSelect.selectedIndex]?.getAttribute("data-stock") || 0);
-            const qty = parseInt(this.value || 0);
-            if (stock && qty) {
-                const remaining = stock - qty;
-                if (remaining < 0) {
-                    stockLeft.textContent = "❌ Exceeds available stock!";
-                    stockLeft.classList.add("text-danger");
-                    stockLeft.classList.remove("text-muted");
-                } else {
-                    stockLeft.textContent = "Stock after dispensing: " + remaining;
-                    stockLeft.classList.remove("text-danger");
-                    stockLeft.classList.add("text-muted");
+                drugSelect.innerHTML = "";
+
+                // placeholder
+                const placeholder = allOptions[0].cloneNode(true);
+                drugSelect.appendChild(placeholder);
+
+                allOptions.slice(1).forEach(function (opt) {
+                    const type = opt.getAttribute("data-dosage") || "";
+                    if (!selectedType || type === selectedType) {
+                        drugSelect.appendChild(opt);
+                    }
+                });
+
+                // keep current selection if still valid
+                if (prevValue) {
+                    const stillExists = Array.from(drugSelect.options)
+                        .some(o => o.value === prevValue);
+                    if (stillExists) {
+                        drugSelect.value = prevValue;
+                    }
                 }
-            } else {
-                stockLeft.textContent = "";
-            }
-        });
+            });
+        }
+
+        // ---------- AUTOFILL MEDICATION TEXT ----------
+        if (medicationInput) {
+            drugSelect.addEventListener("change", function () {
+                const opt = this.options[this.selectedIndex];
+                if (!opt || !opt.value) return;
+
+                const name = opt.getAttribute("data-name") || opt.text;
+                const type = opt.getAttribute("data-dosage") || "";
+
+                // Example: "Amoxicillin (Tablet)"
+                medicationInput.value = type ? (name + " (" + type + ")") : name;
+            });
+        }
     })();
 </script>
