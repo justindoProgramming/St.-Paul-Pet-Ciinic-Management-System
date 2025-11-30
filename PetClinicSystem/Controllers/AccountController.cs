@@ -49,9 +49,11 @@ namespace PetClinicSystem.Controllers
         [HttpGet]
         public IActionResult Login()
         {
-            // if you want login form on Home/Index only, you can
-            // also redirect there instead of returning a view here.
-            return View();
+            // We don't have a /Views/Account/Login view.
+            // If someone browses here directly, send them back to Home
+            // and open the login modal.
+            TempData["OpenLoginModal"] = "true";
+            return RedirectToAction("Index", "Home");
         }
 
         [HttpPost]
@@ -59,8 +61,9 @@ namespace PetClinicSystem.Controllers
         {
             if (string.IsNullOrWhiteSpace(username) || string.IsNullOrWhiteSpace(password))
             {
-                ViewBag.Error = "Username and password are required.";
-                return View();
+                TempData["Error"] = "Username and password are required.";
+                TempData["OpenLoginModal"] = "true";
+                return RedirectToAction("Index", "Home");
             }
 
             var hash = HashPassword(password);
@@ -73,8 +76,9 @@ namespace PetClinicSystem.Controllers
 
             if (user == null)
             {
-                ViewBag.Error = "Invalid username or password, or account is inactive.";
-                return View();
+                TempData["Error"] = "Invalid username or password, or account is inactive.";
+                TempData["OpenLoginModal"] = "true";
+                return RedirectToAction("Index", "Home");
             }
 
             // save info in session for layouts
@@ -98,6 +102,8 @@ namespace PetClinicSystem.Controllers
             }
         }
 
+        // ===================== REGISTER =====================
+
         [HttpPost]
         public IActionResult Register(string FullName, string Email, string Username, string Password)
         {
@@ -113,7 +119,7 @@ namespace PetClinicSystem.Controllers
                 Email = Email,
                 Username = Username,
                 PasswordHash = HashPassword(Password),
-                IsAdmin = 0,
+                IsAdmin = 0,              // client by default
                 IsActive = true,
                 CreatedAt = DateTime.Now,
                 UpdatedAt = DateTime.Now
@@ -127,21 +133,93 @@ namespace PetClinicSystem.Controllers
             return RedirectToAction("Index", "Home");
         }
 
-
         // ===================== LOGOUT =====================
         [HttpPost]
         public IActionResult Logout()
         {
-            // Clear all session data
             HttpContext.Session.Clear();
-
-            // One-time message for the next request
             TempData["LogoutMessage"] = "You have been logged out.";
-
-            // Go back to the public landing page
             return RedirectToAction("Index", "Home");
         }
 
+        // ===================== PROFILE (ALL ROLES) =====================
 
+        [HttpGet]
+        public IActionResult Profile()
+        {
+            int? userId = HttpContext.Session.GetInt32("UserId");
+            if (userId == null)
+            {
+                return RedirectToAction("Index", "Home");
+            }
+
+            var acc = _db.Accounts.FirstOrDefault(a => a.AccountId == userId.Value);
+            if (acc == null)
+            {
+                HttpContext.Session.Clear();
+                return RedirectToAction("Index", "Home");
+            }
+
+            var model = new AccountProfileViewModel
+            {
+                FullName = acc.FullName,
+                Email = acc.Email,
+                Username = acc.Username
+            };
+
+            return View(model);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public IActionResult Profile(AccountProfileViewModel model)
+        {
+            int? userId = HttpContext.Session.GetInt32("UserId");
+            if (userId == null)
+            {
+                return RedirectToAction("Index", "Home");
+            }
+
+            if (!ModelState.IsValid)
+            {
+                return View(model);
+            }
+
+            var acc = _db.Accounts.FirstOrDefault(a => a.AccountId == userId.Value);
+            if (acc == null)
+            {
+                HttpContext.Session.Clear();
+                return RedirectToAction("Index", "Home");
+            }
+
+            // unique email / username (excluding self)
+            bool exists = _db.Accounts.Any(a =>
+                a.AccountId != acc.AccountId &&
+                (a.Email == model.Email || a.Username == model.Username));
+
+            if (exists)
+            {
+                ModelState.AddModelError(string.Empty, "Email or username is already in use.");
+                return View(model);
+            }
+
+            acc.FullName = model.FullName;
+            acc.Email = model.Email;
+            acc.Username = model.Username;
+            acc.UpdatedAt = DateTime.Now;
+
+            if (!string.IsNullOrWhiteSpace(model.NewPassword))
+            {
+                acc.PasswordHash = HashPassword(model.NewPassword);
+            }
+
+            _db.SaveChanges();
+
+            // refresh name in header
+            HttpContext.Session.SetString("UserName", acc.FullName ?? acc.Username);
+
+            TempData["Success"] = "Profile updated successfully.";
+            return RedirectToAction("Profile");
+        }
     }
 }

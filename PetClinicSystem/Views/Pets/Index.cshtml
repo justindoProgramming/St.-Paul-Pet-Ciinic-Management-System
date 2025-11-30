@@ -1,8 +1,31 @@
 ﻿@model List<PetClinicSystem.Models.Pet>
 
+@using Microsoft.AspNetCore.Http
+
 @{
-    Layout = "~/Views/Shared/_Layout_Admin.cshtml";
-    ViewBag.ActiveMenu = "Pets";   // matches your sidebar
+    ViewData["Title"] = "Patient Records";
+
+    int role = Context.Session.GetInt32("UserRole") ?? -1;
+
+    // pick layout based on role
+    if (role == 1)
+    {
+        Layout = "~/Views/Shared/_Layout_Admin.cshtml";
+    }
+    else if (role == 2)
+    {
+        Layout = "~/Views/Shared/_Layout_Staff.cshtml";
+    }
+    else if (role == 0)
+    {
+        Layout = "~/Views/Shared/_Layout_Client.cshtml";
+    }
+    else
+    {
+        Layout = "~/Views/Shared/_Layout_Public.cshtml";
+    }
+
+    ViewBag.ActiveMenu = "Pets";
 }
 
 <div class="container-fluid py-4">
@@ -138,7 +161,6 @@
 
         // ================================
         // 2. MODAL HELPERS (jQuery .load)
-        //    This keeps your dropdown JS working
         // ================================
 
         // CREATE

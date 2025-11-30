@@ -1,18 +1,28 @@
 ﻿@model List<PetClinicSystem.Models.Schedule>
 
+@using Microsoft.AspNetCore.Http
+
 @{
     ViewData["Title"] = "Appointments";
 
     int role = Context.Session.GetInt32("UserRole") ?? -1;
 
     if (role == 1)
+    {
         Layout = "~/Views/Shared/_Layout_Admin.cshtml";
+    }
     else if (role == 2)
+    {
         Layout = "~/Views/Shared/_Layout_Staff.cshtml";
+    }
     else if (role == 0)
+    {
         Layout = "~/Views/Shared/_Layout_Client.cshtml";
+    }
     else
+    {
         Layout = "~/Views/Shared/_Layout_Public.cshtml";
+    }
 }
 
 <div class="container py-4">
@@ -20,20 +30,27 @@
     <div class="d-flex justify-content-between align-items-center mb-4">
         <h3 class="fw-bold">Upcoming Appointments</h3>
 
+        @* show toast if TempData["Success"] is set *@
         @if (TempData["Success"] != null)
         {
             <script>
                 window.onload = function () {
-                    showSuccessToast();
+                    if (window.showSuccessToast) {
+                        showSuccessToast('@TempData["Success"]');
+                    }
                 }
             </script>
         }
 
         <div class="d-flex gap-2">
-            <input id="searchBox" type="text" class="form-control"
-                   placeholder="Search appointments..." style="max-width: 250px;" />
+            <input id="searchBox"
+                   type="text"
+                   class="form-control"
+                   placeholder="Search appointments..."
+                   style="max-width: 250px;"
+                   value="@(ViewBag.Search ?? "")" />
 
-            <button class="btn btn-outline-secondary">
+            <button class="btn btn-outline-secondary" type="button" onclick="applySearch()">
                 <i class="fa-solid fa-filter"></i> Filter
             </button>
 
@@ -51,16 +68,8 @@
 
         @foreach (var appt in Model)
         {
-            var searchText =
-            $"{appt.Pet?.Name} {appt.Pet?.Species} {appt.Pet?.Breed} " +
-            $"{appt.Pet?.Owner?.FullName} {appt.Pet?.Owner?.PhoneNumber} " +
-            $"{appt.Service} {appt.Staff?.FullName} {appt.Status} " +
-            $"{appt.ScheduleDateOld?.ToString("yyyy-MM-dd")} " +
-            $"{appt.ScheduleTime?.ToString(@"hh\:mm")}";
-
             <div class="col-12">
-                <div class="card shadow-sm border-0 rounded-4 p-3 appointment-card"
-                     data-search="@searchText">
+                <div class="card shadow-sm border-0 rounded-4 p-3 appointment-card">
                     <div class="row g-0">
 
                         <!-- TIME -->
@@ -80,7 +89,9 @@
 
                             <div class="mt-3">
                                 <h6 class="fw-semibold mb-0">Owner</h6>
-                                <span class="text-secondary">@appt.Pet?.Owner?.FullName • @appt.Pet?.Owner?.PhoneNumber</span>
+                                <span class="text-secondary">
+                                    @appt.Pet?.Owner?.FullName • @appt.Pet?.Owner?.PhoneNumber
+                                </span>
                             </div>
 
                             <div class="mt-3">
@@ -94,7 +105,7 @@
                             </div>
                         </div>
 
-                        <!-- STATUS + VIEW BUTTON -->
+                        <!-- STATUS + VIEW / EDIT BUTTONS -->
                         <div class="col-md-3 d-flex flex-column align-items-end justify-content-between">
 
                             <div>
@@ -144,22 +155,19 @@
     </div>
 </div>
 
-<!-- FIXED MODAL STRUCTURES -->
-<!-- VIEW MODAL -->
+<!-- MODALS -->
 <div class="modal fade" id="viewModal" tabindex="-1">
     <div class="modal-dialog modal-lg modal-dialog-centered">
         <div class="modal-content" id="viewModalContent"></div>
     </div>
 </div>
 
-<!-- CREATE MODAL -->
 <div class="modal fade" id="createModal" tabindex="-1">
     <div class="modal-dialog modal-lg modal-dialog-centered">
         <div class="modal-content" id="createModalContent"></div>
     </div>
 </div>
 
-<!-- EDIT MODAL -->
 <div class="modal fade" id="editModal" tabindex="-1">
     <div class="modal-dialog modal-lg modal-dialog-centered">
         <div class="modal-content" id="editModalContent"></div>
@@ -168,6 +176,16 @@
 
 @section Scripts {
     <script>
+        // SEARCH → reload page with ?search=
+        function applySearch() {
+            var q = document.getElementById("searchBox").value || "";
+            var url = "/Appointments/Index";
+            if (q.trim() !== "") {
+                url += "?search=" + encodeURIComponent(q.trim());
+            }
+            window.location.href = url;
+        }
+
         // LOAD VIEW
         function loadView(id) {
             $("#viewModalContent").html("Loading...");
@@ -192,27 +210,16 @@
             });
         }
 
-        // SUCCESS TOAST + SEARCH WIRING
-        $(document).ready(function () {
-            var msg = '@TempData["Success"]';
-            if (msg) {
-                showSuccessToast();
-            }
-
-            // 🔍 simple client-side search
-            $("#searchBox").on("input", function () {
-                var q = ($(this).val() || "").toLowerCase().trim();
-
-                $(".appointment-card").each(function () {
-                    var text = ($(this).data("search") || "").toString().toLowerCase();
-
-                    if (!q || text.indexOf(q) !== -1) {
-                        $(this).closest(".col-12").removeClass("d-none");
-                    } else {
-                        $(this).closest(".col-12").addClass("d-none");
+        // Optional: pressing Enter in search box triggers filter
+        document.addEventListener("DOMContentLoaded", function () {
+            var sb = document.getElementById("searchBox");
+            if (sb) {
+                sb.addEventListener("keyup", function (e) {
+                    if (e.key === "Enter") {
+                        applySearch();
                     }
                 });
-            });
+            }
         });
     </script>
 }

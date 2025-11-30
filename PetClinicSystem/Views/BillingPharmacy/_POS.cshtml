@@ -1,67 +1,38 @@
-﻿﻿
-<link rel="stylesheet" href="~/css/pos.css" />
+﻿<!-- Search box -->
+<input id="searchServices"
+       type="text"
+       class="form-control"
+       placeholder="Search services or products..." />
 
-<div class="row">
-
-    <!-- LEFT SIDE: SERVICES -->
-    <div class="col-md-8">
-
-        <div class="input-group mb-3">
-            <span class="input-group-text bg-white"><i class="fa fa-search"></i></span>
-            <input class="form-control" id="searchServices" placeholder="Search services or products..." />
-        </div>
-
-        <h5 class="fw-bold mb-3">Services</h5>
-
-        <div class="row g-3" id="serviceList">
-
-            <!-- ITEM TEMPLATE (auto-filled by JS) -->
-
-        </div>
-
-    </div>
-
-    <!-- RIGHT SIDE: CART -->
-    <div class="col-md-4">
-
-        <div class="card rounded-4 shadow-sm p-3">
-            <h6 class="fw-bold mb-3">
-                <i class="fa fa-cart-shopping text-success me-2"></i>Current Sale
-            </h6>
-
-            <label class="text-secondary small">Select Patient</label>
-            <select class="form-select mb-3">
-                <option>Choose patient...</option>
-            </select>
-
-            <hr />
-
-            <div id="cartItems"></div>
-
-            <hr />
-
-            <div class="d-flex justify-content-between">
-                <span class="fw-semibold">Subtotal</span>
-                <span id="subtotal">₱0.00</span>
-            </div>
-
-            <div class="d-flex justify-content-between">
-                <span class="fw-semibold">Tax (8%)</span>
-                <span id="tax">₱0.00</span>
-            </div>
-
-            <div class="d-flex justify-content-between fs-5 mt-2">
-                <span class="fw-bold">Total</span>
-                <span id="total">0.00</span>
-            </div>
-
-            <button class="btn btn-success w-100 mt-3 rounded-pill" disabled id="payButton">
-                <i class="fa fa-check me-1"></i> Process Payment
-            </button>
-
-        </div>
-
-    </div>
+<!-- Services list container -->
+<div class="row g-3 mt-3" id="serviceList">
+    @* cards are injected by pos.js *@
 </div>
 
-<script src="~/js/pos.js"></script>
+<!-- In the Current Sale card on the right -->
+<select id="petSelect" class="form-select">
+    <option value="" selected disabled>Choose patient...</option>
+    @* your foreach over ViewBag.Pets stays the same *@
+</select>
+
+<!-- Subtotal / Tax / Total placeholders -->
+<div class="d-flex justify-content-between">
+    <span>Subtotal:</span>
+    <span id="subtotal">₱0.00</span>
+</div>
+<div class="d-flex justify-content-between">
+    <span>Tax (8%):</span>
+    <span id="tax">₱0.00</span>
+</div>
+<div class="d-flex justify-content-between fw-bold">
+    <span>Total:</span>
+    <span id="total">₱0.00</span>
+</div>
+
+<!-- Process Payment button -->
+<button type="button"
+        id="payButton"
+        class="btn btn-success w-100 mt-3"
+        onclick="checkout()">
+    <i class="fa-solid fa-cash-register me-2"></i> Process Payment
+</button>

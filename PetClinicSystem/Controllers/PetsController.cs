@@ -1,7 +1,10 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Http;
 using Microsoft.EntityFrameworkCore;
 using PetClinicSystem.Data;
 using PetClinicSystem.Models;
+using System;
+using System.Linq;
 
 namespace PetClinicSystem.Controllers
 {
@@ -14,41 +17,75 @@ namespace PetClinicSystem.Controllers
             _db = db;
         }
 
-        // ============================
-        // LIST PAGE
-        // ============================
+        // ========= SESSION / ROLE HELPERS =========
+        private int UserId => HttpContext.Session.GetInt32("UserId") ?? 0;
+        private int UserRole => HttpContext.Session.GetInt32("UserRole") ?? -1;
+
+        private bool IsAdmin => UserRole == 1;
+        private bool IsStaff => UserRole == 2;
+        private bool IsClient => UserRole == 0;
+
+        // =========================================
+        //  INDEX – LIST ALL PETS (USER-BASED)
+        // =========================================
         public IActionResult Index()
         {
             ViewBag.ActiveMenu = "Pets";
 
-            var pets = _db.Pets
+            var query = _db.Pets
                 .Include(p => p.Owner)
+                .AsQueryable();
+
+            // Clients: only see their own pets (OwnerId == logged-in AccountId)
+            if (IsClient && UserId != 0)
+            {
+                query = query.Where(p => p.OwnerId == UserId);
+            }
+
+            // Admin & Staff: see all pets
+            var pets = query
+                .OrderBy(p => p.Name)
                 .ToList();
 
             return View(pets);
         }
 
-        // ============================
-        // CREATE (MODAL)
-        // ============================
+        // =========================================
+        //  CREATE PET (GET) – OPEN MODAL
+        // =========================================
+        [HttpGet]
         public IActionResult Create()
         {
-            ViewBag.Owners = _db.Owners.ToList();
-            return PartialView("_Modal_CreatePet", new Pet());
+            // list of owners for dropdown
+            ViewBag.Owners = _db.Owners
+                .OrderBy(o => o.FullName)
+                .ToList();
+
+            var model = new Pet
+            {
+                BirthDate = DateTime.Today
+            };
+
+            return PartialView("_Modal_CreatePet", model);
         }
 
-
+        // =========================================
+        //  CREATE PET (POST)
+        // =========================================
         [HttpPost]
         [ValidateAntiForgeryToken]
         public IActionResult Create(Pet model)
         {
             if (!ModelState.IsValid)
             {
-                ViewBag.Owners = _db.Owners.ToList();
+                ViewBag.Owners = _db.Owners
+                    .OrderBy(o => o.FullName)
+                    .ToList();
+
                 return PartialView("_Modal_CreatePet", model);
             }
 
-            // IMPORTANT FIX — remove navigation property before save
+            // avoid EF trying to insert/update Owner again
             model.Owner = null;
 
             _db.Pets.Add(model);
@@ -58,30 +95,43 @@ namespace PetClinicSystem.Controllers
             return RedirectToAction("Index");
         }
 
-
-        // ============================
-        // EDIT
-        // ============================
+        // =========================================
+        //  EDIT PET (GET) – OPEN MODAL
+        // =========================================
+        [HttpGet]
         public IActionResult Edit(int id)
         {
-            var pet = _db.Pets.Find(id);
-            if (pet == null) return NotFound();
+            var pet = _db.Pets
+                .Include(p => p.Owner)
+                .FirstOrDefault(p => p.PetId == id);
 
-            ViewBag.Owners = _db.Owners.ToList();
+            if (pet == null)
+                return NotFound();
+
+            ViewBag.Owners = _db.Owners
+                .OrderBy(o => o.FullName)
+                .ToList();
+
             return PartialView("_Modal_EditPet", pet);
         }
 
+        // =========================================
+        //  EDIT PET (POST)
+        // =========================================
         [HttpPost]
         [ValidateAntiForgeryToken]
         public IActionResult Edit(Pet model)
         {
             if (!ModelState.IsValid)
             {
-                ViewBag.Owners = _db.Owners.ToList();
+                ViewBag.Owners = _db.Owners
+                    .OrderBy(o => o.FullName)
+                    .ToList();
+
                 return PartialView("_Modal_EditPet", model);
             }
 
-            // Prevent EF navigation conflict
+            // detach navigation so EF doesn’t try to re-attach Owner
             model.Owner = null;
 
             _db.Pets.Update(model);
@@ -91,24 +141,32 @@ namespace PetClinicSystem.Controllers
             return RedirectToAction("Index");
         }
 
-        // ============================
-        // DELETE (MODAL)
-        // ============================
+        // =========================================
+        //  DELETE PET (GET) – CONFIRM MODAL
+        // =========================================
+        [HttpGet]
         public IActionResult Delete(int id)
         {
             var pet = _db.Pets
                 .Include(p => p.Owner)
                 .FirstOrDefault(p => p.PetId == id);
 
+            if (pet == null)
+                return NotFound();
+
             return PartialView("_Modal_DeletePet", pet);
         }
 
+        // =========================================
+        //  DELETE PET (POST)
+        // =========================================
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult DeleteConfirmed(int petId)
+        public IActionResult DeleteConfirmed(int id)
         {
-            var pet = _db.Pets.Find(petId);
-            if (pet == null) return NotFound();
+            var pet = _db.Pets.Find(id);
+            if (pet == null)
+                return NotFound();
 
             _db.Pets.Remove(pet);
             _db.SaveChanges();
@@ -117,16 +175,18 @@ namespace PetClinicSystem.Controllers
             return RedirectToAction("Index");
         }
 
-        // ============================
-        // VIEW (MODAL)
-        // ============================
+        // =========================================
+        //  VIEW PET (GET) – DETAILS MODAL
+        // =========================================
+        [HttpGet]
         public IActionResult Details(int id)
         {
             var pet = _db.Pets
                 .Include(p => p.Owner)
                 .FirstOrDefault(p => p.PetId == id);
 
-            if (pet == null) return NotFound();
+            if (pet == null)
+                return NotFound();
 
             return PartialView("_Modal_ViewPet", pet);
         }

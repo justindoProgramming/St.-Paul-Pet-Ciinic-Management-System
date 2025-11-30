@@ -1,6 +1,28 @@
 ﻿@using PetClinicSystem.Models
+@using Microsoft.AspNetCore.Http
+
 @{
-    Layout = "~/Views/Shared/_Layout_Admin.cshtml";
+    ViewData["Title"] = "Billing & Pharmacy";
+
+    int role = Context.Session.GetInt32("UserRole") ?? -1;
+
+    if (role == 1)
+    {
+        Layout = "~/Views/Shared/_Layout_Admin.cshtml";
+    }
+    else if (role == 2)
+    {
+        Layout = "~/Views/Shared/_Layout_Staff.cshtml";
+    }
+    else if (role == 0)
+    {
+        Layout = "~/Views/Shared/_Layout_Client.cshtml";
+    }
+    else
+    {
+        Layout = "~/Views/Shared/_Layout_Public.cshtml";
+    }
+
     ViewBag.ActiveMenu = "Billing";
 }
 
@@ -218,13 +240,13 @@
 </div>
 
 <div class="modal fade" id="vaccViewModal" tabindex="-1" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-dialog modal-lg modal-dialog-centered">
         <div class="modal-content" id="vaccViewContent"></div>
     </div>
 </div>
 
 <div class="modal fade" id="vaccEditModal" tabindex="-1" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-dialog modal-lg modal-dialog-centered">
         <div class="modal-content" id="vaccEditContent"></div>
     </div>
 </div>

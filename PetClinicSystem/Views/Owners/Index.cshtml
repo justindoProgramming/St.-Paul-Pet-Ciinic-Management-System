@@ -1,94 +1,150 @@
-﻿@model IEnumerable<PetClinicSystem.Models.Owner>
+﻿@model List<PetClinicSystem.Models.Owner>
+
+@using Microsoft.AspNetCore.Http
 
 @{
-    Layout = "~/Views/Shared/_Layout_Admin.cshtml";
-    ViewBag.ActiveMenu = "Owners";
+    ViewData["Title"] = "Owners";
 
-    var ownersList = Model.ToList();
-    var totalOwners = ownersList.Count;
-    var ownersWithPets = ownersList.Count(o => o.Pets != null && o.Pets.Any());
+    int role = Context.Session.GetInt32("UserRole") ?? -1;
+    bool canManageOwners = (role == 1 || role == 2); // Admin / Staff
+
+    // Layout per role
+    if (role == 1)
+    {
+        Layout = "~/Views/Shared/_Layout_Admin.cshtml";
+    }
+    else if (role == 2)
+    {
+        Layout = "~/Views/Shared/_Layout_Staff.cshtml";
+    }
+    else if (role == 0)
+    {
+        Layout = "~/Views/Shared/_Layout_Client.cshtml";
+    }
+    else
+    {
+        Layout = "~/Views/Shared/_Layout_Public.cshtml";
+    }
+
+    ViewBag.ActiveMenu = "Owners";
+    var searchValue = ViewBag.Search as string ?? "";
 }
 
-<div class="container-fluid py-4">
+<div class="container py-4">
 
-    <!-- HEADER + ADD BUTTON -->
-    <div class="d-flex justify-content-between align-items-center mb-3">
-        <h3 class="fw-bold">Owners</h3>
+    <!-- HEADER + ACTIONS -->
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <h3 class="fw-bold mb-0">Owners</h3>
 
         <div class="d-flex gap-2">
-            <input id="ownerSearchBox"
+            <input id="searchBox"
+                   type="text"
                    class="form-control"
-                   placeholder="Search by name, email, or phone"
-                   style="max-width: 280px;" />
+                   style="max-width: 260px;"
+                   placeholder="Search owners..."
+                   value="@searchValue" />
 
-            <button class="btn btn-success" onclick="loadOwnerCreate()">
-                <i class="fa-solid fa-user-plus me-2"></i> Add Owner
+            <button class="btn btn-outline-secondary" type="button" onclick="applyOwnerSearch()">
+                <i class="fa-solid fa-filter"></i> Filter
             </button>
+
+            @if (canManageOwners)
+            {
+                <button class="btn btn-success"
+                        type="button"
+                        data-bs-toggle="modal"
+                        data-bs-target="#ownerCreateModal"
+                        onclick="loadOwnerCreate()">
+                    <i class="fa-solid fa-plus"></i> New Owner
+                </button>
+            }
         </div>
     </div>
 
-    <!-- STATS -->
-    <div class="row g-3 mb-4">
-        <div class="col-md-4">
-            <div class="card shadow-sm border-0 rounded-4 p-3 h-100">
-                <div class="d-flex align-items-center gap-3">
-                    <div class="icon-circle bg-success-subtle text-success">
-                        <i class="fa-solid fa-user-group"></i>
-                    </div>
-                    <div>
-                        <div class="text-secondary small">Total Owners</div>
-                        <div class="h4 mb-0 fw-bold">@totalOwners</div>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <div class="col-md-4">
-            <div class="card shadow-sm border-0 rounded-4 p-3 h-100">
-                <div class="d-flex align-items-center gap-3">
-                    <div class="icon-circle bg-info-subtle text-info">
-                        <i class="fa-solid fa-paw"></i>
-                    </div>
-                    <div>
-                        <div class="text-secondary small">Owners with Patients</div>
-                        <div class="h4 mb-0 fw-bold">@ownersWithPets</div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- OWNERS LIST -->
+    <!-- GRID OF OWNER CARDS -->
     <div class="row g-3" id="ownersContainer">
-        @await Html.PartialAsync("_OwnerCards", ownersList)
+        @await Html.PartialAsync("_OwnerCards", Model)
     </div>
 </div>
 
 <!-- MODAL SHELLS -->
-<div class="modal fade" id="ownerCreateModal" tabindex="-1" aria-hidden="true">
+<div class="modal fade" id="ownerCreateModal" tabindex="-1">
     <div class="modal-dialog modal-lg modal-dialog-centered">
         <div class="modal-content" id="ownerCreateContent"></div>
     </div>
 </div>
 
-<div class="modal fade" id="ownerViewModal" tabindex="-1" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered">
+<div class="modal fade" id="ownerViewModal" tabindex="-1">
+    <div class="modal-dialog modal-lg modal-dialog-centered">
         <div class="modal-content" id="ownerViewContent"></div>
     </div>
 </div>
 
-<div class="modal fade" id="ownerEditModal" tabindex="-1" aria-hidden="true">
+<div class="modal fade" id="ownerEditModal" tabindex="-1">
     <div class="modal-dialog modal-lg modal-dialog-centered">
         <div class="modal-content" id="ownerEditContent"></div>
     </div>
 </div>
 
-<div class="modal fade" id="ownerDeleteModal" tabindex="-1" aria-hidden="true">
+<div class="modal fade" id="ownerDeleteModal" tabindex="-1">
     <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content" id="ownerDeleteContent"></div>
     </div>
 </div>
 
 @section Scripts {
-    <script src="~/js/owners.js"></script>
+    <script>
+        // SEARCH – reload with ?search=
+        function applyOwnerSearch() {
+            var q = document.getElementById("searchBox").value || "";
+            var url = "/Owners/Index";
+            if (q.trim() !== "") {
+                url += "?search=" + encodeURIComponent(q.trim());
+            }
+            window.location.href = url;
+        }
+
+        document.addEventListener("DOMContentLoaded", function () {
+            var sb = document.getElementById("searchBox");
+            if (sb) {
+                sb.addEventListener("keyup", function (e) {
+                    if (e.key === "Enter") {
+                        applyOwnerSearch();
+                    }
+                });
+            }
+        });
+
+        // CREATE
+        function loadOwnerCreate() {
+            $("#ownerCreateContent").html("Loading...");
+            $("#ownerCreateContent").load("/Owners/CreateOwner", function () {
+                new bootstrap.Modal(document.getElementById("ownerCreateModal")).show();
+            });
+        }
+
+        // VIEW
+        function loadOwnerView(id) {
+            $("#ownerViewContent").html("Loading...");
+            $("#ownerViewContent").load("/Owners/ViewOwner/" + id, function () {
+                new bootstrap.Modal(document.getElementById("ownerViewModal")).show();
+            });
+        }
+
+        // EDIT
+        function loadOwnerEdit(id) {
+            $("#ownerEditContent").html("Loading...");
+            $("#ownerEditContent").load("/Owners/EditOwner/" + id, function () {
+                new bootstrap.Modal(document.getElementById("ownerEditModal")).show();
+            });
+        }
+
+        // DELETE
+        function loadOwnerDelete(id) {
+            $("#ownerDeleteContent").html("Loading...");
+            $("#ownerDeleteContent").load("/Owners/DeleteOwner/" + id, function () {
+                new bootstrap.Modal(document.getElementById("ownerDeleteModal")).show();
+            });
+        }
+    </script>
 }
