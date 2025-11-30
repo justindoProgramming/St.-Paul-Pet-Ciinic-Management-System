@@ -170,18 +170,22 @@ namespace PetClinicSystem.Controllers
 
             return PartialView("_Modal_DeleteAccount", acc);
         }
-
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public IActionResult DeleteAccountConfirmed(int id)
         {
             var acc = _db.Accounts.FirstOrDefault(a => a.AccountId == id);
-            if (acc != null)
-            {
-                _db.Accounts.Remove(acc);
-                _db.SaveChanges();
-            }
+            if (acc == null)
+                return NotFound();
 
-            return Ok(new { message = "User deleted." });
+            // Soft delete instead of hard delete
+            acc.IsActive = false;
+            acc.UpdatedAt = DateTime.Now;
+
+            _db.SaveChanges();
+
+            return Ok(new { message = "Account deactivated successfully." });
         }
+
     }
 }

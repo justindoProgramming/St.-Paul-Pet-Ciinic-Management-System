@@ -174,5 +174,7 @@ namespace PetClinicSystem.Controllers
 
             return Ok(new { message = "Medical record deleted." });
         }
+
     }
 }
+
