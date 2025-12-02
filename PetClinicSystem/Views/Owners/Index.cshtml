@@ -8,7 +8,6 @@
     int role = Context.Session.GetInt32("UserRole") ?? -1;
     bool canManageOwners = (role == 1 || role == 2); // Admin / Staff
 
-    // Layout per role
     if (role == 1)
     {
         Layout = "~/Views/Shared/_Layout_Admin.cshtml";
@@ -21,80 +20,63 @@
     {
         Layout = "~/Views/Shared/_Layout_Client.cshtml";
     }
-    else
-    {
-        Layout = "~/Views/Shared/_Layout_Public.cshtml";
-    }
-
-    ViewBag.ActiveMenu = "Owners";
-    var searchValue = ViewBag.Search as string ?? "";
 }
 
-<div class="container py-4">
+<div class="container-fluid py-3">
 
-    <!-- HEADER + ACTIONS -->
     <div class="d-flex justify-content-between align-items-center mb-4">
         <h3 class="fw-bold mb-0">Owners</h3>
 
         <div class="d-flex gap-2">
             <input id="searchBox"
-                   type="text"
+                   value="@ViewBag.Search"
                    class="form-control"
-                   style="max-width: 260px;"
-                   placeholder="Search owners..."
-                   value="@searchValue" />
-
-            <button class="btn btn-outline-secondary" type="button" onclick="applyOwnerSearch()">
-                <i class="fa-solid fa-filter"></i> Filter
-            </button>
+                   style="max-width:260px"
+                   placeholder="Search by name, email, phone..." />
 
             @if (canManageOwners)
             {
-                <button class="btn btn-success"
-                        type="button"
-                        data-bs-toggle="modal"
-                        data-bs-target="#ownerCreateModal"
+                <button type="button"
+                        class="btn btn-success"
                         onclick="loadOwnerCreate()">
-                    <i class="fa-solid fa-plus"></i> New Owner
+                    + Add Owner
                 </button>
             }
         </div>
     </div>
 
-    <!-- GRID OF OWNER CARDS -->
-    <div class="row g-3" id="ownersContainer">
+    <div class="row g-3" id="ownerCardsContainer">
         @await Html.PartialAsync("_OwnerCards", Model)
     </div>
 </div>
 
-<!-- MODAL SHELLS -->
-<div class="modal fade" id="ownerCreateModal" tabindex="-1">
+<!-- One reusable modal -->
+<div class="modal fade" id="ownerModal" tabindex="-1" aria-hidden="true">
     <div class="modal-dialog modal-lg modal-dialog-centered">
-        <div class="modal-content" id="ownerCreateContent"></div>
-    </div>
-</div>
-
-<div class="modal fade" id="ownerViewModal" tabindex="-1">
-    <div class="modal-dialog modal-lg modal-dialog-centered">
-        <div class="modal-content" id="ownerViewContent"></div>
-    </div>
-</div>
-
-<div class="modal fade" id="ownerEditModal" tabindex="-1">
-    <div class="modal-dialog modal-lg modal-dialog-centered">
-        <div class="modal-content" id="ownerEditContent"></div>
-    </div>
-</div>
-
-<div class="modal fade" id="ownerDeleteModal" tabindex="-1">
-    <div class="modal-dialog modal-dialog-centered">
-        <div class="modal-content" id="ownerDeleteContent"></div>
+        <div class="modal-content" id="ownerModalContent"></div>
     </div>
 </div>
 
 @section Scripts {
     <script>
-        // SEARCH – reload with ?search=
+        // ---------- Toast helper ----------
+        function showOwnerToast(message, isError) {
+            if (!message) return;
+
+            if (!isError && window.showSuccessToast) {
+                window.showSuccessToast(message);
+                return;
+            }
+            if (isError && window.showErrorToast) {
+                window.showErrorToast(message);
+                return;
+            }
+
+            // fallback
+            alert(message);
+        }
+
+        // ---------- Search: reload with query ----------
         function applyOwnerSearch() {
             var q = document.getElementById("searchBox").value || "";
             var url = "/Owners/Index";
@@ -115,36 +97,87 @@
             }
         });
 
-        // CREATE
+        // ---------- Modal loaders (called from _OwnerCards) ----------
         function loadOwnerCreate() {
-            $("#ownerCreateContent").html("Loading...");
-            $("#ownerCreateContent").load("/Owners/CreateOwner", function () {
-                new bootstrap.Modal(document.getElementById("ownerCreateModal")).show();
+            $("#ownerModalContent").load("/Owners/CreateOwner", function () {
+                const modalEl = document.getElementById("ownerModal");
+                const modal = bootstrap.Modal.getOrCreateInstance(modalEl);
+                modal.show();
+                wireOwnerForm();
             });
         }
 
-        // VIEW
         function loadOwnerView(id) {
-            $("#ownerViewContent").html("Loading...");
-            $("#ownerViewContent").load("/Owners/ViewOwner/" + id, function () {
-                new bootstrap.Modal(document.getElementById("ownerViewModal")).show();
+            $("#ownerModalContent").load("/Owners/ViewOwner/" + id, function () {
+                const modalEl = document.getElementById("ownerModal");
+                const modal = bootstrap.Modal.getOrCreateInstance(modalEl);
+                modal.show();
+                // view has no form
             });
         }
 
-        // EDIT
         function loadOwnerEdit(id) {
-            $("#ownerEditContent").html("Loading...");
-            $("#ownerEditContent").load("/Owners/EditOwner/" + id, function () {
-                new bootstrap.Modal(document.getElementById("ownerEditModal")).show();
+            $("#ownerModalContent").load("/Owners/EditOwner/" + id, function () {
+                const modalEl = document.getElementById("ownerModal");
+                const modal = bootstrap.Modal.getOrCreateInstance(modalEl);
+                modal.show();
+                wireOwnerForm();
             });
         }
 
-        // DELETE
         function loadOwnerDelete(id) {
-            $("#ownerDeleteContent").html("Loading...");
-            $("#ownerDeleteContent").load("/Owners/DeleteOwner/" + id, function () {
-                new bootstrap.Modal(document.getElementById("ownerDeleteModal")).show();
+            $("#ownerModalContent").load("/Owners/DeleteOwner/" + id, function () {
+                const modalEl = document.getElementById("ownerModal");
+                const modal = bootstrap.Modal.getOrCreateInstance(modalEl);
+                modal.show();
+                wireOwnerForm(); // delete also posts
             });
         }
+
+        // ---------- Wire form inside modal ----------
+        function wireOwnerForm() {
+            var form = $("#ownerModalContent").find("form");
+            if (!form.length) return;
+
+            form.off("submit").on("submit", function (e) {
+                e.preventDefault();
+
+                $.ajax({
+                    url: form.attr("action"),
+                    type: form.attr("method") || "POST",
+                    data: form.serialize(),
+                    success: function (res) {
+                        if (res && res.success) {
+                            showOwnerToast(res.message || "Action completed.", false);
+
+                            const modalEl = document.getElementById("ownerModal");
+                            const modal = bootstrap.Modal.getInstance(modalEl);
+                            modal.hide();
+
+                            // simplest way: reload list
+                            location.reload();
+                        } else {
+                            showOwnerToast((res && res.message) || "Something went wrong.", true);
+                        }
+                    },
+                    error: function (xhr) {
+                        var msg = (xhr.responseJSON && xhr.responseJSON.message) ||
+                                  xhr.responseText ||
+                                  "Server error.";
+                        showOwnerToast(msg, true);
+                    }
+                });
+            });
+        }
+
+        // clean stray backdrops
+        document.addEventListener("hidden.bs.modal", function (ev) {
+            if (ev.target.id === "ownerModal") {
+                document.body.classList.remove("modal-open");
+                document.querySelectorAll(".modal-backdrop").forEach(function (el) {
+                    el.remove();
+                });
+            }
+        });
     </script>
 }

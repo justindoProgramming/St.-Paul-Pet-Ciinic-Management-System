@@ -44,10 +44,18 @@
                 </select>
             </div>
 
-            <div class="col-md-6">
-                <label class="form-label fw-semibold">Vaccine Name</label>
-                <input name="VaccineName" class="form-control" required />
+            <div class="mb-3">
+                <label class="form-label fw-semibold">Vaccination Service</label>
+                <select name="VaccineName" class="form-select" required>
+                    <option value="" selected disabled>Select vaccination service…</option>
+
+                    @foreach (var svc in (List<Service>)ViewBag.VaccinationServices)
+                    {
+                        <option value="@svc.Name">@svc.Name — ₱@svc.Price</option>
+                    }
+                </select>
             </div>
+
 
             <div class="col-md-3">
                 <label class="form-label fw-semibold">Date Given</label>

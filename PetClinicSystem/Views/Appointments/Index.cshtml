@@ -1,5 +1,4 @@
 ﻿@model List<PetClinicSystem.Models.Schedule>
-
 @using Microsoft.AspNetCore.Http
 
 @{
@@ -95,11 +94,6 @@
                             </div>
 
                             <div class="mt-3">
-                                <h6 class="fw-semibold mb-0">Reason</h6>
-                                <span class="text-secondary">@appt.Service</span>
-                            </div>
-
-                            <div class="mt-3">
                                 <h6 class="fw-semibold mb-0">Doctor</h6>
                                 <span class="text-secondary">@appt.Staff?.FullName</span>
                             </div>
@@ -137,12 +131,16 @@
                                     View
                                 </button>
 
-                                <button class="btn btn-outline-primary"
-                                        data-bs-toggle="modal"
-                                        data-bs-target="#editModal"
-                                        onclick="loadEdit(@appt.ScheduleId)">
-                                    Edit
-                                </button>
+                                @if (role == 1 || role == 2)   @* admin or staff only *@
+                                {
+                                    <button type="button"
+                                            class="btn btn-outline-primary"
+                                            data-bs-toggle="modal"
+                                            data-bs-target="#editModal"
+                                            onclick="loadEdit(@appt.ScheduleId)">
+                                        Edit
+                                    </button>
+                                }
                             </div>
 
                         </div>
@@ -186,13 +184,15 @@
             window.location.href = url;
         }
 
-        // LOAD VIEW
+                // LOAD VIEW
         function loadView(id) {
             $("#viewModalContent").html("Loading...");
-            $("#viewModalContent").load('/Appointments/Details/' + id, function () {
+            $("#viewModalContent").load('@Url.Action("ViewAppointment", "Appointments")/' + id, function () {
                 new bootstrap.Modal(document.getElementById("viewModal")).show();
             });
         }
+
+        
 
         // LOAD CREATE
         function loadCreate() {

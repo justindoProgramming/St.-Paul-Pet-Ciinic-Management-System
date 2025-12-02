@@ -17,39 +17,28 @@ namespace PetClinicSystem.Controllers
             _db = db;
         }
 
-        // ======== SESSION / ROLE HELPERS ========
-        private int UserId => HttpContext.Session.GetInt32("UserId") ?? 0;
+        // ======== Role helpers ========
         private int UserRole => HttpContext.Session.GetInt32("UserRole") ?? -1;
+        private bool CanManageOwners => UserRole == 1 || UserRole == 2; // admin or staff
 
-        private bool IsAdmin => UserRole == 1;
-        private bool IsStaff => UserRole == 2;
-        private bool IsClient => UserRole == 0;
-
-        // ===================== INDEX =====================
-        // /Owners/Index?search=
+        // ======== Index (cards list) ========
+        // /Owners?search=...
         public IActionResult Index(string? search)
         {
             ViewBag.ActiveMenu = "Owners";
             ViewBag.Search = search ?? string.Empty;
 
             var query = _db.Owners
-                .Include(o => o.Pets)
-                .AsQueryable();
-
-            // (Optional) you COULD restrict clients to only their own owner record
-            // but there is no direct Account ↔ Owner mapping in the model,
-            // so we leave all owners visible for now.
-            // Admin + Staff see all owners.
+                           .Include(o => o.Pets)
+                           .AsQueryable();
 
             if (!string.IsNullOrWhiteSpace(search))
             {
-                search = search.Trim().ToLower();
-
+                var q = search.Trim().ToLower();
                 query = query.Where(o =>
-                    o.FullName.ToLower().Contains(search) ||
-                    o.PhoneNumber.ToLower().Contains(search) ||
-                    o.Email.ToLower().Contains(search) ||
-                    o.Address.ToLower().Contains(search));
+                    o.FullName.ToLower().Contains(q) ||
+                    (o.Email != null && o.Email.ToLower().Contains(q)) ||
+                    (o.PhoneNumber != null && o.PhoneNumber.ToLower().Contains(q)));
             }
 
             var owners = query
@@ -59,12 +48,11 @@ namespace PetClinicSystem.Controllers
             return View(owners);
         }
 
-        // ===================== CREATE =====================
+        // ======== CREATE ========
         [HttpGet]
         public IActionResult CreateOwner()
         {
-            // Clients are not allowed to create owners
-            if (IsClient)
+            if (!CanManageOwners)
                 return Unauthorized();
 
             var model = new Owner();
@@ -75,40 +63,43 @@ namespace PetClinicSystem.Controllers
         [ValidateAntiForgeryToken]
         public IActionResult CreateOwner(Owner model)
         {
-            if (IsClient)
-                return Unauthorized();
+            if (!CanManageOwners)
+                return Json(new { success = false, message = "You are not allowed to create owners." });
 
-            if (!ModelState.IsValid)
+            if (string.IsNullOrWhiteSpace(model.FullName))
+                return Json(new { success = false, message = "Full name is required." });
+
+            try
             {
-                return BadRequest("Invalid owner data.");
+                _db.Owners.Add(model);
+                _db.SaveChanges();
+                return Json(new { success = true, message = "Owner added successfully." });
             }
-
-            _db.Owners.Add(model);
-            _db.SaveChanges();
-
-            return Ok(new { message = "Owner created successfully." });
+            catch (Exception)
+            {
+                return Json(new { success = false, message = "Error while saving owner." });
+            }
         }
 
-        // ===================== VIEW =====================
+        // ======== VIEW ========
         [HttpGet]
         public IActionResult ViewOwner(int id)
         {
             var owner = _db.Owners
-                .Include(o => o.Pets)
-                .FirstOrDefault(o => o.OwnerId == id);
+                           .Include(o => o.Pets)
+                           .FirstOrDefault(o => o.OwnerId == id);
 
             if (owner == null)
                 return NotFound();
 
-            // (If you later link Owner ↔ Account, you can restrict clients here)
             return PartialView("_Modal_ViewOwner", owner);
         }
 
-        // ===================== EDIT =====================
+        // ======== EDIT ========
         [HttpGet]
         public IActionResult EditOwner(int id)
         {
-            if (IsClient)
+            if (!CanManageOwners)
                 return Unauthorized();
 
             var owner = _db.Owners.FirstOrDefault(o => o.OwnerId == id);
@@ -122,41 +113,50 @@ namespace PetClinicSystem.Controllers
         [ValidateAntiForgeryToken]
         public IActionResult EditOwner(Owner model)
         {
-            if (IsClient)
-                return Unauthorized();
+            if (!CanManageOwners)
+                return Json(new { success = false, message = "You are not allowed to edit owners." });
 
-            if (!ModelState.IsValid)
-            {
-                return BadRequest("Invalid owner data.");
-            }
+            if (model.OwnerId <= 0)
+                return Json(new { success = false, message = "Invalid owner." });
+
+            if (string.IsNullOrWhiteSpace(model.FullName))
+                return Json(new { success = false, message = "Full name is required." });
 
             var owner = _db.Owners.FirstOrDefault(o => o.OwnerId == model.OwnerId);
             if (owner == null)
-                return NotFound();
+                return Json(new { success = false, message = "Owner not found." });
 
-            owner.FullName = model.FullName;
-            owner.PhoneNumber = model.PhoneNumber;
-            owner.Email = model.Email;
-            owner.Address = model.Address;
-            owner.EmergencyContact1 = model.EmergencyContact1;
-            owner.EmergencyContact2 = model.EmergencyContact2;
+            try
+            {
+                // Update the fields your modals use
+                owner.FullName = model.FullName;
+                owner.PhoneNumber = model.PhoneNumber;
+                owner.Email = model.Email;
+                owner.Address = model.Address;
+                owner.EmergencyContact1 = model.EmergencyContact1;
+                owner.EmergencyContact2 = model.EmergencyContact2;
 
-            _db.Owners.Update(owner);
-            _db.SaveChanges();
+                _db.Owners.Update(owner);
+                _db.SaveChanges();
 
-            return Ok(new { message = "Owner updated successfully." });
+                return Json(new { success = true, message = "Owner updated successfully." });
+            }
+            catch (Exception)
+            {
+                return Json(new { success = false, message = "Error while updating owner." });
+            }
         }
 
-        // ===================== DELETE =====================
+        // ======== DELETE ========
         [HttpGet]
         public IActionResult DeleteOwner(int id)
         {
-            if (IsClient)
+            if (!CanManageOwners)
                 return Unauthorized();
 
             var owner = _db.Owners
-                .Include(o => o.Pets)
-                .FirstOrDefault(o => o.OwnerId == id);
+                           .Include(o => o.Pets)
+                           .FirstOrDefault(o => o.OwnerId == id);
 
             if (owner == null)
                 return NotFound();
@@ -168,26 +168,31 @@ namespace PetClinicSystem.Controllers
         [ValidateAntiForgeryToken]
         public IActionResult DeleteOwnerConfirmed(int id)
         {
-            if (IsClient)
-                return Unauthorized();
+            if (!CanManageOwners)
+                return Json(new { success = false, message = "You are not allowed to delete owners." });
 
             var owner = _db.Owners
-                .Include(o => o.Pets)
-                .FirstOrDefault(o => o.OwnerId == id);
+                           .Include(o => o.Pets)
+                           .FirstOrDefault(o => o.OwnerId == id);
 
-            if (owner != null)
+            if (owner == null)
+                return Json(new { success = false, message = "Owner not found." });
+
+            if (owner.Pets != null && owner.Pets.Any())
             {
-                // Block delete if owner still has pets
-                if (owner.Pets != null && owner.Pets.Any())
-                {
-                    return BadRequest("Cannot delete owner with existing patients.");
-                }
-
-                _db.Owners.Remove(owner);
-                _db.SaveChanges();
+                return Json(new { success = false, message = "Cannot delete owner with existing patients." });
             }
 
-            return Ok(new { message = "Owner deleted." });
+            try
+            {
+                _db.Owners.Remove(owner);
+                _db.SaveChanges();
+                return Json(new { success = true, message = "Owner deleted successfully." });
+            }
+            catch (Exception)
+            {
+                return Json(new { success = false, message = "Error while deleting owner." });
+            }
         }
     }
 }

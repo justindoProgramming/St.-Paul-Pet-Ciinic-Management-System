@@ -11,30 +11,34 @@ namespace PetClinicSystem.Models
         [Column("schedule_id")]
         public int ScheduleId { get; set; }
 
-        // Foreign key → pets table
+        // PET
         [Column("pet_id")]
         public int PetId { get; set; }
+        public Pet? Pet { get; set; }
 
-        [ForeignKey("PetId")]
-        public Pet? Pet { get; set; }     // <-- FIXED (nullable)
-
-        // Foreign key → accounts table (staff)
+        // STAFF
         [Column("staff_id")]
         public int StaffId { get; set; }
+        public Account? Staff { get; set; }
 
-        [ForeignKey("StaffId")]
-        public Account? Staff { get; set; }   // <-- FIXED (nullable)
+        // SERVICE (FK → services.service_id)
+        [Column("service_id")]
+        public int? ServiceId { get; set; }
+        public Service? Service { get; set; }
 
-        // Service Name
+        // Legacy service name column (still in your DB)
         [Column("service")]
-        public string? Service { get; set; }
+        public string? ServiceName { get; set; }
 
+        // DATE
         [Column("schedule_dateold")]
         public DateTime? ScheduleDateOld { get; set; }
 
+        // TIME
         [Column("schedule_time")]
         public TimeSpan? ScheduleTime { get; set; }
 
+        // STATUS
         [Column("status")]
         public string? Status { get; set; }
     }

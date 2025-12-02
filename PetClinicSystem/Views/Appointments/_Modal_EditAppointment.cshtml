@@ -1,18 +1,26 @@
 ﻿@model PetClinicSystem.Models.Schedule
 @using PetClinicSystem.Models
+@using Microsoft.AspNetCore.Http
 
 @{
-    var pets = ViewBag.Pets as List<Pet>;
-    var staff = ViewBag.Staff as List<Account>;
+    var pets     = ViewBag.Pets     as List<Pet>;
+    var staff    = ViewBag.Staff    as List<Account>;
+    var services = ViewBag.Services as List<Service>;
+
+    // 0 = Client, 1 = Admin, 2 = Staff
+    int role = Context.Session.GetInt32("UserRole") ?? -1;
 }
 
 <div class="modal-header border-0">
     <h5 class="modal-title fw-bold">Edit Appointment</h5>
-    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
 </div>
 
-<form method="post" action="/Appointments/Edit">
-    <input type="hidden" name="ScheduleId" value="@Model.ScheduleId" />
+<form asp-controller="Appointments"
+      asp-action="Edit"
+      method="post">
+    @Html.AntiForgeryToken()
+    <input asp-for="ScheduleId" type="hidden" />
 
     <div class="modal-body">
         <div class="row g-3">
@@ -20,75 +28,101 @@
             <!-- PATIENT -->
             <div class="col-md-6">
                 <label class="form-label fw-semibold">Patient</label>
-                <select name="PetId" class="form-select" required>
+                <select asp-for="PetId" class="form-select" required>
                     <option value="">Select patient…</option>
-                    @if (pets != null)
+                    @foreach (var p in pets ?? new List<Pet>())
                     {
-                        foreach (var p in pets)
-                        {
-                            <option value="@p.PetId"
-                                    selected="@(p.PetId == Model.PetId ? "selected" : null)">
-                                @p.Name (@p.Owner.FullName)
-                            </option>
-                        }
+                        <option value="@p.PetId">
+                            @p.Name (@p.Owner.FullName)
+                        </option>
                     }
                 </select>
+                <span asp-validation-for="PetId" class="text-danger"></span>
             </div>
 
             <!-- STAFF -->
             <div class="col-md-6">
                 <label class="form-label fw-semibold">Assigned Staff</label>
-                <select name="StaffId" class="form-select" required>
+                <select asp-for="StaffId" class="form-select" required>
                     <option value="">Select staff…</option>
-                    @if (staff != null)
+                    @foreach (var s in staff ?? new List<Account>())
                     {
-                        foreach (var s in staff)
-                        {
-                            <option value="@s.AccountId"
-                                    selected="@(s.AccountId == Model.StaffId ? "selected" : null)">
-                                @s.FullName
-                            </option>
-                        }
+                        <option value="@s.AccountId">
+                            @s.FullName
+                        </option>
                     }
                 </select>
+                <span asp-validation-for="StaffId" class="text-danger"></span>
             </div>
 
             <!-- SERVICE -->
             <div class="col-md-12">
                 <label class="form-label fw-semibold">Service</label>
-                <input name="Service" class="form-control" value="@Model.Service" required />
+                <select asp-for="ServiceId" class="form-select" required>
+                    <option value="">Select service…</option>
+
+                    @foreach (var group in (services ?? new List<Service>()).GroupBy(x => x.Category))
+                    {
+                        <optgroup label="@group.Key">
+                            @foreach (var svc in group)
+                            {
+                                <option value="@svc.ServiceId">
+                                    @svc.Name (₱@svc.Price.ToString("N2"))
+                                </option>
+                            }
+                        </optgroup>
+                    }
+                </select>
+                <span asp-validation-for="ServiceId" class="text-danger"></span>
             </div>
 
             <!-- DATE -->
             <div class="col-md-6">
                 <label class="form-label fw-semibold">Date</label>
-                <input name="ScheduleDateOld"
+                <input asp-for="ScheduleDateOld"
                        type="date"
                        class="form-control"
-                       value="@(Model.ScheduleDateOld?.ToString("yyyy-MM-dd") ?? DateTime.Today.ToString("yyyy-MM-dd"))"
+                       value="@(Model.ScheduleDateOld?.ToString("yyyy-MM-dd"))"
                        required />
+                <span asp-validation-for="ScheduleDateOld" class="text-danger"></span>
             </div>
 
             <!-- TIME -->
             <div class="col-md-6">
                 <label class="form-label fw-semibold">Time</label>
-                <input name="ScheduleTime"
+                <input asp-for="ScheduleTime"
                        type="time"
                        class="form-control"
-                       value="@(Model.ScheduleTime?.ToString(@"hh\:mm") ?? "")"
+                       value="@(Model.ScheduleTime?.ToString(@"hh\:mm"))"
                        required />
+                <span asp-validation-for="ScheduleTime" class="text-danger"></span>
             </div>
 
-            <!-- STATUS -->
-            <div class="col-md-6">
-                <label class="form-label fw-semibold">Status</label>
-                <select name="Status" class="form-select">
-                    <option value="Pending" selected="@(Model.Status == "Pending" ? "selected" : null)">Pending</option>
-                    <option value="Confirmed" selected="@(Model.Status == "Confirmed" ? "selected" : null)">Confirmed</option>
-                    <option value="Completed" selected="@(Model.Status == "Completed" ? "selected" : null)">Completed</option>
-                    <option value="Cancelled" selected="@(Model.Status == "Cancelled" ? "selected" : null)">Cancelled</option>
-                </select>
-            </div>
+            <!-- STATUS (user-based, same idea as create) -->
+            @if (role == 0) 
+            {
+                <div class="col-md-6">
+                    <label class="form-label fw-semibold">Status</label>
+                    <!-- show as read-only text -->
+                    <input type="text" class="form-control" value="@Model.Status ?? "Pending"" readonly />
+                    <!-- keep current status value in hidden input so model binds -->
+                    <input type="hidden" name="Status" value="@Model.Status ?? "Pending"" />
+                </div>
+            }
+            else
+            {
+                <div class="col-md-6">
+                    <label class="form-label fw-semibold">Status</label>
+                    <select asp-for="Status" class="form-select">
+                        <option value="Pending">Pending</option>
+                        <option value="Confirmed">Confirmed</option>
+                        <option value="Urgent">Urgent</option>
+                        <option value="Completed">Completed</option>
+                        <option value="Cancelled">Cancelled</option>
+                    </select>
+                    <span asp-validation-for="Status" class="text-danger"></span>
+                </div>
+            }
 
         </div>
     </div>

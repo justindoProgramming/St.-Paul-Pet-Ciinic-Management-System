@@ -52,10 +52,23 @@
                 </select>
             </div>
 
-            <div class="col-md-6">
-                <label class="form-label fw-semibold">Vaccine Name</label>
-                <input name="VaccineName" class="form-control" value="@Model.VaccineName" required />
+            <div class="mb-3">
+                <label class="form-label fw-semibold">Vaccination Service</label>
+
+                <select name="VaccineName" class="form-select" required>
+                    <option disabled>Select a vaccination service...</option>
+
+                    @foreach (var svc in (List<Service>)ViewBag.VaccinationServices ?? new List<Service>())
+                    {
+                        var isSelected = Model?.VaccineName == svc.Name ? "selected" : "";
+
+                        <option value="@svc.Name" selected="@isSelected">
+                            @svc.Name — ₱@svc.Price
+                        </option>
+                    }
+                </select>
             </div>
+
 
             <div class="col-md-3">
                 <label class="form-label fw-semibold">Date Given</label>

@@ -3,34 +3,17 @@
     // ============================
     // 1. HARDCODED SERVICES
     // ============================
-        const services = [
-        { name: "General Consultation", price: 300 },
-        { name: "Vaccination", price: 450 },
-        { name: "Dental Cleaning", price: 1500 },
-        { name: "Surgery Consultation", price: 500 },
-        { name: "X-Ray", price: 1200 },
-        { name: "Blood Test", price: 550 },
-        { name: "Ultrasound", price: 1500 },
-        { name: "Deworming Tablet", price: 150 },
-        { name: "Parvo Test", price: 850 },
-        { name: "Heartworm Test", price: 700 },
-        { name: "Grooming (Basic)", price: 350 },
-        { name: "Grooming (Full)", price: 700 },
-        { name: "Nail Trimming", price: 120 },
-        { name: "Ear Cleaning", price: 180 },
-        { name: "Spay Surgery", price: 2500 },
-        { name: "Neuter Surgery", price: 2200 },
-        { name: "Microchipping", price: 500 },
-        { name: "Fecal Test", price: 300 },
-        { name: "Allergy Test", price: 1200 },
-        { name: "Fluid Therapy", price: 450 },
-        { name: "Wound Treatment", price: 350 },
-        { name: "Hospitalization (per day)", price: 900 },
-        { name: "Rabies Vaccination", price: 300 },
-        { name: "Tick & Flea Treatment", price: 400 },
-        { name: "Kennel Cough Vaccination", price: 450 },
-        { name: "Skin Scraping Test", price: 500 }
-    ];
+        let services = [];
+
+window.addEventListener("DOMContentLoaded", () => {
+    fetch("/BillingPharmacy/GetServices")
+        .then(res => res.json())
+        .then(data => {
+            services = data;
+            loadServices(); // Load service cards from DB
+        });
+});
+
 
     // ============================
     // 2. LOAD SERVICE CARDS
@@ -177,6 +160,15 @@
         }
     }
 
+         function openBillingHistory() {
+        $("#billingHistoryContent").html("Loading...");
+        $("#billingHistoryContent").load("/BillingPharmacy/History", function () {
+            new bootstrap.Modal(document.getElementById("billingHistoryModal")).show();
+        });
+    }
+
+
+
     // ============================
     // 6. TOAST NOTIFICATION
     // ============================
@@ -203,6 +195,45 @@
 
         setTimeout(() => toast.remove(), 3000);
     }
+
+        // ===========================
+    // ADD NEW SERVICE (saves to DB)
+    // ===========================
+
+    document.getElementById("addServiceForm").addEventListener("submit", function (e) {
+        e.preventDefault();
+
+        let service = {
+            Name: document.getElementById("newServiceName").value,
+            Category: document.getElementById("newServiceCategory").value,
+            Price: parseFloat(document.getElementById("newServicePrice").value)
+        };
+
+        fetch("/BillingPharmacy/AddService", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify(service)
+        })
+        .then(res => res.json())
+        .then(data => {
+            showToast("Service added successfully!", "success");
+
+            // Refresh service list
+            fetch("/BillingPharmacy/GetServices")
+                .then(r => r.json())
+                .then(svc => {
+                    services = svc;
+                    loadServices();
+                });
+
+            // Close modal
+            bootstrap.Modal.getInstance(document.getElementById("addServiceModal")).hide();
+        })
+        .catch(() => showToast("Error adding service.", "danger"));
+    });
+
+
+
 
 
 </script>

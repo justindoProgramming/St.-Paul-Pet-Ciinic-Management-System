@@ -19,7 +19,9 @@ namespace PetClinicSystem.Data
         public DbSet<Drug> Drugs { get; set; }
         public DbSet<Prescription> Prescriptions { get; set; }
         public DbSet<Vaccination> Vaccinations { get; set; }
-        public DbSet<Grooming> Grooming { get; set; }
         public DbSet<MedicalRecord> MedicalRecords { get; set; }
+        public DbSet<Notification> Notifications { get; set; }
+        public DbSet<Service> Service { get; set; }
+
     }
 }

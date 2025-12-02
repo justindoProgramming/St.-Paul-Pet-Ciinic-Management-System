@@ -48,6 +48,12 @@
             <i class="fa-solid fa-paw me-2"></i> My Pets
         </a>
 
+        <a class="nav-link nav-link-custom @(ViewBag.ActiveMenu == "Records" ? "nav-active" : "")"
+           href="/ClientRecords/Index">
+            <i class="fa-solid fa-clipboard-list me-2"></i> Medical Records
+        </a>
+
+
         <!-- OPTIONAL: if you ever want a billing history page for clients, link it here
         <a class="nav-link nav-link-custom @(active == "Billing" ? "nav-active" : "")"
            href="/BillingPharmacy/Index">

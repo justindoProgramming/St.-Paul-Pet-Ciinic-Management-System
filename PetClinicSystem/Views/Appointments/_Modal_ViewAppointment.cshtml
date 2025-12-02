@@ -1,23 +1,47 @@
 ﻿@model PetClinicSystem.Models.Schedule
 
+@if (Model == null)
+{
+    <div class="p-4">
+        <h5 class="text-danger">Appointment not found.</h5>
+    </div>
+    return;
+}
+
 <div class="modal-header border-0">
     <h5 class="modal-title fw-bold">Appointment Details</h5>
-    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
 </div>
 
 <div class="modal-body">
     <div class="border rounded-4 p-4 shadow-sm">
 
+        <!-- APPOINTMENT INFO -->
         <h6 class="fw-bold mb-2">Appointment Info</h6>
         <div class="text-secondary mb-3">
-            <div><strong>Service:</strong> @Model.Service</div>
-            <div><strong>Date:</strong> @(Model.ScheduleDateOld?.ToString("MMM dd, yyyy") ?? "-")</div>
-            <div><strong>Time:</strong> @(Model.ScheduleTime?.ToString(@"hh\:mm") ?? "-")</div>
-            <div><strong>Status:</strong> @Model.Status</div>
+            <div>
+                <strong>Service:</strong>
+                @(Model.Service?.Name ?? Model.ServiceName ?? "-")
+            </div>
+
+            <div>
+                <strong>Date:</strong>
+                @(Model.ScheduleDateOld?.ToString("MMM dd, yyyy") ?? "-")
+            </div>
+
+            <div>
+                <strong>Time:</strong>
+                @(Model.ScheduleTime?.ToString(@"hh\:mm") ?? "-")
+            </div>
+
+            <div>
+                <strong>Status:</strong> @Model.Status
+            </div>
         </div>
 
         <hr />
 
+        <!-- PATIENT -->
         <h6 class="fw-bold mb-2">Patient</h6>
         <div class="text-secondary mb-3">
             <div><strong>Name:</strong> @Model.Pet?.Name</div>
@@ -27,6 +51,7 @@
 
         <hr />
 
+        <!-- OWNER -->
         <h6 class="fw-bold mb-2">Owner</h6>
         <div class="text-secondary mb-3">
             <div><strong>Name:</strong> @Model.Pet?.Owner?.FullName</div>
@@ -36,6 +61,7 @@
 
         <hr />
 
+        <!-- STAFF -->
         <h6 class="fw-bold mb-2">Assigned Staff</h6>
         <div class="text-secondary">
             <div><strong>Name:</strong> @Model.Staff?.FullName</div>

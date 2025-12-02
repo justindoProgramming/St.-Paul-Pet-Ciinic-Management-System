@@ -53,11 +53,11 @@
 
                     <button type="button"
                             class="btn btn-success ms-2"
-                            style="border-radius: 4px;"
                             data-bs-toggle="modal"
                             data-bs-target="#addServiceModal">
                         <i class="fa-solid fa-plus me-1"></i> Add Service
                     </button>
+
 
                 </div>
 
@@ -94,6 +94,12 @@
                             onclick="checkout()">
                         <i class="fa-solid fa-cash-register me-2"></i> Process Payment
                     </button>
+                    <button class="btn btn-outline-primary mt-2 w-100"
+                            onclick="openBillingHistory()">
+                        <i class="fa-solid fa-clock-rotate-left me-2"></i> Billing History
+                    </button>
+
+
                 </div>
             </div>
         </div>
@@ -159,6 +165,15 @@
                                placeholder="e.g., Grooming, Nail Trim"
                                required />
                     </div>
+
+                    <div class="mb-3">
+                        <label class="form-label fw-semibold">Category</label>
+                        <input id="newServiceCategory"
+                               class="form-control"
+                               placeholder="e.g., Grooming / Medical / Lab"
+                               required />
+                    </div>
+
 
                     <div class="mb-3">
                         <label class="form-label fw-semibold">Price</label>
@@ -262,58 +277,74 @@
     <span id="bp-toast-text"></span>
 </div>
 
+<!-- BILLING HISTORY MODAL -->
+<div class="modal fade" id="billingHistoryModal" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-xl modal-dialog-centered">
+        <div class="modal-content" id="billingHistoryContent"></div>
+    </div>
+</div>
+
+
 <script>
     function showTab(tab, btn) {
-        document.querySelectorAll('.tab-section')
-            .forEach(s => s.classList.add("d-none"));
-
-        document.querySelectorAll('.tab-btn')
-            .forEach(b => b.classList.remove("active"));
+        document.querySelectorAll('.tab-section').forEach(s => s.classList.add("d-none"));
+        document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove("active"));
 
         document.getElementById("tab-" + tab).classList.remove("d-none");
-        if (btn) {
-            btn.classList.add("active");
-        }
+        if (btn) btn.classList.add("active");
 
-        if (tab === 'inventory') {
-            loadDrugs();
-        } else if (tab === 'prescriptions') {
-            loadPrescriptions();
-        } else if (tab === 'vaccines') {
-            loadVaccinations();
-        }
+        if (tab === 'inventory') loadDrugs();
+        else if (tab === 'prescriptions') loadPrescriptions();
+        else if (tab === 'vaccines') loadVaccinations();
     }
 
-    // Toast helper for Billing & Pharmacy
     function showBpToast(message, type) {
         const toast = document.getElementById("bp-toast");
         const textEl = document.getElementById("bp-toast-text");
-        if (!toast || !textEl) return;
+        if (!toast) return;
 
-        textEl.textContent = message || "";
-
-        // reset classes
+        textEl.textContent = message;
         toast.classList.remove("d-none", "bp-toast-success", "bp-toast-error", "bp-toast-show", "bp-toast-hide");
 
-        // choose color
-        if (type === "error") {
-            toast.classList.add("bp-toast-error");
-        } else {
-            toast.classList.add("bp-toast-success");
-        }
-
-        // show
+        toast.classList.add(type === "error" ? "bp-toast-error" : "bp-toast-success");
         toast.classList.add("bp-toast-show");
 
-        // auto hide after 3 seconds
-        setTimeout(function () {
+        setTimeout(() => {
             toast.classList.add("bp-toast-hide");
-            setTimeout(function () {
+            setTimeout(() => {
                 toast.classList.add("d-none");
                 toast.classList.remove("bp-toast-show", "bp-toast-hide");
-            }, 300); // match transition
+            }, 300);
         }, 3000);
     }
+
+    // ---------------------------
+    // OPEN BILLING HISTORY MODAL
+    // ---------------------------
+    function openBillingHistory() {
+        $("#billingHistoryContent").html("Loading...");
+        $("#billingHistoryContent").load("/BillingPharmacy/History", function () {
+            new bootstrap.Modal(document.getElementById("billingHistoryModal")).show();
+        });
+    }
+
+    // ---------------------------
+    // ADD NEW SERVICE
+    // ---------------------------
+    const name = document.getElementById("newServiceName").value.trim();
+    const price = parseFloat(document.getElementById("newServicePrice").value);
+    const category = document.getElementById("newServiceCategory").value.trim();
+
+    fetch("/BillingPharmacy/AddService", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+            name: name,
+            price: price,
+            category: category
+        })
+    })
+
 </script>
 
 <style>

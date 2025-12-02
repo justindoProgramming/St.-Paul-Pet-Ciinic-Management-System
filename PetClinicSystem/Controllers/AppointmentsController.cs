@@ -1,9 +1,8 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Http;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore.Http;
 using PetClinicSystem.Data;
 using PetClinicSystem.Models;
-using System;
 using System.Linq;
 
 namespace PetClinicSystem.Controllers
@@ -17,251 +16,283 @@ namespace PetClinicSystem.Controllers
             _db = db;
         }
 
-        // ======== SESSION HELPERS / ROLES =========
-        private int UserId => HttpContext.Session.GetInt32("UserId") ?? 0;
-        private int UserRole => HttpContext.Session.GetInt32("UserRole") ?? -1;
+        // 0 = Client, 1 = Admin, 2 = Staff
+        private int? CurrentUserId => HttpContext.Session.GetInt32("UserId");
+        private int? CurrentRole   => HttpContext.Session.GetInt32("UserRole");
 
-        private bool IsAdmin => UserRole == 1;
-        private bool IsStaff => UserRole == 2;
-        private bool IsClient => UserRole == 0;
+        // LOAD DROPDOWN DATA (pets filtered for clients)
+        private void LoadDropdowns()
+        {
+            var role   = CurrentRole;
+            var userId = CurrentUserId;
 
-        // =====================================================
-        // INDEX – list appointments (user-based + search)
-        // =====================================================
+            var petsQuery = _db.Pets
+                .Include(p => p.Owner)
+                .AsQueryable();
+
+            // client: only their pets in dropdown
+            if (role == 0 && userId.HasValue)
+            {
+                petsQuery = petsQuery.Where(p => p.OwnerId == userId.Value);
+            }
+
+            ViewBag.Pets     = petsQuery.ToList();
+            ViewBag.Staff    = _db.Accounts.Where(a => a.IsAdmin == 2).ToList();
+            ViewBag.Services = _db.Service.ToList();
+        }
+
+        // INDEX
         public IActionResult Index(string? search)
         {
             ViewBag.ActiveMenu = "Appointments";
-            ViewBag.Search = search ?? string.Empty;
+
+            var role   = CurrentRole;
+            var userId = CurrentUserId;
 
             var query = _db.Schedule
-                .Include(s => s.Pet).ThenInclude(p => p.Owner)
+                .Include(s => s.Pet).ThenInclude(o => o.Owner)
                 .Include(s => s.Staff)
+                .Include(s => s.Service)
                 .AsQueryable();
 
-            // STAFF: only appointments assigned to this staff
-            if (IsStaff)
+            // CLIENT → only their appointments
+            if (role == 0 && userId.HasValue)
             {
-                query = query.Where(s => s.StaffId == UserId);
+                query = query.Where(s => s.Pet.OwnerId == userId.Value);
             }
-
-            // CLIENT: only appointments for my pets
-            if (IsClient)
+            // STAFF → (optional) only their assigned schedules
+            else if (role == 2 && userId.HasValue)
             {
-                var myPets = _db.Pets
-                    .Where(p => p.OwnerId == UserId)
-                    .Select(p => p.PetId)
-                    .ToList();
-
-                query = query.Where(s => myPets.Contains(s.PetId));
+                query = query.Where(s => s.StaffId == userId.Value);
             }
+            // ADMIN → all
 
-            // SEARCH: pet name, service, status, date (yyyy-MM-dd)
             if (!string.IsNullOrWhiteSpace(search))
             {
-                search = search.Trim().ToLower();
-
+                search = search.ToLower();
                 query = query.Where(s =>
-                    (s.Pet != null && s.Pet.Name.ToLower().Contains(search)) ||
-                    (s.Service != null && s.Service.ToLower().Contains(search)) ||
+                    s.Pet.Name.ToLower().Contains(search) ||
                     (s.Status != null && s.Status.ToLower().Contains(search)) ||
-                    (s.ScheduleDateOld.HasValue &&
-                     s.ScheduleDateOld.Value.ToString("yyyy-MM-dd").Contains(search))
-                );
+                    (s.Service != null && s.Service.Name.ToLower().Contains(search)));
             }
 
-            var list = query
-                .OrderBy(s => s.ScheduleDateOld ?? DateTime.MaxValue)
-                .ThenBy(s => s.ScheduleTime ?? TimeSpan.MaxValue)
-                .ToList();
+            // optional: order by date/time
+            query = query
+                .OrderBy(s => s.ScheduleDateOld)
+                .ThenBy(s => s.ScheduleTime);
 
-            return View(list);
+            return View(query.ToList());
         }
 
-        // =====================================================
-        // DETAILS – view single appointment (modal)
-        // =====================================================
-        public IActionResult Details(int id)
-        {
-            var appt = _db.Schedule
-                .Include(s => s.Pet).ThenInclude(p => p.Owner)
-                .Include(s => s.Staff)
-                .FirstOrDefault(s => s.ScheduleId == id);
-
-            if (appt == null)
-                return NotFound();
-
-            // STAFF: can only view own appointments
-            if (IsStaff && appt.StaffId != UserId)
-                return Unauthorized();
-
-            // CLIENT: can only view their own pets' appointments
-            if (IsClient && appt.Pet?.OwnerId != UserId)
-                return Unauthorized();
-
-            return PartialView("_Modal_ViewAppointment", appt);
-        }
-
-        // =====================================================
-        // CREATE (GET) – open modal
-        // =====================================================
+        // CREATE (MODAL)
         public IActionResult Create()
         {
-            // Pets list
-            if (IsClient)
-            {
-                // client: only their pets
-                ViewBag.Pets = _db.Pets
-                    .Include(p => p.Owner)
-                    .Where(p => p.OwnerId == UserId)
-                    .ToList();
-            }
-            else
-            {
-                // admin / staff: all pets
-                ViewBag.Pets = _db.Pets
-                    .Include(p => p.Owner)
-                    .ToList();
-            }
-
-            // Staff list for dropdown (admins + staff)
-            ViewBag.Staff = _db.Accounts
-                .Where(a => a.IsAdmin == 1 || a.IsAdmin == 2)
-                .ToList();
-
-            return PartialView("_Modal_CreateAppointment", new Schedule());
+            LoadDropdowns();
+            return PartialView("_Modal_CreateAppointment");
         }
 
-        // =====================================================
-        // CREATE (POST)
-        // =====================================================
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public IActionResult Create(Schedule model)
         {
-            // If client is creating, auto-assign to any staff (first active staff)
-            if (IsClient)
-            {
-                var assignedStaffId = _db.Accounts
-                    .Where(a => a.IsAdmin == 2)
-                    .Select(a => a.AccountId)
-                    .FirstOrDefault();
+            var role   = CurrentRole;
+            var userId = CurrentUserId;
 
-                model.StaffId = assignedStaffId;
+            // client can only book for their own pets
+            if (role == 0 && userId.HasValue)
+            {
+                bool ownsPet = _db.Pets.Any(p => p.PetId == model.PetId &&
+                                                 p.OwnerId == userId.Value);
+                if (!ownsPet)
+                {
+                    TempData["Error"] = "You can only book appointments for your own pets.";
+                    return RedirectToAction("Index");
+                }
+
+                // client is not allowed to control Status
+                model.Status = "Pending";
+            }
+
+            // set legacy service name
+            if (model.ServiceId != null)
+            {
+                var svc = _db.Service.Find(model.ServiceId.Value);
+                model.ServiceName = svc?.Name;
             }
 
             _db.Schedule.Add(model);
             _db.SaveChanges();
+            TempData["Success"] = "Appointment created.";
 
-            TempData["Success"] = "Appointment created successfully.";
             return RedirectToAction("Index");
         }
 
-        // =====================================================
-        // EDIT (GET) – open modal
-        // =====================================================
+        // EDIT (MODAL)
         public IActionResult Edit(int id)
         {
-            var appt = _db.Schedule
-                .Include(s => s.Pet)
-                .FirstOrDefault(s => s.ScheduleId == id);
+            var role   = CurrentRole;
+            var userId = CurrentUserId;
 
-            if (appt == null)
-                return NotFound();
+            Schedule? schedule;
 
-            // CLIENT: cannot edit
-            if (IsClient)
-                return Unauthorized();
+            if (role == 0 && userId.HasValue)
+            {
+                // client: only their own appointment
+                schedule = _db.Schedule
+                    .Include(s => s.Pet).ThenInclude(o => o.Owner)
+                    .Include(s => s.Staff)
+                    .Include(s => s.Service)
+                    .FirstOrDefault(s => s.ScheduleId == id &&
+                                         s.Pet.OwnerId == userId.Value);
+            }
+            else
+            {
+                // staff/admin
+                schedule = _db.Schedule
+                    .Include(s => s.Pet).ThenInclude(o => o.Owner)
+                    .Include(s => s.Staff)
+                    .Include(s => s.Service)
+                    .FirstOrDefault(s => s.ScheduleId == id);
+            }
 
-            // STAFF: can only edit their own appointments
-            if (IsStaff && appt.StaffId != UserId)
-                return Unauthorized();
+            if (schedule == null)
+                return Content("Appointment not found");
 
-            // Pets list
-            ViewBag.Pets = _db.Pets
-                .Include(p => p.Owner)
-                .ToList();
-
-            // Staff list
-            ViewBag.Staff = _db.Accounts
-                .Where(a => a.IsAdmin == 1 || a.IsAdmin == 2)
-                .ToList();
-
-            return PartialView("_Modal_EditAppointment", appt);
+            LoadDropdowns();
+            return PartialView("_Modal_EditAppointment", schedule);
         }
 
-        // =====================================================
-        // EDIT (POST)
-        // =====================================================
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public IActionResult Edit(Schedule model)
         {
-            // CLIENT: cannot edit
-            if (IsClient)
-                return Unauthorized();
+            var role   = CurrentRole;
+            var userId = CurrentUserId;
 
-            var existing = _db.Schedule
-                .AsNoTracking()
+            var schedule = _db.Schedule
+                .Include(s => s.Pet).ThenInclude(o => o.Owner)
                 .FirstOrDefault(s => s.ScheduleId == model.ScheduleId);
 
-            if (existing == null)
-                return NotFound();
+            if (schedule == null)
+            {
+                TempData["Error"] = "Appointment not found.";
+                return RedirectToAction("Index");
+            }
 
-            // STAFF: can only edit their own appointments
-            if (IsStaff && existing.StaffId != UserId)
-                return Unauthorized();
+            // client can only edit their own appointment
+            if (role == 0 && userId.HasValue &&
+                schedule.Pet.OwnerId != userId.Value)
+            {
+                TempData["Error"] = "You are not allowed to edit this appointment.";
+                return RedirectToAction("Index");
+            }
 
-            _db.Schedule.Update(model);
+            // update allowed fields
+            schedule.PetId           = model.PetId;
+            schedule.StaffId         = model.StaffId;
+            schedule.ServiceId       = model.ServiceId;
+            schedule.ScheduleDateOld = model.ScheduleDateOld;
+            schedule.ScheduleTime    = model.ScheduleTime;
+
+            // update ServiceName
+            if (model.ServiceId != null)
+            {
+                var svc = _db.Service.Find(model.ServiceId.Value);
+                schedule.ServiceName = svc?.Name;
+            }
+            else
+            {
+                schedule.ServiceName = null;
+            }
+
+            // ONLY staff/admin can change Status
+            if (role != 0)
+            {
+                schedule.Status = model.Status;
+            }
+
             _db.SaveChanges();
+            TempData["Success"] = "Appointment updated.";
 
-            TempData["Success"] = "Appointment updated successfully!";
             return RedirectToAction("Index");
         }
 
-        // =====================================================
-        // DELETE (GET) – open confirm modal
-        // =====================================================
-        public IActionResult Delete(int id)
+        // VIEW
+        public IActionResult ViewAppointment(int id)
         {
-            var appt = _db.Schedule
-                .Include(s => s.Pet)
+            var role   = CurrentRole;
+            var userId = CurrentUserId;
+
+            var schedule = _db.Schedule
+                .Include(s => s.Pet).ThenInclude(o => o.Owner)
+                .Include(s => s.Staff)
+                .Include(s => s.Service)
                 .FirstOrDefault(s => s.ScheduleId == id);
 
-            if (appt == null)
-                return NotFound();
+            if (schedule == null)
+                return Content("Appointment not found");
 
-            // CLIENT: cannot delete
-            if (IsClient)
-                return Unauthorized();
+            // client can only view their own appointment
+            if (role == 0 && userId.HasValue &&
+                schedule.Pet.OwnerId != userId.Value)
+            {
+                return Content("Appointment not found");
+            }
 
-            // STAFF: can only delete their own
-            if (IsStaff && appt.StaffId != UserId)
-                return Unauthorized();
-
-            return PartialView("_Modal_DeleteAppointment", appt);
+            return PartialView("_Modal_ViewAppointment", schedule);
         }
 
-        // =====================================================
-        // DELETE (POST)
-        // =====================================================
-        [HttpPost]
-        public IActionResult DeleteConfirmed(int scheduleId)
+        // DELETE
+        public IActionResult Delete(int id)
         {
-            var appt = _db.Schedule.Find(scheduleId);
+            var role   = CurrentRole;
+            var userId = CurrentUserId;
 
-            if (appt == null)
+            var schedule = _db.Schedule
+                .Include(s => s.Pet).ThenInclude(o => o.Owner)
+                .FirstOrDefault(s => s.ScheduleId == id);
+
+            if (schedule == null)
+                return Content("Appointment not found");
+
+            // client can only delete their own appointment (if you allow)
+            if (role == 0 && userId.HasValue &&
+                schedule.Pet.OwnerId != userId.Value)
+            {
+                return Content("Appointment not found");
+            }
+
+            return PartialView("_Modal_DeleteAppointment", schedule);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public IActionResult DeleteConfirmed(int id)
+        {
+            var role   = CurrentRole;
+            var userId = CurrentUserId;
+
+            var schedule = _db.Schedule
+                .Include(s => s.Pet).ThenInclude(o => o.Owner)
+                .FirstOrDefault(s => s.ScheduleId == id);
+
+            if (schedule == null)
+            {
+                TempData["Error"] = "Appointment not found.";
                 return RedirectToAction("Index");
+            }
 
-            // CLIENT: cannot delete
-            if (IsClient)
-                return Unauthorized();
+            if (role == 0 && userId.HasValue &&
+                schedule.Pet.OwnerId != userId.Value)
+            {
+                TempData["Error"] = "You are not allowed to delete this appointment.";
+                return RedirectToAction("Index");
+            }
 
-            // STAFF: can only delete their own
-            if (IsStaff && appt.StaffId != UserId)
-                return Unauthorized();
-
-            _db.Schedule.Remove(appt);
+            _db.Schedule.Remove(schedule);
             _db.SaveChanges();
 
-            TempData["Success"] = "Appointment deleted successfully.";
+            TempData["Success"] = "Appointment deleted.";
             return RedirectToAction("Index");
         }
     }

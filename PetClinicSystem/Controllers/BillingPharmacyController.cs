@@ -14,7 +14,8 @@ namespace PetClinicSystem.Controllers
 
         public BillingPharmacyController(ApplicationDbContext db)
         {
-            _db = db;
+            _db = db;   
+
         }
 
         // =========================================
@@ -423,6 +424,20 @@ namespace PetClinicSystem.Controllers
             return PartialView("_Vaccinations", list);
         }
 
+        public IActionResult ViewVaccination(int id)
+        {
+            var vacc = _db.Vaccinations
+                .Include(v => v.Pet).ThenInclude(o => o.Owner)
+                .Include(v => v.Staff)
+                .FirstOrDefault(v => v.VaccinationId == id);
+
+            if (vacc == null)
+                return NotFound();
+
+            return PartialView("_Modal_ViewVaccination", vacc);
+        }
+
+
         [HttpGet]
         public IActionResult CreateVaccination()
         {
@@ -434,6 +449,12 @@ namespace PetClinicSystem.Controllers
                 .Where(a => a.IsAdmin == 2 || a.IsAdmin == 1)
                 .ToList();
 
+            // Load only Vaccination Services
+            ViewBag.VaccinationServices = _db.Service
+                .Where(s => s.Category != null && s.Category.ToLower().Contains("vaccination"))
+                .OrderBy(s => s.Name)
+                .ToList();
+
             var model = new Vaccination
             {
                 DateGiven = DateTime.Today,
@@ -442,6 +463,7 @@ namespace PetClinicSystem.Controllers
 
             return PartialView("_Modal_CreateVaccination", model);
         }
+
 
         // ====== UPDATED: CREATE VACCINATION (NO ModelState BLOCK + MESSAGE) ======
         [HttpPost]
@@ -503,21 +525,6 @@ namespace PetClinicSystem.Controllers
         }
 
 
-
-        [HttpGet]
-        public IActionResult ViewVaccination(int id)
-        {
-            var vacc = _db.Vaccinations
-                .Include(v => v.Pet).ThenInclude(o => o.Owner)
-                .Include(v => v.Staff)
-                .FirstOrDefault(v => v.VaccinationId == id);
-
-            if (vacc == null)
-                return NotFound();
-
-            return PartialView("_Modal_ViewVaccination", vacc);
-        }
-
         [HttpGet]
         public IActionResult EditVaccination(int id)
         {
@@ -535,8 +542,16 @@ namespace PetClinicSystem.Controllers
                 .Where(a => a.IsAdmin == 2 || a.IsAdmin == 1)
                 .ToList();
 
+            // Load only Vaccination Services
+            ViewBag.VaccinationServices = _db.Service
+                .Where(s => s.Category != null && s.Category.ToLower().Contains("vaccination"))
+                .OrderBy(s => s.Name)
+                .ToList();
+
             return PartialView("_Modal_EditVaccination", vacc);
         }
+
+
 
         // ====== UPDATED: EDIT VACCINATION (NO ModelState BLOCK + MESSAGE) ======
         [HttpPost]
@@ -613,5 +628,56 @@ namespace PetClinicSystem.Controllers
 
             return Ok(new { message = "Vaccination deleted." });
         }
+
+        [HttpGet]
+        public IActionResult GetServices()
+        {
+            var services = _db.Service
+                .Select(s => new
+                {
+                    name = s.Name,
+                    price = s.Price,
+                    category = s.Category
+                })
+                .ToList();
+
+            return Json(services);
+        }
+
+
+        public IActionResult History()
+        {
+            var history = _db.Billing
+                .Include(b => b.Pet).ThenInclude(o => o.Owner)
+                .Include(b => b.Staff)
+                .OrderByDescending(b => b.BillingDate)
+                .ToList();
+
+            return PartialView("_BillingHistory", history);
+        }
+
+        [HttpPost]
+        public JsonResult AddService([FromBody] Service model)
+        {
+            if (model == null || string.IsNullOrWhiteSpace(model.Name))
+                return Json(new { success = false, message = "Invalid data." });
+
+            try
+            {
+                _db.Service.Add(model);
+                _db.SaveChanges();
+
+                return Json(new { success = true, message = "Service added successfully." });
+            }
+            catch (Exception ex)
+            {
+                return Json(new { success = false, message = ex.Message });
+            }
+        }
+
+
+
+
+
     }
 }

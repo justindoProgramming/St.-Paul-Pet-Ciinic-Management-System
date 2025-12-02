@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\CJ LUMANGLAS\\Documents\\C#\\PetClinicSystem\\PetClinicSystem\\PetClinicSystem.csproj": {}
+    "C:\\Users\\CJ LUMANGLAS\\Documents\\C#\\PetClinicSystem - Completed Backup\\PetClinicSystem\\PetClinicSystem\\PetClinicSystem.csproj": {}
   },
   "projects": {
-    "C:\\Users\\CJ LUMANGLAS\\Documents\\C#\\PetClinicSystem\\PetClinicSystem\\PetClinicSystem.csproj": {
+    "C:\\Users\\CJ LUMANGLAS\\Documents\\C#\\PetClinicSystem - Completed Backup\\PetClinicSystem\\PetClinicSystem\\PetClinicSystem.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\CJ LUMANGLAS\\Documents\\C#\\PetClinicSystem\\PetClinicSystem\\PetClinicSystem.csproj",
+        "projectUniqueName": "C:\\Users\\CJ LUMANGLAS\\Documents\\C#\\PetClinicSystem - Completed Backup\\PetClinicSystem\\PetClinicSystem\\PetClinicSystem.csproj",
         "projectName": "PetClinicSystem",
-        "projectPath": "C:\\Users\\CJ LUMANGLAS\\Documents\\C#\\PetClinicSystem\\PetClinicSystem\\PetClinicSystem.csproj",
+        "projectPath": "C:\\Users\\CJ LUMANGLAS\\Documents\\C#\\PetClinicSystem - Completed Backup\\PetClinicSystem\\PetClinicSystem\\PetClinicSystem.csproj",
         "packagesPath": "C:\\Users\\CJ LUMANGLAS\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\CJ LUMANGLAS\\Documents\\C#\\PetClinicSystem\\PetClinicSystem\\obj\\",
+        "outputPath": "C:\\Users\\CJ LUMANGLAS\\Documents\\C#\\PetClinicSystem - Completed Backup\\PetClinicSystem\\PetClinicSystem\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"

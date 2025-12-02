@@ -168,12 +168,23 @@ namespace PetClinicSystem.Controllers
             if (pet == null)
                 return NotFound();
 
+            // Example checks – tweak based on your DbSets
+            bool hasAppointments = _db.Schedule.Any(s => s.PetId == id);
+            bool hasMedical = _db.MedicalRecords.Any(m => m.PetId == id);
+
+            if (hasAppointments || hasMedical)
+            {
+                TempData["Error"] = "This patient has existing records and cannot be deleted.";
+                return RedirectToAction("Index");
+            }
+
             _db.Pets.Remove(pet);
             _db.SaveChanges();
 
             TempData["Success"] = "Patient deleted successfully!";
             return RedirectToAction("Index");
         }
+
 
         // =========================================
         //  VIEW PET (GET) – DETAILS MODAL

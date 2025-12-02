@@ -1,0 +1,43 @@
+﻿@model List<PetClinicSystem.Models.Billing>
+
+<div class="modal-header">
+    <h5 class="modal-title fw-bold">Billing History</h5>
+    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+</div>
+
+<div class="modal-body">
+
+    <table class="table table-bordered table-striped">
+        <thead class="table-success">
+            <tr>
+                <th>Date</th>
+                <th>Pet</th>
+                <th>Owner</th>
+                <th>Service</th>
+                <th>Qty</th>
+                <th>Price</th>
+                <th>Total</th>
+            </tr>
+        </thead>
+
+        <tbody>
+            @foreach (var b in Model)
+            {
+                <tr>
+                    <td>@b.BillingDate.ToString("MMM dd, yyyy")</td>
+                    <td>@b.Pet?.Name</td>
+                    <td>@b.Pet?.Owner?.FullName</td>
+                    <td>@b.ServiceName</td>
+                    <td>@b.Quantity</td>
+                    <td>₱@b.ServicePrice</td>
+                    <td class="fw-bold text-success">₱@b.Total</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+
+</div>
+
+<div class="modal-footer">
+    <button class="btn btn-outline-secondary" data-bs-dismiss="modal">Close</button>
+</div>
