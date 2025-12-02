@@ -4,7 +4,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace PetClinicSystem.Models
 {
-    [Table("medicalrecords")]   // table name in MySQL
+    [Table("medicalrecords")]
     public class MedicalRecord
     {
         [Key]
@@ -21,12 +21,10 @@ namespace PetClinicSystem.Models
         public int StaffId { get; set; }
         public Account Staff { get; set; }
 
-        // optional link to prescription
         [Column("prescription_id")]
         public int? PrescriptionId { get; set; }
         public Prescription? Prescription { get; set; }
 
-        // optional link to vaccination
         [Column("vaccination_id")]
         public int? VaccinationId { get; set; }
         public Vaccination? Vaccination { get; set; }
@@ -42,5 +40,9 @@ namespace PetClinicSystem.Models
 
         [Column("date")]
         public DateTime? Date { get; set; }
+
+        // NEW: archive flag
+        [Column("is_archived")]
+        public bool IsArchived { get; set; } = false;
     }
 }

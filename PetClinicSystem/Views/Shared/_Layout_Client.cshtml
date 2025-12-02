@@ -39,18 +39,18 @@
         <!-- APPOINTMENTS (client sees only their own – controller handles filter) -->
         <a class="nav-link nav-link-custom @(active == "Appointments" ? "nav-active" : "")"
            href="/Appointments/Index">
-            <i class="fa-solid fa-calendar-check me-2"></i> Appointments
+            <i class="fa-solid fa-calendar-check me-2"></i> Appointment
         </a>
 
         <!-- PATIENTS (pets belonging to this client – PetsController handles filter) -->
         <a class="nav-link nav-link-custom @(active == "Pets" ? "nav-active" : "")"
            href="/Pets/Index">
-            <i class="fa-solid fa-paw me-2"></i> My Pets
+            <i class="fa-solid fa-paw me-2"></i> My Pet
         </a>
 
         <a class="nav-link nav-link-custom @(ViewBag.ActiveMenu == "Records" ? "nav-active" : "")"
            href="/ClientRecords/Index">
-            <i class="fa-solid fa-clipboard-list me-2"></i> Medical Records
+            <i class="fa-solid fa-clipboard-list me-2"></i> Medical Record
         </a>
 
 

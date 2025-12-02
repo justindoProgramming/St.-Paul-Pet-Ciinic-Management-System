@@ -27,8 +27,14 @@
     <div class="d-flex justify-content-between align-items-center mb-4">
         <h3 class="fw-bold mb-0">Owners</h3>
 
-        <div class="d-flex gap-2">
-            <input id="searchBox"
+        <!-- SIMPLE GET FORM FOR SEARCH -->
+        <form asp-controller="Owners"
+              asp-action="Index"
+              method="get"
+              class="d-flex gap-2 mb-0">
+
+            <input name="search"
+                   id="searchBox"
                    value="@ViewBag.Search"
                    class="form-control"
                    style="max-width:260px"
@@ -42,7 +48,7 @@
                     + Add Owner
                 </button>
             }
-        </div>
+        </form>
     </div>
 
     <div class="row g-3" id="ownerCardsContainer">
@@ -75,27 +81,6 @@
             // fallback
             alert(message);
         }
-
-        // ---------- Search: reload with query ----------
-        function applyOwnerSearch() {
-            var q = document.getElementById("searchBox").value || "";
-            var url = "/Owners/Index";
-            if (q.trim() !== "") {
-                url += "?search=" + encodeURIComponent(q.trim());
-            }
-            window.location.href = url;
-        }
-
-        document.addEventListener("DOMContentLoaded", function () {
-            var sb = document.getElementById("searchBox");
-            if (sb) {
-                sb.addEventListener("keyup", function (e) {
-                    if (e.key === "Enter") {
-                        applyOwnerSearch();
-                    }
-                });
-            }
-        });
 
         // ---------- Modal loaders (called from _OwnerCards) ----------
         function loadOwnerCreate() {
