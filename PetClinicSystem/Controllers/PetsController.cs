@@ -36,19 +36,30 @@ namespace PetClinicSystem.Controllers
                 .Include(p => p.Owner)
                 .AsQueryable();
 
-            // Clients: only see their own pets (OwnerId == logged-in AccountId)
+            // ✔ Correct Client Filtering
             if (IsClient && UserId != 0)
             {
-                query = query.Where(p => p.OwnerId == UserId);
+                // find owner linked to this account
+                var owner = _db.Owners.FirstOrDefault(o => o.AccountId == UserId);
+
+                if (owner != null)
+                {
+                    query = query.Where(p => p.OwnerId == owner.OwnerId);
+                }
+                else
+                {
+                    // client has no owner record
+                    return View(new List<Pet>());
+                }
             }
 
-            // Admin & Staff: see all pets
             var pets = query
                 .OrderBy(p => p.Name)
                 .ToList();
 
             return View(pets);
         }
+
 
         // =========================================
         //  CREATE PET (GET) – OPEN MODAL

@@ -22,7 +22,7 @@ namespace PetClinicSystem.Models
         [Column("password_hash")]
         public string PasswordHash { get; set; }
 
-        // 0=Client, 1=Admin, 2=Staff
+        // 0 = Client, 1 = Admin
         [Column("is_admin")]
         public int IsAdmin { get; set; }
 
@@ -34,5 +34,8 @@ namespace PetClinicSystem.Models
 
         [Column("updated_at")]
         public DateTime UpdatedAt { get; set; } = DateTime.Now;
+
+        // NEW: Link to Owner (1:1)
+        public Owner Owner { get; set; }
     }
 }

@@ -1,11 +1,13 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Http;
+using Microsoft.EntityFrameworkCore;
 using PetClinicSystem.Data;
 using PetClinicSystem.Models;
 using System;
 using System.Linq;
 using System.Security.Cryptography;
 using System.Text;
+using System.Threading.Tasks;
 
 namespace PetClinicSystem.Controllers
 {
@@ -18,46 +20,33 @@ namespace PetClinicSystem.Controllers
             _db = db;
         }
 
-        // ===================== HASH HELPER =====================
+        // ===================== PASSWORD HASHING =====================
         private string HashPassword(string password)
         {
             if (string.IsNullOrWhiteSpace(password))
                 return null;
 
-            using (var sha = SHA256.Create())
-            {
-                var bytes = Encoding.UTF8.GetBytes(password);
-                var hashBytes = sha.ComputeHash(bytes);
-                var sb = new StringBuilder();
-                foreach (var b in hashBytes)
-                    sb.Append(b.ToString("x2"));
-                return sb.ToString();
-            }
-        }
+            using var sha = SHA256.Create();
+            var bytes = Encoding.UTF8.GetBytes(password);
+            var hashBytes = sha.ComputeHash(bytes);
+            var sb = new StringBuilder();
 
-        // ===================== LANDING / DEFAULT =====================
+            foreach (var b in hashBytes)
+                sb.Append(b.ToString("x2"));
 
-        // /Account or /Account/Index  → send to public landing page (Home/Index)
-        [HttpGet]
-        public IActionResult Index()
-        {
-            return RedirectToAction("Index", "Home");
+            return sb.ToString();
         }
 
         // ===================== LOGIN =====================
-
         [HttpGet]
         public IActionResult Login()
         {
-            // We don't have a /Views/Account/Login view.
-            // If someone browses here directly, send them back to Home
-            // and open the login modal.
             TempData["OpenLoginModal"] = "true";
             return RedirectToAction("Index", "Home");
         }
 
         [HttpPost]
-        public IActionResult Login(string username, string password)
+        public async Task<IActionResult> Login(string username, string password)
         {
             if (string.IsNullOrWhiteSpace(username) || string.IsNullOrWhiteSpace(password))
             {
@@ -68,93 +57,106 @@ namespace PetClinicSystem.Controllers
 
             var hash = HashPassword(password);
 
-            var user = _db.Accounts
-                .FirstOrDefault(a =>
+            var user = await _db.Accounts
+                .Include(a => a.Owner)
+                .FirstOrDefaultAsync(a =>
                     a.Username == username &&
                     a.PasswordHash == hash &&
                     a.IsActive == true);
 
             if (user == null)
             {
-                TempData["Error"] = "Invalid username or password, or account is inactive.";
+                TempData["Error"] = "Invalid username or password.";
                 TempData["OpenLoginModal"] = "true";
                 return RedirectToAction("Index", "Home");
             }
 
-            // save info in session for layouts
+            // Save session login
             HttpContext.Session.SetInt32("UserId", user.AccountId);
             HttpContext.Session.SetString("UserName", user.FullName ?? user.Username);
-            HttpContext.Session.SetInt32("UserRole", user.IsAdmin);  // 1=Admin, 2=Staff, 0=Client
+            HttpContext.Session.SetInt32("UserRole", user.IsAdmin);
 
-            // redirect based on role
-            if (user.IsAdmin == 1)
+            // Role Redirects
+            return user.IsAdmin switch
             {
-                return RedirectToAction("Index", "Admin");
-            }
-            else if (user.IsAdmin == 2)
-            {
-                return RedirectToAction("Index", "Staff");
-            }
-            else
-            {
-                // client
-                return RedirectToAction("Index", "Client");
-            }
+                1 => RedirectToAction("Index", "Admin"), // Admin
+                2 => RedirectToAction("Index", "Staff"), // Staff
+                _ => RedirectToAction("Index", "Client") // Client
+            };
         }
 
-        // ===================== REGISTER =====================
-
+        // ===================== REGISTER (ACCOUNT + OWNER) =====================
         [HttpPost]
-        public IActionResult Register(string FullName, string Email, string Username, string Password)
+        public async Task<IActionResult> Register(
+            string FullName,
+            string Email,
+            string Username,
+            string Password,
+            string PhoneNumber,
+            string Address,
+            string EmergencyContact1,
+            string EmergencyContact2)
         {
-            if (_db.Accounts.Any(a => a.Email == Email || a.Username == Username))
+            // Validate duplicate email or username
+            bool exists = await _db.Accounts
+                .AnyAsync(a => a.Email == Email || a.Username == Username);
+
+            if (exists)
             {
                 TempData["Error"] = "Email or username already exists.";
+                TempData["OpenSignupModal"] = "true";
                 return RedirectToAction("Index", "Home");
             }
 
-            var account = new Account()
+            // 1. Create Account
+            var account = new Account
             {
                 FullName = FullName,
                 Email = Email,
                 Username = Username,
                 PasswordHash = HashPassword(Password),
-                IsAdmin = 0,              // client by default
+                IsAdmin = 0, // Client
                 IsActive = true,
                 CreatedAt = DateTime.Now,
                 UpdatedAt = DateTime.Now
             };
 
-            _db.Accounts.Add(account);
-            _db.SaveChanges();
+            await _db.Accounts.AddAsync(account);
+            await _db.SaveChangesAsync();
 
-            TempData["Success"] = "Account created successfully! You may now log in.";
+            // 2. Create Owner linked to account
+            var owner = new Owner
+            {
+                FullName = FullName,
+                Email = Email,
+                PhoneNumber = PhoneNumber,
+                Address = Address,
+                EmergencyContact1 = EmergencyContact1,
+                EmergencyContact2 = EmergencyContact2,
+                AccountId = account.AccountId
+            };
+
+            await _db.Owners.AddAsync(owner);
+            await _db.SaveChangesAsync();
+
+            TempData["Success"] = "Registration successful! You may now log in.";
+            TempData["OpenLoginModal"] = "true";
 
             return RedirectToAction("Index", "Home");
         }
 
-        // ===================== LOGOUT =====================
-        [HttpPost]
-        public IActionResult Logout()
-        {
-            HttpContext.Session.Clear();
-            TempData["LogoutMessage"] = "You have been logged out.";
-            return RedirectToAction("Index", "Home");
-        }
-
-        // ===================== PROFILE (ALL ROLES) =====================
-
+        // ===================== PROFILE (VIEW PAGE) =====================
         [HttpGet]
-        public IActionResult Profile()
+        public async Task<IActionResult> Profile()
         {
             int? userId = HttpContext.Session.GetInt32("UserId");
-            if (userId == null)
-            {
-                return RedirectToAction("Index", "Home");
-            }
 
-            var acc = _db.Accounts.FirstOrDefault(a => a.AccountId == userId.Value);
-            if (acc == null)
+            if (userId == null)
+                return RedirectToAction("Index", "Home");
+
+            var user = await _db.Accounts.FirstOrDefaultAsync(a => a.AccountId == userId);
+
+            if (user == null)
             {
                 HttpContext.Session.Clear();
                 return RedirectToAction("Index", "Home");
@@ -162,39 +164,38 @@ namespace PetClinicSystem.Controllers
 
             var model = new AccountProfileViewModel
             {
-                FullName = acc.FullName,
-                Email = acc.Email,
-                Username = acc.Username
+                FullName = user.FullName,
+                Email = user.Email,
+                Username = user.Username
             };
 
             return View(model);
         }
 
+        // ===================== PROFILE (SAVE CHANGES) =====================
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult Profile(AccountProfileViewModel model)
+        public async Task<IActionResult> Profile(AccountProfileViewModel model)
         {
             int? userId = HttpContext.Session.GetInt32("UserId");
+
             if (userId == null)
-            {
                 return RedirectToAction("Index", "Home");
-            }
 
             if (!ModelState.IsValid)
-            {
                 return View(model);
-            }
 
-            var acc = _db.Accounts.FirstOrDefault(a => a.AccountId == userId.Value);
-            if (acc == null)
+            var user = await _db.Accounts.FirstOrDefaultAsync(a => a.AccountId == userId);
+
+            if (user == null)
             {
                 HttpContext.Session.Clear();
                 return RedirectToAction("Index", "Home");
             }
 
-            // unique email / username (excluding self)
-            bool exists = _db.Accounts.Any(a =>
-                a.AccountId != acc.AccountId &&
+            // Check duplicates (exclude self)
+            bool exists = await _db.Accounts.AnyAsync(a =>
+                a.AccountId != user.AccountId &&
                 (a.Email == model.Email || a.Username == model.Username));
 
             if (exists)
@@ -203,23 +204,41 @@ namespace PetClinicSystem.Controllers
                 return View(model);
             }
 
-            acc.FullName = model.FullName;
-            acc.Email = model.Email;
-            acc.Username = model.Username;
-            acc.UpdatedAt = DateTime.Now;
+            // Update account fields
+            user.FullName = model.FullName;
+            user.Email = model.Email;
+            user.Username = model.Username;
+            user.UpdatedAt = DateTime.Now;
 
+            // Update password if entered
             if (!string.IsNullOrWhiteSpace(model.NewPassword))
             {
-                acc.PasswordHash = HashPassword(model.NewPassword);
+                if (model.NewPassword != model.ConfirmPassword)
+                {
+                    ModelState.AddModelError("ConfirmPassword", "Passwords do not match.");
+                    return View(model);
+                }
+
+                user.PasswordHash = HashPassword(model.NewPassword);
             }
 
-            _db.SaveChanges();
+            await _db.SaveChangesAsync();
 
-            // refresh name in header
-            HttpContext.Session.SetString("UserName", acc.FullName ?? acc.Username);
+            // Update session
+            HttpContext.Session.SetString("UserName", user.FullName);
 
-            TempData["Success"] = "Profile updated successfully.";
+            TempData["Success"] = "Profile updated successfully!";
             return RedirectToAction("Profile");
+        }
+
+
+        // ===================== LOGOUT =====================
+        [HttpPost]
+        public IActionResult Logout()
+        {
+            HttpContext.Session.Clear();
+            TempData["Success"] = "You have been logged out.";
+            return RedirectToAction("Index", "Home");
         }
     }
 }

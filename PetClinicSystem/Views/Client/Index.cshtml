@@ -1,5 +1,6 @@
 ﻿@{
     Layout = "_Layout_Client";
+
     var pets = ViewBag.MyPets;
     var upcoming = ViewBag.Upcoming;
     var vaccines = ViewBag.Vaccines;
@@ -31,7 +32,7 @@
                 <i class="fa-solid fa-calendar-check"></i>
             </div>
             <div>
-                <div class="text-secondary small">Today's' Appointments</div>
+                <div class="text-secondary small">Today's Appointments</div>
                 <div class="fw-bold fs-4">@upcoming.Count</div>
             </div>
         </div>
@@ -76,17 +77,26 @@
                         <div class="d-flex justify-content-between">
 
                             <div>
-                                <div class="fw-bold">@a.Pet.Name</div>
-                                <div class="text-secondary small">@a.Service</div>
+                                <div class="fw-bold">@a.Pet?.Name</div>
+
+                                <div class="text-secondary small">
+                                    @(a.Service?.Name ?? a.ServiceName ?? "No service")
+                                </div>
+
                                 <div class="text-muted small">
                                     @a.ScheduleDateOld?.ToString("MMM dd, yyyy")
-                                    — @a.ScheduleTime
+                                    —
+                                    @(
+                                                                a.Slot != null
+                                                                ? $"{a.Slot.StartTime:hh\\:mm} - {a.Slot.EndTime:hh\\:mm}"
+                                                                : "No Slot Selected"
+                                                                )
                                 </div>
                             </div>
 
                             <div class="text-end">
                                 <span class="badge bg-info text-white fw-semibold">
-                                    Upcoming
+                                    @(a.Status ?? "Upcoming")
                                 </span>
                             </div>
 
@@ -115,7 +125,7 @@
                 {
                     <div class="patient-card p-3 rounded-3 mb-2 d-flex justify-content-between">
                         <div>
-                            <div class="fw-bold">@v.Pet.Name</div>
+                            <div class="fw-bold">@v.Pet?.Name</div>
                             <div class="small text-secondary">@v.VaccineName</div>
                         </div>
 

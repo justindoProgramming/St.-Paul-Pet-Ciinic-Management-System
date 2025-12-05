@@ -6,22 +6,13 @@
 
     int role = Context.Session.GetInt32("UserRole") ?? -1;
 
-    if (role == 1)
+    Layout = role switch
     {
-        Layout = "~/Views/Shared/_Layout_Admin.cshtml";
-    }
-    else if (role == 2)
-    {
-        Layout = "~/Views/Shared/_Layout_Staff.cshtml";
-    }
-    else if (role == 0)
-    {
-        Layout = "~/Views/Shared/_Layout_Client.cshtml";
-    }
-    else
-    {
-        Layout = "~/Views/Shared/_Layout_Public.cshtml";
-    }
+        1 => "~/Views/Shared/_Layout_Admin.cshtml",
+        2 => "~/Views/Shared/_Layout_Staff.cshtml",
+        0 => "~/Views/Shared/_Layout_Client.cshtml",
+        _ => "~/Views/Shared/_Layout_Public.cshtml"
+    };
 }
 
 <div class="container py-4">
@@ -29,18 +20,19 @@
     <div class="d-flex justify-content-between align-items-center mb-4">
         <h3 class="fw-bold">Appointments</h3>
 
-        @* show toast if TempData["Success"] is set *@
+        <!-- SUCCESS TOAST -->
         @if (TempData["Success"] != null)
         {
             <script>
                 window.onload = function () {
                     if (window.showSuccessToast) {
-                        showSuccessToast('@TempData["Success"]');
+                        showSuccessToast("@TempData["Success"]");
                     }
                 }
             </script>
         }
 
+        <!-- SEARCH + NEW BUTTON -->
         <div class="d-flex gap-2">
             <input id="searchBox"
                    type="text"
@@ -50,32 +42,33 @@
                    value="@(ViewBag.Search ?? "")" />
 
             <button class="btn btn-outline-secondary" type="button" onclick="applySearch()">
-                <i class="fa-solid fa-filter"></i> Filter
+                Search
             </button>
 
             <button class="btn btn-success"
-                    data-bs-toggle="modal"
-                    data-bs-target="#createModal"
                     onclick="loadCreate()">
                 <i class="fa-solid fa-plus"></i> New Appointment
             </button>
         </div>
     </div>
 
-    <!-- APPOINTMENT CARDS -->
+    <!-- APPOINTMENT LIST -->
     <div class="row g-3">
 
         @foreach (var appt in Model)
         {
+            string slotStart = appt.Slot?.StartTime.ToString(@"hh\:mm") ?? "";
+            string slotEnd = appt.Slot?.EndTime.ToString(@"hh\:mm") ?? "";
+
             <div class="col-12">
                 <div class="card shadow-sm border-0 rounded-4 p-3 appointment-card">
                     <div class="row g-0">
 
-                        <!-- TIME -->
+                        <!-- TIME SECTION -->
                         <div class="col-md-2 d-flex flex-column align-items-center justify-content-center border-end">
-                            <h4 class="fw-bold text-success mb-0">
-                                @appt.ScheduleTime?.ToString(@"hh\:mm")
-                            </h4>
+                            <h5 class="fw-bold text-success mb-0">
+                                @(appt.Slot != null ? $"{slotStart} - {slotEnd}" : "No Slot")
+                            </h5>
                             <small class="text-secondary">
                                 @appt.ScheduleDateOld?.ToString("MMM dd, yyyy")
                             </small>
@@ -84,7 +77,9 @@
                         <!-- MAIN INFO -->
                         <div class="col-md-7 px-4">
                             <h5 class="fw-bold mb-1">@appt.Pet?.Name</h5>
-                            <span class="text-secondary small">@appt.Pet?.Species - @appt.Pet?.Breed</span>
+                            <div class="text-secondary small">
+                                @appt.Pet?.Species - @appt.Pet?.Breed
+                            </div>
 
                             <div class="mt-3">
                                 <h6 class="fw-semibold mb-0">Owner</h6>
@@ -94,14 +89,17 @@
                             </div>
 
                             <div class="mt-3">
-                                <h6 class="fw-semibold mb-0">Doctor</h6>
-                                <span class="text-secondary">@appt.Staff?.FullName</span>
+                                <h6 class="fw-semibold mb-0">Assigned Staff</h6>
+                                <span class="text-secondary">
+                                    @appt.Staff?.FullName
+                                </span>
                             </div>
                         </div>
 
-                        <!-- STATUS + VIEW / EDIT BUTTONS -->
+                        <!-- STATUS & ACTIONS -->
                         <div class="col-md-3 d-flex flex-column align-items-end justify-content-between">
 
+                            <!-- STATUS BADGE -->
                             <div>
                                 @switch (appt.Status?.ToLower())
                                 {
@@ -123,20 +121,16 @@
                                 }
                             </div>
 
+                            <!-- BUTTONS -->
                             <div class="d-flex gap-2 mt-3">
                                 <button class="btn btn-outline-success"
-                                        data-bs-toggle="modal"
-                                        data-bs-target="#viewModal"
                                         onclick="loadView(@appt.ScheduleId)">
                                     View
                                 </button>
 
-                                @if (role == 1 || role == 2)   @* admin or staff only *@
+                                @if (role == 1 || role == 2)
                                 {
-                                    <button type="button"
-                                            class="btn btn-outline-primary"
-                                            data-bs-toggle="modal"
-                                            data-bs-target="#editModal"
+                                    <button class="btn btn-outline-primary"
                                             onclick="loadEdit(@appt.ScheduleId)">
                                         Edit
                                     </button>
@@ -173,53 +167,104 @@
 </div>
 
 @section Scripts {
-    <script>
-        // SEARCH → reload page with ?search=
-        function applySearch() {
-            var q = document.getElementById("searchBox").value || "";
-            var url = "/Appointments/Index";
-            if (q.trim() !== "") {
-                url += "?search=" + encodeURIComponent(q.trim());
+    <style>
+        .time-slot {
+            padding: 8px 12px;
+            border-radius: 6px;
+            border: 1px solid #ccc;
+            cursor: pointer;
+            min-width: 75px;
+            text-align: center;
+            user-select: none;
+            transition: 0.2s;
+            font-weight: 500;
+        }
+
+            .time-slot:hover {
+                background: #f3f3f3;
             }
-            window.location.href = url;
-        }
 
-                // LOAD VIEW
-        function loadView(id) {
-            $("#viewModalContent").html("Loading...");
-            $("#viewModalContent").load('@Url.Action("ViewAppointment", "Appointments")/' + id, function () {
-                new bootstrap.Modal(document.getElementById("viewModal")).show();
-            });
-        }
+            .time-slot.selected {
+                background: #198754;
+                color: white;
+                border-color: #198754;
+            }
+    </style>
 
-        
+    <script>
 
-        // LOAD CREATE
+        // --------------------------------------------------------------------
+        //  MAIN MODAL LOADERS
+        // --------------------------------------------------------------------
+
         function loadCreate() {
-            $("#createModalContent").html("Loading...");
             $("#createModalContent").load('/Appointments/Create', function () {
                 new bootstrap.Modal(document.getElementById("createModal")).show();
             });
         }
 
-        // LOAD EDIT
         function loadEdit(id) {
-            $("#editModalContent").html("Loading...");
-            $("#editModalContent").load('/Appointments/Edit/' + id, function () {
+            $("#editModalContent").load(`/Appointments/Edit/${id}`, function () {
                 new bootstrap.Modal(document.getElementById("editModal")).show();
             });
         }
 
-        // Optional: pressing Enter in search box triggers filter
-        document.addEventListener("DOMContentLoaded", function () {
-            var sb = document.getElementById("searchBox");
-            if (sb) {
-                sb.addEventListener("keyup", function (e) {
-                    if (e.key === "Enter") {
-                        applySearch();
-                    }
-                });
+        function loadView(id) {
+            $("#viewModalContent").load(`/Appointments/ViewAppointment/${id}`, function () {
+                new bootstrap.Modal(document.getElementById("viewModal")).show();
+            });
+        }
+
+
+        // --------------------------------------------------------------------
+        //  CREATE APPOINTMENT — TIME SLOT ENGINE
+        // --------------------------------------------------------------------
+
+        // Because modal loads dynamically, we use delegated events
+        $(document).on("change", "#appointmentDate, #serviceDropdown", function () {
+
+            let date = $("#appointmentDate").val();
+            let serviceId = $("#serviceDropdown").val();
+
+            if (date && serviceId) {
+                loadTimeGrid(date, serviceId);
             }
         });
+
+        function loadTimeGrid(date, serviceId) {
+
+            if (!$("#timeGrid").length) return; // Modal not loaded yet
+
+            $("#timeGrid").html("<div class='small text-muted'>Loading…</div>");
+            $("#selectedSlotId").val("");
+
+            $.get("/Appointments/GetValidStartTimes",
+                { date: date, serviceId: serviceId },
+                function (slots) {
+
+                    $("#timeGrid").empty();
+
+                    if (!slots || slots.length === 0) {
+                        $("#timeGrid").html("<div class='text-danger small'>No available times</div>");
+                        return;
+                    }
+
+                    slots.forEach(s => {
+                        let slotBtn = $(`<div class='time-slot'>${s.start}</div>`);
+                        slotBtn.data("slotId", s.slotId);
+
+                        slotBtn.on("click", function () {
+                            $(".time-slot").removeClass("selected");
+                            $(this).addClass("selected");
+
+                            $("#selectedSlotId").val($(this).data("slotId"));
+                        });
+
+                        $("#timeGrid").append(slotBtn);
+                    });
+                }
+            );
+        }
+
     </script>
 }

@@ -32,7 +32,7 @@
 
     <!-- HEADER -->
     <div class="d-flex justify-content-between align-items-center mb-4">
-        <h3 class="fw-bold mb-0">Patient Records</h3>
+        <h3 class="fw-bold mb-0">Pet Records</h3>
 
         <div class="d-flex gap-2">
             <input id="searchBox"
@@ -43,7 +43,7 @@
             <button type="button"
                     class="btn btn-success"
                     onclick="loadCreate()">
-                + Add Patient
+                + Add Pet
             </button>
         </div>
     </div>
@@ -89,23 +89,34 @@
                                 }
                             </div>
 
+                            <!-- ACTION BUTTONS -->
                             <div class="mt-3 d-flex gap-2">
+
+                                <!-- VIEW (ALWAYS VISIBLE) -->
                                 <button type="button"
-                                        class="btn btn-outline-primary btn-sm"
+                                        class="btn btn-primary btn-sm"
                                         onclick="loadView(@p.PetId)">
                                     View
                                 </button>
-                                <button type="button"
-                                        class="btn btn-outline-success btn-sm"
-                                        onclick="loadEdit(@p.PetId)">
-                                    Edit
-                                </button>
-                                <button type="button"
-                                        class="btn btn-outline-danger btn-sm"
-                                        onclick="loadDelete(@p.PetId)">
-                                    Delete
-                                </button>
+
+                                @* ADMIN & STAFF ONLY *@
+                                @if (Context.Session.GetInt32("UserRole") == 1 || Context.Session.GetInt32("UserRole") == 2)
+                                {
+                                    <button type="button"
+                                            class="btn btn-outline-success btn-sm"
+                                            onclick="loadEdit(@p.PetId)">
+                                        Edit
+                                    </button>
+
+                                    <button type="button"
+                                            class="btn btn-outline-danger btn-sm"
+                                            onclick="loadDelete(@p.PetId)">
+                                        Delete
+                                    </button>
+                                }
+
                             </div>
+
                         </div>
 
                     </div>
@@ -113,7 +124,6 @@
             </div>
         }
     </div>
-</div>
 
 <!-- MODAL SHELLS -->
 <div class="modal fade" id="createModal" tabindex="-1" aria-hidden="true">

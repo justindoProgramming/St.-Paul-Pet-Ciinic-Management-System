@@ -34,12 +34,15 @@ namespace PetClinicSystem.Models
         [Column("schedule_dateold")]
         public DateTime? ScheduleDateOld { get; set; }
 
-        // TIME
-        [Column("schedule_time")]
-        public TimeSpan? ScheduleTime { get; set; }
+        // SLOT
+        [Column("slot_id")]
+        public int? SlotId { get; set; }
+        public TimeSlot? Slot { get; set; }
 
         // STATUS
         [Column("status")]
         public string? Status { get; set; }
+
+       
     }
 }

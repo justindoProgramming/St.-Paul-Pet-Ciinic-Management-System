@@ -8,7 +8,7 @@
 }
 
 <div class="modal-header">
-    <h5 class="modal-title fw-bold">Edit Patient</h5>
+    <h5 class="modal-title fw-bold">Edit Pet</h5>
     <button type="button"
             class="btn-close"
             data-bs-dismiss="modal"
@@ -82,12 +82,11 @@
 
             <!-- GENDER -->
             <div class="col-md-4">
-                <label class="form-label fw-semibold">Gender</label>
+                <label class="form-label fw-semibold">Sex</label>
                 <select asp-for="Gender" class="form-select">
                     <option value="">Select gender...</option>
                     <option value="Male">Male</option>
                     <option value="Female">Female</option>
-                    <option value="Unknown">Unknown</option>
                 </select>
                 <span asp-validation-for="Gender" class="text-danger"></span>
             </div>

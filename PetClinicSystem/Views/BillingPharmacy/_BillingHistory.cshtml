@@ -1,43 +1,152 @@
 ﻿@model List<PetClinicSystem.Models.Billing>
 
-<div class="modal-header">
-    <h5 class="modal-title fw-bold">Billing History</h5>
-    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+<div class="p-3">
+
+    <h4 class="fw-bold mb-3">Billing History</h4>
+
+    <!-- ===================== FILTERS CARD ===================== -->
+    <div class="card shadow-sm p-3 mb-4 rounded-4">
+        <div class="row g-3">
+
+            <!-- Date From -->
+            <div class="col-md-3">
+                <label class="form-label fw-semibold">From</label>
+                <input type="date" id="filterFrom" class="form-control">
+            </div>
+
+            <!-- Date To -->
+            <div class="col-md-3">
+                <label class="form-label fw-semibold">To</label>
+                <input type="date" id="filterTo" class="form-control">
+            </div>
+
+            <!-- Auto-complete Search -->
+            <div class="col-md-4">
+                <label class="form-label fw-semibold">Search</label>
+
+                <input list="historySuggestions"
+                       id="searchHistory"
+                       class="form-control"
+                       placeholder="Search pet, owner, service...">
+
+                <datalist id="historySuggestions"></datalist>
+            </div>
+
+            <!-- Apply Button -->
+            <div class="col-md-2">
+                <button class="btn btn-success w-100 mt-4"
+                        onclick="applyHistoryFilter()">
+                    Apply
+                </button>
+            </div>
+
+        </div>
+    </div>
+
+    <!-- ===================== EXPORT BUTTONS ===================== -->
+    <div class="d-flex gap-2 mb-3">
+
+        <button class="btn btn-outline-success"
+                onclick="exportExcel()">
+            <i class="fa-solid fa-file-excel me-1"></i> Export Excel
+        </button>
+
+        <button class="btn btn-outline-danger"
+                onclick="exportPDF()">
+            <i class="fa-solid fa-file-pdf me-1"></i> Export PDF
+        </button>
+
+    </div>
+
+    <!-- ===================== RESULTS ===================== -->
+    <div class="row g-3" id="historyResult">
+
+        @foreach (var b in Model)
+        {
+            <div class="col-md-4">
+                <div class="card shadow-sm p-3 rounded-4 billing-card">
+
+                    <div class="d-flex justify-content-between align-items-center">
+                        <h5 class="fw-bold mb-0">@b.ServiceName</h5>
+                        <span class="badge bg-primary fs-6">₱@b.Total</span>
+                    </div>
+
+                    <p class="mt-2 mb-1"><b>Pet:</b> @b.Pet.Name</p>
+                    <p class="mb-1"><b>Owner:</b> @b.Pet.Owner.FullName</p>
+                    <p class="mb-1"><b>Staff:</b> @b.Staff.FullName</p>
+
+                    <p class="text-secondary small mb-0">
+                        @b.BillingDate.ToString("MMM dd, yyyy • hh:mm tt")
+                    </p>
+
+                </div>
+            </div>
+        }
+
+    </div>
+
 </div>
 
-<div class="modal-body">
+<!-- ===================== STYLES ===================== -->
+<style>
+    .billing-card {
+        transition: 0.25s ease;
+    }
 
-    <table class="table table-bordered table-striped">
-        <thead class="table-success">
-            <tr>
-                <th>Date</th>
-                <th>Pet</th>
-                <th>Owner</th>
-                <th>Service</th>
-                <th>Qty</th>
-                <th>Price</th>
-                <th>Total</th>
-            </tr>
-        </thead>
+        .billing-card:hover {
+            background: #f7fbff;
+            transform: translateY(-3px);
+        }
+</style>
 
-        <tbody>
-            @foreach (var b in Model)
-            {
-                <tr>
-                    <td>@b.BillingDate.ToString("MMM dd, yyyy")</td>
-                    <td>@b.Pet?.Name</td>
-                    <td>@b.Pet?.Owner?.FullName</td>
-                    <td>@b.ServiceName</td>
-                    <td>@b.Quantity</td>
-                    <td>₱@b.ServicePrice</td>
-                    <td class="fw-bold text-success">₱@b.Total</td>
-                </tr>
-            }
-        </tbody>
-    </table>
+<!-- ===================== JS LOGIC ===================== -->
+<script>
 
-</div>
+    // -------------------------------
+    // AUTO-COMPLETE SEARCH
+    // -------------------------------
+    $("#searchHistory").on("input", function () {
+        let query = $(this).val();
 
-<div class="modal-footer">
-    <button class="btn btn-outline-secondary" data-bs-dismiss="modal">Close</button>
-</div>
+        $.get("/BillingPharmacy/SearchHistory", { term: query }, function (results) {
+
+            let html = "";
+            results.forEach(r => {
+                html += `<option value="${r}">`;
+            });
+
+            $("#historySuggestions").html(html);
+        });
+    });
+
+
+    // -------------------------------
+    // APPLY FILTERS
+    // -------------------------------
+    function applyHistoryFilter() {
+
+        $.post("/BillingPharmacy/FilterHistory", {
+            startDate: $("#filterFrom").val(),
+            endDate: $("#filterTo").val(),
+            search: $("#searchHistory").val()
+        }, function (html) {
+
+            $("#historyResult").html(html);
+
+        });
+
+    }
+
+
+    // -------------------------------
+    // EXPORT BUTTONS
+    // -------------------------------
+    function exportExcel() {
+        window.location.href = "/BillingPharmacy/ExportHistoryExcel";
+    }
+
+    function exportPDF() {
+        window.location.href = "/BillingPharmacy/ExportHistoryPDF";
+    }
+
+</script>

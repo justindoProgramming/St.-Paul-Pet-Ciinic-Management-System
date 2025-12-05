@@ -2,23 +2,30 @@
 
 <div class="modal-header border-0">
     <h5 class="modal-title fw-bold">Delete Appointment</h5>
-    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+    <button class="btn-close" data-bs-dismiss="modal"></button>
 </div>
 
-<form method="post" action="/Appointments/DeleteConfirmed">
-    <input type="hidden" name="scheduleId" value="@Model.ScheduleId" />
+<form asp-action="DeleteConfirmed" method="post">
+    <input type="hidden" asp-for="ScheduleId" />
 
     <div class="modal-body">
-        <p class="mb-0">
-            Are you sure you want to delete the appointment for
-            <strong>@Model.Pet?.Name</strong>
-            on
-            <strong>@(Model.ScheduleDateOld?.ToString("MMM dd, yyyy") ?? "-")</strong>?
-        </p>
+        <p>Are you sure you want to delete the appointment for:</p>
+
+        <ul>
+            <li><strong>@Model.Pet?.Name</strong></li>
+            <li>@Model.ScheduleDateOld?.ToString("MMM dd, yyyy")</li>
+            <li>
+                @(Model.Slot != null ?
+                                $"{Model.Slot.StartTime:hh\\:mm} - {Model.Slot.EndTime:hh\\:mm}" :
+                                "-")
+            </li>
+        </ul>
+
+        <p class="text-danger fw-semibold">This action cannot be undone.</p>
     </div>
 
     <div class="modal-footer border-0">
-        <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">Cancel</button>
-        <button type="submit" class="btn btn-danger">Delete</button>
+        <button class="btn btn-outline-secondary" data-bs-dismiss="modal">Cancel</button>
+        <button class="btn btn-danger" type="submit">Delete</button>
     </div>
 </form>

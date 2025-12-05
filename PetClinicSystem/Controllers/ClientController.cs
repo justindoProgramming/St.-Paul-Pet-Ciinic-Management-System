@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using PetClinicSystem.Data;
+using PetClinicSystem.Models;
 
 namespace PetClinicSystem.Controllers
 {
@@ -15,37 +16,49 @@ namespace PetClinicSystem.Controllers
 
         public IActionResult Index()
         {
-            var clientId = HttpContext.Session.GetInt32("UserId");
-            var role = HttpContext.Session.GetInt32("UserRole");
+            int? userId = HttpContext.Session.GetInt32("UserId");
 
-            if (clientId == null || role != 0)
+            if (userId == null)
                 return RedirectToAction("Index", "Home");
 
-            ViewBag.Layout = "_Layout_Client";
-            ViewBag.ActiveMenu = "Dashboard";
+            // 1️⃣ Find owner linked to this account
+            var owner = _db.Owners.FirstOrDefault(o => o.AccountId == userId);
 
-            // PET LIST
-            ViewBag.MyPets = _db.Pets
+            if (owner == null)
+            {
+                // Safety fallback — client has no owner record
+                ViewBag.MyPets = new List<Pet>();
+                ViewBag.Upcoming = new List<Schedule>();
+                ViewBag.Vaccines = new List<Vaccination>();
+                return View();
+            }
+
+            // 2️⃣ Load only the client’s pets correctly
+            var pets = _db.Pets
                 .Include(p => p.Owner)
-                .Where(p => p.OwnerId == clientId)
+                .Where(p => p.OwnerId == owner.OwnerId)
                 .ToList();
 
-            // UPCOMING APPOINTMENTS
-            var today = DateTime.Today;
-            ViewBag.Upcoming = _db.Schedule
+            ViewBag.MyPets = pets;
+
+            // 3️⃣ Upcoming appointments
+            var upcoming = _db.Schedule
                 .Include(s => s.Pet)
-                .Where(s => s.Pet.OwnerId == clientId && s.ScheduleDateOld >= today)
+                .Where(s =>
+                    s.Pet.OwnerId == owner.OwnerId &&
+                    s.ScheduleDateOld >= DateTime.Today)
                 .OrderBy(s => s.ScheduleDateOld)
-                .Take(5)
                 .ToList();
 
-            // VACCINATION RECORDS
-            ViewBag.Vaccines = _db.Vaccinations
+            ViewBag.Upcoming = upcoming;
+
+            // 4️⃣ Vaccination reminders
+            var vaccines = _db.Vaccinations
                 .Include(v => v.Pet)
-                .Where(v => v.Pet.OwnerId == clientId)
-                .OrderBy(v => v.NextDueDate)
-                .Take(5)
+                .Where(v => v.Pet.OwnerId == owner.OwnerId)
                 .ToList();
+
+            ViewBag.Vaccines = vaccines;
 
             return View();
         }

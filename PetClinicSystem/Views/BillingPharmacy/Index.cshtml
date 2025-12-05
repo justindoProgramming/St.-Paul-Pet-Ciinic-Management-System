@@ -39,71 +39,116 @@
         <button class="btn tab-btn" onclick="showTab('vaccines', this)">Vaccinations</button>
     </div>
 
-    <!-- POS TAB -->
+    <!-- ===================== POS TAB ===================== -->
     <div id="tab-pos" class="tab-section">
         <div class="row">
+
+            <!-- LEFT SIDE: SERVICES -->
             <div class="col-md-8">
-                <h5 class="fw-bold mb-3">Services</h5>
 
-                <!-- SEARCH + ADD SERVICE BUTTON -->
-                <div class="d-flex align-items-center mb-3">
-                    <input type="text" class="form-control"
-                           placeholder="Search services..."
-                           oninput="filterServices(this.value)" />
+                <div class="d-flex justify-content-between align-items-center mb-3 mt-2">
+                    <h4 class="fw-bold mb-0">Available Services</h4>
 
-                    <button type="button"
-                            class="btn btn-success ms-2"
-                            data-bs-toggle="modal"
-                            data-bs-target="#addServiceModal">
-                        <i class="fa-solid fa-plus me-1"></i> Add Service
-                    </button>
+                    <div class="d-flex gap-2">
 
+                        <!-- ADD SERVICE BUTTON -->
+                        <button type="button"
+                                class="btn btn-success"
+                                data-bs-toggle="modal"
+                                data-bs-target="#addServiceModal">
+                            <i class="fa-solid fa-plus me-2"></i> Add Service
+                        </button>
 
+                        <!-- BILLING HISTORY BUTTON -->
+                        <button class="btn btn-outline-primary"
+                                onclick="openBillingHistory()">
+                            <i class="fa-solid fa-clock-rotate-left me-2"></i> Billing History
+                        </button>
+
+                    </div>
                 </div>
 
-                <div class="row g-3" id="servicesContainer">
-                    <!-- filled by _POS_Scripts -->
-                </div>
+                <!-- SEARCH -->
+                <input id="searchServices"
+                       type="text"
+                       class="form-control mb-3"
+                       placeholder="Search services by name or category...">
+
+                <!-- CATEGORY FILTER -->
+                <ul id="categoryMenu" class="nav nav-pills mb-3 gap-2"></ul>
+
+                <!-- SERVICES GRID -->
+                <div id="serviceGrid" class="row g-3"></div>
+
             </div>
 
+            <!-- RIGHT SIDE: CART -->
             <div class="col-md-4">
                 <div class="card shadow p-3 rounded-4">
+
                     <h5 class="fw-bold">Current Sale</h5>
 
-                    <label class="mt-2 fw-semibold">Select Patient</label>
-                    <select id="petSelect" class="form-select">
+                    <!-- SELECT PET -->
+                    <label class="fw-semibold mt-2">Select Patient</label>
+                    <select id="petSelect" class="form-select mb-2">
                         <option disabled selected>Choose patient...</option>
                         @foreach (var p in (List<Pet>)ViewBag.Pets)
                         {
-                            <option value="@p.PetId">
-                                @p.Name (@p.Owner.FullName)
-                            </option>
+                            <option value="@p.PetId">@p.Name (@p.Owner.FullName)</option>
                         }
                     </select>
 
-                    <hr />
-                    <div id="cartItems"></div>
+                    <!-- HIDDEN STAFF ID -->
+                    <input type="hidden" id="staffId" value="@Context.Session.GetInt32("UserId")" />
+
                     <hr />
 
+                    <!-- CART TABLE -->
+                    <table class="table table-sm">
+                        <thead>
+                            <tr>
+                                <th>Item</th>
+                                <th>₱</th>
+                                <th>Qty</th>
+                                <th>Total</th>
+                                <th></th>
+                            </tr>
+                        </thead>
+                        <tbody id="cartTable"></tbody>
+                    </table>
+
+                    <hr />
+
+                    <!-- SUBTOTAL -->
                     <div class="d-flex justify-content-between">
                         <span class="fw-semibold">Subtotal:</span>
                         <span id="subtotal">₱0.00</span>
                     </div>
 
-                    <button class="btn btn-success mt-3 w-100"
-                            onclick="checkout()">
+                    <!-- PROCESS PAYMENT -->
+                    <button class="btn btn-success mt-3 w-100" onclick="checkoutPOS()">
                         <i class="fa-solid fa-cash-register me-2"></i> Process Payment
                     </button>
-                    <button class="btn btn-outline-primary mt-2 w-100"
-                            onclick="openBillingHistory()">
-                        <i class="fa-solid fa-clock-rotate-left me-2"></i> Billing History
-                    </button>
-
 
                 </div>
             </div>
+
         </div>
     </div>
+
+
+        
+
+<!-- Bootstrap Toast -->
+<div class="position-fixed top-0 end-0 p-3" style="z-index:2000">
+    <div id="bpToast" class="toast bg-success text-white border-0" role="alert">
+        <div class="d-flex">
+            <div class="toast-body fw-semibold" id="bpToastMsg">Success</div>
+            <button type="button" class="btn-close btn-close-white me-2 m-auto"
+                    data-bs-dismiss="toast"></button>
+        </div>
+    </div>
+</div>
 
     <!-- PRESCRIPTIONS TAB -->
     <div id="tab-prescriptions" class="tab-section d-none">
@@ -398,6 +443,52 @@
     .bp-toast-error {
         background-color: #b91c1c; /* red */
     }
+
+    /* CATEGORY TABS */
+    #categoryMenu .category-item {
+        padding: 8px 14px;
+        background: #f3f4f6;
+        border-radius: 20px;
+        cursor: pointer;
+        font-weight: 600;
+        transition: 0.2s;
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+    }
+
+        #categoryMenu .category-item.active {
+            background: #198754;
+            color: white;
+        }
+
+    /* SERVICE CARDS */
+    .service-card {
+        border: 2px solid #e2e8f0;
+        border-radius: 14px;
+        padding: 14px;
+        cursor: pointer;
+        text-align: center;
+        transition: 0.2s;
+        background: #ffffff;
+    }
+
+        .service-card:hover {
+            border-color: #198754;
+            background: #f0fff4;
+        }
+
+    .service-title {
+        font-weight: 600;
+        font-size: 16px;
+    }
+
+    .service-price {
+        color: #198754;
+        font-weight: 700;
+        margin-top: 4px;
+    }
+
 </style>
 
 @section Scripts {

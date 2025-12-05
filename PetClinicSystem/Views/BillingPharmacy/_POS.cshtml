@@ -1,38 +1,120 @@
-﻿<!-- Search box -->
-<input id="searchServices"
-       type="text"
-       class="form-control"
-       placeholder="Search services or products..." />
+﻿<div class="row">
 
-<!-- Services list container -->
-<div class="row g-3 mt-3" id="serviceList">
-    @* cards are injected by pos.js *@
+    <!-- LEFT: CATEGORY MENU -->
+    <div class="col-md-2">
+        <div class="category-list card shadow-sm p-3">
+            <h6 class="text-secondary mb-3">Categories</h6>
+
+            <ul class="nav flex-column" id="categoryMenu">
+                <!-- Filled by JS -->
+            </ul>
+        </div>
+    </div>
+
+    <!-- MIDDLE: SERVICE CARDS -->
+    <div class="col-md-6">
+        <div class="card shadow-sm p-3">
+            <div class="d-flex justify-content-between align-items-center mb-2">
+                <h6 class="fw-bold">Services</h6>
+                <input type="text"
+                       id="searchServices"
+                       class="form-control w-50"
+                       placeholder="Search services...">
+            </div>
+
+            <div id="serviceGrid" class="row g-3">
+                <!-- Filled dynamically -->
+            </div>
+        </div>
+    </div>
+
+    <!-- RIGHT: CART -->
+    <div class="col-md-4">
+        <div class="card shadow-sm p-3">
+            <h5 class="fw-bold">Current Sale</h5>
+
+            <label class="mt-2 fw-semibold">Select Patient</label>
+            <select id="petSelect" class="form-select mb-2">
+                <option value="" disabled selected>Select patient...</option>
+                @foreach (var p in (List<Pet>)ViewBag.Pets)
+                {
+                    <option value="@p.PetId">@p.Name (@p.Owner.FullName)</option>
+                }
+            </select>
+
+            <hr>
+
+            <table class="table">
+                <tbody id="cartTable"></tbody>
+            </table>
+
+            <hr>
+
+            <div class="d-flex justify-content-between">
+                <span class="fw-semibold">Subtotal:</span>
+                <span id="subtotal">₱0.00</span>
+            </div>
+
+            <button class="btn btn-success mt-3 w-100"
+                    onclick="checkout()">
+                <i class="fa-solid fa-cash-register me-2"></i> Process Payment
+            </button>
+
+            <button class="btn btn-outline-primary mt-2 w-100"
+                    onclick="openBillingHistory()">
+                <i class="fa-solid fa-clock-rotate-left me-2"></i> Billing History
+            </button>
+
+        </div>
+    </div>
+
 </div>
 
-<!-- In the Current Sale card on the right -->
-<select id="petSelect" class="form-select">
-    <option value="" selected disabled>Choose patient...</option>
-    @* your foreach over ViewBag.Pets stays the same *@
-</select>
+<style>
+    .category-list ul li {
+        margin-bottom: 6px;
+    }
 
-<!-- Subtotal / Tax / Total placeholders -->
-<div class="d-flex justify-content-between">
-    <span>Subtotal:</span>
-    <span id="subtotal">₱0.00</span>
-</div>
-<div class="d-flex justify-content-between">
-    <span>Tax (8%):</span>
-    <span id="tax">₱0.00</span>
-</div>
-<div class="d-flex justify-content-between fw-bold">
-    <span>Total:</span>
-    <span id="total">₱0.00</span>
-</div>
+    .category-item {
+        padding: 10px;
+        border-radius: 8px;
+        cursor: pointer;
+        font-weight: 500;
+        color: #0d6efd;
+        transition: 0.2s;
+    }
 
-<!-- Process Payment button -->
-<button type="button"
-        id="payButton"
-        class="btn btn-success w-100 mt-3"
-        onclick="checkout()">
-    <i class="fa-solid fa-cash-register me-2"></i> Process Payment
-</button>
+        .category-item:hover,
+        .category-item.active {
+            background: #e7f1ff;
+            color: #0a58ca;
+        }
+
+    .service-card {
+        padding: 15px;
+        border-radius: 12px;
+        border: 1px solid #e3e3e3;
+        background: #ffffff;
+        cursor: pointer;
+        transition: 0.2s ease;
+        text-align: center;
+    }
+
+        .service-card:hover {
+            background: #e8f5ff;
+            transform: translateY(-3px);
+            border-color: #bcdfff;
+        }
+
+    .service-title {
+        font-weight: 600;
+        font-size: 14px;
+        margin-bottom: 4px;
+    }
+
+    .service-price {
+        font-size: 13px;
+        color: #198754;
+        font-weight: bold;
+    }
+</style>

@@ -28,7 +28,14 @@ namespace PetClinicSystem.Models
         [Column("emergency_contact2")]
         public string EmergencyContact2 { get; set; } = string.Empty;
 
-        // Navigation
+        // ⭐ REQUIRED FOREIGN KEY → FIXES YOUR ISSUE
+        [Column("account_id")]
+        public int AccountId { get; set; }
+
+        // ⭐ NAVIGATION PROPERTY
+        public Account Account { get; set; }
+
+        // Existing pets list
         public List<Pet> Pets { get; set; } = new List<Pet>();
     }
 }

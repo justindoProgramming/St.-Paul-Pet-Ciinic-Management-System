@@ -23,9 +23,14 @@ namespace PetClinicSystem.Controllers
             ViewBag.Layout = "_Layout_Staff";
             ViewBag.ActiveMenu = "Dashboard";
 
+            // ===========================
             // QUICK METRICS
+            // ===========================
+
             ViewBag.TodayAppointments = _db.Schedule
-                .Where(s => s.StaffId == staffId && s.ScheduleDateOld == DateTime.Today)
+                .Where(s => s.StaffId == staffId &&
+                            s.ScheduleDateOld.HasValue &&
+                            s.ScheduleDateOld.Value.Date == DateTime.Today)
                 .Count();
 
             ViewBag.PendingAppointments = _db.Schedule
@@ -38,16 +43,25 @@ namespace PetClinicSystem.Controllers
                 .Distinct()
                 .Count();
 
-            // TODAY'S APPOINTMENTS (staff-specific)
+            // ===========================
+            // TODAY'S APPOINTMENTS
+            // (Slot-based)
+            // ===========================
+
             ViewBag.TodayList = _db.Schedule
                 .Include(s => s.Pet)
-                .Include(s => s.Staff)
-                .Where(s => s.StaffId == staffId && s.ScheduleDateOld == DateTime.Today)
-                .OrderBy(s => s.ScheduleTime)
+                .Include(s => s.Slot)          // ✔ include slot model
+                .Where(s => s.StaffId == staffId &&
+                            s.ScheduleDateOld.HasValue &&
+                            s.ScheduleDateOld.Value.Date == DateTime.Today)
+                .OrderBy(s => s.Slot.StartTime) // ✔ NEW: sort by slot time
                 .Take(5)
                 .ToList();
 
+            // ===========================
             // RECENT PATIENTS THEY HANDLED
+            // ===========================
+
             ViewBag.RecentPatients = _db.MedicalRecords
                 .Include(r => r.Pet)
                 .Where(r => r.StaffId == staffId)

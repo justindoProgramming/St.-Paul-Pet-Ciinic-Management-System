@@ -1,7 +1,11 @@
 using Microsoft.EntityFrameworkCore;
 using PetClinicSystem.Data;
+using QuestPDF.Infrastructure;   // <-- REQUIRED FOR PDF
 
 var builder = WebApplication.CreateBuilder(args);
+
+// REQUIRED FOR QUESTPDF
+QuestPDF.Settings.License = LicenseType.Community;
 
 builder.Services.AddControllersWithViews().AddRazorRuntimeCompilation();
 
@@ -22,7 +26,6 @@ builder.Services.AddSession(options =>
 
 var app = builder.Build();
 
-app.UseStaticFiles();
 app.UseStaticFiles();
 app.UseRouting();
 app.UseSession();

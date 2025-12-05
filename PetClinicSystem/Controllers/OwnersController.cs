@@ -12,6 +12,7 @@ namespace PetClinicSystem.Controllers
     {
         private readonly ApplicationDbContext _db;
 
+
         public OwnersController(ApplicationDbContext db)
         {
             _db = db;
@@ -47,6 +48,44 @@ namespace PetClinicSystem.Controllers
 
             return View(owners);
         }
+
+        // ===================== CLIENT SELF-REGISTRATION =====================
+        // /Owners/RegisterAsOwner   (GET)
+        [HttpGet]
+        public IActionResult RegisterAsOwner()
+        {
+
+            if (UserRole != 0)
+                return Unauthorized(); // only clients allowed
+
+            var model = new Owner();
+            return View("ClientRegisterOwner", model);
+        }
+
+        // /Owners/RegisterAsOwner   (POST)
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public IActionResult RegisterAsOwner(Owner model)
+        {
+            if (UserRole != 0)
+                return Unauthorized();
+
+            if (!ModelState.IsValid)
+            {
+                // redisplay form with validation errors
+                return View("ClientRegisterOwner", model);
+            }
+
+            _db.Owners.Add(model);
+            _db.SaveChanges();
+
+            TempData["Success"] = "Your owner profile has been registered.";
+
+            // redirect to whatever client page you prefer
+            // (change "ClientRecords" if you want a different landing page)
+            return RedirectToAction("Index", "ClientRecords");
+        }
+
 
         // ======== CREATE ========
         [HttpGet]

@@ -1,239 +1,337 @@
 ﻿<script>
-
-    // ============================
-    // 1. HARDCODED SERVICES
-    // ============================
-        let services = [];
-
-window.addEventListener("DOMContentLoaded", () => {
-    fetch("/BillingPharmacy/GetServices")
-        .then(res => res.json())
-        .then(data => {
-            services = data;
-            loadServices(); // Load service cards from DB
-        });
-});
-
-
-    // ============================
-    // 2. LOAD SERVICE CARDS
-    // ============================
-    function loadServices(filter = "") {
-        let html = "";
-        let lower = filter.toLowerCase();
-
-        services
-            .filter(s => s.name.toLowerCase().includes(lower))
-            .forEach((s, i) => {
-                html += `
-                    <div class="col-md-6">
-                        <div class="card p-3 shadow-sm rounded-4">
-                            <h6 class="fw-bold">${s.name}</h6>
-                            <p class="text-secondary">₱${s.price.toFixed(2)}</p>
-                            <button class="btn btn-success btn-sm" onclick="addToCart(${i})">
-                                <i class="fa-solid fa-plus"></i> Add
-                            </button>
-                        </div>
-                    </div>`;
-            });
-
-        document.getElementById("servicesContainer").innerHTML = html;
-    }
-
-    loadServices();
-
-    function filterServices(text) {
-        loadServices(text);
-    }
-
-    // ============================
-    // 3. CART SYSTEM
-    // ============================
     let cart = [];
+    let allServices = [];
+    let currentCategory = "all";
 
-    function addToCart(i) {
-        let item = services[i];
-        let existing = cart.find(c => c.name === item.name);
+    /* ===============================
+       CATEGORY ICONS
+    ================================*/
+    const icons = {
+        consultation: '<i class="fa-solid fa-stethoscope"></i>',
+        vaccination: '<i class="fa-solid fa-syringe"></i>',
+        grooming: '<i class="fa-solid fa-scissors"></i>',
+        laboratory: '<i class="fa-solid fa-flask"></i>',
+        medicine: '<i class="fa-solid fa-pills"></i>',
+        other: '<i class="fa-solid fa-tag"></i>'
+    };
 
-        if (existing) {
-            existing.qty++;
-        } else {
-            cart.push({
-                name: item.name,
-                price: item.price,
-                qty: 1
-            });
-        }
+    function normalizeCategory(cat) {
+        if (!cat) return "other";
+        cat = cat.toLowerCase();
 
-        renderCart();
+        if (cat.includes("consult")) return "consultation";
+        if (cat.includes("vacc")) return "vaccination";
+        if (cat.includes("groom")) return "grooming";
+        if (cat.includes("lab") || cat.includes("test")) return "laboratory";
+        if (cat.includes("drug") || cat.includes("med")) return "medicine";
+
+        return "other";
     }
 
-    function removeItem(name) {
-        cart = cart.filter(c => c.name !== name);
-        renderCart();
+    /* ===============================
+       LOAD SERVICES
+    ================================*/
+    function loadServices() {
+        $.get("/BillingPharmacy/GetServices", function (data) {
+            allServices = data.map(s => ({
+                name: s.name,
+                price: s.price,
+                rawCategory: s.category,
+                category: normalizeCategory(s.category)
+            }));
+
+            buildCategoryTabs();
+            renderServices("all");
+        });
     }
 
-    function renderCart() {
+    /* ===============================
+       CATEGORY MENU
+    ================================*/
+    function buildCategoryTabs() {
         let html = "";
-        let subtotal = 0;
+        const categories = ["all", ...new Set(allServices.map(s => s.category))];
 
-        cart.forEach(c => {
-            subtotal += c.price * c.qty;
-
+        categories.forEach(cat => {
             html += `
-                <div class="d-flex justify-content-between align-items-center mb-2">
-                    <div>
-                        <strong>${c.name}</strong> <br/>
-                        <small>₱${c.price.toFixed(2)}</small>
-                    </div>
+                <li class="nav-item">
+                    <button class="category-item btn btn-light"
+                            onclick="renderServices('${cat}', this)">
+                        ${icons[cat] || icons.other} ${cat.toUpperCase()}
+                    </button>
+                </li>`;
+        });
 
-                    <div class="d-flex align-items-center gap-2">
-                        <span class="badge bg-secondary">${c.qty}</span>
-                        <button class="btn btn-sm btn-outline-danger" onclick="removeItem('${c.name}')">
-                            <i class="fa-solid fa-trash"></i>
-                        </button>
-                    </div>
+        $("#categoryMenu").html(html);
+        $("#categoryMenu .category-item").first().addClass("active");
+    }
+
+    /* ===============================
+       RENDER SERVICES
+    ================================*/
+    function renderServices(cat, btn) {
+        currentCategory = cat;
+
+        $("#categoryMenu .category-item").removeClass("active");
+        if (btn) $(btn).addClass("active");
+
+        let list = cat === "all"
+            ? allServices
+            : allServices.filter(s => s.category === cat);
+
+        let html = "";
+        list.forEach(s => {
+            html += `
+            <div class="col-md-4">
+                <div class="service-card" onclick="addToCart('${s.name}', ${s.price}, '${s.rawCategory}')">
+                    <div class="service-title">${s.name}</div>
+                    <div class="service-price">₱${s.price}</div>
                 </div>
-            `;
+            </div>`;
         });
 
-        document.getElementById("cartItems").innerHTML = html;
-        document.getElementById("subtotal").innerText = "₱" + subtotal.toFixed(2);
+        $("#serviceGrid").html(html);
     }
 
-    // ============================
-    // 4. CHECKOUT – SAVE TO DATABASE
-    // ============================
-    function checkout() {
-        let petId = document.getElementById("petSelect").value;
-        if (!petId) return showToast("Please select a patient.", "warning");
+    /* ===============================
+       SEARCH BAR FILTER
+    ================================*/
+    $("#searchServices").on("input", function () {
+        let term = $(this).val().toLowerCase();
 
-        if (cart.length === 0) return showToast("Cart is empty!", "warning");
+        let list = allServices.filter(s =>
+            s.name.toLowerCase().includes(term)
+            || s.rawCategory.toLowerCase().includes(term)
+        );
 
-        let staffId = 1; // PLACEHOLDER — replace with logged-in user
-
-        let items = cart.map(c => ({
-            petId: parseInt(petId),
-            staffId: staffId,
-            serviceName: c.name,
-            servicePrice: c.price,
-            quantity: c.qty,
-            total: c.price * c.qty
-        }));
-
-        fetch("/BillingPharmacy/SaveTransaction", {
-            method: "POST",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify(items)
-        })
-        .then(r => r.json())
-        .then(res => {
-            showToast(res.message, "success");
-            cart = [];
-            renderCart();
-        })
-        .catch(() => showToast("Fill out all inputs before proceeding.", "danger"));
-    }
-
-    // ============================
-    // 5. TAB SYSTEM
-    // ============================
-    function showTab(tab) {
-        document.querySelectorAll(".tab-section").forEach(s => s.classList.add("d-none"));
-        document.querySelectorAll(".tab-btn").forEach(b => b.classList.remove("active"));
-
-        if (tab === "pos") {
-            document.getElementById("tab-pos").classList.remove("d-none");
-            document.getElementById("tabPosBtn").classList.add("active");
-
-        } else if (tab === "prescriptions") {
-            document.getElementById("tab-prescriptions").classList.remove("d-none");
-            event.target.classList.add("active");
-
-        } else if (tab === "inventory") {
-            document.getElementById("tab-inventory").classList.remove("d-none");
-            event.target.classList.add("active");
-
-        } else if (tab === "vaccines") {
-            document.getElementById("tab-vaccines").classList.remove("d-none");
-            event.target.classList.add("active");
-        }
-    }
-
-         function openBillingHistory() {
-        $("#billingHistoryContent").html("Loading...");
-        $("#billingHistoryContent").load("/BillingPharmacy/History", function () {
-            new bootstrap.Modal(document.getElementById("billingHistoryModal")).show();
-        });
-    }
-
-
-
-    // ============================
-    // 6. TOAST NOTIFICATION
-    // ============================
-    function showToast(msg, type = "success") {
-        let toast = document.createElement("div");
-        toast.className = `toast align-items-center text-white bg-${type} border-0 show`;
-        toast.role = "alert";
-        toast.innerHTML = `
-            <div class="d-flex">
-                <div class="toast-body">${msg}</div>
-                <button class="btn-close btn-close-white me-2 m-auto"
-                        onclick="this.parentElement.parentElement.remove()"></button>
-            </div>
-        `;
-
-        Object.assign(toast.style, {
-            position: "fixed",
-            top: "20px",
-            right: "20px",
-            zIndex: "9999"
+        let html = "";
+        list.forEach(s => {
+            html += `
+            <div class="col-md-4">
+                <div class="service-card" onclick="addToCart('${s.name}', ${s.price}, '${s.rawCategory}')">
+                    <div class="service-title">${s.name}</div>
+                    <div class="service-price">₱${s.price}</div>
+                </div>
+            </div>`;
         });
 
-        document.body.appendChild(toast);
-
-        setTimeout(() => toast.remove(), 3000);
-    }
-
-        // ===========================
-    // ADD NEW SERVICE (saves to DB)
-    // ===========================
-
-    document.getElementById("addServiceForm").addEventListener("submit", function (e) {
-        e.preventDefault();
-
-        let service = {
-            Name: document.getElementById("newServiceName").value,
-            Category: document.getElementById("newServiceCategory").value,
-            Price: parseFloat(document.getElementById("newServicePrice").value)
-        };
-
-        fetch("/BillingPharmacy/AddService", {
-            method: "POST",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify(service)
-        })
-        .then(res => res.json())
-        .then(data => {
-            showToast("Service added successfully!", "success");
-
-            // Refresh service list
-            fetch("/BillingPharmacy/GetServices")
-                .then(r => r.json())
-                .then(svc => {
-                    services = svc;
-                    loadServices();
-                });
-
-            // Close modal
-            bootstrap.Modal.getInstance(document.getElementById("addServiceModal")).hide();
-        })
-        .catch(() => showToast("Error adding service.", "danger"));
+        $("#serviceGrid").html(html);
     });
 
+    /* ===============================
+       QUANTITY RULES
+    ================================*/
+    function maxQty(category, name) {
+        category = category.toLowerCase();
+        name = name.toLowerCase();
+
+        if (category.includes("consult") || category.includes("groom") || category.includes("vacc"))
+            return 1;
+
+        if (category.includes("drug") || name.includes("tablet") || name.includes("capsule"))
+            return 10;
+
+        return 5;
+    }
+
+    /* ===============================
+       ADD TO CART
+    ================================*/
+    function addToCart(name, price, category) {
+        let existing = cart.find(x => x.name === name);
+        let limit = maxQty(category, name);
+
+        if (existing) {
+            if (existing.quantity >= limit) return showToast(`Limit reached: max ${limit}`);
+            existing.quantity++;
+            existing.total = existing.quantity * existing.price;
+        } else {
+            cart.push({
+                name,
+                price,
+                category,
+                quantity: 1,
+                total: price
+            });
+        }
+
+        renderCart();
+        updateTotals();
+    }
+
+    /* ===============================
+       CART RENDERING
+    ================================*/
+    function renderCart() {
+        let html = "";
+
+        cart.forEach((item, i) => {
+            let limit = maxQty(item.category, item.name);
+
+            html += `
+            <tr>
+                <td>${item.name}</td>
+                <td>₱${item.price}</td>
+                <td>
+                    <input type="number" min="1" max="${limit}" value="${item.quantity}"
+                           onchange="updateQty(${i}, this.value)"
+                           class="form-control form-control-sm" />
+                </td>
+                <td>₱${item.total}</td>
+                <td>
+                    <button class="btn btn-danger btn-sm" onclick="removeItem(${i})">X</button>
+                </td>
+            </tr>`;
+        });
+
+        $("#cartTable").html(html);
+    }
+
+    /* ===============================
+       UPDATE QTY
+    ================================*/
+    function updateQty(index, qty) {
+        qty = parseInt(qty);
+        let item = cart[index];
+        let limit = maxQty(item.category, item.name);
+
+        if (qty < 1) qty = 1;
+        if (qty > limit) qty = limit;
+
+        item.quantity = qty;
+        item.total = item.price * qty;
+
+        renderCart();
+        updateTotals();
+    }
+
+    /* ===============================
+       REMOVE ITEM
+    ================================*/
+    function removeItem(i) {
+        cart.splice(i, 1);
+        renderCart();
+        updateTotals();
+    }
+
+    /* ===============================
+       UPDATE TOTALS
+    ================================*/
+    function updateTotals() {
+        let subtotal = cart.reduce((sum, x) => sum + x.total, 0);
+        $("#subtotal").text("₱" + subtotal.toFixed(2));
+    }
+
+    /* ===============================
+       CHECKOUT (FINAL VERSION)
+    ================================*/
+    function checkoutPOS() {
+        let petId = $("#petSelect").val();
+        let staffId = $("#staffId").val();
+
+        if (!petId) return showToast("Select a pet first.");
+        if (cart.length === 0) return showToast("Cart is empty.");
+
+        let payload = cart.map(x => ({
+            petId,
+            staffId,
+            serviceName: x.name,
+            servicePrice: x.price,
+            quantity: x.quantity,
+            total: x.total
+        }));
+
+        $.ajax({
+            url: "/BillingPharmacy/SaveTransaction",
+            method: "POST",
+            contentType: "application/json",
+            data: JSON.stringify(payload),
+
+            success: function (res) {
+
+                showToast("Payment Successful!");
+
+                // Auto-open receipt
+                setTimeout(() => {
+                   window.open("/BillingPharmacy/DownloadPdf?id=" + res.transactionId);
+                }, 300);
+
+                // Reset POS
+                cart = [];
+                renderCart();
+                updateTotals();
+                $("#petSelect").val("");
+            }
+        });
+    }
+
+        function submitNewService(e) {
+        e.preventDefault();
+
+        let name = $("#newServiceName").val().trim();
+        let category = $("#newServiceCategory").val().trim();
+        let price = parseFloat($("#newServicePrice").val());
+
+        if (!name || !category || !price || price <= 0) {
+            showToast("Please fill in all service fields.", "error");
+            return false;
+        }
+
+        $.ajax({
+            url: "/BillingPharmacy/AddService",
+            method: "POST",
+            contentType: "application/json",
+            data: JSON.stringify({
+                Name: name,
+                Category: category,
+                Price: price
+            }),
+            success: function (res) {
+                if (res.success) {
+                    showToast("Service added successfully!");
+
+                    // Close modal
+                    $("#addServiceModal").modal("hide");
+
+                    // Clear inputs
+                    $("#newServiceName").val("");
+                    $("#newServiceCategory").val("");
+                    $("#newServicePrice").val("");
+
+                    // Reload services on screen
+                    loadServices();
+                } else {
+                    showToast(res.message, "error");
+                }
+            },
+            error: function () {
+                showToast("Error saving service", "error");
+            }
+        });
+
+        return false;
+    }
+
+        function showToast(message, type = "success") {
+        $("#bpToastMsg").text(message);
+        const toast = new bootstrap.Toast(document.getElementById("bpToast"));
+        toast.show();
+    }
 
 
 
 
+    /* ===============================
+       TOAST FUNCTION
+    ================================*/
+    function showToast(msg) {
+        $("#bpToastMsg").text(msg);
+        const toast = new bootstrap.Toast(document.getElementById("bpToast"));
+        toast.show();
+    }
+
+    /* ===============================
+       INIT
+    ================================*/
+    $(document).ready(loadServices);
 </script>

@@ -1,75 +1,52 @@
 ﻿@model PetClinicSystem.Models.Schedule
 
-@if (Model == null)
-{
-    <div class="p-4">
-        <h5 class="text-danger">Appointment not found.</h5>
-    </div>
-    return;
-}
-
 <div class="modal-header border-0">
     <h5 class="modal-title fw-bold">Appointment Details</h5>
     <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
 </div>
 
 <div class="modal-body">
-    <div class="border rounded-4 p-4 shadow-sm">
+    <div class="rounded-4 shadow-sm p-4">
 
-        <!-- APPOINTMENT INFO -->
         <h6 class="fw-bold mb-2">Appointment Info</h6>
-        <div class="text-secondary mb-3">
-            <div>
-                <strong>Service:</strong>
-                @(Model.Service?.Name ?? Model.ServiceName ?? "-")
-            </div>
-
-            <div>
-                <strong>Date:</strong>
-                @(Model.ScheduleDateOld?.ToString("MMM dd, yyyy") ?? "-")
-            </div>
-
-            <div>
-                <strong>Time:</strong>
-                @(Model.ScheduleTime?.ToString(@"hh\:mm") ?? "-")
-            </div>
-
-            <div>
-                <strong>Status:</strong> @Model.Status
-            </div>
-        </div>
+        <p class="text-secondary">
+            <strong>Service:</strong> @(Model.Service?.Name ?? "-") <br />
+            <strong>Date:</strong> @Model.ScheduleDateOld?.ToString("MMM dd, yyyy") <br />
+            <strong>Time:</strong>
+            @(Model.Slot != null ?
+                        $"{Model.Slot.StartTime:hh\\:mm} - {Model.Slot.EndTime:hh\\:mm}" :
+                        "-") <br />
+            <strong>Status:</strong> @Model.Status
+        </p>
 
         <hr />
 
-        <!-- PATIENT -->
-        <h6 class="fw-bold mb-2">Patient</h6>
-        <div class="text-secondary mb-3">
-            <div><strong>Name:</strong> @Model.Pet?.Name</div>
-            <div><strong>Species:</strong> @Model.Pet?.Species</div>
-            <div><strong>Breed:</strong> @Model.Pet?.Breed</div>
-        </div>
+        <h6 class="fw-bold">Patient</h6>
+        <p class="text-secondary">
+            <strong>Name:</strong> @Model.Pet?.Name <br />
+            <strong>Species:</strong> @Model.Pet?.Species <br />
+            <strong>Breed:</strong> @Model.Pet?.Breed
+        </p>
 
         <hr />
 
-        <!-- OWNER -->
-        <h6 class="fw-bold mb-2">Owner</h6>
-        <div class="text-secondary mb-3">
-            <div><strong>Name:</strong> @Model.Pet?.Owner?.FullName</div>
-            <div><strong>Phone:</strong> @Model.Pet?.Owner?.PhoneNumber</div>
-            <div><strong>Email:</strong> @Model.Pet?.Owner?.Email</div>
-        </div>
+        <h6 class="fw-bold">Owner</h6>
+        <p class="text-secondary">
+            <strong>Name:</strong> @Model.Pet?.Owner?.FullName <br />
+            <strong>Phone:</strong> @Model.Pet?.Owner?.PhoneNumber <br />
+            <strong>Email:</strong> @Model.Pet?.Owner?.Email
+        </p>
 
         <hr />
 
-        <!-- STAFF -->
-        <h6 class="fw-bold mb-2">Assigned Staff</h6>
-        <div class="text-secondary">
-            <div><strong>Name:</strong> @Model.Staff?.FullName</div>
-        </div>
+        <h6 class="fw-bold">Assigned Staff</h6>
+        <p class="text-secondary">
+            @Model.Staff?.FullName
+        </p>
 
     </div>
 </div>
 
 <div class="modal-footer border-0">
-    <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">Close</button>
+    <button class="btn btn-outline-secondary" data-bs-dismiss="modal">Close</button>
 </div>

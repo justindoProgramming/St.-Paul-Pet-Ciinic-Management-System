@@ -2,9 +2,13 @@
 using Microsoft.EntityFrameworkCore;
 using PetClinicSystem.Data;
 using PetClinicSystem.Models;
+using ClosedXML.Excel;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using QuestPDF.Fluent;
+using PetClinicSystem.Services.Pdf;
+
 
 namespace PetClinicSystem.Controllers
 {
@@ -14,35 +18,30 @@ namespace PetClinicSystem.Controllers
 
         public BillingPharmacyController(ApplicationDbContext db)
         {
-            _db = db;   
-
+            _db = db;
         }
 
-        // =========================================
-        //  MAIN PAGE (POS + TABS)
-        // =========================================
+        // ============================================================
+        // MAIN PAGE (POS + TABS)
+        // ============================================================
         public IActionResult Index()
         {
             ViewBag.ActiveMenu = "Billing";
 
-            // POS
             ViewBag.Pets = _db.Pets
                 .Include(p => p.Owner)
                 .ToList();
 
-            // Prescriptions
             ViewBag.Prescriptions = _db.Prescriptions
                 .Include(p => p.Pet).ThenInclude(o => o.Owner)
                 .Include(p => p.Staff)
                 .OrderByDescending(p => p.Date)
                 .ToList();
 
-            // Drugs
             ViewBag.Drugs = _db.Drugs
                 .OrderBy(d => d.DrugName)
                 .ToList();
 
-            // Vaccinations
             ViewBag.Vaccinations = _db.Vaccinations
                 .Include(v => v.Pet).ThenInclude(o => o.Owner)
                 .Include(v => v.Staff)
@@ -52,583 +51,81 @@ namespace PetClinicSystem.Controllers
             return View();
         }
 
-        // =========================================
-        //  POS — SAVE TRANSACTION
-        // =========================================
+        // ============================================================
+        // POS — SAVE TRANSACTION (multi-item + safe rules)
+        // ============================================================
         [HttpPost]
-        public IActionResult SaveTransaction([FromBody] List<Billing> items)
+        public IActionResult SaveTransaction([FromBody] List<BillingDTO> items)
         {
             if (items == null || items.Count == 0)
-                return BadRequest("Empty cart!");
+                return Json(new { success = false, message = "Cart is empty." });
 
-            foreach (var item in items)
+            int staffId = HttpContext.Session.GetInt32("UserId") ?? 0;
+            if (staffId <= 0)
+                return Json(new { success = false, message = "Unable to identify staff account." });
+
+            string transactionId = Guid.NewGuid().ToString();
+
+            foreach (var dto in items)
             {
-                _db.Billing.Add(item);
-            }
+                if (dto.PetId <= 0)
+                    return Json(new { success = false, message = "Invalid pet selected." });
 
-            _db.SaveChanges();
+                if (string.IsNullOrWhiteSpace(dto.ServiceName))
+                    return Json(new { success = false, message = "Service name missing." });
 
-            return Ok(new { message = "Payment saved successfully!" });
-        }
+                if (dto.ServicePrice <= 0)
+                    return Json(new { success = false, message = "Invalid price." });
 
-        // =========================================
-        //  PRESCRIPTIONS — LIST (AJAX)
-        // =========================================
-        public IActionResult PrescriptionList()
-        {
-            var list = _db.Prescriptions
-                .Include(p => p.Pet).ThenInclude(o => o.Owner)
-                .Include(p => p.Staff)
-                .OrderByDescending(p => p.Date)
-                .ToList();
+                if (dto.Quantity <= 0)
+                    return Json(new { success = false, message = "Invalid quantity." });
 
-            return PartialView("_Prescriptions", list);
-        }
-
-        // =========================================
-        //  PRESCRIPTIONS — CREATE
-        // =========================================
-        [HttpGet]
-        public IActionResult CreatePrescription()
-        {
-            ViewBag.Pets = _db.Pets
-                .Include(p => p.Owner)
-                .ToList();
-
-            ViewBag.Staff = _db.Accounts
-                .Where(a => a.IsAdmin == 2 || a.IsAdmin == 1)
-                .ToList();
-
-            ViewBag.Drugs = _db.Drugs
-                .OrderBy(d => d.DrugName)
-                .ToList();
-
-            var model = new Prescription
-            {
-                Date = DateTime.Today
-            };
-
-            return PartialView("_Modal_CreatePrescription", model);
-        }
-
-        [HttpPost]
-        public IActionResult CreatePrescription(Prescription model)
-        {
-            // 1️⃣ Validate model
-            if (!ModelState.IsValid)
-            {
-                var errors = ModelState.Values
-                    .SelectMany(v => v.Errors)
-                    .Select(e => e.ErrorMessage)
-                    .ToList();
-
-                var joined = string.Join("; ", errors);
-                return BadRequest("Invalid prescription data. Details: " + joined);
-            }
-
-            using var transaction = _db.Database.BeginTransaction();
-
-            try
-            {
-                // 2️⃣ Save prescription
-                _db.Prescriptions.Add(model);
-                _db.SaveChanges(); // fills model.PrescriptionId
-
-                // 3️⃣ Optional: reduce drug stock if linked
-                if (model.SelectedDrugId.HasValue &&
-                    model.DispensedQuantity.HasValue &&
-                    model.DispensedQuantity.Value > 0)
+                var b = new Billing
                 {
-                    var drug = _db.Drugs.FirstOrDefault(d => d.DrugId == model.SelectedDrugId.Value);
-                    if (drug == null)
-                        return BadRequest("Selected drug not found.");
-
-                    if (model.DispensedQuantity.Value > drug.Quantity)
-                        return BadRequest($"Not enough stock for {drug.DrugName}. Current stock: {drug.Quantity}");
-
-                    drug.Quantity -= model.DispensedQuantity.Value;
-                    _db.Drugs.Update(drug);
-                    _db.SaveChanges();
-                }
-
-                // 4️⃣ Build nice Diagnosis/Treatment text
-                var diagnosisText = string.IsNullOrWhiteSpace(model.Notes)
-                    ? "Medication prescription"
-                    : model.Notes;
-
-                var treatmentText = $"{model.Medication} — {model.Dosage}; {model.Frequency}; {model.Duration}"
-                    .Trim()
-                    .Trim(' ', ';', '—');
-
-                if (string.IsNullOrWhiteSpace(treatmentText))
-                {
-                    treatmentText = "Medication prescribed (see details).";
-                }
-
-                // 5️⃣ Create linked MedicalRecord row
-                var record = new MedicalRecord
-                {
-                    PetId = model.PetId,
-                    StaffId = model.StaffId,
-                    PrescriptionId = model.PrescriptionId, // 🔗 strong link
-                    VaccinationId = null,
-                    Date = model.Date,
-                    Description = $"Prescription for {model.Medication}",
-                    Diagnosis = diagnosisText,
-                    Treatment = treatmentText
+                    PetId = dto.PetId,
+                    StaffId = staffId,
+                    ServiceName = dto.ServiceName,
+                    ServicePrice = dto.ServicePrice,
+                    Quantity = dto.Quantity,
+                    Total = dto.ServicePrice * dto.Quantity,
+                    TransactionId = transactionId,
+                    BillingDate = DateTime.Now
                 };
 
-                _db.MedicalRecords.Add(record);
-                _db.SaveChanges();
-
-                // 6️⃣ All good
-                transaction.Commit();
-                return Ok(new { message = "Prescription created successfully." });
+                _db.Billing.Add(b);
             }
-            catch (Exception ex)
-            {
-                transaction.Rollback();
-                return StatusCode(500, "Error saving prescription: " + ex.Message);
-            }
-        }
-    
-
-
-
-        // =========================================
-        //  PRESCRIPTIONS — VIEW
-        // =========================================
-        [HttpGet]
-        public IActionResult ViewPrescription(int id)
-        {
-            var pres = _db.Prescriptions
-                .Include(p => p.Pet).ThenInclude(o => o.Owner)
-                .Include(p => p.Staff)
-                .FirstOrDefault(p => p.PrescriptionId == id);
-
-            if (pres == null)
-                return NotFound();
-
-            return PartialView("_Modal_ViewPrescription", pres);
-        }
-
-        // =========================================
-        //  PRESCRIPTIONS — EDIT
-        // =========================================
-        [HttpGet]
-        public IActionResult EditPrescription(int id)
-        {
-            var pres = _db.Prescriptions.FirstOrDefault(p => p.PrescriptionId == id);
-            if (pres == null) return NotFound();
-
-            ViewBag.Pets = _db.Pets.Include(p => p.Owner).ToList();
-            ViewBag.Staff = _db.Accounts
-                .Where(a => a.IsAdmin == 2 || a.IsAdmin == 1)
-                .ToList();
-            ViewBag.Drugs = _db.Drugs.OrderBy(d => d.DrugName).ToList();
-
-            return PartialView("_Modal_EditPrescription", pres);
-        }
-
-        [HttpPost]
-        public IActionResult EditPrescription(Prescription model)
-        {
-            if (!ModelState.IsValid)
-                return BadRequest("Invalid prescription data.");
-
-            try
-            {
-                // 1️⃣ Update prescription
-                _db.Prescriptions.Update(model);
-                _db.SaveChanges();
-
-                // 2️⃣ Update linked MedicalRecord (if exists)
-                var record = _db.MedicalRecords
-                    .FirstOrDefault(r => r.PrescriptionId == model.PrescriptionId);
-
-                if (record != null)
-                {
-                    record.PetId = model.PetId;
-                    record.StaffId = model.StaffId;
-                    record.Date = model.Date;
-
-                    var diagnosisText = string.IsNullOrWhiteSpace(model.Notes)
-                        ? "Medication prescription"
-                        : model.Notes;
-
-                    var treatmentText = $"{model.Medication} — {model.Dosage}; {model.Frequency}; {model.Duration}"
-                        .Trim()
-                        .Trim(' ', ';', '—');
-
-                    if (string.IsNullOrWhiteSpace(treatmentText))
-                    {
-                        treatmentText = "Medication prescribed (see details).";
-                    }
-
-                    record.Description = $"Prescription for {model.Medication}";
-                    record.Diagnosis = diagnosisText;
-                    record.Treatment = treatmentText;
-
-                    _db.MedicalRecords.Update(record);
-                    _db.SaveChanges();
-                }
-
-                return Ok(new { message = "Prescription updated." });
-            }
-            catch (Exception ex)
-            {
-                return StatusCode(500, "Error updating prescription: " + ex.Message);
-            }
-        }
-
-        // =========================================
-        //  PRESCRIPTIONS — DELETE
-        // =========================================
-        [HttpGet]
-        public IActionResult DeletePrescription(int id)
-        {
-            var pres = _db.Prescriptions
-                .Include(p => p.Pet).ThenInclude(o => o.Owner)
-                .Include(p => p.Staff)
-                .FirstOrDefault(p => p.PrescriptionId == id);
-
-            if (pres == null)
-                return NotFound();
-
-            return PartialView("_Modal_DeletePrescription", pres);
-        }
-
-        [HttpPost]
-        public IActionResult DeletePrescriptionConfirmed(int id)
-        {
-            var pres = _db.Prescriptions.Find(id);
-            if (pres != null)
-            {
-                _db.Prescriptions.Remove(pres);
-                _db.SaveChanges();
-            }
-
-            return Ok(new { message = "Prescription deleted." });
-        }
-
-        // =========================================
-        //  DRUGS
-        // =========================================
-        public IActionResult DrugList()
-        {
-            var list = _db.Drugs
-                .OrderBy(d => d.DrugName)
-                .ToList();
-
-            return PartialView("_Drugs", list);
-        }
-
-        [HttpGet]
-        public IActionResult CreateDrug()
-        {
-            // DateAdded will be set here so it never ends up null
-            var model = new Drug
-            {
-                DateAdded = DateTime.Now
-            };
-
-            return PartialView("_Modal_CreateDrug", model);
-        }
-
-        [HttpPost]
-        public IActionResult CreateDrug(Drug model)
-        {
-            if (!ModelState.IsValid)
-                return BadRequest("Invalid drug data.");
-
-            // make sure date_added is never null (fixes the DB error)
-            if (!model.DateAdded.HasValue)
-                model.DateAdded = DateTime.Now;
-
-            _db.Drugs.Add(model);
-            _db.SaveChanges();
-
-            return Ok(new { message = "Drug created successfully." });
-        }
-
-        [HttpGet]
-        public IActionResult EditDrug(int id)
-        {
-            var drug = _db.Drugs.Find(id);
-            if (drug == null)
-                return NotFound();
-
-            return PartialView("_Modal_EditDrug", drug);
-        }
-
-        [HttpPost]
-        public IActionResult EditDrug(Drug model)
-        {
-            if (!ModelState.IsValid)
-                return BadRequest("Invalid drug data.");
-
-            var drug = _db.Drugs.FirstOrDefault(d => d.DrugId == model.DrugId);
-            if (drug == null)
-                return NotFound();
-
-            // update editable fields only, keep original DateAdded
-            drug.DrugName = model.DrugName;
-            drug.DosageType = model.DosageType;
-            drug.Quantity = model.Quantity;
-            drug.UnitPrice = model.UnitPrice;
-            drug.BasePrice = model.BasePrice;
-            drug.ExpiryDate = model.ExpiryDate;
-            drug.RestockNotes = model.RestockNotes;
 
             _db.SaveChanges();
 
-            return Ok(new { message = "Drug updated successfully." });
-        }
-
-        [HttpGet]
-        public IActionResult DeleteDrug(int id)
-        {
-            var drug = _db.Drugs.Find(id);
-            if (drug == null)
-                return NotFound();
-
-            return PartialView("_Modal_DeleteDrug", drug);
-        }
-
-        [HttpPost]
-        public IActionResult DeleteDrugConfirmed(int id)
-        {
-            var drug = _db.Drugs.Find(id);
-            if (drug != null)
+            return Json(new
             {
-                _db.Drugs.Remove(drug);
-                _db.SaveChanges();
-            }
-
-            return Ok(new { message = "Drug deleted successfully." });
+                success = true,
+                message = "Payment recorded successfully!",
+                transactionId = transactionId
+            });
         }
 
 
-
-        // =========================================
-        //  VACCINATIONS
-        // =========================================
-        public IActionResult VaccinationList()
+        // ============================================================
+        // RECEIPT — MULTI ITEM (browser print-friendly)
+        // ============================================================
+        public IActionResult Receipt(string id)
         {
-            var list = _db.Vaccinations
-                .Include(v => v.Pet).ThenInclude(o => o.Owner)
-                .Include(v => v.Staff)
-                .OrderByDescending(v => v.DateGiven)
+            var items = _db.Billing
+                .Include(b => b.Pet).ThenInclude(p => p.Owner)
+                .Include(b => b.Staff)
+                .Where(b => b.TransactionId == id)
                 .ToList();
 
-            return PartialView("_Vaccinations", list);
+            if (!items.Any())
+                return NotFound("Receipt not found.");
+
+            return View("_Receipt", items); // Multi-item receipt
         }
 
-        public IActionResult ViewVaccination(int id)
-        {
-            var vacc = _db.Vaccinations
-                .Include(v => v.Pet).ThenInclude(o => o.Owner)
-                .Include(v => v.Staff)
-                .FirstOrDefault(v => v.VaccinationId == id);
-
-            if (vacc == null)
-                return NotFound();
-
-            return PartialView("_Modal_ViewVaccination", vacc);
-        }
-
-
-        [HttpGet]
-        public IActionResult CreateVaccination()
-        {
-            ViewBag.Pets = _db.Pets
-                .Include(p => p.Owner)
-                .ToList();
-
-            ViewBag.Staff = _db.Accounts
-                .Where(a => a.IsAdmin == 2 || a.IsAdmin == 1)
-                .ToList();
-
-            // Load only Vaccination Services
-            ViewBag.VaccinationServices = _db.Service
-                .Where(s => s.Category != null && s.Category.ToLower().Contains("vaccination"))
-                .OrderBy(s => s.Name)
-                .ToList();
-
-            var model = new Vaccination
-            {
-                DateGiven = DateTime.Today,
-                NextDueDate = DateTime.Today.AddYears(1)
-            };
-
-            return PartialView("_Modal_CreateVaccination", model);
-        }
-
-
-        // ====== UPDATED: CREATE VACCINATION (NO ModelState BLOCK + MESSAGE) ======
-        [HttpPost]
-        public IActionResult CreateVaccination(Vaccination model)
-        {
-            using var transaction = _db.Database.BeginTransaction();
-
-            try
-            {
-                // 1️⃣ Default dates if empty
-                if (!model.DateGiven.HasValue)
-                    model.DateGiven = DateTime.Today;
-
-                if (!model.NextDueDate.HasValue)
-                    model.NextDueDate = model.DateGiven.Value.AddYears(1);
-
-                // 2️⃣ Save vaccination
-                _db.Vaccinations.Add(model);
-                _db.SaveChanges(); // fills model.VaccinationId
-
-                // 3️⃣ Build default Diagnosis/Treatment
-                var diagnosisText = "Vaccination / preventive care";
-
-                var nextDueText = model.NextDueDate.HasValue
-                    ? $"Next due: {model.NextDueDate.Value:MMM dd, yyyy}"
-                    : "Next dose as advised";
-
-                var treatmentText = $"{model.VaccineName} administered. {nextDueText}";
-
-                // 4️⃣ Create linked MedicalRecord row
-                var record = new MedicalRecord
-                {
-                    PetId = model.PetId,
-                    StaffId = model.StaffId,
-                    PrescriptionId = null,
-                    VaccinationId = model.VaccinationId, // 🔗 strong link
-                    Date = model.DateGiven,
-                    Description = $"Vaccination: {model.VaccineName}",
-                    Diagnosis = diagnosisText,
-                    Treatment = treatmentText
-                };
-
-                _db.MedicalRecords.Add(record);
-                _db.SaveChanges();
-
-                transaction.Commit();
-
-                return Ok(new
-                {
-                    success = true,
-                    message = "Vaccination record added successfully."
-                });
-            }
-            catch (Exception ex)
-            {
-                transaction.Rollback();
-                return StatusCode(500, "Error saving vaccination: " + ex.Message);
-            }
-        }
-
-
-        [HttpGet]
-        public IActionResult EditVaccination(int id)
-        {
-            var vacc = _db.Vaccinations
-                .FirstOrDefault(v => v.VaccinationId == id);
-
-            if (vacc == null)
-                return NotFound();
-
-            ViewBag.Pets = _db.Pets
-                .Include(p => p.Owner)
-                .ToList();
-
-            ViewBag.Staff = _db.Accounts
-                .Where(a => a.IsAdmin == 2 || a.IsAdmin == 1)
-                .ToList();
-
-            // Load only Vaccination Services
-            ViewBag.VaccinationServices = _db.Service
-                .Where(s => s.Category != null && s.Category.ToLower().Contains("vaccination"))
-                .OrderBy(s => s.Name)
-                .ToList();
-
-            return PartialView("_Modal_EditVaccination", vacc);
-        }
-
-
-
-        // ====== UPDATED: EDIT VACCINATION (NO ModelState BLOCK + MESSAGE) ======
-        [HttpPost]
-        public IActionResult EditVaccination(Vaccination model)
-        {
-            try
-            {
-                // 1️⃣ Update vaccination itself
-                _db.Vaccinations.Update(model);
-                _db.SaveChanges();
-
-                // 2️⃣ Update linked MedicalRecord if it exists
-                var record = _db.MedicalRecords
-                    .FirstOrDefault(r => r.VaccinationId == model.VaccinationId);
-
-                if (record != null)
-                {
-                    record.PetId = model.PetId;
-                    record.StaffId = model.StaffId;
-                    record.Date = model.DateGiven ?? record.Date;
-
-                    var diagnosisText = "Vaccination / preventive care";
-
-                    var nextDueText = model.NextDueDate.HasValue
-                        ? $"Next due: {model.NextDueDate.Value:MMM dd, yyyy}"
-                        : "Next dose as advised";
-
-                    var treatmentText = $"{model.VaccineName} administered. {nextDueText}";
-
-                    record.Description = $"Vaccination: {model.VaccineName}";
-                    record.Diagnosis = diagnosisText;
-                    record.Treatment = treatmentText;
-
-                    _db.MedicalRecords.Update(record);
-                    _db.SaveChanges();
-                }
-
-                return Ok(new
-                {
-                    success = true,
-                    message = "Vaccination record updated successfully."
-                });
-            }
-            catch (Exception ex)
-            {
-                return StatusCode(500, "Error updating vaccination: " + ex.Message);
-            }
-        }
-
-
-        [HttpGet]
-        public IActionResult DeleteVaccination(int id)
-        {
-            var vacc = _db.Vaccinations
-                .Include(v => v.Pet).ThenInclude(o => o.Owner)
-                .Include(v => v.Staff)
-                .FirstOrDefault(v => v.VaccinationId == id);
-
-            if (vacc == null)
-                return NotFound();
-
-            return PartialView("_Modal_DeleteVaccination", vacc);
-        }
-
-        [HttpPost]
-        public IActionResult DeleteVaccinationConfirmed(int id)
-        {
-            var vacc = _db.Vaccinations.Find(id);
-            if (vacc != null)
-            {
-                _db.Vaccinations.Remove(vacc);
-                _db.SaveChanges();
-            }
-
-            return Ok(new { message = "Vaccination deleted." });
-        }
-
+        // ============================================================
+        // GET SERVICES FOR POS
+        // ============================================================
         [HttpGet]
         public IActionResult GetServices()
         {
@@ -644,18 +141,9 @@ namespace PetClinicSystem.Controllers
             return Json(services);
         }
 
-
-        public IActionResult History()
-        {
-            var history = _db.Billing
-                .Include(b => b.Pet).ThenInclude(o => o.Owner)
-                .Include(b => b.Staff)
-                .OrderByDescending(b => b.BillingDate)
-                .ToList();
-
-            return PartialView("_BillingHistory", history);
-        }
-
+        // ============================================================
+        // ADD SERVICE (POS)
+        // ============================================================
         [HttpPost]
         public JsonResult AddService([FromBody] Service model)
         {
@@ -675,9 +163,550 @@ namespace PetClinicSystem.Controllers
             }
         }
 
+        // ============================================================
+        // BILLING HISTORY LIST
+        // ============================================================
+        public IActionResult History()
+        {
+            var history = _db.Billing
+                .Include(b => b.Pet).ThenInclude(o => o.Owner)
+                .Include(b => b.Staff)
+                .OrderByDescending(b => b.BillingDate)
+                .ToList();
+
+            return PartialView("_BillingHistory", history);
+        }
+
+        [HttpPost]
+        public IActionResult FilterHistory(DateTime? startDate, DateTime? endDate, string search)
+        {
+            var query = _db.Billing
+                .Include(b => b.Pet).ThenInclude(o => o.Owner)
+                .Include(b => b.Staff)
+                .AsQueryable();
+
+            if (startDate.HasValue)
+                query = query.Where(b => b.BillingDate >= startDate.Value);
+
+            if (endDate.HasValue)
+                query = query.Where(b => b.BillingDate <= endDate.Value.AddDays(1));
+
+            if (!string.IsNullOrWhiteSpace(search))
+                query = query.Where(b =>
+                    b.ServiceName.Contains(search) ||
+                    b.Pet.Name.Contains(search) ||
+                    b.Pet.Owner.FullName.Contains(search));
+
+            var filtered = query
+                .OrderByDescending(b => b.BillingDate)
+                .ToList();
+
+            return PartialView("_BillingHistoryList", filtered);
+        }
 
 
+        // ============================================================
+        // AUTOCOMPLETE SEARCH (history search box)
+        // ============================================================
+        [HttpGet]
+        public JsonResult SearchHistory(string term)
+        {
+            var results = _db.Billing
+                .Where(b =>
+                    b.ServiceName.Contains(term) ||
+                    b.Pet.Name.Contains(term) ||
+                    b.Pet.Owner.FullName.Contains(term))
+                .Select(b => b.ServiceName)
+                .Distinct()
+                .Take(10)
+                .ToList();
+
+            return Json(results);
+        }
+
+        // ============================================================
+        // EXPORT HISTORY TO EXCEL
+        // ============================================================
+        public IActionResult ExportHistoryExcel()
+        {
+            var data = _db.Billing
+                .Include(b => b.Pet).ThenInclude(p => p.Owner)
+                .Include(b => b.Staff)
+                .ToList();
+
+            var wb = new ClosedXML.Excel.XLWorkbook();
+            var ws = wb.Worksheets.Add("Billing History");
+
+            ws.Cell(1, 1).Value = "Service";
+            ws.Cell(1, 2).Value = "Pet";
+            ws.Cell(1, 3).Value = "Owner";
+            ws.Cell(1, 4).Value = "Staff";
+            ws.Cell(1, 5).Value = "Total";
+
+            int row = 2;
+            foreach (var b in data)
+            {
+                ws.Cell(row, 1).Value = b.ServiceName;
+                ws.Cell(row, 2).Value = b.Pet.Name;
+                ws.Cell(row, 3).Value = b.Pet.Owner.FullName;
+                ws.Cell(row, 4).Value = b.Staff.FullName;
+                ws.Cell(row, 5).Value = b.Total;
+                row++;
+            }
+
+            using var stream = new MemoryStream();
+            wb.SaveAs(stream);
+            stream.Position = 0;
+
+            return File(
+                stream.ToArray(),
+                "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+                "BillingHistory.xlsx"
+            );
+        }
+
+        // ============================================================
+        // PRESCRIPTIONS — LIST (AJAX)
+        // ============================================================
+        public IActionResult PrescriptionList()
+        {
+            var list = _db.Prescriptions
+                .Include(p => p.Pet).ThenInclude(o => o.Owner)
+                .Include(p => p.Staff)
+                .OrderByDescending(p => p.Date)
+                .ToList();
+
+            return PartialView("_Prescriptions", list);
+        }
+
+        // ============================================================
+        // PRESCRIPTIONS — CREATE
+        // ============================================================
+        [HttpGet]
+        public IActionResult CreatePrescription()
+        {
+            ViewBag.Pets = _db.Pets
+                .Include(p => p.Owner)
+                .ToList();
+
+            ViewBag.Staff = _db.Accounts
+                .Where(a => a.IsAdmin == 1 || a.IsAdmin == 2)
+                .ToList();
+
+            ViewBag.Drugs = _db.Drugs
+                .OrderBy(d => d.DrugName)
+                .ToList();
+
+            var model = new Prescription
+            {
+                Date = DateTime.Today
+            };
+
+            return PartialView("_Modal_CreatePrescription", model);
+        }
+
+        [HttpPost]
+        public IActionResult CreatePrescription(Prescription model)
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest("Invalid prescription data.");
+            }
+
+            using var transaction = _db.Database.BeginTransaction();
+
+            try
+            {
+                // Save prescription
+                _db.Prescriptions.Add(model);
+                _db.SaveChanges();
+
+                // Reduce drug stock if used
+                if (model.SelectedDrugId.HasValue &&
+                    model.DispensedQuantity.HasValue &&
+                    model.DispensedQuantity.Value > 0)
+                {
+                    var drug = _db.Drugs.FirstOrDefault(d => d.DrugId == model.SelectedDrugId.Value);
+                    if (drug == null)
+                        return BadRequest("Drug not found.");
+
+                    if (model.DispensedQuantity.Value > drug.Quantity)
+                        return BadRequest($"Insufficient stock for {drug.DrugName}");
+
+                    drug.Quantity -= model.DispensedQuantity.Value;
+                    _db.SaveChanges();
+                }
+
+                // Auto-generate medical record
+                var record = new MedicalRecord
+                {
+                    PetId = model.PetId,
+                    StaffId = model.StaffId,
+                    PrescriptionId = model.PrescriptionId,
+                    Date = model.Date,
+                    Description = $"Prescription for {model.Medication}",
+                    Diagnosis = string.IsNullOrWhiteSpace(model.Notes) ? "Medication prescribed" : model.Notes,
+                    Treatment = $"{model.Medication} — {model.Dosage}; {model.Frequency}; {model.Duration}"
+                };
+
+                _db.MedicalRecords.Add(record);
+                _db.SaveChanges();
+
+                transaction.Commit();
+
+                return Ok(new { message = "Prescription created successfully." });
+            }
+            catch (Exception ex)
+            {
+                transaction.Rollback();
+                return StatusCode(500, ex.Message);
+            }
+        }
+
+        // ============================================================
+        // PRESCRIPTION — VIEW
+        // ============================================================
+        [HttpGet]
+        public IActionResult ViewPrescription(int id)
+        {
+            var pres = _db.Prescriptions
+                .Include(p => p.Pet).ThenInclude(o => o.Owner)
+                .Include(p => p.Staff)
+                .FirstOrDefault(p => p.PrescriptionId == id);
+
+            if (pres == null)
+                return NotFound();
+
+            return PartialView("_Modal_ViewPrescription", pres);
+        }
+
+        // ============================================================
+        // PRESCRIPTION — EDIT
+        // ============================================================
+        [HttpGet]
+        public IActionResult EditPrescription(int id)
+        {
+            var pres = _db.Prescriptions.FirstOrDefault(p => p.PrescriptionId == id);
+            if (pres == null) return NotFound();
+
+            ViewBag.Pets = _db.Pets.Include(p => p.Owner).ToList();
+            ViewBag.Staff = _db.Accounts.Where(a => a.IsAdmin == 1 || a.IsAdmin == 2).ToList();
+            ViewBag.Drugs = _db.Drugs.OrderBy(d => d.DrugName).ToList();
+
+            return PartialView("_Modal_EditPrescription", pres);
+        }
+
+        [HttpPost]
+        public IActionResult EditPrescription(Prescription model)
+        {
+            if (!ModelState.IsValid)
+                return BadRequest("Invalid data.");
+
+            try
+            {
+                _db.Prescriptions.Update(model);
+                _db.SaveChanges();
+
+                var record = _db.MedicalRecords
+                    .FirstOrDefault(r => r.PrescriptionId == model.PrescriptionId);
+
+                if (record != null)
+                {
+                    record.PetId = model.PetId;
+                    record.StaffId = model.StaffId;
+                    record.Date = model.Date;
+                    record.Description = $"Prescription for {model.Medication}";
+                    record.Diagnosis = string.IsNullOrWhiteSpace(model.Notes) ? "Medication prescribed" : model.Notes;
+                    record.Treatment = $"{model.Medication} — {model.Dosage}; {model.Frequency}; {model.Duration}";
+
+                    _db.Update(record);
+                    _db.SaveChanges();
+                }
+
+                return Ok(new { message = "Prescription updated." });
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, ex.Message);
+            }
+        }
+
+        // ============================================================
+        // PRESCRIPTION — DELETE
+        // ============================================================
+        [HttpGet]
+        public IActionResult DeletePrescription(int id)
+        {
+            var pres = _db.Prescriptions
+                .Include(p => p.Pet).ThenInclude(o => o.Owner)
+                .Include(p => p.Staff)
+                .FirstOrDefault(p => p.PrescriptionId == id);
+
+            if (pres == null)
+                return NotFound();
+
+            return PartialView("_Modal_DeletePrescription", pres);
+        }
+
+        [HttpPost]
+        public IActionResult DeletePrescriptionConfirmed(int id)
+        {
+            var pres = _db.Prescriptions.Find(id);
+
+            if (pres != null)
+            {
+                _db.Prescriptions.Remove(pres);
+                _db.SaveChanges();
+            }
+
+            return Ok(new { message = "Prescription deleted." });
+        }
+
+        // ============================================================
+        // DRUG LIST
+        // ============================================================
+        public IActionResult DrugList()
+        {
+            var list = _db.Drugs.OrderBy(d => d.DrugName).ToList();
+            return PartialView("_Drugs", list);
+        }
+
+        [HttpGet]
+        public IActionResult CreateDrug()
+        {
+            return PartialView("_Modal_CreateDrug", new Drug { DateAdded = DateTime.Now });
+        }
+
+        [HttpPost]
+        public IActionResult CreateDrug(Drug model)
+        {
+            if (!ModelState.IsValid)
+                return BadRequest("Invalid data.");
+
+            if (!model.DateAdded.HasValue)
+                model.DateAdded = DateTime.Now;
+
+            _db.Drugs.Add(model);
+            _db.SaveChanges();
+
+            return Ok(new { message = "Drug created successfully." });
+        }
+
+        [HttpGet]
+        public IActionResult EditDrug(int id)
+        {
+            var drug = _db.Drugs.Find(id);
+            if (drug == null) return NotFound();
+
+            return PartialView("_Modal_EditDrug", drug);
+        }
+
+        [HttpPost]
+        public IActionResult EditDrug(Drug model)
+        {
+            if (!ModelState.IsValid)
+                return BadRequest("Invalid data.");
+
+            var drug = _db.Drugs.FirstOrDefault(d => d.DrugId == model.DrugId);
+            if (drug == null) return NotFound();
+
+            drug.DrugName = model.DrugName;
+            drug.DosageType = model.DosageType;
+            drug.Quantity = model.Quantity;
+            drug.UnitPrice = model.UnitPrice;
+            drug.BasePrice = model.BasePrice;
+            drug.ExpiryDate = model.ExpiryDate;
+            drug.RestockNotes = model.RestockNotes;
+
+            _db.SaveChanges();
+
+            return Ok(new { message = "Drug updated successfully." });
+        }
+
+        [HttpGet]
+        public IActionResult DeleteDrug(int id)
+        {
+            var drug = _db.Drugs.Find(id);
+            if (drug == null) return NotFound();
+
+            return PartialView("_Modal_DeleteDrug", drug);
+        }
+
+        [HttpPost]
+        public IActionResult DeleteDrugConfirmed(int id)
+        {
+            var drug = _db.Drugs.Find(id);
+            if (drug != null)
+            {
+                _db.Drugs.Remove(drug);
+                _db.SaveChanges();
+            }
+
+            return Ok(new { message = "Drug deleted." });
+        }
+
+        // ============================================================
+        // VACCINATIONS
+        // ============================================================
+        public IActionResult VaccinationList()
+        {
+            var list = _db.Vaccinations
+                .Include(v => v.Pet).ThenInclude(o => o.Owner)
+                .Include(v => v.Staff)
+                .OrderByDescending(v => v.DateGiven)
+                .ToList();
+
+            return PartialView("_Vaccinations", list);
+        }
+
+        [HttpGet]
+        public IActionResult CreateVaccination()
+        {
+            ViewBag.Pets = _db.Pets.Include(p => p.Owner).ToList();
+            ViewBag.Staff = _db.Accounts.Where(a => a.IsAdmin == 1 || a.IsAdmin == 2).ToList();
+
+            ViewBag.VaccinationServices = _db.Service
+                .Where(s => s.Category != null && s.Category.ToLower().Contains("vaccination"))
+                .OrderBy(s => s.Name)
+                .ToList();
+
+            return PartialView("_Modal_CreateVaccination",
+                new Vaccination
+                {
+                    DateGiven = DateTime.Today,
+                    NextDueDate = DateTime.Today.AddYears(1)
+                });
+        }
+
+        [HttpPost]
+        public IActionResult CreateVaccination(Vaccination model)
+        {
+            using var tx = _db.Database.BeginTransaction();
+            try
+            {
+                if (!model.DateGiven.HasValue)
+                    model.DateGiven = DateTime.Today;
+
+                if (!model.NextDueDate.HasValue)
+                    model.NextDueDate = model.DateGiven.Value.AddYears(1);
+
+                _db.Vaccinations.Add(model);
+                _db.SaveChanges();
+
+                var record = new MedicalRecord
+                {
+                    PetId = model.PetId,
+                    StaffId = model.StaffId,
+                    VaccinationId = model.VaccinationId,
+                    Date = model.DateGiven,
+                    Description = $"Vaccination: {model.VaccineName}",
+                    Diagnosis = "Preventive vaccination",
+                    Treatment = $"{model.VaccineName} administered. Next due: {model.NextDueDate.Value:MMM dd yyyy}"
+                };
+
+                _db.MedicalRecords.Add(record);
+                _db.SaveChanges();
+
+                tx.Commit();
+
+                return Ok(new { success = true, message = "Vaccination added." });
+            }
+            catch (Exception ex)
+            {
+                tx.Rollback();
+                return StatusCode(500, ex.Message);
+            }
+        }
+
+        [HttpGet]
+        public IActionResult EditVaccination(int id)
+        {
+            var vacc = _db.Vaccinations.FirstOrDefault(v => v.VaccinationId == id);
+            if (vacc == null) return NotFound();
+
+            ViewBag.Pets = _db.Pets.Include(p => p.Owner).ToList();
+            ViewBag.Staff = _db.Accounts.Where(a => a.IsAdmin == 1 || a.IsAdmin == 2).ToList();
+            ViewBag.VaccinationServices = _db.Service
+                .Where(s => s.Category.ToLower().Contains("vacc"))
+                .OrderBy(s => s.Name)
+                .ToList();
+
+            return PartialView("_Modal_EditVaccination", vacc);
+        }
+
+        [HttpPost]
+        public IActionResult EditVaccination(Vaccination model)
+        {
+            try
+            {
+                _db.Vaccinations.Update(model);
+                _db.SaveChanges();
+
+                var record = _db.MedicalRecords.FirstOrDefault(r => r.VaccinationId == model.VaccinationId);
+
+                if (record != null)
+                {
+                    record.PetId = model.PetId;
+                    record.StaffId = model.StaffId;
+                    record.Date = model.DateGiven ?? record.Date;
+                    record.Description = $"Vaccination: {model.VaccineName}";
+                    record.Treatment = $"{model.VaccineName} administered. Next due: {model.NextDueDate?.ToString("MMM dd yyyy")}";
+                    _db.SaveChanges();
+                }
+
+                return Ok(new { success = true, message = "Vaccination updated." });
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, ex.Message);
+            }
+        }
+
+        [HttpGet]
+        public IActionResult DeleteVaccination(int id)
+        {
+            var vacc = _db.Vaccinations
+                .Include(v => v.Pet).ThenInclude(o => o.Owner)
+                .Include(v => v.Staff)
+                .FirstOrDefault(v => v.VaccinationId == id);
+
+            if (vacc == null) return NotFound();
+
+            return PartialView("_Modal_DeleteVaccination", vacc);
+        }
+
+        [HttpPost]
+        public IActionResult DeleteVaccinationConfirmed(int id)
+        {
+            var vacc = _db.Vaccinations.Find(id);
+
+            if (vacc != null)
+            {
+                _db.Vaccinations.Remove(vacc);
+                _db.SaveChanges();
+            }
+
+            return Ok(new { message = "Vaccination deleted." });
+        }
+
+        public IActionResult DownloadPdf(string id)
+        {
+            var items = _db.Billing
+                .Include(b => b.Pet).ThenInclude(p => p.Owner)
+                .Include(b => b.Staff)
+                .Where(b => b.TransactionId == id)
+                .ToList();
+
+            if (!items.Any())
+                return NotFound("Receipt not found.");
+
+            var document = new BillingReceiptDocument(items);
+            var pdf = document.GeneratePdf();   // CLEAN, CORRECT
+
+            return File(pdf, "application/pdf", $"Receipt_{id}.pdf");
+        }
 
 
     }
 }
+

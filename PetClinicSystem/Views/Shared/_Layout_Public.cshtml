@@ -141,7 +141,6 @@
                     <h4 class="fw-bold">Create Your Account</h4>
                     <button class="btn-close" data-bs-dismiss="modal"></button>
                 </div>
-
                 <form method="post" action="/Account/Register">
 
                     <div class="row g-3">
@@ -160,7 +159,7 @@
                             <label class="fw-semibold">Email</label>
                             <input type="email" name="Email"
                                    class="form-control py-2 rounded-3"
-                                   placeholder="your@email.com"
+                                   placeholder="you@example.com"
                                    required />
                         </div>
 
@@ -180,6 +179,40 @@
                                    class="form-control py-2 rounded-3"
                                    placeholder="Create a strong password"
                                    required />
+                        </div>
+
+                        <!-- PHONE NUMBER -->
+                        <div class="col-md-6">
+                            <label class="fw-semibold">Phone Number</label>
+                            <input name="PhoneNumber"
+                                   class="form-control py-2 rounded-3"
+                                   placeholder="09XXXXXXXXX"
+                                   required />
+                        </div>
+
+                        <!-- ADDRESS -->
+                        <div class="col-md-6">
+                            <label class="fw-semibold">Address</label>
+                            <input name="Address"
+                                   class="form-control py-2 rounded-3"
+                                   placeholder="Your address"
+                                   required />
+                        </div>
+
+                        <!-- EMERGENCY CONTACT #1 -->
+                        <div class="col-md-6">
+                            <label class="fw-semibold">Emergency Contact #1</label>
+                            <input name="EmergencyContact1"
+                                   class="form-control py-2 rounded-3"
+                                   placeholder="Optional" />
+                        </div>
+
+                        <!-- EMERGENCY CONTACT #2 -->
+                        <div class="col-md-6">
+                            <label class="fw-semibold">Emergency Contact #2</label>
+                            <input name="EmergencyContact2"
+                                   class="form-control py-2 rounded-3"
+                                   placeholder="Optional" />
                         </div>
 
                     </div>

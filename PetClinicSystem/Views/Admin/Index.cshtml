@@ -95,18 +95,24 @@
                         <div class="d-flex justify-content-between">
 
                             <div>
-                                <div class="fw-bold">@a.Pet.Name</div>
+                                <div class="fw-bold">@a.Pet?.Name</div>
                                 <div class="text-secondary small">
-                                    @a.Pet.Species • @a.Staff.FullName
+                                    @a.Pet?.Species • @a.Staff?.FullName
                                 </div>
-                                <div class="text-muted small">@a.Service</div>
+                                <div class="text-muted small">@a.ServiceName</div>
                             </div>
 
                             <div class="text-end">
-                                <div class="small">@a.ScheduleTime</div>
+                                <div class="small text-success fw-bold">
+                                    @(
+                                                                    a.Slot != null
+                                                                    ? $"{a.Slot.StartTime:hh\\:mm} - {a.Slot.EndTime:hh\\:mm}"
+                                                                    : "No Slot"
+                                                                    )
+                                </div>
 
                                 <span class="badge bg-success rounded-pill mt-2">
-                                    Confirmed
+                                    @(a.Status ?? "Pending")
                                 </span>
                             </div>
                         </div>
